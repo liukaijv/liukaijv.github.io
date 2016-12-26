@@ -9,28 +9,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。
-方法一来自于知乎贴https://www.zhihu.com/question/21650209，直接在主题的source文件夹下面创建404.html页面。
-
-优点：基于主题的，简单，直接了当
-缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题">
+  <meta name="description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo自定义404页面">
 <meta property="og:url" content="http://liukaijv.github.io/2015/12/26/custom-404-page-on-the-hexo/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
-<meta property="og:description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。
-方法一来自于知乎贴https://www.zhihu.com/question/21650209，直接在主题的source文件夹下面创建404.html页面。
-
-优点：基于主题的，简单，直接了当
-缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题">
-<meta property="og:updated_time" content="2016-12-26T03:44:48.214Z">
+<meta property="og:description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。">
+<meta property="og:updated_time" content="2016-12-26T03:49:55.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo自定义404页面">
-<meta name="twitter:description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。
-方法一来自于知乎贴https://www.zhihu.com/question/21650209，直接在主题的source文件夹下面创建404.html页面。
-
-优点：基于主题的，简单，直接了当
-缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题">
+<meta name="twitter:description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。">
   
     <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
   
@@ -99,12 +87,12 @@
 
   <div class="post-content article-entry markdown-body">    
       <p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
+<a id="more"></a>
 <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209" target="_blank" rel="external">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
 <ul>
 <li>优点：基于主题的，简单，直接了当</li>
 <li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
 </ul>
-<a id="more"></a>
 <p>404页面腾讯公益404页面。代码如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1, maximum-scale=1"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"renderer"</span> <span class="attr">content</span>=<span class="string">"webkit"</span>&gt;</span>    </div><div class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge,chrome=1"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </div><div class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://www.qq.com/404/search_children.js"</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span> <span class="attr">homePageUrl</span>=<span class="string">"http://yourdomain.com"</span> <span class="attr">homePageName</span>=<span class="string">"回到主页"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
