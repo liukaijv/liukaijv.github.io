@@ -5,17 +5,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>page not found | 工作中的学习笔记和心得</title>
+  <title>分类: javascript | 工作中的学习笔记和心得</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="page not found">
-<meta property="og:url" content="http://liukaijv.github.io/404.html">
+<meta property="og:title" content="工作中的学习笔记和心得">
+<meta property="og:url" content="http://liukaijv.github.io/categories/javascript/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
-<meta property="og:updated_time" content="2016-12-26T03:51:15.852Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="page not found">
+<meta name="twitter:title" content="工作中的学习笔记和心得">
   
     <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
   
@@ -64,12 +63,43 @@
 <section class="container content">
 	<main>
 		
-			<div class="empty-data">
-				<div class="empty-content">
-					<p><i class="lb-icon-frown"></i></p>
-					<p>您访问的页面没有找到！</p>	
-				</div>	
-			</div>
+		
+    
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/02/27/javascrit-number-valid/">js验证只能输入数字</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-02-27 17:26:15</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>js验证只能输入数字函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">  <span class="comment">// 替换非数字值</span></div><div class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换第一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换最后一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换连续.+</span></div><div class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="comment">// .号前只能有一个0</span></div><div class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">'0.'</span>);</div><div class="line">  <span class="comment">// 保留一个.，替换其它的.</span></div><div class="line">  value = value.replace(<span class="string">'.'</span>, <span class="string">'$#$'</span>).replace(<span class="regexp">/\./g</span>, <span class="string">''</span>).replace(<span class="string">'$#$'</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
+
+
+
+
 		
 	</main>
 			

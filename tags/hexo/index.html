@@ -40,6 +40,10 @@
 					</li>
 				
 					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
 						<a href="/archives">归档</a>
 					</li>
 									
@@ -97,6 +101,44 @@
 	</div>
 </article>
 
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/笔记/">笔记</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-05-27 09:55:46</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>博客是用hexo搭建的，没有上传图片的功能，于是想把图片都放github上。需要图片的时候<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>这样就可以插入了。</p>
+<p>在github上创建仓库，名字自己取，以我自己的为例，仓库为static_cdn，克隆到本地：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 克隆</span></div><div class="line">$ git <span class="built_in">clone</span> git@github.com:liukaijv/static_cdn.git</div><div class="line"><span class="comment"># 打开目录</span></div><div class="line">$ <span class="built_in">cd</span> static_cdn</div><div class="line"><span class="comment"># 新建images文件夹</span></div><div class="line">$ mikdir images</div></pre></td></tr></table></figure>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2015/05/27/use-github-as-a-static-cdn/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
 
 
 
@@ -119,6 +161,18 @@
             <a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
           </li>
         
+          <li>
+            <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+          </li>
+        
+          <li>
+            <a href="/2015/02/27/javascrit-number-valid/">js验证只能输入数字</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/27/php-array-chunk/">php array_chunk()的妙用</a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -128,7 +182,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
     </div>
   </div>
 
@@ -138,7 +192,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
     </div>
   </div>
 
@@ -148,7 +202,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a>
+      <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a>
     </div>
   </div>
 

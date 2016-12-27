@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js验证只能输入数字 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="js验证只能输入数字函数：
+123456789101112131415function parseNumber(value) &amp;#123;  // 替换非数字值  value = value.replace(/[^\d.]/g, &apos;&apos;);  // 替换第一位为.  value = value.replace(/^\./g, &apos;&apos;);  // 替换最后一位为.  value = value.repl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js验证只能输入数字">
+<meta property="og:url" content="http://liukaijv.github.io/2015/02/27/javascrit-number-valid/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="js验证只能输入数字函数：
+123456789101112131415function parseNumber(value) &amp;#123;  // 替换非数字值  value = value.replace(/[^\d.]/g, &apos;&apos;);  // 替换第一位为.  value = value.replace(/^\./g, &apos;&apos;);  // 替换最后一位为.  value = value.repl">
+<meta property="og:updated_time" content="2016-12-27T09:27:47.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js验证只能输入数字">
+<meta name="twitter:description" content="js验证只能输入数字函数：
+123456789101112131415function parseNumber(value) &amp;#123;  // 替换非数字值  value = value.replace(/[^\d.]/g, &apos;&apos;);  // 替换第一位为.  value = value.replace(/^\./g, &apos;&apos;);  // 替换最后一位为.  value = value.repl">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-javascrit-number-valid" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">js验证只能输入数字</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-02-27 17:26:15</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>js验证只能输入数字函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">  <span class="comment">// 替换非数字值</span></div><div class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换第一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换最后一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换连续.+</span></div><div class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="comment">// .号前只能有一个0</span></div><div class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">'0.'</span>);</div><div class="line">  <span class="comment">// 保留一个.，替换其它的.</span></div><div class="line">  value = value.replace(<span class="string">'.'</span>, <span class="string">'$#$'</span>).replace(<span class="regexp">/\./g</span>, <span class="string">''</span>).replace(<span class="string">'$#$'</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>  
+  </div>
+
+</article>
+
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2014/12/27/php-array-chunk/">php array_chunk()的妙用</a>
+  </div>
+  
+</nav>
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+          </li>
+        
+          <li>
+            <a href="/2015/02/27/javascrit-number-valid/">js验证只能输入数字</a>
+          </li>
+        
+          <li>
+            <a href="/2014/12/27/php-array-chunk/">php array_chunk()的妙用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2016 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+</body>
+</html>
