@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>hexo的md文件中使用html、css、javascript | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo的md文件中使用html、css、javascript">
+<meta property="og:url" content="http://liukaijv.github.io/2015/03/28/use-html-css-javascript-in-hexo-s-post/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。">
+<meta property="og:updated_time" content="2016-12-28T03:13:56.799Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo的md文件中使用html、css、javascript">
+<meta name="twitter:description" content="有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-use-html-css-javascript-in-hexo-s-post" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">hexo的md文件中使用html、css、javascript</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/笔记/">笔记</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-03-28 09:19:10</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。</p>
+<a id="more"></a>
+<h2 id="开始折腾"><a href="#开始折腾" class="headerlink" title="开始折腾"></a>开始折腾</h2><h3 id="1、直接插入"><a href="#1、直接插入" class="headerlink" title="1、直接插入"></a>1、直接插入</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 正文</div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">.styled-div&#123;</div><div class="line">	width: 100px;</div><div class="line">	height: 100px;</div><div class="line">	background: yellow;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"styled-div"</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'我是md是的javascript'</span>);</div><div class="line">	&#125;)();</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p><style><br>.styled-div{<br>    width: 100px;<br>    height: 100px;<br>    background: yellow;<br>}<br></style></p>
+<div class="styled-div">我是div</div>
+
+<p>html和javascript成功了，但是style没有成功……。</p>
+<h3 id="2、把css放到行内"><a href="#2、把css放到行内" class="headerlink" title="2、把css放到行内"></a>2、把css放到行内</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 正文</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 100px;height: 100px;background: yellow;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<div style="width: 100px;height: 100px;background: yellow;">我是div</div>
+
+
+<p>样式放在行内是可以的。怎么让放在style里的样式也有效呢？</p>
+<h3 id="3、使用raw"><a href="#3、使用raw" class="headerlink" title="3、使用raw:"></a>3、使用raw:</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># 正文</div><div class="line">&#123;% raw %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">.styled-div1&#123;</div><div class="line">	width: 100px;</div><div class="line">	height: 100px;</div><div class="line">	background: yellow;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"styled-div-other"</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">&#123;% endraw %&#125;</div></pre></td></tr></table></figure>
+
+<style>
+.styled-div-other{
+	width: 100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+<div class="styled-div-other">我是div</div>
+
+<p>style里的样式有效了</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><blockquote>
+<p>html，js，css 都应该写在raw标签里。</p>
+</blockquote>
+<p>方法一、二中，好像是直接在md里写html和javascript都行，但当这篇文章写到第三种方法的时候，js报错了，并且页面布局也有点乱。用web开发都工具看了下，<code>&lt;div class=&quot;styled-div&quot;&gt;我是div&lt;/div&gt;</code>和<code>&lt;script&gt;&lt;/script&gt;</code>中都生成了很多’<br>‘标签。</p>
+<p>所以要在md中杂点其它东西。放在raw标签里才是正确的：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 正文</div><div class="line">&#123;% raw %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">.styled-div-right&#123;</div><div class="line">	width: 100px;</div><div class="line">	height: 100px;</div><div class="line">	background: yellow;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"styled-div-right"</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'我才是正确的md里的javascript'</span>);</div><div class="line">	&#125;)();</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">&#123;% endraw %&#125;</div></pre></td></tr></table></figure>
+
+<style>
+.styled-div-right{
+	width: 100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+<div class="styled-div-right">我是正确的</div>
+<script>
+	(function(){
+		console.log('我才是正确的md里的javascript');
+	})();
+</script>
+
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在markdown里写html的东西有点不合理，取决于各自吧。介绍下另外两种方式：</p>
+<ul>
+<li>在source文件下创建单独html页面</li>
+<li>内嵌第三方的演示平台代码，jsfiddle、codepen都是很不错的选择。</li>
+</ul>
+  
+  </div>
+
+</article>
+
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/hexo/">hexo</a>
+    
+</div>
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2015/02/27/javascrit-number-valid/">js验证只能输入数字</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="use-html-css-javascript-in-hexo-s-post" data-title="hexo的md文件中使用html、css、javascript" data-url="2015/03/28/use-html-css-javascript-in-hexo-s-post/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
+          </li>
+        
+          <li>
+            <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+          </li>
+        
+          <li>
+            <a href="/2015/03/28/use-html-css-javascript-in-hexo-s-post/">hexo的md文件中使用html、css、javascript</a>
+          </li>
+        
+          <li>
+            <a href="/2015/02/27/javascrit-number-valid/">js验证只能输入数字</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 15px;">tricks</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2016 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+</body>
+</html>
