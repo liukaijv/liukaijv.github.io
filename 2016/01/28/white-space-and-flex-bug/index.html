@@ -5,16 +5,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>归档: 2014/12 | 工作中的学习笔记和心得</title>
+  <title>同时使用flex和white-space的bug | 工作中的学习笔记和心得</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="工作中的学习笔记和心得">
-<meta property="og:url" content="http://liukaijv.github.io/archives/2014/12/index.html">
+  <meta name="description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
+1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+解决办法：再加上min-width: 0属性。
+12345flex: 1,overflow:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同时使用flex和white-space的bug">
+<meta property="og:url" content="http://liukaijv.github.io/2016/01/28/white-space-and-flex-bug/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
+1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+解决办法：再加上min-width: 0属性。
+12345flex: 1,overflow:">
+<meta property="og:updated_time" content="2016-12-28T09:22:51.015Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="工作中的学习笔记和心得">
+<meta name="twitter:title" content="同时使用flex和white-space的bug">
+<meta name="twitter:description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
+1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+解决办法：再加上min-width: 0属性。
+12345flex: 1,overflow:">
   
     <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
   
@@ -67,29 +80,79 @@
 <section class="container content">
 	<main>
 		
-		
+		<article id="post-white-space-and-flex-bug" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">同时使用flex和white-space的bug</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/css/">css</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-01-28 17:14:07</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div></pre></td></tr></table></figure>
+<p>解决办法：再加上min-width: 0属性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>
+  
+  </div>
+
+</article>
 
 
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
   
-  
+    <a class="tag-item" href="/tags/flex/">flex</a>
     
-    
-    <section class="archive-item">
-      <h3>
-        <a href="/archives/2014" class="archive-year">2014</a>
-      </h3>
-      <ul>
+</div>
+
+
+
+<nav class="gutter">
   
-  <li>
-    <a href="/2014/12/27/php-array-chunk/">php array_chunk()的妙用</a>
-  </li>
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
+  </div>
+  
+</nav>
 
 
-  </ul></section>
 
-
-
-
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="white-space-and-flex-bug" data-title="同时使用flex和white-space的bug" data-url="2016/01/28/white-space-and-flex-bug/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
 
 		
 	</main>

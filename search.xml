@@ -4,6 +4,23 @@
   
     
     <entry>
+      <title><![CDATA[同时使用flex和white-space的bug]]></title>
+      <url>http://liukaijv.github.io/2016/01/28/white-space-and-flex-bug/</url>
+      <content type="html"><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div></pre></td></tr></table></figure>
+<p>解决办法：再加上min-width: 0属性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>
+]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[如何关闭微信内置浏览器]]></title>
+      <url>http://liukaijv.github.io/2015/12/28/how-to-close-wechat-browser-window/</url>
+      <content type="html"><![CDATA[<p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </div><div class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</div><div class="line">        wx.closeWindow();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">"undefined"</span>) &#123;</div><div class="line">        WeixinJSBridge.call(<span class="string">'closeWindow'</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">window</span>.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[hexo自定义404页面]]></title>
       <url>http://liukaijv.github.io/2015/12/26/custom-404-page-on-the-hexo/</url>
       <content type="html"><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
@@ -107,6 +124,13 @@
 <p>github是服务器在国外，访问慢，可以选择放七牛。<br>教程在<a href="http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/" target="_blank" rel="external">http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/</a></p>
 </blockquote>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[让jquery插件支持AMD和CMD规范]]></title>
+      <url>http://liukaijv.github.io/2015/03/28/let-jquery-plugin-support-amd-or-cmd/</url>
+      <content type="html"><![CDATA[<p>jquery插件支持AMD和CMD规范的改造：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">;<span class="function"><span class="keyword">function</span>(<span class="params">root, factory</span>) </span>&#123;</div><div class="line"><span class="meta">	 "use strict"</span>;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; (define.amd || define.cmd)) &#123;</div><div class="line"></div><div class="line">		<span class="comment">// register as anon module</span></div><div class="line">		define([<span class="string">'jquery'</span>], factory);</div><div class="line"></div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">		<span class="comment">// invoke directly</span></div><div class="line">		factory( (<span class="keyword">typeof</span>(jQuery) != <span class="string">'undefined'</span>) ? jQuery : <span class="built_in">window</span>.Zepto );</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line"><span class="meta">	'use strict'</span>;</div><div class="line"></div><div class="line">		<span class="comment">// your code</span></div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>

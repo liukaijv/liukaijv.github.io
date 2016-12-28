@@ -5,23 +5,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>js验证只能输入数字 | 工作中的学习笔记和心得</title>
+  <title>让jquery插件支持AMD和CMD规范 | 工作中的学习笔记和心得</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="js验证只能输入数字函数：
-123456789101112131415function parseNumber(value) &amp;#123;  // 替换非数字值  value = value.replace(/[^\d.]/g, &apos;&apos;);  // 替换第一位为.  value = value.replace(/^\./g, &apos;&apos;);  // 替换最后一位为.  value = value.repl">
+  <meta name="description" content="jquery插件支持AMD和CMD规范的改造：
+12345678910111213141516171819;function(root, factory) &amp;#123;	 &quot;use strict&quot;;	if (typeof define === &apos;function&apos; &amp;amp;&amp;amp; (define.amd || define.cmd)) &amp;#123;		// register as anon">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js验证只能输入数字">
-<meta property="og:url" content="http://liukaijv.github.io/2015/02/27/javascrit-number-valid/index.html">
+<meta property="og:title" content="让jquery插件支持AMD和CMD规范">
+<meta property="og:url" content="http://liukaijv.github.io/2015/03/28/let-jquery-plugin-support-amd-or-cmd/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
-<meta property="og:description" content="js验证只能输入数字函数：
-123456789101112131415function parseNumber(value) &amp;#123;  // 替换非数字值  value = value.replace(/[^\d.]/g, &apos;&apos;);  // 替换第一位为.  value = value.replace(/^\./g, &apos;&apos;);  // 替换最后一位为.  value = value.repl">
-<meta property="og:updated_time" content="2016-12-28T03:43:59.674Z">
+<meta property="og:description" content="jquery插件支持AMD和CMD规范的改造：
+12345678910111213141516171819;function(root, factory) &amp;#123;	 &quot;use strict&quot;;	if (typeof define === &apos;function&apos; &amp;amp;&amp;amp; (define.amd || define.cmd)) &amp;#123;		// register as anon">
+<meta property="og:updated_time" content="2016-12-28T03:43:48.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js验证只能输入数字">
-<meta name="twitter:description" content="js验证只能输入数字函数：
-123456789101112131415function parseNumber(value) &amp;#123;  // 替换非数字值  value = value.replace(/[^\d.]/g, &apos;&apos;);  // 替换第一位为.  value = value.replace(/^\./g, &apos;&apos;);  // 替换最后一位为.  value = value.repl">
+<meta name="twitter:title" content="让jquery插件支持AMD和CMD规范">
+<meta name="twitter:description" content="jquery插件支持AMD和CMD规范的改造：
+12345678910111213141516171819;function(root, factory) &amp;#123;	 &quot;use strict&quot;;	if (typeof define === &apos;function&apos; &amp;amp;&amp;amp; (define.amd || define.cmd)) &amp;#123;		// register as anon">
   
     <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
   
@@ -74,9 +74,9 @@
 <section class="container content">
 	<main>
 		
-		<article id="post-javascrit-number-valid" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+		<article id="post-let-jquery-plugin-support-amd-or-cmd" class="article-entry post post-type-post" itemscope itemprop="blogPost">
   
-  <h2 class="post-title">js验证只能输入数字</h2>
+  <h2 class="post-title">让jquery插件支持AMD和CMD规范</h2>
 
   <ul class="post-meta">	
 	
@@ -94,18 +94,27 @@
 	</li>
 	
 	<li>
-		发表于<span>2015-02-27 17:26:15</span>	
+		发表于<span>2015-03-28 11:37:47</span>	
 	</li>
 			
 </ul>
 
   <div class="post-content article-entry markdown-body">    
-      <p>js验证只能输入数字函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">  <span class="comment">// 替换非数字值</span></div><div class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换第一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换最后一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换连续.+</span></div><div class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="comment">// .号前只能有一个0</span></div><div class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">'0.'</span>);</div><div class="line">  <span class="comment">// 保留一个.，替换其它的.</span></div><div class="line">  value = value.replace(<span class="string">'.'</span>, <span class="string">'$#$'</span>).replace(<span class="regexp">/\./g</span>, <span class="string">''</span>).replace(<span class="string">'$#$'</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>  
+      <p>jquery插件支持AMD和CMD规范的改造：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">;<span class="function"><span class="keyword">function</span>(<span class="params">root, factory</span>) </span>&#123;</div><div class="line"><span class="meta">	 "use strict"</span>;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; (define.amd || define.cmd)) &#123;</div><div class="line"></div><div class="line">		<span class="comment">// register as anon module</span></div><div class="line">		define([<span class="string">'jquery'</span>], factory);</div><div class="line"></div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">		<span class="comment">// invoke directly</span></div><div class="line">		factory( (<span class="keyword">typeof</span>(jQuery) != <span class="string">'undefined'</span>) ? jQuery : <span class="built_in">window</span>.Zepto );</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line"><span class="meta">	'use strict'</span>;</div><div class="line"></div><div class="line">		<span class="comment">// your code</span></div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>  
   </div>
 
 </article>
 
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/tricks/">tricks</a>
+  
+    <a class="tag-item" href="/tags/jquery/">jquery</a>
+    
+</div>
 
 
 
@@ -113,13 +122,13 @@
   
   <div class="post-prev">
     上一篇：
-    <a href="/2015/03/28/use-html-css-javascript-in-hexo-s-post/">hexo的md文件中使用html、css、javascript</a>
+    <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
   </div>
   
    
   <div class="post-next">
     下一篇：
-    <a href="/2014/12/27/php-array-chunk/">php array_chunk()的妙用</a>
+    <a href="/2015/03/28/use-html-css-javascript-in-hexo-s-post/">hexo的md文件中使用html、css、javascript</a>
   </div>
   
 </nav>
@@ -127,7 +136,7 @@
 
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="javascrit-number-valid" data-title="js验证只能输入数字" data-url="2015/02/27/javascrit-number-valid/"></div>
+	<div class="ds-thread" data-thread-key="let-jquery-plugin-support-amd-or-cmd" data-title="让jquery插件支持AMD和CMD规范" data-url="2015/03/28/let-jquery-plugin-support-amd-or-cmd/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
