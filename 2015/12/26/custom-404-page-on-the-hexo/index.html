@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://liukaijv.github.io/2015/12/26/custom-404-page-on-the-hexo/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
 <meta property="og:description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。">
-<meta property="og:updated_time" content="2016-12-26T04:15:01.152Z">
+<meta property="og:updated_time" content="2016-12-29T03:43:05.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo自定义404页面">
 <meta name="twitter:description" content="要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。">
@@ -52,7 +52,15 @@
 					</li>
 				
 					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
 						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
 					</li>
 									
 			</ul>
@@ -113,7 +121,7 @@
 <blockquote>
 <p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 404</div><div class="line">date: 2015-12-26 09:16:44</div><div class="line">comments: false #禁止评论</div><div class="line">permalink: 404.html #设为固定链接</div><div class="line">---</div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #ddd"</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 404</div><div class="line">date: 2015-12-26 09:16:44</div><div class="line">comments: false #禁止评论</div><div class="line">permalink: 404.html #设为固定链接</div><div class="line">---</div><div class="line"></div><div class="line">&#123;% raw %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"border: 1px solid #ddd"</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">&#123;% endraw %&#125;</div></pre></td></tr></table></figure>
 <p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">layout: 404</div><div class="line">title: 404</div><div class="line">date: 2015-12-26 09:16:44</div><div class="line">comments: false #禁止评论</div><div class="line">permalink: 404.html #设为固定链接</div><div class="line">---</div></pre></td></tr></table></figure>
 <p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
@@ -121,7 +129,7 @@
 <p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
 </blockquote>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">%if(page.layout=='404')&#123;%</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">%-</span> <span class="attr">partial</span>('<span class="attr">_partial</span>/<span class="attr">404</span>') %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%&#125;else&#123;%</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%-</span> <span class="attr">body</span> %&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">%&#125;%</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。我的博客的<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
+<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
   
   </div>
 
@@ -183,7 +191,15 @@ var duoshuoQuery = {short_name:"liukaijv"};
       <ul>
         
           <li>
-            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex和white-space的bug</a>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
           </li>
         
           <li>
@@ -192,14 +208,6 @@ var duoshuoQuery = {short_name:"liukaijv"};
         
           <li>
             <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
           </li>
         
       </ul>
@@ -211,7 +219,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
     </div>
   </div>
 
@@ -221,7 +229,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
     </div>
   </div>
 
@@ -231,7 +239,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 

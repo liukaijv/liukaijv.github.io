@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>laravel处理跨域请求 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。
+
+推荐使用dingo/api扩展包
+
+1、用laravel中间件，基于w3c-Cross-Origin Resource Sharing创建中间件CrossDomainMiddleware.php，代码如下：
+12345678910111213141516171819202122232425&amp;lt;?phpnam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="laravel处理跨域请求">
+<meta property="og:url" content="http://liukaijv.github.io/2016/05/29/laravel-cross-domain/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。
+
+推荐使用dingo/api扩展包
+
+1、用laravel中间件，基于w3c-Cross-Origin Resource Sharing创建中间件CrossDomainMiddleware.php，代码如下：
+12345678910111213141516171819202122232425&amp;lt;?phpnam">
+<meta property="og:updated_time" content="2016-12-29T03:23:21.840Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="laravel处理跨域请求">
+<meta name="twitter:description" content="写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。
+
+推荐使用dingo/api扩展包
+
+1、用laravel中间件，基于w3c-Cross-Origin Resource Sharing创建中间件CrossDomainMiddleware.php，代码如下：
+12345678910111213141516171819202122232425&amp;lt;?phpnam">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/前端开发/">前端开发</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-laravel-cross-domain" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">laravel处理跨域请求</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/php/">php</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-05-29 10:50:38</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。</p>
+<blockquote>
+<p>推荐使用<a href="https://github.com/dingo/api" target="_blank" rel="external">dingo/api</a>扩展包</p>
+</blockquote>
+<h2 id="1、用laravel中间件，基于w3c-Cross-Origin-Resource-Sharing"><a href="#1、用laravel中间件，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="1、用laravel中间件，基于w3c-Cross-Origin Resource Sharing"></a>1、用laravel中间件，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header" target="_blank" rel="external">w3c-Cross-Origin Resource Sharing</a></h2><p>创建中间件CrossDomainMiddleware.php，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrossDomainMiddleware</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Handle an incoming request.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</div><div class="line">     * <span class="doctag">@param</span>  \Closure  $next</div><div class="line">     * <span class="doctag">@return</span> mixed</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></span></div><div class="line">    &#123;         </div><div class="line">        $response =  $next($request);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Headers'</span>, <span class="string">'Origin, Content-Type, Cookie, Accept'</span>);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Methods'</span>, <span class="string">'GET, POST, PATCH, PUT, OPTIONS'</span>);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Credentials'</span>, <span class="string">'true'</span>);</div><div class="line">        <span class="keyword">return</span> $response;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>在Kernel.php中注册中间件：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The application's global HTTP middleware stack.</div><div class="line">     *</div><div class="line">     * These middleware are run during every request to your application.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> array</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $middleware = [</div><div class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</div><div class="line">    ];</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The application's route middleware groups.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> array</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $middlewareGroups = [</div><div class="line">        <span class="string">'web'</span> =&gt; [</div><div class="line">            \App\Http\Middleware\EncryptCookies::class,</div><div class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</div><div class="line">            \Illuminate\Session\Middleware\StartSession::class,</div><div class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</div><div class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</div><div class="line">        ],</div><div class="line"></div><div class="line">        <span class="string">'api'</span> =&gt; [</div><div class="line">            <span class="string">'throttle:60,1'</span>,</div><div class="line">            \App\Http\Middleware\CrossDomainMiddleware::class,        </div><div class="line">        ]</div><div class="line">    ];</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The application's route middleware.</div><div class="line">     *</div><div class="line">     * These middleware may be assigned to groups or used individually.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@var</span> array</div><div class="line">     */</div><div class="line">    <span class="keyword">protected</span> $routeMiddleware = [</div><div class="line">        <span class="string">'auth'</span> =&gt; \App\Http\Middleware\Authenticate::class,</div><div class="line">        <span class="string">'auth.basic'</span> =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</div><div class="line">        <span class="string">'auth.basic.once'</span> =&gt; \App\Http\Middleware\AuthenticateOnceWithBasicAuth::class,</div><div class="line">        <span class="string">'guest'</span> =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</div><div class="line">        <span class="string">'throttle'</span> =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,     </div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing"><a href="#2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="2、在nginx.conf中配置，基于w3c-Cross-Origin Resource Sharing"></a>2、在nginx.conf中配置，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header" target="_blank" rel="external">w3c-Cross-Origin Resource Sharing</a></h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">http &#123;</div><div class="line">  ......</div><div class="line">  add_header Access-Control-Allow-Origin *;</div><div class="line">  add_header Access-Control-Allow-Headers X-Requested-With;</div><div class="line">  add_header Access-Control-Allow-Methods GET,POST,OPTIONS;</div><div class="line">  ......</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3、nginx的反向代理"><a href="#3、nginx的反向代理" class="headerlink" title="3、nginx的反向代理"></a>3、nginx的反向代理</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">upstream serve &#123;</div><div class="line">    server <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">3000</span>;    </div><div class="line">    keepalive <span class="number">64</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">server &#123;</div><div class="line"></div><div class="line">    listen <span class="number">80</span>;</div><div class="line">    server_name localhost;</div><div class="line"></div><div class="line">    location / &#123;</div><div class="line">        proxy_set_header X-Real-IP $remote_addr;</div><div class="line">        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</div><div class="line">        proxy_set_header Host  $http_host;</div><div class="line">        proxy_set_header X-Nginx-Proxy <span class="literal">true</span>;</div><div class="line">        proxy_set_header Connection <span class="string">""</span>;</div><div class="line">        proxy_pass      http://serve;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  
+  </div>
+
+</article>
+
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/laravel/">laravel</a>
+    
+</div>
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="laravel-cross-domain" data-title="laravel处理跨域请求" data-url="2016/05/29/laravel-cross-domain/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2016 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+</body>
+</html>

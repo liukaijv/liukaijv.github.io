@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vue中使用基于客户端的缓存 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="在写基于express、vuejs博客的小项目过程中，折腾了下在vuejs中怎么使用浏览器缓存请求。
+
+原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。
+
+用到的依赖包：
+
+vue-resource #一个vuejs的http包
+lodash # js库
+ls">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue中使用基于客户端的缓存">
+<meta property="og:url" content="http://liukaijv.github.io/2016/06/29/vue-use-client-cache/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="在写基于express、vuejs博客的小项目过程中，折腾了下在vuejs中怎么使用浏览器缓存请求。
+
+原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。
+
+用到的依赖包：
+
+vue-resource #一个vuejs的http包
+lodash # js库
+ls">
+<meta property="og:updated_time" content="2016-12-29T02:19:48.149Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue中使用基于客户端的缓存">
+<meta name="twitter:description" content="在写基于express、vuejs博客的小项目过程中，折腾了下在vuejs中怎么使用浏览器缓存请求。
+
+原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。
+
+用到的依赖包：
+
+vue-resource #一个vuejs的http包
+lodash # js库
+ls">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/前端开发/">前端开发</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-vue-use-client-cache" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">vue中使用基于客户端的缓存</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-06-29 09:25:26</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>在写<a href="https://github.com/liukaijv/lnode-blog" target="_blank" rel="external">基于express、vuejs博客</a>的小项目过程中，折腾了下在<strong>vuejs</strong>中怎么使用浏览器缓存请求。</p>
+<blockquote>
+<p>原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。</p>
+</blockquote>
+<p>用到的依赖包：</p>
+<ul>
+<li><a href="https://github.com/pagekit/vue-resource" target="_blank" rel="external">vue-resource</a> #一个vuejs的http包</li>
+<li><a href="https://github.com/lodash/lodash" target="_blank" rel="external">lodash</a> # js库</li>
+<li><a href="https://github.com/pamelafox/lscache" target="_blank" rel="external">lscache</a> #localStorage和sessionStorage包</li>
+</ul>
+<p>详细代码在<a href="https://github.com/liukaijv/lnode-blog/tree/master/frontend" target="_blank" rel="external">https://github.com/liukaijv/lnode-blog/tree/master/frontend</a>。</p>
+<a id="more"></a>
+<h2 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h2><p>vue入口文件main.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span>;</div><div class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">'vue-resource'</span>;</div><div class="line"><span class="keyword">import</span> Cache <span class="keyword">from</span> <span class="string">'lscache'</span>;</div><div class="line"></div><div class="line">Vue.prototype.$cache = Cache;</div><div class="line">Vue.cache = Cache;</div><div class="line"></div><div class="line"><span class="keyword">import</span> httpCache <span class="keyword">from</span> <span class="string">'./lib/cache'</span>;</div><div class="line">httpCache(Vue);</div></pre></td></tr></table></figure>
+<p>缓存拦截器cache.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">'lodash'</span>;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>)</span>&#123;</div><div class="line">    Vue.http.interceptors.push(<span class="function">(<span class="params">request, next</span>) =&gt;</span> &#123;</div><div class="line"></div><div class="line">    	<span class="comment">// lifetime为缓存时间</span></div><div class="line">        <span class="keyword">let</span> cached, key, lifetime; </div><div class="line"></div><div class="line">        <span class="keyword">if</span>(request.cache !== <span class="literal">undefined</span> &amp;&amp; <span class="regexp">/^(GET|JSONP)$/i</span>.test(request.method)) &#123;</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (_.isObject(request.cache)) &#123;</div><div class="line">                lifetime = request.cache.lifetime;</div><div class="line">                key = <span class="string">'_resource.'</span> + request.cache.key;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                lifetime = request.cache;</div><div class="line">                key = request.url;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="comment">// 不需要缓存的请求，添加参数no_cache=true</span></div><div class="line">            <span class="keyword">let</span> no_cache = request.params.no_cache;</div><div class="line">            </div><div class="line">            cached = Vue.cache.get(key); </div><div class="line"></div><div class="line">            <span class="keyword">if</span> (cached &amp;&amp; !no_cache) &#123;                </div><div class="line">                <span class="comment">// 重写返回数据</span></div><div class="line">                request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </div><div class="line">                    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</div><div class="line">                &#125;;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        next(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;   </div><div class="line">            <span class="keyword">if</span> (!cached &amp;&amp; response.ok) &#123;</div><div class="line">                Vue.cache.set(key, response, lifetime);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>关键点请求的client，返回数据<code>{ok: true}</code>必须有，这样才能正确返回数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </div><div class="line">    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>具体请查看源码<a href="https://github.com/pagekit/vue-resource/blob/master/src/http/index.js" target="_blank" rel="external">https://github.com/pagekit/vue-resource/blob/master/src/http/index.js</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> client(<span class="keyword">new</span> Request(options)).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</div><div class="line">		</div><div class="line">	<span class="comment">// 原因在这里</span></div><div class="line">    <span class="keyword">return</span> response.ok ? response : <span class="built_in">Promise</span>.reject(response);</div><div class="line"></div><div class="line">    &#125;, (response) =&gt; &#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (response <span class="keyword">instanceof</span> <span class="built_in">Error</span>) &#123;</div><div class="line">            error(response);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(response);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+  
+  </div>
+
+</article>
+
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/vue/">vue</a>
+    
+</div>
+
+
+
+<nav class="gutter">
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="vue-use-client-cache" data-title="vue中使用基于客户端的缓存" data-url="2016/06/29/vue-use-client-cache/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2016 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+</body>
+</html>

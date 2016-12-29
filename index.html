@@ -48,7 +48,15 @@
 					</li>
 				
 					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
 						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
 					</li>
 									
 			</ul>
@@ -71,7 +79,97 @@
     
 <article class="post">
 	<h2 class="post-title">
-		<a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex和white-space的bug</a>
+		<a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-06-29 09:25:26</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>在写<a href="https://github.com/liukaijv/lnode-blog">基于express、vuejs博客</a>的小项目过程中，折腾了下在<strong>vuejs</strong>中怎么使用浏览器缓存请求。</p>
+<blockquote>
+<p>原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。</p>
+</blockquote>
+<p>用到的依赖包：</p>
+<ul>
+<li><a href="https://github.com/pagekit/vue-resource">vue-resource</a> #一个vuejs的http包</li>
+<li><a href="https://github.com/lodash/lodash">lodash</a> # js库</li>
+<li><a href="https://github.com/pamelafox/lscache">lscache</a> #localStorage和sessionStorage包</li>
+</ul>
+<p>详细代码在<a href="https://github.com/liukaijv/lnode-blog/tree/master/frontend">https://github.com/liukaijv/lnode-blog/tree/master/frontend</a>。</p>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/06/29/vue-use-client-cache/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/php/">php</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-05-29 10:50:38</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。</p>
+<blockquote>
+<p>推荐使用<a href="https://github.com/dingo/api">dingo/api</a>扩展包</p>
+</blockquote>
+<h2 id="1、用laravel中间件，基于w3c-Cross-Origin-Resource-Sharing"><a href="#1、用laravel中间件，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="1、用laravel中间件，基于w3c-Cross-Origin Resource Sharing"></a>1、用laravel中间件，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">w3c-Cross-Origin Resource Sharing</a></h2><p>创建中间件CrossDomainMiddleware.php，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"></div><div class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</div><div class="line"></div><div class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrossDomainMiddleware</span></div><div class="line"></span>&#123;</div><div class="line">    <span class="comment">/**</div><div class="line">     * Handle an incoming request.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</div><div class="line">     * <span class="doctag">@param</span>  \Closure  $next</div><div class="line">     * <span class="doctag">@return</span> mixed</div><div class="line">     */</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span><span class="params">($request, Closure $next)</span></div><div class="line">    </span>&#123;         </div><div class="line">        $response =  $next($request);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Origin'</span>, <span class="string">'*'</span>);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Headers'</span>, <span class="string">'Origin, Content-Type, Cookie, Accept'</span>);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Methods'</span>, <span class="string">'GET, POST, PATCH, PUT, OPTIONS'</span>);</div><div class="line">        $response-&gt;header(<span class="string">'Access-Control-Allow-Credentials'</span>, <span class="string">'true'</span>);</div><div class="line">        <span class="keyword">return</span> $response;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/05/29/laravel-cross-domain/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
 	</h2>		
 	<ul class="post-meta">	
 	
@@ -185,7 +283,7 @@
 	<li>
 		分类：			
 							
-			<a href="/categories/笔记/">笔记</a>
+			<a href="/categories/编程笔记/">编程笔记</a>
 			
 						
 		 · 
@@ -223,7 +321,7 @@
 	<li>
 		分类：			
 							
-			<a href="/categories/笔记/">笔记</a>
+			<a href="/categories/编程笔记/">编程笔记</a>
 			
 						
 		 · 
@@ -296,7 +394,7 @@
 	<li>
 		分类：			
 							
-			<a href="/categories/笔记/">笔记</a>
+			<a href="/categories/编程笔记/">编程笔记</a>
 			
 						
 		 · 
@@ -357,46 +455,6 @@
 	</div>
 </article>
 
-<article class="post">
-	<h2 class="post-title">
-		<a href="/2014/12/27/php-array-chunk/">php array_chunk()的妙用</a>
-	</h2>		
-	<ul class="post-meta">	
-	
-	
-	<li>
-		分类：			
-							
-			<a href="/categories/php/">php</a>
-			
-						
-		 · 
-	</li>
-	
-	<li>
-		发表于<span>2014-12-27 09:28:09</span>	
-	</li>
-			
-</ul>
-	<div class="post-content article-entry markdown-body">
-		<div class="post-thumbnail"></div>
-		<div class="post-content">
-			
-		        <p>如果你想输出这么一个列表你会怎么做呢？</p>
-<p>数据：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$cars=<span class="keyword">array</span>(<span class="string">"Volvo"</span>,<span class="string">"BMW"</span>,<span class="string">"Toyota"</span>,<span class="string">"Honda"</span>,<span class="string">"Mercedes"</span>,<span class="string">"Opel"</span>);</div></pre></td></tr></table></figure>
-<p>最终结果：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Volvo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>BMW<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Toyota<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Honda<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Mercedes<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Opel<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">...</div><div class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></div></pre></td></tr></table></figure>
-		        	
-		          	<p class="more-link">
-		            	<a href="/2014/12/27/php-array-chunk/">查看详情&raquo;</a>
-		          	</p>
-		        	
-		      
-		</div>
-	</div>
-</article>
-
 
 
 
@@ -412,7 +470,15 @@
       <ul>
         
           <li>
-            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex和white-space的bug</a>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
           </li>
         
           <li>
@@ -421,14 +487,6 @@
         
           <li>
             <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
           </li>
         
       </ul>
@@ -440,7 +498,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
     </div>
   </div>
 
@@ -450,7 +508,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
     </div>
   </div>
 
@@ -460,7 +518,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 

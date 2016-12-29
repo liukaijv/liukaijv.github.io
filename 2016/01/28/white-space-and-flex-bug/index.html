@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>同时使用flex和white-space的bug | 工作中的学习笔记和心得</title>
+  <title>同时使用flex、white-space和overflow的bug | 工作中的学习笔记和心得</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -14,16 +14,16 @@
 解决办法：再加上min-width: 0属性。
 12345flex: 1,overflow:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="同时使用flex和white-space的bug">
+<meta property="og:title" content="同时使用flex、white-space和overflow的bug">
 <meta property="og:url" content="http://liukaijv.github.io/2016/01/28/white-space-and-flex-bug/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
 <meta property="og:description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
 1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 解决办法：再加上min-width: 0属性。
 12345flex: 1,overflow:">
-<meta property="og:updated_time" content="2016-12-28T09:22:51.015Z">
+<meta property="og:updated_time" content="2016-12-29T03:30:22.928Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="同时使用flex和white-space的bug">
+<meta name="twitter:title" content="同时使用flex、white-space和overflow的bug">
 <meta name="twitter:description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
 1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 解决办法：再加上min-width: 0属性。
@@ -61,7 +61,15 @@
 					</li>
 				
 					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
 						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
 					</li>
 									
 			</ul>
@@ -82,7 +90,7 @@
 		
 		<article id="post-white-space-and-flex-bug" class="article-entry post post-type-post" itemscope itemprop="blogPost">
   
-  <h2 class="post-title">同时使用flex和white-space的bug</h2>
+  <h2 class="post-title">同时使用flex、white-space和overflow的bug</h2>
 
   <ul class="post-meta">	
 	
@@ -127,6 +135,11 @@
 
 <nav class="gutter">
   
+  <div class="post-prev">
+    上一篇：
+    <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+  </div>
+  
    
   <div class="post-next">
     下一篇：
@@ -138,7 +151,7 @@
 
 
 <!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="white-space-and-flex-bug" data-title="同时使用flex和white-space的bug" data-url="2016/01/28/white-space-and-flex-bug/"></div>
+	<div class="ds-thread" data-thread-key="white-space-and-flex-bug" data-title="同时使用flex、white-space和overflow的bug" data-url="2016/01/28/white-space-and-flex-bug/"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -166,7 +179,15 @@ var duoshuoQuery = {short_name:"liukaijv"};
       <ul>
         
           <li>
-            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex和white-space的bug</a>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
           </li>
         
           <li>
@@ -175,14 +196,6 @@ var duoshuoQuery = {short_name:"liukaijv"};
         
           <li>
             <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
-          </li>
-        
-          <li>
-            <a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
           </li>
         
       </ul>
@@ -194,7 +207,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/笔记/">笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
     </div>
   </div>
 
@@ -204,7 +217,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
     </div>
   </div>
 
@@ -214,7 +227,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 
