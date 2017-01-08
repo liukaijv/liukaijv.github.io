@@ -79,6 +79,49 @@
     
 <article class="post">
 	<h2 class="post-title">
+		<a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/php/">php</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-10-29 12:12:55</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
+<h2 id="访问storage下任意图片"><a href="#访问storage下任意图片" class="headerlink" title="访问storage下任意图片"></a>访问storage下任意图片</h2><p>如果图片不是放在<code>storage</code>公共磁盘中，可以定义一个用于访问图片的路由，如下：</p>
+<p>routes/web.php定义路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// file manager</span></div><div class="line">Route::group([<span class="string">'prefix'</span> =&gt; <span class="string">'filemanager'</span>], <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123; </div><div class="line">    Route::get(<span class="string">'show'</span>, <span class="string">'FileManageController@get'</span>)-&gt;name(<span class="string">'filemanager.show'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>FileManageController.php中定义action：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</div><div class="line"> * <span class="doctag">@param</span> Request $request</div><div class="line"> * <span class="doctag">@return</span> mixed</div><div class="line"> */</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">(Request $request)</span></div><div class="line"></span>&#123;	</div><div class="line">    $filename = $request-&gt;get(<span class="string">'filename'</span>, <span class="string">''</span>);</div><div class="line">    $file = Storage::get($filename);</div><div class="line">    <span class="keyword">return</span> response($file, <span class="number">200</span>)-&gt;header(<span class="string">'Content-Type'</span>, Storage::mimeType($filename));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>view里的图片：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;route('filemanager.show',['filename'=&gt;$image['name']])&#125;&#125;"</span>&gt;</span></div></pre></td></tr></table></figure>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
 		<a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
 	</h2>		
 	<ul class="post-meta">	
@@ -133,23 +176,23 @@
       <ul>
         
           <li>
+            <a href="/2017/01/03/javascrit-sort/">javascrit常见排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
           </li>
         
           <li>
             <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
           </li>
         
       </ul>
@@ -161,17 +204,26 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
     </div>
   </div>
 
 
 
+	<!-- <div class="widget">
+    <h3 class="widget-title">专题</h3>
+    <div class="widget-body">
+      <ul>
+      <li><a href="#"></a></li>
+      </ul>
+    </div>
+</div> -->
+
 	
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年08月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
     </div>
   </div>
 
@@ -181,7 +233,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 
@@ -193,7 +245,7 @@
 <footer>
 	<div class="container">
 		<p>
-			&copy; 2016 Liukaijv all rights reserved.	
+			&copy; 2017 Liukaijv all rights reserved.	
 			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
 								
 		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        

@@ -79,6 +79,45 @@
     
 <article class="post">
 	<h2 class="post-title">
+		<a href="/2017/01/03/javascrit-sort/">javascrit常见排序算法</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2017-01-03 10:01:14</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>总结一下javascrit常见排序算法。</p>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2017/01/03/javascrit-sort/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
 		<a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
 	</h2>		
 	<ul class="post-meta">	
@@ -155,10 +194,49 @@
 		<div class="post-content">
 			
 		        	<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1;</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div></pre></td></tr></table></figure>
 <p>解决办法：再加上min-width: 0属性。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1;</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
 
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/12/29/lodash-sortBy/">lodash集合的sortBy排序</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-12-29 14:11:20</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>lodash sortBy的用法</p>
+<p>数组对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> tags = [ </div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'php'</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'html'</span>, <span class="attr">post_count</span>: <span class="number">3</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'lua'</span>, <span class="attr">post_count</span>: <span class="number">5</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'css'</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'python'</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'javascript'</span>, <span class="attr">post_count</span>: <span class="number">1</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'express'</span>, <span class="attr">post_count</span>: <span class="number">4</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'css3'</span>, <span class="attr">post_count</span>: <span class="number">6</span> &#125;,</div><div class="line">		&#123; <span class="attr">name</span>: <span class="string">'mongoose'</span>, <span class="attr">post_count</span>: <span class="number">0</span> &#125; </div><div class="line">	]</div></pre></td></tr></table></figure>
+<p>以post_count升序排序：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tags = _.sortBy(tags, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> item.post_count;</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<p>以post_count降序排序，排序项加个负号：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tags = _.sortBy(tags, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">			<span class="keyword">return</span> -item.post_count;</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
 		     
 		</div>
 	</div>
@@ -191,6 +269,44 @@
 			
 		        	<p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </div><div class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</div><div class="line">        wx.closeWindow();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">"undefined"</span>) &#123;</div><div class="line">        WeixinJSBridge.call(<span class="string">'closeWindow'</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">window</span>.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/10/29/function-as-a-variable-value/">javascript函数作为变量传递</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-10-29 14:19:13</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>js中当函数不加括号时可以把函数当成值传递。</p>
+<p>无参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无参函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = foo;</div></pre></td></tr></table></figure>
+<p>有参时需要用一个匿名函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> bar =  <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">	foo(arg1, arg2);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 		     
 		</div>
 	</div>
@@ -266,6 +382,112 @@
 	</div>
 </article>
 
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/01/05/use-jascript-for-getting-window-viewport/">javascript获取浏览器视口大小</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-01-05 09:39:43</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">'BackCompat'</span>)&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</div><div class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</div><div class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2014/12/29/tag-a-pseudo-class/">a标签伪类顺序</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/css/">css</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2014-12-29 14:30:14</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>a标签的link、visited、hover、active通常的顺序为：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></div><div class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </div><div class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2014/11/05/the-difference-between-src-and-href/">src和href的区别</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/html/">html</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2014-11-05 09:10:35</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
+<p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
+<p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
+
+		     
+		</div>
+	</div>
+</article>
+
 
 
 
@@ -281,23 +503,23 @@
       <ul>
         
           <li>
+            <a href="/2017/01/03/javascrit-sort/">javascrit常见排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
           </li>
         
           <li>
             <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
           </li>
         
       </ul>
@@ -309,17 +531,26 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
     </div>
   </div>
 
 
 
+	<!-- <div class="widget">
+    <h3 class="widget-title">专题</h3>
+    <div class="widget-body">
+      <ul>
+      <li><a href="#"></a></li>
+      </ul>
+    </div>
+</div> -->
+
 	
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年08月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
     </div>
   </div>
 
@@ -329,7 +560,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 
@@ -341,7 +572,7 @@
 <footer>
 	<div class="container">
 		<p>
-			&copy; 2016 Liukaijv all rights reserved.	
+			&copy; 2017 Liukaijv all rights reserved.	
 			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
 								
 		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        

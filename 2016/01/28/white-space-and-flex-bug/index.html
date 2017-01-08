@@ -10,24 +10,24 @@
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
-1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+1234flex: 1;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 解决办法：再加上min-width: 0属性。
-12345flex: 1,overflow:">
+12345flex: 1;overflow:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="同时使用flex、white-space和overflow的bug">
 <meta property="og:url" content="http://liukaijv.github.io/2016/01/28/white-space-and-flex-bug/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
 <meta property="og:description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
-1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+1234flex: 1;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 解决办法：再加上min-width: 0属性。
-12345flex: 1,overflow:">
-<meta property="og:updated_time" content="2016-12-29T03:30:22.928Z">
+12345flex: 1;overflow:">
+<meta property="og:updated_time" content="2016-12-29T05:56:52.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="同时使用flex、white-space和overflow的bug">
 <meta name="twitter:description" content="写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：
-1234flex: 1,overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
+1234flex: 1;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;
 解决办法：再加上min-width: 0属性。
-12345flex: 1,overflow:">
+12345flex: 1;overflow:">
   
     <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
   
@@ -115,10 +115,9 @@
 
   <div class="post-content article-entry markdown-body">    
       <p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1;</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div></pre></td></tr></table></figure>
 <p>解决办法：再加上min-width: 0属性。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1,</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>
-  
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1;</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>  
   </div>
 
 </article>
@@ -143,7 +142,7 @@
    
   <div class="post-next">
     下一篇：
-    <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
+    <a href="/2015/12/29/lodash-sortBy/">lodash集合的sortBy排序</a>
   </div>
   
 </nav>
@@ -179,23 +178,23 @@ var duoshuoQuery = {short_name:"liukaijv"};
       <ul>
         
           <li>
+            <a href="/2017/01/03/javascrit-sort/">javascrit常见排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+          </li>
+        
+          <li>
             <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
           </li>
         
           <li>
             <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
-          </li>
-        
-          <li>
-            <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/28/how-to-close-wechat-browser-window/">如何关闭微信内置浏览器</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
           </li>
         
       </ul>
@@ -207,17 +206,26 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
     </div>
   </div>
 
 
 
+	<!-- <div class="widget">
+    <h3 class="widget-title">专题</h3>
+    <div class="widget-body">
+      <ul>
+      <li><a href="#"></a></li>
+      </ul>
+    </div>
+</div> -->
+
 	
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年08月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
     </div>
   </div>
 
@@ -227,7 +235,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 
@@ -239,7 +247,7 @@ var duoshuoQuery = {short_name:"liukaijv"};
 <footer>
 	<div class="container">
 		<p>
-			&copy; 2016 Liukaijv all rights reserved.	
+			&copy; 2017 Liukaijv all rights reserved.	
 			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
 								
 		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>显示上传到laravel的storage目录中的图片 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问public公共磁盘目录。
+访问storage下任意图片如果图片不是放在storage公共磁盘中，可以定义一个用于访问图片的路由，如下：
+routes/web.php定义路由：
+1234// file managerRoute::group([&apos;prefix&apos; =&amp;gt; &apos;filemanager&apos;], functio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="显示上传到laravel的storage目录中的图片">
+<meta property="og:url" content="http://liukaijv.github.io/2016/10/29/show-image-files-in-laravel's-storage-directory/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问public公共磁盘目录。
+访问storage下任意图片如果图片不是放在storage公共磁盘中，可以定义一个用于访问图片的路由，如下：
+routes/web.php定义路由：
+1234// file managerRoute::group([&apos;prefix&apos; =&amp;gt; &apos;filemanager&apos;], functio">
+<meta property="og:updated_time" content="2016-12-29T05:09:02.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="显示上传到laravel的storage目录中的图片">
+<meta name="twitter:description" content="Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问public公共磁盘目录。
+访问storage下任意图片如果图片不是放在storage公共磁盘中，可以定义一个用于访问图片的路由，如下：
+routes/web.php定义路由：
+1234// file managerRoute::group([&apos;prefix&apos; =&amp;gt; &apos;filemanager&apos;], functio">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/前端开发/">前端开发</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-show-image-files-in-laravel&#39;s-storage-directory" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">显示上传到laravel的storage目录中的图片</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/php/">php</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-10-29 12:12:55</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
+<h2 id="访问storage下任意图片"><a href="#访问storage下任意图片" class="headerlink" title="访问storage下任意图片"></a>访问storage下任意图片</h2><p>如果图片不是放在<code>storage</code>公共磁盘中，可以定义一个用于访问图片的路由，如下：</p>
+<p>routes/web.php定义路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// file manager</span></div><div class="line">Route::group([<span class="string">'prefix'</span> =&gt; <span class="string">'filemanager'</span>], <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123; </div><div class="line">    Route::get(<span class="string">'show'</span>, <span class="string">'FileManageController@get'</span>)-&gt;name(<span class="string">'filemanager.show'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>FileManageController.php中定义action：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * <span class="doctag">@param</span> Request $request</div><div class="line"> * <span class="doctag">@return</span> mixed</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">(Request $request)</span></span></div><div class="line">&#123;	</div><div class="line">    $filename = $request-&gt;get(<span class="string">'filename'</span>, <span class="string">''</span>);</div><div class="line">    $file = Storage::get($filename);</div><div class="line">    <span class="keyword">return</span> response($file, <span class="number">200</span>)-&gt;header(<span class="string">'Content-Type'</span>, Storage::mimeType($filename));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>view里的图片：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;route('filemanager.show',['filename'=&gt;$image['name']])&#125;&#125;"</span>&gt;</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="公共磁盘图片访问"><a href="#公共磁盘图片访问" class="headerlink" title="公共磁盘图片访问"></a>公共磁盘图片访问</h2><p>public 磁盘用于存储可以被公开访问的文件，默认情况下， public 磁盘使用 local 驱动并将文件存储在<code>storage/app/public</code> ，要让这些文件可以通过web访问到，需要创建一个软链 <code>public/storage</code> 指向 <code>storage/app/public</code> 。</p>
+<p>创建这个软链，可以使用Artisan命令 storage:link ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">php artisan storage:link</div></pre></td></tr></table></figure>
+<p>图片被存储并且软链已经被创建的情况下，就可以使用辅助函数<code>asset</code>创建一个指向该图片的URL：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"&#123;&#123;asset('storage/picture.png')&#125;&#125;"</span>&gt;</span>;</div></pre></td></tr></table></figure>  
+  </div>
+
+</article>
+
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/laravel/">laravel</a>
+    
+</div>
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2017/01/03/javascrit-sort/">javascrit常见排序算法</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="show-image-files-in-laravel&#39;s-storage-directory" data-title="显示上传到laravel的storage目录中的图片" data-url="2016/10/29/show-image-files-in-laravel&#39;s-storage-directory/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/03/javascrit-sort/">javascrit常见排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	<!-- <div class="widget">
+    <h3 class="widget-title">专题</h3>
+    <div class="widget-body">
+      <ul>
+      <li><a href="#"></a></li>
+      </ul>
+    </div>
+</div> -->
+
+	
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/">2017年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年08月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2017 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+</body>
+</html>
