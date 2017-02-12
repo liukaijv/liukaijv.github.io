@@ -23,6 +23,7 @@
   
 
   <link rel="stylesheet" href="/css/style.css">  
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
   
 </head>
 
@@ -198,6 +199,46 @@
 <p>解决办法：再加上min-width: 0属性。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">flex</span>: 1;</div><div class="line"><span class="selector-tag">overflow</span>: <span class="selector-tag">hidden</span>;</div><div class="line"><span class="selector-tag">white-space</span>: <span class="selector-tag">nowrap</span>;</div><div class="line"><span class="selector-tag">text-overflow</span>: <span class="selector-tag">ellipsis</span>;</div><div class="line"><span class="selector-tag">min-width</span><span class="selector-pseudo">:0</span>;</div></pre></td></tr></table></figure>
 		     
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2016/01/09/use-jquery-ajax-to-upload-files-on-qiniu/">使用$.ajax上传文件到七牛</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-01-09 09:27:03</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>用jquery的ajax方法上传文件到七牛和常规的ajax有点区别，直接上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $input = $(<span class="string">'#upload-qiniu'</span>);</div><div class="line"><span class="keyword">var</span> token = <span class="string">'sMTdcnRxls_IaTJ1uSOR1Rb7zFkcdJq3LK0MPjR1:4k547QcZwzo2fK7zPJeu28UgXNM=:eyJzY29wZSI6Im9haGEiLCJkZWFkbGluZSI6MTQ0MTk2NzY1Mn0='</span>;</div><div class="line"><span class="keyword">var</span> url = <span class="string">'http://up.qiniu.com/'</span>;</div><div class="line"><span class="keyword">var</span> prefix = <span class="string">'http://7vii28.com1.z0.glb.clouddn.com/'</span>;</div><div class="line"></div><div class="line">$input.on(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> me = $(<span class="keyword">this</span>);</div><div class="line">	<span class="keyword">var</span> file = <span class="keyword">this</span>.files[<span class="number">0</span>];     </div><div class="line">	<span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(),</div><div class="line">	    filename = file.name;</div><div class="line">	formData.append(<span class="string">'token'</span>, token);</div><div class="line">	formData.append(<span class="string">"file"</span>, file);</div><div class="line">	$.ajax(&#123;  </div><div class="line">		<span class="attr">url</span> : url,  </div><div class="line">		<span class="attr">type</span> : <span class="string">'POST'</span>,  </div><div class="line">		<span class="attr">data</span> : formData, </div><div class="line">		<span class="attr">processData</span> : <span class="literal">false</span>, <span class="comment">// 对数据不作处理</span></div><div class="line">		contentType : <span class="literal">false</span> <span class="comment">// 使用原始类型</span></div><div class="line">	&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123; </div><div class="line">		<span class="built_in">console</span>.log(json);</div><div class="line">	&#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;                </div><div class="line">		<span class="built_in">console</span>.log(json.responseJSON.error);</div><div class="line">	&#125;);              </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/01/09/use-jquery-ajax-to-upload-files-on-qiniu/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
 		</div>
 	</div>
 </article>
@@ -482,6 +523,9 @@
 		        	<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
 <p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
 <p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
+<blockquote>
+<p>href是与资源建立关系，src是用资源替换到当前位置</p>
+</blockquote>
 
 		     
 		</div>

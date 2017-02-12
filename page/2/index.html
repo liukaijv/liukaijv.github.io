@@ -23,6 +23,7 @@
   
 
   <link rel="stylesheet" href="/css/style.css">  
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
   
 </head>
 
@@ -77,6 +78,41 @@
 		
 		
     
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/02/27/javascrit-number-valid/">js验证只能输入数字</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-02-27 17:26:15</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>js验证只能输入数字函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">  <span class="comment">// 替换非数字值</span></div><div class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换第一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换最后一位为.</span></div><div class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">''</span>);</div><div class="line">  <span class="comment">// 替换连续.+</span></div><div class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="comment">// .号前只能有一个0</span></div><div class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">'0.'</span>);</div><div class="line">  <span class="comment">// 保留一个.，替换其它的.</span></div><div class="line">  value = value.replace(<span class="string">'.'</span>, <span class="string">'$#$'</span>).replace(<span class="regexp">/\./g</span>, <span class="string">''</span>).replace(<span class="string">'$#$'</span>, <span class="string">'.'</span>);</div><div class="line">  <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
+
 <article class="post">
 	<h2 class="post-title">
 		<a href="/2015/01/05/use-jascript-for-getting-window-viewport/">javascript获取浏览器视口大小</a>
@@ -217,6 +253,9 @@
 		        	<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
 <p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
 <p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
+<blockquote>
+<p>href是与资源建立关系，src是用资源替换到当前位置</p>
+</blockquote>
 
 		     
 		</div>

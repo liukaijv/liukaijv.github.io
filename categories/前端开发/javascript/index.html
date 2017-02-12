@@ -23,6 +23,7 @@
   
 
   <link rel="stylesheet" href="/css/style.css">  
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
   
 </head>
 
@@ -158,6 +159,46 @@
 		        	
 		          	<p class="more-link">
 		            	<a href="/2016/06/29/vue-use-client-cache/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2016/01/09/use-jquery-ajax-to-upload-files-on-qiniu/">使用$.ajax上传文件到七牛</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-01-09 09:27:03</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>用jquery的ajax方法上传文件到七牛和常规的ajax有点区别，直接上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $input = $(<span class="string">'#upload-qiniu'</span>);</div><div class="line"><span class="keyword">var</span> token = <span class="string">'sMTdcnRxls_IaTJ1uSOR1Rb7zFkcdJq3LK0MPjR1:4k547QcZwzo2fK7zPJeu28UgXNM=:eyJzY29wZSI6Im9haGEiLCJkZWFkbGluZSI6MTQ0MTk2NzY1Mn0='</span>;</div><div class="line"><span class="keyword">var</span> url = <span class="string">'http://up.qiniu.com/'</span>;</div><div class="line"><span class="keyword">var</span> prefix = <span class="string">'http://7vii28.com1.z0.glb.clouddn.com/'</span>;</div><div class="line"></div><div class="line">$input.on(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> me = $(<span class="keyword">this</span>);</div><div class="line">	<span class="keyword">var</span> file = <span class="keyword">this</span>.files[<span class="number">0</span>];     </div><div class="line">	<span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(),</div><div class="line">	    filename = file.name;</div><div class="line">	formData.append(<span class="string">'token'</span>, token);</div><div class="line">	formData.append(<span class="string">"file"</span>, file);</div><div class="line">	$.ajax(&#123;  </div><div class="line">		<span class="attr">url</span> : url,  </div><div class="line">		<span class="attr">type</span> : <span class="string">'POST'</span>,  </div><div class="line">		<span class="attr">data</span> : formData, </div><div class="line">		<span class="attr">processData</span> : <span class="literal">false</span>, <span class="comment">// 对数据不作处理</span></div><div class="line">		contentType : <span class="literal">false</span> <span class="comment">// 使用原始类型</span></div><div class="line">	&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123; </div><div class="line">		<span class="built_in">console</span>.log(json);</div><div class="line">	&#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;                </div><div class="line">		<span class="built_in">console</span>.log(json.responseJSON.error);</div><div class="line">	&#125;);              </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/01/09/use-jquery-ajax-to-upload-files-on-qiniu/">查看详情&raquo;</a>
 		          	</p>
 		        	
 		      

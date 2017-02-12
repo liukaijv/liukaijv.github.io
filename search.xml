@@ -113,6 +113,50 @@
     </entry>
     
     <entry>
+      <title><![CDATA[使用$.ajax上传文件到七牛]]></title>
+      <url>http://liukaijv.github.io/2016/01/09/use-jquery-ajax-to-upload-files-on-qiniu/</url>
+      <content type="html"><![CDATA[<p>用jquery的ajax方法上传文件到七牛和常规的ajax有点区别，直接上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $input = $(<span class="string">'#upload-qiniu'</span>);</div><div class="line"><span class="keyword">var</span> token = <span class="string">'sMTdcnRxls_IaTJ1uSOR1Rb7zFkcdJq3LK0MPjR1:4k547QcZwzo2fK7zPJeu28UgXNM=:eyJzY29wZSI6Im9haGEiLCJkZWFkbGluZSI6MTQ0MTk2NzY1Mn0='</span>;</div><div class="line"><span class="keyword">var</span> url = <span class="string">'http://up.qiniu.com/'</span>;</div><div class="line"><span class="keyword">var</span> prefix = <span class="string">'http://7vii28.com1.z0.glb.clouddn.com/'</span>;</div><div class="line"></div><div class="line">$input.on(<span class="string">'change'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> me = $(<span class="keyword">this</span>);</div><div class="line">	<span class="keyword">var</span> file = <span class="keyword">this</span>.files[<span class="number">0</span>];     </div><div class="line">	<span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(),</div><div class="line">	    filename = file.name;</div><div class="line">	formData.append(<span class="string">'token'</span>, token);</div><div class="line">	formData.append(<span class="string">"file"</span>, file);</div><div class="line">	$.ajax(&#123;  </div><div class="line">		<span class="attr">url</span> : url,  </div><div class="line">		<span class="attr">type</span> : <span class="string">'POST'</span>,  </div><div class="line">		<span class="attr">data</span> : formData, </div><div class="line">		<span class="attr">processData</span> : <span class="literal">false</span>, <span class="comment">// 对数据不作处理</span></div><div class="line">		contentType : <span class="literal">false</span> <span class="comment">// 使用原始类型</span></div><div class="line">	&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123; </div><div class="line">		<span class="built_in">console</span>.log(json);</div><div class="line">	&#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;                </div><div class="line">		<span class="built_in">console</span>.log(json.responseJSON.error);</div><div class="line">	&#125;);              </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>如果不能上传，可能是因为token已过期，可以用开发者工具查看xhr请求。</p>
+
+<input type="file" id="upload-qiniu">
+<script>
+var $input = $('#upload-qiniu');
+var token = 'sMTdcnRxls_IaTJ1uSOR1Rb7zFkcdJq3LK0MPjR1:4k547QcZwzo2fK7zPJeu28UgXNM=:eyJzY29wZSI6Im9haGEiLCJkZWFkbGluZSI6MTQ0MTk2NzY1Mn0=';
+var url = 'http://up.qiniu.com/';
+var prefix = 'http://7vii28.com1.z0.glb.clouddn.com/';
+
+$input.on('change', function(){
+	var me = $(this);
+	var file = this.files[0];     
+	var formData = new FormData(),
+	    filename = file.name;
+	formData.append('token', token);
+	formData.append("file", file);
+	$.ajax({  
+		url : url,  
+		type : 'POST',  
+		data : formData, 
+		processData : false,
+		contentType : false
+	}).done(function(json){ 
+		console.log(json);
+	}).fail(function(json){                
+		console.log(json.responseJSON.error);
+	});              
+});
+</script>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>ajax方法中的processData和contentType需要设置为false，关于这两个参数介绍：</p>
+<ul>
+<li>processData： 要求为Boolean类型的参数，默认为true。默认情况下，发送的数据将被转换为对象（从技术角度来讲并非字符串）以配合默认内容类型”application/x-www-form-urlencoded”。如果要发送DOM树信息或者其他不希望转换的信息，请设置为false。</li>
+<li>contentType：要求为String类型的参数，当发送信息至服务器时，内容编码类型默认为”application/x-www-form-urlencoded”。该默认值适合大多数应用场合。</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[lodash集合的sortBy排序]]></title>
       <url>http://liukaijv.github.io/2015/12/29/lodash-sortBy/</url>
       <content type="html"><![CDATA[<p>lodash sortBy的用法</p>
@@ -358,6 +402,9 @@
       <content type="html"><![CDATA[<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
 <p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
 <p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
+<blockquote>
+<p>href是与资源建立关系，src是用资源替换到当前位置</p>
+</blockquote>
 ]]></content>
     </entry>
     
