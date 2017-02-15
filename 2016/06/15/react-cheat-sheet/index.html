@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>react常用API总结 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react常用API总结">
+<meta property="og:url" content="http://liukaijv.github.io/2016/06/15/react-cheat-sheet/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。">
+<meta property="og:updated_time" content="2017-02-15T03:36:56.557Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react常用API总结">
+<meta name="twitter:description" content="其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/前端开发/">前端开发</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">关于我</a>
+					</li>
+				
+					<li>
+						<a href="/about.html">个人项目</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-react-cheat-sheet" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">react常用API总结</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-06-15 10:35:51</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。</p>
+<a id="more"></a>
+<h2 id="React相关"><a href="#React相关" class="headerlink" title="React相关"></a>React相关</h2><p>创建组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 普通</span></div><div class="line">React.createClass (&#123;&#125;)</div><div class="line"></div><div class="line"><span class="comment">// class</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> () </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">// 无state的组件可以这样创建</span></div><div class="line"><span class="keyword">var</span> HelloMsg =&gt; <span class="function"><span class="keyword">function</span>(<span class="params">props</span>) </span>&#123; <span class="keyword">return</span> &lt;div&gt;Hello &#123;props.name&#125;&lt;/div&gt; &#125;</div></pre></td></tr></table></figure>
+<p>ReactElement</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 返回ReactElement</span></div><div class="line">React.createElement(HTMLTag|ReactClass, &#123;props&#125;?, [children...]?)</div><div class="line"></div><div class="line"><span class="comment">// 返回ReactElement</span></div><div class="line">React.cloneElement(ReactElement, &#123;props&#125;?, [children...]?)</div><div class="line"></div><div class="line"><span class="comment">// 返回Boolean</span></div><div class="line">React.isValidElement(ReactElement)</div></pre></td></tr></table></figure>
+<h2 id="ReactDOM相关"><a href="#ReactDOM相关" class="headerlink" title="ReactDOM相关"></a>ReactDOM相关</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// render</span></div><div class="line">ReactDOM.render (ReactElement, DOMElement, callback?)</div><div class="line"></div><div class="line"><span class="comment">// 返回DOMElement</span></div><div class="line">ReactDOM.findDOMNode(ReactComponent)</div><div class="line"></div><div class="line"><span class="comment">// DOM 中移除已经挂载的 React 组件</span></div><div class="line">ReactDOM.unmountComponentAtNode(DOMElement)</div></pre></td></tr></table></figure>
+<h2 id="服务器渲染ReactDOMServer"><a href="#服务器渲染ReactDOMServer" class="headerlink" title="服务器渲染ReactDOMServer"></a>服务器渲染ReactDOMServer</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ReactDOMServer.renderToString (ReactElement)</div><div class="line"></div><div class="line"><span class="comment">// 不会在dom上创建react 属性， 如data-react-id</span></div><div class="line">ReactDOMServer.renderToStaticMarkup (ReactElement)</div></pre></td></tr></table></figure>
+<h2 id="组件Component-API"><a href="#组件Component-API" class="headerlink" title="组件Component API"></a>组件Component API</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 改变状态</span></div><div class="line">setState ( FunctiOn *|&#123; nextState &#125;  ,  callBacK?  )</div><div class="line"></div><div class="line"><span class="comment">// 直接调用reaner()而跳过shouldComponentUpdate()</span></div><div class="line">forceUpdate ( callBacK?  )</div><div class="line"></div><div class="line"><span class="comment">// 渲染</span></div><div class="line">render ()&#123;&#125;</div><div class="line"></div><div class="line"><span class="comment">// 初始化值</span></div><div class="line"><span class="keyword">constructor</span> ( props ) &#123; <span class="keyword">super</span>(props); <span class="keyword">this</span>.state = &#123;...&#125; &#125;</div></pre></td></tr></table></figure>
+<h2 id="组件Component事件"><a href="#组件Component事件" class="headerlink" title="组件Component事件"></a>组件Component事件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">componentWillMount ()</div><div class="line"></div><div class="line">componentDidMount ()</div><div class="line"></div><div class="line">componentWillReceiveProps ( &#123;nextProps &#125;  )</div><div class="line"></div><div class="line">shouldComponentUpdate ( &#123;nextProps &#125;  ,  &#123;nextState &#125;  )</div><div class="line"></div><div class="line">componentWillUpdate ( &#123;nextProps &#125;  ,  &#123;nextState &#125;  </div><div class="line"></div><div class="line">componentDidUpdate ( &#123;previousProps &#125;  ,  &#123;previousState &#125;  )</div><div class="line"></div><div class="line">componentWillUnmount ()</div></pre></td></tr></table></figure>
+<h2 id="Tag相关"><a href="#Tag相关" class="headerlink" title="Tag相关"></a>Tag相关</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">key &lt; ExampleComponent  key = <span class="string">"uniqueValue"</span> /&gt;</div><div class="line"></div><div class="line">ref &lt; ExampleComponent  ref =&#123; S tRing |c allBacK &#125; /&gt;</div><div class="line"></div><div class="line">dangerouslySetInnerHTML &lt; span  dangerouslySetInnerHTML =&#123; <span class="attr">__Html</span>: <span class="built_in">String</span> &#125; /&gt;</div></pre></td></tr></table></figure>
+<h2 id="Props相关"><a href="#Props相关" class="headerlink" title="Props相关"></a>Props相关</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">this.props.children &lt; Component &gt;&#123; this.props.children &#125;&lt;/ Component &gt;</div><div class="line"></div><div class="line">... &lt; ExampleComponent  &#123; ... this.props&#125; /&gt;</div><div class="line"></div><div class="line">ReactComponentClass.defaultProps  = DefaultPropertiesObject</div><div class="line"></div><div class="line">ReactComponentClass.propTypes  = PropertiesSpecificationObject</div></pre></td></tr></table></figure>
+<h2 id="propTypes相关"><a href="#propTypes相关" class="headerlink" title="propTypes相关"></a>propTypes相关</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">React.PropTypes.array</div><div class="line"></div><div class="line">React.PropTypes.bool</div><div class="line"></div><div class="line">React.PropTypes.func</div><div class="line"></div><div class="line">React.PropTypes.number</div><div class="line"></div><div class="line">React.PropTypes.object</div><div class="line"></div><div class="line">React.PropTypes.string</div><div class="line"></div><div class="line">React.PropTypes.node (anything that can be rendered])</div><div class="line"></div><div class="line">React.PropTypes.element (ReactElement)</div><div class="line"></div><div class="line">React.PropTypes.instanceOf(Message) (must be of javascript type)</div><div class="line"></div><div class="line">React.PropTypes.oneOf(['News', 'Photos']) (specify enumerated values)</div><div class="line"></div><div class="line">React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]) (limit property types)</div><div class="line"></div><div class="line">React.PropTypes.arrayOf(React.PropTypes.number) (limit to a typed array)</div><div class="line"></div><div class="line">React.PropTypes.objectOf(React.PropTypes.number) (limit to a typed object)</div><div class="line"></div><div class="line">React.PropTypes.shape(&#123;color: React.PropTypes.string, fontSize: React.PropTypes.number&#125;) (limit to object with specific keys/types)</div><div class="line"></div><div class="line">React.PropTypes.func.isRequired (produce an error if the property isn't passed to the child)</div><div class="line"></div><div class="line">React.PropTypes.any.isRequired (can be any object but must be required)</div><div class="line"></div><div class="line">(props, propName, componentName) =&gt; Boolean (create a custom property with the following function signature)</div></pre></td></tr></table></figure>  
+  </div>
+
+</article>
+
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/react/">react</a>
+    
+</div>
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="react-cheat-sheet" data-title="react常用API总结" data-url="2016/06/15/react-cheat-sheet/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/react-cheat-sheet/">react常用API总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	<!-- <div class="widget">
+    <h3 class="widget-title">专题</h3>
+    <div class="widget-body">
+      <ul>
+      <li><a href="#"></a></li>
+      </ul>
+    </div>
+</div> -->
+
+	
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年08月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
+    </div>
+  </div>
+
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2017 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+</body>
+</html>
