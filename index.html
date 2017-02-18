@@ -127,7 +127,7 @@
 
 <article class="post">
 	<h2 class="post-title">
-		<a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+		<a href="/2016/07/18/Promise-and-jQuery-Deferred/">Promise and jQuery Deferred的对比</a>
 	</h2>		
 	<ul class="post-meta">	
 	
@@ -135,14 +135,17 @@
 	<li>
 		分类：			
 							
-			<a href="/categories/nodejs/">nodejs</a>
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
 			
 						
 		 · 
 	</li>
 	
 	<li>
-		发表于<span>2016-08-29 14:06:19</span>	
+		发表于<span>2016-07-18 18:59:00</span>	
 	</li>
 			
 </ul>
@@ -150,15 +153,13 @@
 		<div class="post-thumbnail"></div>
 		<div class="post-content">
 			
-		        	<p>定义了指定为virtual属性的post_count字段统计文章数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// model</span></div><div class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</div><div class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</div><div class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</div><div class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">"Post"</span> &#125;],</div><div class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// virtual</span></div><div class="line">TagSchema.virtual(<span class="string">'post_count'</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.posts ? <span class="keyword">this</span>.posts.length : <span class="number">0</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
-<blockquote>
-<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
-</blockquote>
-<p>需要对Schama做下面的配置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TagSchema.set(<span class="string">'toJSON'</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</div><div class="line">TagSchema.set(<span class="string">'toObject'</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</div></pre></td></tr></table></figure>
-		     
+		        <p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/07/18/Promise-and-jQuery-Deferred/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
 		</div>
 	</div>
 </article>
@@ -288,6 +289,44 @@
 		          	</p>
 		        	
 		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2016/04/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/nodejs/">nodejs</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-04-29 14:06:19</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>定义了指定为virtual属性的post_count字段统计文章数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// model</span></div><div class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</div><div class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</div><div class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</div><div class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">"Post"</span> &#125;],</div><div class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// virtual</span></div><div class="line">TagSchema.virtual(<span class="string">'post_count'</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.posts ? <span class="keyword">this</span>.posts.length : <span class="number">0</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
+<blockquote>
+<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
+</blockquote>
+<p>需要对Schama做下面的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TagSchema.set(<span class="string">'toJSON'</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</div><div class="line">TagSchema.set(<span class="string">'toObject'</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</div></pre></td></tr></table></figure>
+		     
 		</div>
 	</div>
 </article>
@@ -631,41 +670,6 @@
 	</div>
 </article>
 
-<article class="post">
-	<h2 class="post-title">
-		<a href="/2015/03/28/let-jquery-plugin-support-amd-or-cmd/">让jquery插件支持AMD和CMD规范</a>
-	</h2>		
-	<ul class="post-meta">	
-	
-	
-	<li>
-		分类：			
-							
-			<a href="/categories/前端开发/">前端开发</a>
-			>
-							
-			<a href="/categories/前端开发/javascript/">javascript</a>
-			
-						
-		 · 
-	</li>
-	
-	<li>
-		发表于<span>2015-03-28 11:37:47</span>	
-	</li>
-			
-</ul>
-	<div class="post-content article-entry markdown-body">
-		<div class="post-thumbnail"></div>
-		<div class="post-content">
-			
-		        	<p>jquery插件支持AMD和CMD规范的改造：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">;<span class="function"><span class="keyword">function</span>(<span class="params">root, factory</span>) </span>&#123;</div><div class="line"><span class="meta">	 "use strict"</span>;</div><div class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; (define.amd || define.cmd)) &#123;</div><div class="line"></div><div class="line">		<span class="comment">// register as anon module</span></div><div class="line">		define([<span class="string">'jquery'</span>], factory);</div><div class="line"></div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">		<span class="comment">// invoke directly</span></div><div class="line">		factory( (<span class="keyword">typeof</span>(jQuery) != <span class="string">'undefined'</span>) ? jQuery : <span class="built_in">window</span>.Zepto );</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line"><span class="meta">	'use strict'</span>;</div><div class="line"></div><div class="line">		<span class="comment">// your code</span></div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-		     
-		</div>
-	</div>
-</article>
-
 
 
  
@@ -691,7 +695,7 @@
           </li>
         
           <li>
-            <a href="/2016/08/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+            <a href="/2016/07/18/Promise-and-jQuery-Deferred/">Promise and jQuery Deferred的对比</a>
           </li>
         
           <li>
@@ -734,7 +738,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年08月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年07月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年06月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年04月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/">2016年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年11月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年10月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年05月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年03月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年02月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/">2015年01月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年12月</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/">2014年11月</a></li></ul>
     </div>
   </div>
 
@@ -744,7 +748,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 10px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 
