@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>触发display为none元素的动画效果 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="写模态框时，当模态框show的时候动画没有，原来是元素有display:none时添加样式里css3的变幻效果无法生效，解决的方法总结，测试代码如下：
+123456789101112.modal&amp;#123;  z-index: 100;  height: 200px;  width: 200px;  background: yellow;  transition: all 1s;  display">
+<meta property="og:type" content="article">
+<meta property="og:title" content="触发display为none元素的动画效果">
+<meta property="og:url" content="http://liukaijv.github.io/2016/02/23/display-element-trigger-css3-effect/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="写模态框时，当模态框show的时候动画没有，原来是元素有display:none时添加样式里css3的变幻效果无法生效，解决的方法总结，测试代码如下：
+123456789101112.modal&amp;#123;  z-index: 100;  height: 200px;  width: 200px;  background: yellow;  transition: all 1s;  display">
+<meta property="og:updated_time" content="2017-02-23T10:46:11.273Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="触发display为none元素的动画效果">
+<meta name="twitter:description" content="写模态框时，当模态框show的时候动画没有，原来是元素有display:none时添加样式里css3的变幻效果无法生效，解决的方法总结，测试代码如下：
+123456789101112.modal&amp;#123;  z-index: 100;  height: 200px;  width: 200px;  background: yellow;  transition: all 1s;  display">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/前端开发/">前端开发</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="http://www.noteliu.com/portfolio/">个人项目</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-display-element-trigger-css3-effect" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">触发display为none元素的动画效果</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/css/">css</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-02-23 16:45:28</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>写模态框时，当模态框show的时候动画没有，原来是元素有display:none时添加样式里css3的变幻效果无法生效，解决的方法总结，测试代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.modal</span>&#123;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">100</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">background</span>: yellow;</div><div class="line">  <span class="attribute">transition</span>: all <span class="number">1s</span>;</div><div class="line">  <span class="attribute">display</span>:none;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.modal</span><span class="selector-class">.active</span>&#123;</div><div class="line">  <span class="attribute">background</span>: red;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:"</span> <span class="attr">id</span>=<span class="string">"trigger"</span> <span class="attr">data-target</span>=<span class="string">"#model1"</span>&gt;</span>运行动画<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"model1"</span> <span class="attr">class</span>=<span class="string">"modal"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+
+
+<style>
+.modal{
+  z-index: 100;
+  height: 200px;
+  width: 200px;
+  background: yellow;
+  transition: all 1s;
+  display:none;
+}
+.modal.active{
+  background: red;
+  transform: translateX(100px);
+}
+</style>
+
+
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>元素显示后再触发重绘就能让动画生效，读取Layout属性可以触发repaint，这些属性有offsetLeft、offsetTop、offsetHeight、offsetWidth、scrollTop/Left/Width/Height、clientTop/Left/Width/Height、getComputedStyle()等，用jquery的话与这些属性相关的都行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#trigger1'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> $target = $($(<span class="keyword">this</span>).data(<span class="string">'target'</span>));</div><div class="line">  <span class="keyword">if</span> ($target) &#123;</div><div class="line">    $target.show();</div><div class="line">    <span class="comment">// $target.width(); </span></div><div class="line">    $target[<span class="number">0</span>].offsetWidth;</div><div class="line">    $target.addClass(<span class="string">'active'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+
+<a href="javascript:" id="trigger1" data-target="#model1" target="_blank" rel="external">运行动画</a>
+<div id="model1" class="modal"></div>
+
+<script>
+$('#trigger1').click(function () {
+  var $target = $($(this).data('target'));
+  if ($target) {
+    $target.show();
+    // $target.width(); 
+    $target[0].offsetWidth;
+    $target.addClass('active');
+  }
+});
+$('.modal').on('transitionend', function (e) {
+  $(this).hide().removeClass('active');
+});
+</script>
+
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>利用了js的setTimout</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#trigger2'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> $target = $($(<span class="keyword">this</span>).data(<span class="string">'target'</span>));</div><div class="line">  <span class="keyword">if</span> ($target) &#123;</div><div class="line">    $target.show();</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      $target.addClass(<span class="string">'active'</span>);</div><div class="line">    &#125;, <span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+
+<a href="javascript:" id="trigger2" data-target="#model2" target="_blank" rel="external">运行动画</a>
+<div id="model2" class="modal"></div>
+
+<script>
+$('#trigger2').click(function () {
+  var $target = $($(this).data('target'));
+  if ($target) {
+    $target.show();
+    setTimeout(function () {
+      $target.addClass('active');
+    }, 0);
+  }
+});
+$('.modal').on('transitionend', function (e) {
+  $(this).hide().removeClass('active');
+});
+</script>
+
+
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><p>用visibility代替display隐藏元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#modal3</span>&#123;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">100</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">background</span>: yellow;</div><div class="line">  <span class="attribute">transition</span>: all <span class="number">1s</span>;</div><div class="line">  <span class="attribute">visibility</span>:hidden;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">clip</span>:<span class="built_in">rect</span>(1px, 1px, 1px, 1px);</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#modal3</span><span class="selector-class">.active</span>&#123;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">clip</span>: auto;</div><div class="line">  <span class="attribute">visibility</span>:visible;</div><div class="line">  <span class="attribute">background</span>: red;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#trigger3'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> $target = $($(<span class="keyword">this</span>).data(<span class="string">'target'</span>));</div><div class="line">  <span class="keyword">if</span> ($target) &#123;</div><div class="line">    $target.show();</div><div class="line">    $target.addClass(<span class="string">'active'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+
+<style>
+#modal3{
+  z-index: 100;
+  height: 200px;
+  width: 200px;
+  background: yellow;
+  transition: all 1s;
+  visibility:hidden;
+  position: absolute;
+  clip:rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+}
+#modal3.active{
+  position: relative;
+  clip: auto;
+  visibility:visible;
+  background: red;
+  transform: translateX(100px);
+}
+</style>
+<a href="javascript:" id="trigger3" data-target="#modal3" target="_blank" rel="external">运行动画</a>
+<div id="modal3"></div>
+
+<script>
+$('#trigger3').click(function () {
+  var $target = $($(this).data('target'));
+  if ($target) {
+    $target.show();
+    $target.addClass('active');
+  }
+});
+$('#modal3').on('transitionend', function (e) {
+  $(this).removeClass('active');
+});
+</script>
+
+  
+  </div>
+
+</article>
+
+
+<div class="post-tag">
+  <i class="lb-icon-tag" title="标签"></i> 
+  
+    <a class="tag-item" href="/tags/css3/">css3</a>
+    
+</div>
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2016/04/29/mongoose-virtaul/">mongoose使用中查不出定义的virtual字段</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2016/01/28/white-space-and-flex-bug/">同时使用flex、white-space和overflow的bug</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="display-element-trigger-css3-effect" data-title="触发display为none元素的动画效果" data-url="2016/02/23/display-element-trigger-css3-effect/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/18/Promise-and-jQuery-Deferred/">Promise and jQuery Deferred的对比</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/react-cheat-sheet/">react常用API总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	<div class="widget">
+    <h3 class="widget-title">站点收藏</h3>
+    <div class="widget-body">
+      <ul>
+      	<li><a href="http://www.w3cplus.com/">W3cplus</a></li>
+      	<li><a href="http://www.uisdc.com/">优设网</a></li>
+      	<li><a href="http://hub.tutsplus.com/">Tuts+</a></li>
+      	<li><a href="http://tympanus.net/codrops/">Codrops</a></li>
+      	<li><a href="http://tutorialzine.com/">TutorialZine</a></li>
+      	<li><a href="http://www.smashingmagazine.com/">Smashing Magazine</a></li>
+      </ul>
+    </div>
+</div>
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2017 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+<script src="/js/script.js"></script>
+</body>
+</html>

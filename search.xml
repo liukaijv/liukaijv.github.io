@@ -144,6 +144,121 @@
     </entry>
     
     <entry>
+      <title><![CDATA[触发display为none元素的动画效果]]></title>
+      <url>http://liukaijv.github.io/2016/02/23/display-element-trigger-css3-effect/</url>
+      <content type="html"><![CDATA[<p>写模态框时，当模态框show的时候动画没有，原来是元素有display:none时添加样式里css3的变幻效果无法生效，解决的方法总结，测试代码如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.modal</span>&#123;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">100</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">background</span>: yellow;</div><div class="line">  <span class="attribute">transition</span>: all <span class="number">1s</span>;</div><div class="line">  <span class="attribute">display</span>:none;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.modal</span><span class="selector-class">.active</span>&#123;</div><div class="line">  <span class="attribute">background</span>: red;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:"</span> <span class="attr">id</span>=<span class="string">"trigger"</span> <span class="attr">data-target</span>=<span class="string">"#model1"</span>&gt;</span>运行动画<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"model1"</span> <span class="attr">class</span>=<span class="string">"modal"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+
+
+<style>
+.modal{
+  z-index: 100;
+  height: 200px;
+  width: 200px;
+  background: yellow;
+  transition: all 1s;
+  display:none;
+}
+.modal.active{
+  background: red;
+  transform: translateX(100px);
+}
+</style>
+
+
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>元素显示后再触发重绘就能让动画生效，读取Layout属性可以触发repaint，这些属性有offsetLeft、offsetTop、offsetHeight、offsetWidth、scrollTop/Left/Width/Height、clientTop/Left/Width/Height、getComputedStyle()等，用jquery的话与这些属性相关的都行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#trigger1'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> $target = $($(<span class="keyword">this</span>).data(<span class="string">'target'</span>));</div><div class="line">  <span class="keyword">if</span> ($target) &#123;</div><div class="line">    $target.show();</div><div class="line">    <span class="comment">// $target.width(); </span></div><div class="line">    $target[<span class="number">0</span>].offsetWidth;</div><div class="line">    $target.addClass(<span class="string">'active'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+
+<a href="javascript:" id="trigger1" data-target="#model1" target="_blank" rel="external">运行动画</a>
+<div id="model1" class="modal"></div>
+
+<script>
+$('#trigger1').click(function () {
+  var $target = $($(this).data('target'));
+  if ($target) {
+    $target.show();
+    // $target.width(); 
+    $target[0].offsetWidth;
+    $target.addClass('active');
+  }
+});
+$('.modal').on('transitionend', function (e) {
+  $(this).hide().removeClass('active');
+});
+</script>
+
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>利用了js的setTimout</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#trigger2'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> $target = $($(<span class="keyword">this</span>).data(<span class="string">'target'</span>));</div><div class="line">  <span class="keyword">if</span> ($target) &#123;</div><div class="line">    $target.show();</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      $target.addClass(<span class="string">'active'</span>);</div><div class="line">    &#125;, <span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+
+<a href="javascript:" id="trigger2" data-target="#model2" target="_blank" rel="external">运行动画</a>
+<div id="model2" class="modal"></div>
+
+<script>
+$('#trigger2').click(function () {
+  var $target = $($(this).data('target'));
+  if ($target) {
+    $target.show();
+    setTimeout(function () {
+      $target.addClass('active');
+    }, 0);
+  }
+});
+$('.modal').on('transitionend', function (e) {
+  $(this).hide().removeClass('active');
+});
+</script>
+
+
+<h2 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h2><p>用visibility代替display隐藏元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#modal3</span>&#123;</div><div class="line">  <span class="attribute">z-index</span>: <span class="number">100</span>;</div><div class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">  <span class="attribute">background</span>: yellow;</div><div class="line">  <span class="attribute">transition</span>: all <span class="number">1s</span>;</div><div class="line">  <span class="attribute">visibility</span>:hidden;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">clip</span>:<span class="built_in">rect</span>(1px, 1px, 1px, 1px);</div><div class="line">  <span class="attribute">overflow</span>: hidden;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#modal3</span><span class="selector-class">.active</span>&#123;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">clip</span>: auto;</div><div class="line">  <span class="attribute">visibility</span>:visible;</div><div class="line">  <span class="attribute">background</span>: red;</div><div class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(100px);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#trigger3'</span>).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> $target = $($(<span class="keyword">this</span>).data(<span class="string">'target'</span>));</div><div class="line">  <span class="keyword">if</span> ($target) &#123;</div><div class="line">    $target.show();</div><div class="line">    $target.addClass(<span class="string">'active'</span>);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+
+
+<style>
+#modal3{
+  z-index: 100;
+  height: 200px;
+  width: 200px;
+  background: yellow;
+  transition: all 1s;
+  visibility:hidden;
+  position: absolute;
+  clip:rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+}
+#modal3.active{
+  position: relative;
+  clip: auto;
+  visibility:visible;
+  background: red;
+  transform: translateX(100px);
+}
+</style>
+<a href="javascript:" id="trigger3" data-target="#modal3" target="_blank" rel="external">运行动画</a>
+<div id="modal3"></div>
+
+<script>
+$('#trigger3').click(function () {
+  var $target = $($(this).data('target'));
+  if ($target) {
+    $target.show();
+    $target.addClass('active');
+  }
+});
+$('#modal3').on('transitionend', function (e) {
+  $(this).removeClass('active');
+});
+</script>
+
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[同时使用flex、white-space和overflow的bug]]></title>
       <url>http://liukaijv.github.io/2016/01/28/white-space-and-flex-bug/</url>
       <content type="html"><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
@@ -193,52 +308,6 @@ $input.on('change', function(){
 <li>processData： 要求为Boolean类型的参数，默认为true。默认情况下，发送的数据将被转换为对象（从技术角度来讲并非字符串）以配合默认内容类型”application/x-www-form-urlencoded”。如果要发送DOM树信息或者其他不希望转换的信息，请设置为false。</li>
 <li>contentType：要求为String类型的参数，当发送信息至服务器时，内容编码类型默认为”application/x-www-form-urlencoded”。该默认值适合大多数应用场合。</li>
 </ul>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[javascrit常见排序算法]]></title>
-      <url>http://liukaijv.github.io/2016/01/03/javascrit-sort/</url>
-      <content type="html"><![CDATA[<p>总结一下javascrit常见排序算法。</p>
-<h2 id="冒泡排序（Bubble-Sort）"><a href="#冒泡排序（Bubble-Sort）" class="headerlink" title="冒泡排序（Bubble Sort）"></a>冒泡排序（Bubble Sort）</h2><p>冒泡排序是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果它们的顺序错误就把它们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
-<a id="more"></a>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
-<li>比较相邻元素，如果第一个比第二个大，就交换它们</li>
-<li>对每一对相邻元素作同样工作，从第一对到结尾的最后一对，这样在最后的元素应该会是最大的数</li>
-<li>针对所有元素重复以上步骤，最后一个除外</li>
-<li>重复步骤1-3，直到排序完成</li>
-</ul>
-<p>代码实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> len = arr.length;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; (len - <span class="number">1</span> - i); j++) &#123;</div><div class="line">      <span class="comment">// 相邻元素比较</span></div><div class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</div><div class="line">        <span class="comment">// 元素交换</span></div><div class="line">        <span class="keyword">var</span> temp = arr[j + <span class="number">1</span>];</div><div class="line">        arr[j + <span class="number">1</span>] = arr[j];</div><div class="line">        arr[j] = temp;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">bubbleSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure>
-<h2 id="选择排序（Selection-Sort）"><a href="#选择排序（Selection-Sort）" class="headerlink" title="选择排序（Selection Sort）"></a>选择排序（Selection Sort）</h2><p>选择排序(Selection-sort)是一种简单直观的排序算法。它的工作原理：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
-<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果。具体算法描述如下：</p>
-<ul>
-<li>初始状态：无序区为R[1..n]，有序区为空</li>
-<li>第i趟排序(i=1,2,3…n-1)开始时，当前有序区和无序区分别为R[1..i-1]和R(i..n）。该趟排序从当前无序区中-选出关键字最小的记录 R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区</li>
-<li>n-1趟结束，数组有序化了</li>
-</ul>
-<p>代码实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectionSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> len = arr.length;</div><div class="line">  <span class="keyword">var</span> minIndex,</div><div class="line">  temp;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</div><div class="line">    minIndex = i;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt; len; j++) &#123;</div><div class="line">      <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</div><div class="line">        minIndex = j;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    temp = arr[i];</div><div class="line">    arr[i] = arr[minIndex];</div><div class="line">    arr[minIndex] = temp;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">selectionSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure></p>
-<h2 id="插入排序（Insertion-Sort）"><a href="#插入排序（Insertion-Sort）" class="headerlink" title="插入排序（Insertion Sort）"></a>插入排序（Insertion Sort）</h2><p>插入排序（Insertion-Sort）的算法描述是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
-<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><p>一般来说，插入排序都采用in-place在数组上实现。具体算法描述如下：</p>
-<ul>
-<li>从第一个元素开始，该元素可以认为已经被排序；</li>
-<li>取出下一个元素，在已经排序的元素序列中从后向前扫描；</li>
-<li>如果该元素（已排序）大于新元素，将该元素移到下一位置；</li>
-<li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；</li>
-<li>将新元素插入到该位置后；</li>
-<li>重复步骤2~5。</li>
-</ul>
-<p>代码实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertionSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> len = arr.length;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> key = arr[i];</div><div class="line">    <span class="keyword">var</span> j = i - <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; key) &#123;</div><div class="line">      arr[j + <span class="number">1</span>] = arr[j];</div><div class="line">      j--;</div><div class="line">    &#125;</div><div class="line">    arr[j + <span class="number">1</span>] = key;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">insertionSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure>
-<h2 id="快速排序（Quick-Sort）"><a href="#快速排序（Quick-Sort）" class="headerlink" title="快速排序（Quick Sort）"></a>快速排序（Quick Sort）</h2><p>快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。</p>
-<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><p>快速排序使用分治法来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：</p>
-<ul>
-<li>从数列中挑出一个元素，称为 “基准”（pivot）；</li>
-<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</li>
-<li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</li>
-</ul>
-<p>代码实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> quickSort = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (arr.length &lt;= <span class="number">1</span>) &#123;</div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> pivotIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>);</div><div class="line">  <span class="keyword">var</span> pivot = arr.splice(pivotIndex, <span class="number">1</span>) [<span class="number">0</span>];</div><div class="line">  <span class="keyword">var</span> left = [</div><div class="line">  ];</div><div class="line">  <span class="keyword">var</span> right = [</div><div class="line">  ];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (arr[i] &lt; pivot) &#123;</div><div class="line">      left.push(arr[i]);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      right.push(arr[i]);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> quickSort(left).concat([pivot], quickSort(right));</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">quickSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure>
 ]]></content>
     </entry>
     
@@ -451,6 +520,52 @@ $input.on('change', function(){
       <title><![CDATA[javascript获取浏览器视口大小]]></title>
       <url>http://liukaijv.github.io/2015/01/05/use-jascript-for-getting-window-viewport/</url>
       <content type="html"><![CDATA[<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">'BackCompat'</span>)&#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</div><div class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> &#123;</div><div class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</div><div class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[javascrit常见排序算法]]></title>
+      <url>http://liukaijv.github.io/2015/01/03/javascrit-sort/</url>
+      <content type="html"><![CDATA[<p>总结一下javascrit常见排序算法。</p>
+<h2 id="冒泡排序（Bubble-Sort）"><a href="#冒泡排序（Bubble-Sort）" class="headerlink" title="冒泡排序（Bubble Sort）"></a>冒泡排序（Bubble Sort）</h2><p>冒泡排序是一种简单的排序算法。它重复地走访过要排序的数列，一次比较两个元素，如果它们的顺序错误就把它们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
+<a id="more"></a>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>比较相邻元素，如果第一个比第二个大，就交换它们</li>
+<li>对每一对相邻元素作同样工作，从第一对到结尾的最后一对，这样在最后的元素应该会是最大的数</li>
+<li>针对所有元素重复以上步骤，最后一个除外</li>
+<li>重复步骤1-3，直到排序完成</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> len = arr.length;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; (len - <span class="number">1</span> - i); j++) &#123;</div><div class="line">      <span class="comment">// 相邻元素比较</span></div><div class="line">      <span class="keyword">if</span> (arr[j] &gt; arr[j + <span class="number">1</span>]) &#123;</div><div class="line">        <span class="comment">// 元素交换</span></div><div class="line">        <span class="keyword">var</span> temp = arr[j + <span class="number">1</span>];</div><div class="line">        arr[j + <span class="number">1</span>] = arr[j];</div><div class="line">        arr[j] = temp;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">bubbleSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure>
+<h2 id="选择排序（Selection-Sort）"><a href="#选择排序（Selection-Sort）" class="headerlink" title="选择排序（Selection Sort）"></a>选择排序（Selection Sort）</h2><p>选择排序(Selection-sort)是一种简单直观的排序算法。它的工作原理：首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</p>
+<h3 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h3><p>n个记录的直接选择排序可经过n-1趟直接选择排序得到有序结果。具体算法描述如下：</p>
+<ul>
+<li>初始状态：无序区为R[1..n]，有序区为空</li>
+<li>第i趟排序(i=1,2,3…n-1)开始时，当前有序区和无序区分别为R[1..i-1]和R(i..n）。该趟排序从当前无序区中-选出关键字最小的记录 R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R[i+1..n)分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区</li>
+<li>n-1趟结束，数组有序化了</li>
+</ul>
+<p>代码实现：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectionSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> len = arr.length;</div><div class="line">  <span class="keyword">var</span> minIndex,</div><div class="line">  temp;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len - <span class="number">1</span>; i++) &#123;</div><div class="line">    minIndex = i;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt; len; j++) &#123;</div><div class="line">      <span class="keyword">if</span> (arr[j] &lt; arr[minIndex]) &#123;</div><div class="line">        minIndex = j;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    temp = arr[i];</div><div class="line">    arr[i] = arr[minIndex];</div><div class="line">    arr[minIndex] = temp;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">selectionSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure></p>
+<h2 id="插入排序（Insertion-Sort）"><a href="#插入排序（Insertion-Sort）" class="headerlink" title="插入排序（Insertion Sort）"></a>插入排序（Insertion Sort）</h2><p>插入排序（Insertion-Sort）的算法描述是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<h3 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h3><p>一般来说，插入排序都采用in-place在数组上实现。具体算法描述如下：</p>
+<ul>
+<li>从第一个元素开始，该元素可以认为已经被排序；</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描；</li>
+<li>如果该元素（已排序）大于新元素，将该元素移到下一位置；</li>
+<li>重复步骤3，直到找到已排序的元素小于或者等于新元素的位置；</li>
+<li>将新元素插入到该位置后；</li>
+<li>重复步骤2~5。</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertionSort</span>(<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> len = arr.length;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; len; i++) &#123;</div><div class="line">    <span class="keyword">var</span> key = arr[i];</div><div class="line">    <span class="keyword">var</span> j = i - <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; key) &#123;</div><div class="line">      arr[j + <span class="number">1</span>] = arr[j];</div><div class="line">      j--;</div><div class="line">    &#125;</div><div class="line">    arr[j + <span class="number">1</span>] = key;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> arr;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">insertionSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure>
+<h2 id="快速排序（Quick-Sort）"><a href="#快速排序（Quick-Sort）" class="headerlink" title="快速排序（Quick Sort）"></a>快速排序（Quick Sort）</h2><p>快速排序的基本思想：通过一趟排序将待排记录分隔成独立的两部分，其中一部分记录的关键字均比另一部分的关键字小，则可分别对这两部分记录继续进行排序，以达到整个序列有序。</p>
+<h3 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h3><p>快速排序使用分治法来把一个串（list）分为两个子串（sub-lists）。具体算法描述如下：</p>
+<ul>
+<li>从数列中挑出一个元素，称为 “基准”（pivot）；</li>
+<li>重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</li>
+<li>递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。</li>
+</ul>
+<p>代码实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> quickSort = <span class="function"><span class="keyword">function</span> (<span class="params">arr</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (arr.length &lt;= <span class="number">1</span>) &#123;</div><div class="line">    <span class="keyword">return</span> arr;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">var</span> pivotIndex = <span class="built_in">Math</span>.floor(arr.length / <span class="number">2</span>);</div><div class="line">  <span class="keyword">var</span> pivot = arr.splice(pivotIndex, <span class="number">1</span>) [<span class="number">0</span>];</div><div class="line">  <span class="keyword">var</span> left = [</div><div class="line">  ];</div><div class="line">  <span class="keyword">var</span> right = [</div><div class="line">  ];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (arr[i] &lt; pivot) &#123;</div><div class="line">      left.push(arr[i]);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      right.push(arr[i]);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> quickSort(left).concat([pivot], quickSort(right));</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> arr = [</div><div class="line">  <span class="number">3</span>,</div><div class="line">  <span class="number">44</span>,</div><div class="line">  <span class="number">38</span>,</div><div class="line">  <span class="number">5</span>,</div><div class="line">  <span class="number">47</span>,</div><div class="line">  <span class="number">15</span>,</div><div class="line">  <span class="number">36</span>,</div><div class="line">  <span class="number">26</span>,</div><div class="line">  <span class="number">27</span>,</div><div class="line">  <span class="number">2</span>,</div><div class="line">  <span class="number">46</span>,</div><div class="line">  <span class="number">4</span>,</div><div class="line">  <span class="number">19</span>,</div><div class="line">  <span class="number">50</span>,</div><div class="line">  <span class="number">48</span></div><div class="line">];</div><div class="line">quickSort(arr);</div><div class="line"><span class="comment">// [2, 3, 4, 5, 15, 19, 26, 27, 36, 38, 44, 46, 47, 48, 50]</span></div></pre></td></tr></table></figure>
+]]></content>
     </entry>
     
     <entry>
