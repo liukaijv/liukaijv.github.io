@@ -329,6 +329,45 @@
 
 <article class="post">
 	<h2 class="post-title">
+		<a href="/2016/02/27/right-way-to-bind-event-in-loop/">在循环中正确绑定事件N种方法</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-02-27 21:03:53</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>面试中常考的题，把想到的方法都整理一下，代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> list = <span class="built_in">document</span>.getElementById(<span class="string">"list"</span>);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</div><div class="line">  <span class="keyword">var</span> item = <span class="built_in">document</span>.createElement(<span class="string">"li"</span>);</div><div class="line">  item.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"列表 "</span> + i));</div><div class="line"></div><div class="line">  item.onclick = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"列表 "</span> + i + <span class="string">" 被点击."</span>);</div><div class="line">  &#125;;</div><div class="line">  list.appendChild(item);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面这段代码的意图是创建5个li,点击不同的li能够打印出当前li的序号。但是点击任何li打印出来的都是“列表 6 被点击“，因为i是函数级变量，5个内部函数都指向了同一个i ,而i最后一次赋值是5，当点击时i已经是6了。</p>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/02/27/right-way-to-bind-event-in-loop/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
 		<a href="/2016/02/23/display-element-trigger-css3-effect/">触发display为none元素的动画效果</a>
 	</h2>		
 	<ul class="post-meta">	
@@ -625,44 +664,6 @@
 <p>有参时需要用一个匿名函数：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> bar =  <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">	foo(arg1, arg2);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 		     
-		</div>
-	</div>
-</article>
-
-<article class="post">
-	<h2 class="post-title">
-		<a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
-	</h2>		
-	<ul class="post-meta">	
-	
-	
-	<li>
-		分类：			
-							
-			<a href="/categories/编程笔记/">编程笔记</a>
-			
-						
-		 · 
-	</li>
-	
-	<li>
-		发表于<span>2015-05-27 09:55:46</span>	
-	</li>
-			
-</ul>
-	<div class="post-content article-entry markdown-body">
-		<div class="post-thumbnail"></div>
-		<div class="post-content">
-			
-		        <p>博客是用hexo搭建的，没有上传图片的功能，于是想把图片都放github上。需要图片的时候<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>这样就可以插入了。</p>
-<p>在github上创建仓库，名字自己取，以我自己的为例，仓库为static_cdn，克隆到本地：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 克隆</span></div><div class="line">$ git <span class="built_in">clone</span> git@github.com:liukaijv/static_cdn.git</div><div class="line"><span class="comment"># 打开目录</span></div><div class="line">$ <span class="built_in">cd</span> static_cdn</div><div class="line"><span class="comment"># 新建images文件夹</span></div><div class="line">$ mikdir images</div></pre></td></tr></table></figure>
-		        	
-		          	<p class="more-link">
-		            	<a href="/2015/05/27/use-github-as-a-static-cdn/">查看详情&raquo;</a>
-		          	</p>
-		        	
-		      
 		</div>
 	</div>
 </article>

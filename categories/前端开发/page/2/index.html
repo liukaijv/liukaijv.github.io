@@ -5,23 +5,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>如何关闭微信内置浏览器 | 工作中的学习笔记和心得</title>
+  <title>分类: 前端开发 | 工作中的学习笔记和心得</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="renderer" content="webkit">    
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="做微信开发中发现window.close失效，不能关闭浏览器，解决如下：
-12345678910function closeWindow() &amp;#123;       if (wx != undefined) &amp;#123;        wx.closeWindow();    &amp;#125;    else if (typeof(WeixinJSBridge) != &quot;undefined&quot;) &amp;#">
-<meta property="og:type" content="article">
-<meta property="og:title" content="如何关闭微信内置浏览器">
-<meta property="og:url" content="http://liukaijv.github.io/2015/12/28/how-to-close-wechat-browser-window/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="工作中的学习笔记和心得">
+<meta property="og:url" content="http://liukaijv.github.io/categories/前端开发/page/2/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
-<meta property="og:description" content="做微信开发中发现window.close失效，不能关闭浏览器，解决如下：
-12345678910function closeWindow() &amp;#123;       if (wx != undefined) &amp;#123;        wx.closeWindow();    &amp;#125;    else if (typeof(WeixinJSBridge) != &quot;undefined&quot;) &amp;#">
-<meta property="og:updated_time" content="2016-12-28T08:36:25.064Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何关闭微信内置浏览器">
-<meta name="twitter:description" content="做微信开发中发现window.close失效，不能关闭浏览器，解决如下：
-12345678910function closeWindow() &amp;#123;       if (wx != undefined) &amp;#123;        wx.closeWindow();    &amp;#125;    else if (typeof(WeixinJSBridge) != &quot;undefined&quot;) &amp;#">
+<meta name="twitter:title" content="工作中的学习笔记和心得">
   
     <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
   
@@ -83,80 +76,56 @@
 <section class="container content">
 	<main>
 		
-		<article id="post-how-to-close-wechat-browser-window" class="article-entry post post-type-post" itemscope itemprop="blogPost">
-  
-  <h2 class="post-title">如何关闭微信内置浏览器</h2>
-
-  <ul class="post-meta">	
+		
+    
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2014/11/05/the-difference-between-src-and-href/">src和href的区别</a>
+	</h2>		
+	<ul class="post-meta">	
 	
 	
 	<li>
 		分类：			
 							
 			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/html/">html</a>
 			
 						
 		 · 
 	</li>
 	
 	<li>
-		发表于<span>2015-12-28 11:55:46</span>	
+		发表于<span>2014-11-05 09:10:35</span>	
 	</li>
 			
 </ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
+<p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
+<p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
+<blockquote>
+<p>href是与资源建立关系，src是用资源替换到当前位置</p>
+</blockquote>
 
-  <div class="post-content article-entry markdown-body">    
-      <p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </div><div class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</div><div class="line">        wx.closeWindow();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">"undefined"</span>) &#123;</div><div class="line">        WeixinJSBridge.call(<span class="string">'closeWindow'</span>);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">window</span>.close();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>  
-  </div>
-
+		     
+		</div>
+	</div>
 </article>
 
 
-<div class="post-tag">
-  <i class="lb-icon-tag" title="标签"></i> 
-  
-    <a class="tag-item" href="/tags/tricks/">tricks</a>
-  
-    <a class="tag-item" href="/tags/wechat/">wechat</a>
-    
-</div>
 
-
-
-<nav class="gutter">
-  
-  <div class="post-prev">
-    上一篇：
-    <a href="/2015/12/29/lodash-sortBy/">lodash集合的sortBy排序</a>
-  </div>
-  
-   
-  <div class="post-next">
-    下一篇：
-    <a href="/2015/12/26/custom-404-page-on-the-hexo/">hexo自定义404页面</a>
-  </div>
-  
-</nav>
-
-
-
-<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="how-to-close-wechat-browser-window" data-title="如何关闭微信内置浏览器" data-url="2015/12/28/how-to-close-wechat-browser-window/"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"liukaijv"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-<!-- 多说公共JS代码 end -->
+ 
+<section class="paginate-container">
+  <nav class="pagination"> 
+      <a class="extend prev" rel="prev" href="/categories/前端开发/">&laquo;上一页</a><a class="page-number" href="/categories/前端开发/">1</a><span class="page-number current">2</span>
+  </nav>
+</section>
 
 		
 	</main>
