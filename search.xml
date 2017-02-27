@@ -144,7 +144,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[在循环中正确绑定事件N种方法]]></title>
+      <title><![CDATA[循环中正确绑定事件的N种方法]]></title>
       <url>http://liukaijv.github.io/2016/02/27/right-way-to-bind-event-in-loop/</url>
       <content type="html"><![CDATA[<p>面试中常考的题，把想到的方法都整理一下，代码如下：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"list"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div></pre></td></tr></table></figure>
