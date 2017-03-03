@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title><![CDATA[Apache的访问权限]]></title>
+      <url>http://liukaijv.github.io/2017/03/03/apache-access-right/</url>
+      <content type="html"><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
+<pre><code>################################################ 
+2.2上的配置 
+Order deny,allow 
+Deny from all 
+
+2.4上的配置 
+Require all denied 
+
+################################################ 
+2.2上的配置 
+Order allow,deny 
+Allow from all 
+
+2.4上的配置 
+Require all granted 
+
+################################################# 
+</code></pre><p>下面给出了几个例子在2.4版本上的配置</p>
+<p>1、仅允许IP为192.168.1.1的主机访问</p>
+<pre><code>require all  granted 
+require ip 192.168.1.1 
+</code></pre><p>2、仅允许192.168.0.0/24网络的主机访问</p>
+<pre><code>require all  granted  
+require ip 192.168.1.0/24 
+</code></pre><p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
+<pre><code>require all  granted 
+require not ip 192.168.1.2 
+</code></pre><p>4、允许所有访问,</p>
+<pre><code>require all  granted
+</code></pre><p>5、拒绝所有访问,</p>
+<pre><code>require all  denied 
+</code></pre>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[显示上传到laravel的storage目录中的图片]]></title>
       <url>http://liukaijv.github.io/2016/10/29/show-image-files-in-laravel's-storage-directory/</url>
       <content type="html"><![CDATA[<p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
@@ -141,6 +179,28 @@
 </blockquote>
 <p>需要对Schama做下面的配置：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TagSchema.set(<span class="string">'toJSON'</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</div><div class="line">TagSchema.set(<span class="string">'toObject'</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</div></pre></td></tr></table></figure>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[在centos7上安装php]]></title>
+      <url>http://liukaijv.github.io/2016/03/03/install-php-on-centos7/</url>
+      <content type="html"><![CDATA[<p>###默认安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php</div></pre></td></tr></table></figure>
+<p>默认的版本太低了，手动安装有一些麻烦，想采用Yum安装的可以使用下面的方案：</p>
+<h5 id="检查当前安装的PHP包"><a href="#检查当前安装的PHP包" class="headerlink" title="检查当前安装的PHP包"></a>检查当前安装的PHP包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list installed | grep php</div></pre></td></tr></table></figure>
+<p>如果有安装的PHP包，先删除他们</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php-mbstring.x86_64 php-mcrypt.x86_64 php-mysql.x86_64 php-pdo.x86_64</div></pre></td></tr></table></figure>
+<h5 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h5><p>Centos 5.X</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirror.webtatic.com/yum/el5/latest.rpm</div></pre></td></tr></table></figure>
+<p>Centos 6.X</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm</div></pre></td></tr></table></figure>
+<p>Centos 7.X</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div></pre></td></tr></table></figure>
+<p>使用yum list命令查看可安装的包(Packege)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list --enablerepo=webtatic | grep php</div></pre></td></tr></table></figure>
+<p>如果想删除上面安装的包，重新安装<br>rpm -qa | grep webstatic<br>rpm -e  上面搜索到的包即可</p>
+<h5 id="运行yum-install"><a href="#运行yum-install" class="headerlink" title="运行yum install"></a>运行yum install</h5><p>php指定版本对应，55w、56w、70w<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php55w.x86_64 php55w-cli.x86_64 php55w-common.x86_64 php55w-gd.x86_64 php55w-ldap.x86_64 php55w-mbstring.x86_64 php55w-mcrypt.x86_64 php55w-mysql.x86_64 php55w-pdo.x86_64</div></pre></td></tr></table></figure></p>
+<h5 id="安装PHP-FPM"><a href="#安装PHP-FPM" class="headerlink" title="安装PHP FPM"></a>安装PHP FPM</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php55w-fpm</div></pre></td></tr></table></figure>]]></content>
     </entry>
     
     <entry>

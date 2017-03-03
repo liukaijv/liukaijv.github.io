@@ -80,6 +80,82 @@
     
 <article class="post">
 	<h2 class="post-title">
+		<a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/编程笔记/">编程笔记</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-11-26 17:05:40</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <blockquote>
+<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
+</blockquote>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2015/11/26/markdown-syntax/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/10/29/function-as-a-variable-value/">javascript函数作为变量传递</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-10-29 14:19:13</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>js中当函数不加括号时可以把函数当成值传递。</p>
+<p>无参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无参函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> bar = foo;</div></pre></td></tr></table></figure>
+<p>有参时需要用一个匿名函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> bar =  <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</div><div class="line">	foo(arg1, arg2);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+		     
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
 		<a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
 	</h2>		
 	<ul class="post-meta">	
@@ -432,6 +508,10 @@
       <ul>
         
           <li>
+            <a href="/2017/03/03/apache-access-right/">Apache的访问权限</a>
+          </li>
+        
+          <li>
             <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
           </li>
         
@@ -445,10 +525,6 @@
         
           <li>
             <a href="/2016/06/15/react-cheat-sheet/">react常用API总结</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
           </li>
         
       </ul>
@@ -484,7 +560,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
     </div>
   </div>
 
