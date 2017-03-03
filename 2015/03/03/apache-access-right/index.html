@@ -29,7 +29,7 @@ Deny from all
 
 2.4上的配置 
 Require all denied">
-<meta property="og:updated_time" content="2017-03-03T09:49:14.284Z">
+<meta property="og:updated_time" content="2017-03-03T09:55:22.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Apache的访问权限">
 <meta name="twitter:description" content="在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下
@@ -142,7 +142,8 @@ Allow from all
 Require all granted 
 
 ################################################# 
-</code></pre><p>下面给出了几个例子在2.4版本上的配置</p>
+</code></pre><a id="more"></a>
+<p>下面给出了几个例子在2.4版本上的配置</p>
 <p>1、仅允许IP为192.168.1.1的主机访问</p>
 <pre><code>require all  granted 
 require ip 192.168.1.1 

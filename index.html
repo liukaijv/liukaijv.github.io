@@ -352,24 +352,18 @@
 		<div class="post-thumbnail"></div>
 		<div class="post-content">
 			
-		        	<p>###默认安装</p>
+		        <p>###默认安装</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php</div></pre></td></tr></table></figure>
 <p>默认的版本太低了，手动安装有一些麻烦，想采用Yum安装的可以使用下面的方案：</p>
 <h5 id="检查当前安装的PHP包"><a href="#检查当前安装的PHP包" class="headerlink" title="检查当前安装的PHP包"></a>检查当前安装的PHP包</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list installed | grep php</div></pre></td></tr></table></figure>
 <p>如果有安装的PHP包，先删除他们</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum remove php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php-mbstring.x86_64 php-mcrypt.x86_64 php-mysql.x86_64 php-pdo.x86_64</div></pre></td></tr></table></figure>
-<h5 id="配置yum源"><a href="#配置yum源" class="headerlink" title="配置yum源"></a>配置yum源</h5><p>Centos 5.X</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirror.webtatic.com/yum/el5/latest.rpm</div></pre></td></tr></table></figure>
-<p>Centos 6.X</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm</div></pre></td></tr></table></figure>
-<p>Centos 7.X</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/epel-release.rpm</div><div class="line">rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm</div></pre></td></tr></table></figure>
-<p>使用yum list命令查看可安装的包(Packege)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum list --enablerepo=webtatic | grep php</div></pre></td></tr></table></figure>
-<p>如果想删除上面安装的包，重新安装<br>rpm -qa | grep webstatic<br>rpm -e  上面搜索到的包即可</p>
-<h5 id="运行yum-install"><a href="#运行yum-install" class="headerlink" title="运行yum install"></a>运行yum install</h5><p>php指定版本对应，55w、56w、70w<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php55w.x86_64 php55w-cli.x86_64 php55w-common.x86_64 php55w-gd.x86_64 php55w-ldap.x86_64 php55w-mbstring.x86_64 php55w-mcrypt.x86_64 php55w-mysql.x86_64 php55w-pdo.x86_64</div></pre></td></tr></table></figure></p>
-<h5 id="安装PHP-FPM"><a href="#安装PHP-FPM" class="headerlink" title="安装PHP FPM"></a>安装PHP FPM</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum install php55w-fpm</div></pre></td></tr></table></figure>
-		     
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/03/03/install-php-on-centos7/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
 		</div>
 	</div>
 </article>

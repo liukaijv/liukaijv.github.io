@@ -250,7 +250,7 @@
 		<div class="post-thumbnail"></div>
 		<div class="post-content">
 			
-		        	<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
+		        <p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
 <pre><code>################################################ 
 2.2上的配置 
 Order deny,allow 
@@ -268,22 +268,13 @@ Allow from all
 Require all granted 
 
 ################################################# 
-</code></pre><p>下面给出了几个例子在2.4版本上的配置</p>
-<p>1、仅允许IP为192.168.1.1的主机访问</p>
-<pre><code>require all  granted 
-require ip 192.168.1.1 
-</code></pre><p>2、仅允许192.168.0.0/24网络的主机访问</p>
-<pre><code>require all  granted  
-require ip 192.168.1.0/24 
-</code></pre><p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
-<pre><code>require all  granted 
-require not ip 192.168.1.2 
-</code></pre><p>4、允许所有访问,</p>
-<pre><code>require all  granted
-</code></pre><p>5、拒绝所有访问,</p>
-<pre><code>require all  denied 
 </code></pre>
-		     
+		        	
+		          	<p class="more-link">
+		            	<a href="/2015/03/03/apache-access-right/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
 		</div>
 	</div>
 </article>
