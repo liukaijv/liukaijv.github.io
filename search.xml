@@ -4,44 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Apache的访问权限]]></title>
-      <url>http://liukaijv.github.io/2017/03/03/apache-access-right/</url>
-      <content type="html"><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
-<pre><code>################################################ 
-2.2上的配置 
-Order deny,allow 
-Deny from all 
-
-2.4上的配置 
-Require all denied 
-
-################################################ 
-2.2上的配置 
-Order allow,deny 
-Allow from all 
-
-2.4上的配置 
-Require all granted 
-
-################################################# 
-</code></pre><p>下面给出了几个例子在2.4版本上的配置</p>
-<p>1、仅允许IP为192.168.1.1的主机访问</p>
-<pre><code>require all  granted 
-require ip 192.168.1.1 
-</code></pre><p>2、仅允许192.168.0.0/24网络的主机访问</p>
-<pre><code>require all  granted  
-require ip 192.168.1.0/24 
-</code></pre><p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
-<pre><code>require all  granted 
-require not ip 192.168.1.2 
-</code></pre><p>4、允许所有访问,</p>
-<pre><code>require all  granted
-</code></pre><p>5、拒绝所有访问,</p>
-<pre><code>require all  denied 
-</code></pre>]]></content>
-    </entry>
-    
-    <entry>
       <title><![CDATA[显示上传到laravel的storage目录中的图片]]></title>
       <url>http://liukaijv.github.io/2016/10/29/show-image-files-in-laravel's-storage-directory/</url>
       <content type="html"><![CDATA[<p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
@@ -585,6 +547,44 @@ $input.on('change', function(){
 <li>内嵌第三方的演示平台代码，jsfiddle、codepen都是很不错的选择。</li>
 </ul>
 ]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Apache的访问权限]]></title>
+      <url>http://liukaijv.github.io/2015/03/03/apache-access-right/</url>
+      <content type="html"><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
+<pre><code>################################################ 
+2.2上的配置 
+Order deny,allow 
+Deny from all 
+
+2.4上的配置 
+Require all denied 
+
+################################################ 
+2.2上的配置 
+Order allow,deny 
+Allow from all 
+
+2.4上的配置 
+Require all granted 
+
+################################################# 
+</code></pre><p>下面给出了几个例子在2.4版本上的配置</p>
+<p>1、仅允许IP为192.168.1.1的主机访问</p>
+<pre><code>require all  granted 
+require ip 192.168.1.1 
+</code></pre><p>2、仅允许192.168.0.0/24网络的主机访问</p>
+<pre><code>require all  granted  
+require ip 192.168.1.0/24 
+</code></pre><p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
+<pre><code>require all  granted 
+require not ip 192.168.1.2 
+</code></pre><p>4、允许所有访问,</p>
+<pre><code>require all  granted
+</code></pre><p>5、拒绝所有访问,</p>
+<pre><code>require all  denied 
+</code></pre>]]></content>
     </entry>
     
     <entry>

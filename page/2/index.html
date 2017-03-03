@@ -80,44 +80,6 @@
     
 <article class="post">
 	<h2 class="post-title">
-		<a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
-	</h2>		
-	<ul class="post-meta">	
-	
-	
-	<li>
-		分类：			
-							
-			<a href="/categories/编程笔记/">编程笔记</a>
-			
-						
-		 · 
-	</li>
-	
-	<li>
-		发表于<span>2015-11-26 17:05:40</span>	
-	</li>
-			
-</ul>
-	<div class="post-content article-entry markdown-body">
-		<div class="post-thumbnail"></div>
-		<div class="post-content">
-			
-		        <blockquote>
-<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
-</blockquote>
-		        	
-		          	<p class="more-link">
-		            	<a href="/2015/11/26/markdown-syntax/">查看详情&raquo;</a>
-		          	</p>
-		        	
-		      
-		</div>
-	</div>
-</article>
-
-<article class="post">
-	<h2 class="post-title">
 		<a href="/2015/10/29/function-as-a-variable-value/">javascript函数作为变量传递</a>
 	</h2>		
 	<ul class="post-meta">	
@@ -259,6 +221,69 @@
 		          	</p>
 		        	
 		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
+		<a href="/2015/03/03/apache-access-right/">Apache的访问权限</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/编程笔记/">编程笔记</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-03-03 17:46:10</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        	<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
+<pre><code>################################################ 
+2.2上的配置 
+Order deny,allow 
+Deny from all 
+
+2.4上的配置 
+Require all denied 
+
+################################################ 
+2.2上的配置 
+Order allow,deny 
+Allow from all 
+
+2.4上的配置 
+Require all granted 
+
+################################################# 
+</code></pre><p>下面给出了几个例子在2.4版本上的配置</p>
+<p>1、仅允许IP为192.168.1.1的主机访问</p>
+<pre><code>require all  granted 
+require ip 192.168.1.1 
+</code></pre><p>2、仅允许192.168.0.0/24网络的主机访问</p>
+<pre><code>require all  granted  
+require ip 192.168.1.0/24 
+</code></pre><p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
+<pre><code>require all  granted 
+require not ip 192.168.1.2 
+</code></pre><p>4、允许所有访问,</p>
+<pre><code>require all  granted
+</code></pre><p>5、拒绝所有访问,</p>
+<pre><code>require all  denied 
+</code></pre>
+		     
 		</div>
 	</div>
 </article>
@@ -508,10 +533,6 @@
       <ul>
         
           <li>
-            <a href="/2017/03/03/apache-access-right/">Apache的访问权限</a>
-          </li>
-        
-          <li>
             <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
           </li>
         
@@ -525,6 +546,10 @@
         
           <li>
             <a href="/2016/06/15/react-cheat-sheet/">react常用API总结</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
           </li>
         
       </ul>
