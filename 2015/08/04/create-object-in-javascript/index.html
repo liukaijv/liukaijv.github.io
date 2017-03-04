@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript中创建对象的几种方式 | 工作中的学习笔记和心得</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="renderer" content="webkit">    
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="description" content="javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。
+工厂方式缺点是不能实现私有属性和私有方法
+1234567891011function Person() &amp;#123;  var Obj = new Object();  Obj.name = &apos;attr name&apos;;  Obj.eat = function() &amp;#123;    console.log(&apos;met">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中创建对象的几种方式">
+<meta property="og:url" content="http://liukaijv.github.io/2015/08/04/create-object-in-javascript/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。
+工厂方式缺点是不能实现私有属性和私有方法
+1234567891011function Person() &amp;#123;  var Obj = new Object();  Obj.name = &apos;attr name&apos;;  Obj.eat = function() &amp;#123;    console.log(&apos;met">
+<meta property="og:updated_time" content="2017-03-04T10:07:36.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript中创建对象的几种方式">
+<meta name="twitter:description" content="javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。
+工厂方式缺点是不能实现私有属性和私有方法
+1234567891011function Person() &amp;#123;  var Obj = new Object();  Obj.name = &apos;attr name&apos;;  Obj.eat = function() &amp;#123;    console.log(&apos;met">
+  
+    <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <link rel="stylesheet" href="/css/style.css">  
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  
+</head>
+
+<body>
+<header>
+	<div class="container">
+		<h1 class="logo">
+			<a href="/">Notes</a>
+		</h1>				
+		<nav class="menu" id="nav">
+			<ul>
+				
+					<li>
+						<a href="/">首页</a>
+					</li>
+				
+					<li>
+						<a href="/categories/前端开发/">前端开发</a>
+					</li>
+				
+					<li>
+						<a href="/categories/php">PHP</a>
+					</li>
+				
+					<li>
+						<a href="/categories/编程笔记/">编程笔记</a>
+					</li>
+				
+					<li>
+						<a href="/archives">归档</a>
+					</li>
+				
+					<li>
+						<a href="http://www.noteliu.com/portfolio/">个人项目</a>
+					</li>
+									
+			</ul>
+		</nav>
+		<form class="search-form" action="//google.com/search">
+			<input placeholder="关键字" type="search" name="q" results="0">
+			<button title="搜索"><i class="lb-icon-search"></i></button>
+		</form>
+		<div class="toggle-menu">
+			<a class="menu-icon" id="toggle-nav">
+				<i class="lb-icon-list"></i>
+			</a>
+		</div>
+	</div>
+</header>
+<section class="container content">
+	<main>
+		
+		<article id="post-create-object-in-javascript" class="article-entry post post-type-post" itemscope itemprop="blogPost">
+  
+  <h2 class="post-title">javascript中创建对象的几种方式</h2>
+
+  <ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2015-08-04 11:38:06</span>	
+	</li>
+			
+</ul>
+
+  <div class="post-content article-entry markdown-body">    
+      <p>javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。</p>
+<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><p>缺点是不能实现私有属性和私有方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> Obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">  Obj.name = <span class="string">'attr name'</span>;</div><div class="line">  Obj.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'method eat'</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> Obj;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = Person();</div><div class="line"><span class="built_in">console</span>.log(person.name);</div><div class="line"><span class="built_in">console</span>.log(person.eat());</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="构造函数法"><a href="#构造函数法" class="headerlink" title="构造函数法"></a>构造函数法</h2><p>与工厂方式相比，使用构造函数方式创建对象，无需再函数内部重建创建对象，而使用this指代，并而函数无需明确return。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.name = <span class="string">'attr jack'</span>;</div><div class="line">	<span class="keyword">this</span>.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="string">'method eat'</span>);</div><div class="line">	&#125;;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</div><div class="line"><span class="built_in">console</span>.log(person.name);</div><div class="line"><span class="built_in">console</span>.log(person.eat());</div></pre></td></tr></table></figure>
+<h2 id="原型方式"><a href="#原型方式" class="headerlink" title="原型方式"></a>原型方式</h2><p>把属性和方法的定义放到prototype上</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">Person.prototype.name = <span class="string">'attr name'</span>;</div><div class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'method eat'</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</div><div class="line"><span class="built_in">console</span>.log(person.name);</div><div class="line"><span class="built_in">console</span>.log(person.eat());</div></pre></td></tr></table></figure>
+<h2 id="构造函数-原型混合方式"><a href="#构造函数-原型混合方式" class="headerlink" title="构造函数+原型混合方式"></a>构造函数+原型混合方式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">this</span>.name = <span class="string">'attr name'</span>;</div><div class="line">&#125;</div><div class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="string">'method eat'</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</div><div class="line"><span class="built_in">console</span>.log(person.name);</div><div class="line"><span class="built_in">console</span>.log(person.eat());</div></pre></td></tr></table></figure>
+<h2 id="Object-create-法"><a href="#Object-create-法" class="headerlink" title="Object.create()法"></a>Object.create()法</h2><p>Es6的一个新的方法Object.create()，直接返回一个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = &#123;</div><div class="line">	<span class="attr">name</span>: <span class="string">'attr name'</span>,</div><div class="line">  <span class="attr">eat</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  	<span class="built_in">console</span>.log(<span class="string">'method eat'</span>)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person = <span class="built_in">Object</span>.create(Person);</div><div class="line"><span class="built_in">console</span>.log(person.name);</div><div class="line"><span class="built_in">console</span>.log(person.eat());</div></pre></td></tr></table></figure>
+<p>老式浏览器模拟Object.create()方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</div><div class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">    F.prototype = o;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>缺点是不能实现私有属性和私有方法，实例对象之间也不能共享数据。</p>
+<h2 id="极简主义法"><a href="#极简主义法" class="headerlink" title="极简主义法"></a>极简主义法</h2><p>荷兰程序员Gabor de Mooij提出了一种比Object.create()更好的新方法，他称这种方法为”极简主义法”（minimalist approach）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = &#123;</div><div class="line">  <span class="attr">createNew</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> _person = &#123;&#125;;</div><div class="line">    _person.name = <span class="string">'attr name'</span>;</div><div class="line">    _person.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'method eat'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _person;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> person = Person.createNew();</div><div class="line"><span class="built_in">console</span>.log(person.name);</div><div class="line"><span class="built_in">console</span>.log(person.eat());</div></pre></td></tr></table></figure>
+<p>这种方法实现继承、私有属性和私有方法、数据共享也方便。</p>
+<blockquote>
+<p>参考和引用 <a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html" target="_blank" rel="external">Javascript定义类（class）的三种方法</a></p>
+</blockquote>
+  
+  </div>
+
+</article>
+
+
+
+
+<nav class="gutter">
+  
+  <div class="post-prev">
+    上一篇：
+    <a href="/2015/10/04/implicit-type-conversion-in-javascript/">javascript中的隐式类型转换</a>
+  </div>
+  
+   
+  <div class="post-next">
+    下一篇：
+    <a href="/2015/05/27/use-github-as-a-static-cdn/">把github作为静态资源cdn</a>
+  </div>
+  
+</nav>
+
+
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="create-object-in-javascript" data-title="javascript中创建对象的几种方式" data-url="2015/08/04/create-object-in-javascript/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"liukaijv"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- 多说公共JS代码 end -->
+
+		
+	</main>
+			
+        <aside id="sidebar">
+
+	
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2016/10/29/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/04/how-javascript-run/">深入理解JS执行细节</a>
+          </li>
+        
+          <li>
+            <a href="/2016/07/18/Promise-and-jQuery-Deferred/">Promise和Deferred的用法对比</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/29/vue-use-client-cache/">vue中使用基于客户端的缓存</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/15/react-cheat-sheet/">react常用API总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+	
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端开发/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程笔记/">编程笔记</a></li></ul>
+    </div>
+  </div>
+
+
+
+	<div class="widget">
+    <h3 class="widget-title">站点收藏</h3>
+    <div class="widget-body">
+      <ul>
+      	<li><a href="http://www.w3cplus.com/">W3cplus</a></li>
+      	<li><a href="http://www.uisdc.com/">优设网</a></li>
+      	<li><a href="http://hub.tutsplus.com/">Tuts+</a></li>
+      	<li><a href="http://tympanus.net/codrops/">Codrops</a></li>
+      	<li><a href="http://tutorialzine.com/">TutorialZine</a></li>
+      	<li><a href="http://www.smashingmagazine.com/">Smashing Magazine</a></li>
+      </ul>
+    </div>
+</div>
+
+	
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+    </div>
+  </div>
+
+
+</aside>       
+    	
+</section>
+
+<footer>
+	<div class="container">
+		<p>
+			&copy; 2017 Liukaijv all rights reserved.	
+			Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>		
+								
+		        <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>		        
+		    	
+	</div>
+</footer>
+<script src="/js/script.js"></script>
+</body>
+</html>
