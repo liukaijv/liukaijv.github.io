@@ -123,6 +123,51 @@
 
 <article class="post">
 	<h2 class="post-title">
+		<a href="/2016/08/04/how-javascript-run/">深入理解JS执行细节</a>
+	</h2>		
+	<ul class="post-meta">	
+	
+	
+	<li>
+		分类：			
+							
+			<a href="/categories/前端开发/">前端开发</a>
+			>
+							
+			<a href="/categories/前端开发/javascript/">javascript</a>
+			
+						
+		 · 
+	</li>
+	
+	<li>
+		发表于<span>2016-08-04 11:38:06</span>	
+	</li>
+			
+</ul>
+	<div class="post-content article-entry markdown-body">
+		<div class="post-thumbnail"></div>
+		<div class="post-content">
+			
+		        <p>以前看Tom大叔的深入理解JS系列有详细的分析，但这篇文章短而好懂，mark一份。</p>
+<blockquote>
+<p>转自<a href="http://www.cnblogs.com/onepixel/p/5090799.html">http://www.cnblogs.com/onepixel/p/5090799.html</a></p>
+</blockquote>
+<p>javascript从定义到执行，JS引擎在实现层做了很多初始化工作，因此在学习JS引擎工作机制之前，我们需要引入几个相关的概念：执行环境栈、全局对象、执行环境、变量对象、活动对象、作用域和作用域链等，这些概念正是JS引擎工作的核心组件。这篇文章的目的不是孤立的为你讲解每一个概念，而是通过一个简单的demo来展开分析，全局讲解JS引擎从定义到执行的每一个细节，以及这些概念在其中所扮演的角色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">1</span>;  <span class="comment">//定义一个全局变量 x</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">y</span>)</span>&#123;</div><div class="line">   <span class="keyword">var</span> x = <span class="number">2</span>;  <span class="comment">//定义一个局部变量 x</span></div><div class="line">   <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">z</span>)</span>&#123; <span class="comment">//定义一个内部函数 B</span></div><div class="line">       <span class="built_in">console</span>.log(x+y+z);</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">return</span> B; <span class="comment">//返回函数B的引用</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> C = A(<span class="number">1</span>); <span class="comment">//执行A,返回B</span></div><div class="line">C(<span class="number">1</span>); <span class="comment">//执行函数B</span></div></pre></td></tr></table></figure>
+<p>这个demo是一个闭包，执行结果是4，下面我们将分全局初始化、执行函数A、执行函数B 三个阶段来分析JS引擎的工作机制:</p>
+		        	
+		          	<p class="more-link">
+		            	<a href="/2016/08/04/how-javascript-run/">查看详情&raquo;</a>
+		          	</p>
+		        	
+		      
+		</div>
+	</div>
+</article>
+
+<article class="post">
+	<h2 class="post-title">
 		<a href="/2016/07/18/Promise-and-jQuery-Deferred/">Promise and jQuery Deferred的对比</a>
 	</h2>		
 	<ul class="post-meta">	
@@ -633,44 +678,6 @@
 	</div>
 </article>
 
-<article class="post">
-	<h2 class="post-title">
-		<a href="/2015/11/26/markdown-syntax/">markdown 语法</a>
-	</h2>		
-	<ul class="post-meta">	
-	
-	
-	<li>
-		分类：			
-							
-			<a href="/categories/编程笔记/">编程笔记</a>
-			
-						
-		 · 
-	</li>
-	
-	<li>
-		发表于<span>2015-11-26 17:05:40</span>	
-	</li>
-			
-</ul>
-	<div class="post-content article-entry markdown-body">
-		<div class="post-thumbnail"></div>
-		<div class="post-content">
-			
-		        <blockquote>
-<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
-</blockquote>
-		        	
-		          	<p class="more-link">
-		            	<a href="/2015/11/26/markdown-syntax/">查看详情&raquo;</a>
-		          	</p>
-		        	
-		      
-		</div>
-	</div>
-</article>
-
 
 
  
@@ -696,6 +703,10 @@
           </li>
         
           <li>
+            <a href="/2016/08/04/how-javascript-run/">深入理解JS执行细节</a>
+          </li>
+        
+          <li>
             <a href="/2016/07/18/Promise-and-jQuery-Deferred/">Promise and jQuery Deferred的对比</a>
           </li>
         
@@ -705,10 +716,6 @@
         
           <li>
             <a href="/2016/06/15/react-cheat-sheet/">react常用API总结</a>
-          </li>
-        
-          <li>
-            <a href="/2016/05/29/laravel-cross-domain/">laravel处理跨域请求</a>
           </li>
         
       </ul>
