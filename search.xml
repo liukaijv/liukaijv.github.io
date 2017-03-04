@@ -55,7 +55,7 @@
     </entry>
     
     <entry>
-      <title><![CDATA[Promise and jQuery Deferred的对比]]></title>
+      <title><![CDATA[Promise和Deferred的用法对比]]></title>
       <url>http://liukaijv.github.io/2016/07/18/Promise-and-jQuery-Deferred/</url>
       <content type="html"><![CDATA[<p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
 <a id="more"></a>
