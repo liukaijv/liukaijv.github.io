@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        深入理解JS执行细节 |
+        
+        Hexo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="以前看Tom大叔的深入理解JS系列介绍的很在错，但这篇文章短而好懂，mark一份。  转自http:&#x2F;&#x2F;www.cnblogs.com&#x2F;onepixel&#x2F;p&#x2F;5090799.html  javascript从定义到执行，JS引擎在实现层做了很多初始化工作，因此在学习JS引擎工作机制之前，我们需要引入几个相关的概念：执行环境栈、全局对象、执行环境、变量对象、活动对象、作用域和作用域链等，这些概念正是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JS执行细节">
+<meta property="og:url" content="http://liukaijv.github.io/2016/08/04/frontend/how-javascript-run/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="以前看Tom大叔的深入理解JS系列介绍的很在错，但这篇文章短而好懂，mark一份。  转自http:&#x2F;&#x2F;www.cnblogs.com&#x2F;onepixel&#x2F;p&#x2F;5090799.html  javascript从定义到执行，JS引擎在实现层做了很多初始化工作，因此在学习JS引擎工作机制之前，我们需要引入几个相关的概念：执行环境栈、全局对象、执行环境、变量对象、活动对象、作用域和作用域链等，这些概念正是">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-08-04T03:38:06.000Z">
+<meta property="article:modified_time" content="2017-03-04T03:53:17.000Z">
+<meta property="article:author" content="Abc">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <div class="logo">
+            
+                <a href="/"><img src="/images/logo.svg" class="logo_img"/></a>
+            
+            
+        
+        </div>
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-frontend/how-javascript-run" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">深入理解JS执行细节</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                >
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-08-04 11:38:06</span>
+    </li>
+    
+        <li>
+            · By <span>Abc</span>
+        </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>以前看Tom大叔的深入理解JS系列介绍的很在错，但这篇文章短而好懂，mark一份。</p>
+<blockquote>
+<p>转自<a target="_blank" rel="noopener" href="http://www.cnblogs.com/onepixel/p/5090799.html">http://www.cnblogs.com/onepixel/p/5090799.html</a></p>
+</blockquote>
+<p>javascript从定义到执行，JS引擎在实现层做了很多初始化工作，因此在学习JS引擎工作机制之前，我们需要引入几个相关的概念：执行环境栈、全局对象、执行环境、变量对象、活动对象、作用域和作用域链等，这些概念正是JS引擎工作的核心组件。这篇文章的目的不是孤立的为你讲解每一个概念，而是通过一个简单的demo来展开分析，全局讲解JS引擎从定义到执行的每一个细节，以及这些概念在其中所扮演的角色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;  <span class="comment">//定义一个全局变量 x</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> x = <span class="number">2</span>;  <span class="comment">//定义一个局部变量 x</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">z</span>)</span>&#123; <span class="comment">//定义一个内部函数 B</span></span><br><span class="line">       <span class="built_in">console</span>.log(x+y+z);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> B; <span class="comment">//返回函数B的引用</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> C = A(<span class="number">1</span>); <span class="comment">//执行A,返回B</span></span><br><span class="line">C(<span class="number">1</span>); <span class="comment">//执行函数B</span></span><br></pre></td></tr></table></figure>
+
+<p>这个demo是一个闭包，执行结果是4，下面我们将分全局初始化、执行函数A、执行函数B 三个阶段来分析JS引擎的工作机制:</p>
+<span id="more"></span>
+
+<h2 id="一、全局初始化"><a href="#一、全局初始化" class="headerlink" title="一、全局初始化"></a>一、全局初始化</h2><p>JS引擎在进入一段可执行的代码时，需要完成以下三个初始化工作：</p>
+<p>首先，创建一个全局对象(Global Object) ， 这个对象全局只存在一份，它的属性在任何地方都可以访问，它的存在伴随着应用程序的整个生命周期。全局对象在创建时，将Math,String,Date,document 等常用的JS对象作为其属性。由于这个全局对象不能通过名字直接访问，因此还有另外一个属性window,并将window指向了自身，这样就可以通过window访问这个全局对象了。用伪代码模拟全局对象的大体结构如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个全局对象</span></span><br><span class="line"><span class="keyword">var</span> globalObject = &#123; </span><br><span class="line">    <span class="attr">Math</span>:&#123;&#125;,</span><br><span class="line">    <span class="attr">String</span>:&#123;&#125;,</span><br><span class="line">    <span class="attr">Date</span>:&#123;&#125;,</span><br><span class="line">    <span class="attr">document</span>:&#123;&#125;, <span class="comment">//DOM操作</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="attr">window</span>:<span class="built_in">this</span> <span class="comment">//让window属性指向了自身</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，JS引擎需要构建一个执行环境栈( Execution Context Stack) ，与此同时，也要创建一个全局执行环境（Execution Context）EC ，并将这个全局执行环境EC压入执行环境栈中。执行环境栈的作用是为了保证程序能够按照正确的顺序被执行。在javascript中，每个函数都有自己的执行环境，当执行一个函数时，该函数的执行环境就会被推入执行环境栈的顶部并获取执行权。当这个函数执行完毕，它的执行环境又从这个栈的顶部被删除，并把执行权并还给之前执行环境。我们用伪代码来模拟执行环境栈和EC的关系：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ECStack = []; <span class="comment">//定义一个执行环境栈，类似于数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> EC = &#123;&#125;;   <span class="comment">//创建一个执行空间，</span></span><br><span class="line"><span class="comment">//ECMA-262规范并没有对EC的数据结构做明确的定义，你可以理解为在内存中分配的一块空间</span></span><br><span class="line"></span><br><span class="line">ECStack.push(EC); <span class="comment">//进入函数，压入执行环境</span></span><br><span class="line">ECStack.pop(EC);  <span class="comment">//函数返回后，删除执行环境</span></span><br></pre></td></tr></table></figure>
+
+<p>最后，JS引擎还要创建一个与EC关联的全局变量对象(Varibale Object) VO,  并把VO指向全局对象，VO中不仅包含了全局对象的原有属性，还包括在全局定义的变量x 和函数 A，与此同时，在定义函数A的时候，还为 A 添加了一个内部属性scope，并将scope指向了VO。每个函数在定义的时候，都会创建一个与之关联的scope属性，scope总是指向定义函数时所在的环境。此时的ECStack结构如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [   <span class="comment">//执行环境栈</span></span><br><span class="line">    EC(G) = &#123;   <span class="comment">//全局执行环境</span></span><br><span class="line">        VO(G):&#123; <span class="comment">//定义全局变量对象</span></span><br><span class="line">            ... <span class="comment">//包含全局对象原有的属性</span></span><br><span class="line">            x = <span class="number">1</span>; <span class="comment">//定义变量x</span></span><br><span class="line">            A = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;; <span class="comment">//定义函数A</span></span><br><span class="line">            A[[scope]] = <span class="built_in">this</span>; <span class="comment">//定义A的scope，并赋值为VO本身</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、-执行函数A"><a href="#二、-执行函数A" class="headerlink" title="二、 执行函数A"></a>二、 执行函数A</h2><p>当执行进入A(1) 时，JS引擎需要完成以下工作：</p>
+<p>首先，JS引擎会创建函数A的执行环境EC，然后EC推入执行环境栈的顶部并获取执行权。此时执行环境栈中有两个执行环境，分别是全局执行环境和函数A执行环境，A的执行环境在栈顶，全局执行环境在栈的底部。然后，创建函数A的作用域链(Scope Chain) ，在javascript中，每个执行环境都有自己的作用域链，用于标识符解析，当执行环境被创建时，它的作用域链就初始化为当前运行函数的scope所包含的对象。  </p>
+<p>接着，JS引擎会创建一个当前函数的活动对象(Activation Object) AO，这里的活动对象扮演着变量对象的角色，只是在函数中的叫法不同而已（你可以认为变量对象是一个总的概念，而活动对象是它的一个分支）， AO中包含了函数的形参、arguments对象、this对象、以及局部变量和内部函数的定义，然后AO会被推入作用域链的顶端。需要注意的是，在定义函数B的时候，JS引擎同样也会为B添加了一个scope属性,并将scope指向了定义函数B时所在的环境，定义函数B的环境就是A的活动对象AO， 而AO位于链表的前端，由于链表具有首尾相连的特点，因此函数B的scope指向了A的整个作用域链。 我们再看看此时的ECStack结构：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [   <span class="comment">//执行环境栈</span></span><br><span class="line">    EC(A) = &#123;   <span class="comment">//A的执行环境</span></span><br><span class="line">        [scope]:VO(G), <span class="comment">//VO是全局变量对象</span></span><br><span class="line">        AO(A) : &#123; <span class="comment">//创建函数A的活动对象</span></span><br><span class="line">            <span class="attr">y</span>:<span class="number">1</span>,</span><br><span class="line">            <span class="attr">x</span>:<span class="number">2</span>,  <span class="comment">//定义局部变量x</span></span><br><span class="line">            <span class="attr">B</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;...&#125;, <span class="comment">//定义函数B</span></span><br><span class="line">            B[[scope]] = <span class="built_in">this</span>; <span class="comment">//this指代AO本身，而AO位于scopeChain的顶端，因此B[[scope]]指向整个作用域链</span></span><br><span class="line">            <span class="built_in">arguments</span>:[],<span class="comment">//平时我们在函数中访问的arguments就是AO中的arguments</span></span><br><span class="line">            <span class="attr">this</span>:<span class="built_in">window</span>  <span class="comment">//函数中的this指向调用者window对象</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">scopeChain</span>:<span class="xml">&lt;AO(A),A[[scope]]&gt;  //链表初始化为A[[scope]],然后再把AO加入该作用域链的顶端,此时A的作用域链：AO(A)-&gt;VO(G)</span></span><br><span class="line"><span class="xml">    &#125;,</span></span><br><span class="line"><span class="xml">    EC(G) = &#123;   //全局执行环境</span></span><br><span class="line"><span class="xml">        VO(G):&#123; //创建全局变量对象</span></span><br><span class="line"><span class="xml">            ... //包含全局对象原有的属性</span></span><br><span class="line"><span class="xml">            x = 1; //定义变量x</span></span><br><span class="line"><span class="xml">            A = function()&#123;...&#125;; //定义函数A</span></span><br><span class="line"><span class="xml">            A[[scope]] = this; //定义A的scope，A[[scope]] == VO(G)</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">];</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、-执行函数B"><a href="#三、-执行函数B" class="headerlink" title="三、 执行函数B"></a>三、 执行函数B</h2><p>函数A被执行以后，返回了B的引用，并赋值给了变量C，执行 C(1) 就相当于执行B(1)，JS引擎需要完成以下工作：</p>
+<p>首先，还和上面一样，创建函数B的执行环境EC，然后EC推入执行环境栈的顶部并获取执行权。 此时执行环境栈中有两个执行环境，分别是全局执行环境和函数B的执行环境，B的执行环境在栈顶，全局执行环境在栈的底部。（注意：当函数A返回后，A的执行环境就会从栈中被删除，只留下全局执行环境）然后，创建函数B的作用域链，并初始化为函数B的scope所包含的对象，即包含了A的作用域链。最后，创建函数B的活动对象AO,并将B的形参z, arguments对象 和 this对象作为AO的属性。此时ECStack将会变成这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [   <span class="comment">//执行环境栈</span></span><br><span class="line">    EC(B) = &#123;   <span class="comment">//创建B的执行环境,并处于作用域链的顶端</span></span><br><span class="line">        [scope]:AO(A), <span class="comment">//指向函数A的作用域链,AO(A)-&gt;VO(G)</span></span><br><span class="line">        <span class="keyword">var</span> AO(B) = &#123; <span class="comment">//创建函数B的活动对象</span></span><br><span class="line">            <span class="attr">z</span>:<span class="number">1</span>,</span><br><span class="line">            <span class="attr">arguments</span>:[],</span><br><span class="line">            <span class="attr">this</span>:<span class="built_in">window</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="attr">scopeChain</span>:<span class="xml">&lt;AO(B),B[[scope]]&gt;  //链表初始化为B[[scope]],再将AO(B)加入链表表头，此时B的作用域链：AO(B)-&gt;AO(A)-VO(G)</span></span><br><span class="line"><span class="xml">    &#125;,</span></span><br><span class="line"><span class="xml">    EC(A), //A的执行环境已经从栈顶被删除,</span></span><br><span class="line"><span class="xml">    EC(G) = &#123;   //全局执行环境</span></span><br><span class="line"><span class="xml">        VO:&#123; //定义全局变量对象</span></span><br><span class="line"><span class="xml">            ... //包含全局对象原有的属性</span></span><br><span class="line"><span class="xml">            x = 1; //定义变量x</span></span><br><span class="line"><span class="xml">            A = function()&#123;...&#125;; //定义函数A</span></span><br><span class="line"><span class="xml">            A[[scope]] = this; //定义A的scope，A[[scope]] == VO(G)</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">    &#125;</span></span><br><span class="line"><span class="xml">];</span></span><br></pre></td></tr></table></figure>
+
+<p>当函数B执行“x+y+z”时，需要对x、y、z 三个标识符进行一一解析，解析过程遵守变量查找规则：先查找自己的活动对象中是否存在该属性，如果存在，则停止查找并返回；如果不存在，继续沿着其作用域链从顶端依次查找，直到找到为止，如果整个作用域链上都未找到该变量，则返回“undefined”。从上面的分析可以看出函数B的作用域链是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AO(B)-&gt;AO(A)-&gt;VO(G)</span><br></pre></td></tr></table></figure>
+
+<p>因此，变量x会在AO(A)中被找到，而不会查找VO(G)中的x，变量y也会在AO(A)中被找到，变量z 在自身的AO(B)中就找到了。所以执行结果：2+1+1=4.</p>
+<h2 id="简单的总结语"><a href="#简单的总结语" class="headerlink" title="简单的总结语"></a>简单的总结语</h2><p>了解了JS引擎的工作机制之后，我们不能只停留在理解概念的层面，而要将其作为基础工具，用以优化和改善我们在实际工作中的代码，提高执行效率，产生实际价值才是我们的真正目的。就拿变量查找机制来说，如果你的代码嵌套很深，每引用一次全局变量，JS引擎就要查找整个作用域链，比如处于作用域链的最底端window和document对象就存在这个问题，因此我们围绕这个问题可以做很多性能优化的工作，当然还有其他方面的优化，此处不再赘述，本文仅当作抛砖引玉吧！</p>
+
+    </div>
+
+</article>
+
+
+
+
+
+    <nav class="gutter">
+        
+            <div class="post-prev">
+                上一篇：
+                <a href="/2016/10/29/php/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+            </div>
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2016/07/18/frontend/Promise-and-jQuery-Deferred/">Promise和Deferred的用法对比</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/">在shell中执行一个字符串</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/10/frontend/js%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">js防抖和节流</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/10/software/linux-clash-install/">clash安装</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2021 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
