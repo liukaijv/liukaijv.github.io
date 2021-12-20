@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        vue中使用基于客户端的缓存 |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="在写基于express、vuejs博客的小项目过程中，折腾了下在vuejs中怎么使用浏览器缓存请求。  原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。  用到的依赖包：  vue-resource #一个vuejs的http包 lodash # js库 ls">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue中使用基于客户端的缓存">
+<meta property="og:url" content="http://liukaijv.github.io/2016/06/29/frontend/vue%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="在写基于express、vuejs博客的小项目过程中，折腾了下在vuejs中怎么使用浏览器缓存请求。  原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。  用到的依赖包：  vue-resource #一个vuejs的http包 lodash # js库 ls">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-06-29T01:25:26.000Z">
+<meta property="article:modified_time" content="2016-12-29T02:19:48.000Z">
+<meta property="article:author" content="Abc">
+<meta property="article:tag" content="vue">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-frontend/vue中使用基于客户端的缓存" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">vue中使用基于客户端的缓存</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                >
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-06-29 09:25:26</span>
+    </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>在写<a target="_blank" rel="noopener" href="https://github.com/liukaijv/lnode-blog">基于express、vuejs博客</a>的小项目过程中，折腾了下在<strong>vuejs</strong>中怎么使用浏览器缓存请求。</p>
+<blockquote>
+<p>原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。</p>
+</blockquote>
+<p>用到的依赖包：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/pagekit/vue-resource">vue-resource</a> #一个vuejs的http包</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/lodash/lodash">lodash</a> # js库</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/pamelafox/lscache">lscache</a> #localStorage和sessionStorage包</li>
+</ul>
+<p>详细代码在<a target="_blank" rel="noopener" href="https://github.com/liukaijv/lnode-blog/tree/master/frontend">https://github.com/liukaijv/lnode-blog/tree/master/frontend</a>。</p>
+<span id="more"></span>
+
+<h2 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h2><p>vue入口文件main.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">&#x27;vue-resource&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Cache <span class="keyword">from</span> <span class="string">&#x27;lscache&#x27;</span>;</span><br><span class="line"></span><br><span class="line">Vue.prototype.$cache = Cache;</span><br><span class="line">Vue.cache = Cache;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httpCache <span class="keyword">from</span> <span class="string">&#x27;./lib/cache&#x27;</span>;</span><br><span class="line">httpCache(Vue);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>缓存拦截器cache.js：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>)</span>&#123;</span><br><span class="line">    Vue.http.interceptors.push(<span class="function">(<span class="params">request, next</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    	<span class="comment">// lifetime为缓存时间</span></span><br><span class="line">        <span class="keyword">let</span> cached, key, lifetime; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(request.cache !== <span class="literal">undefined</span> &amp;&amp; <span class="regexp">/^(GET|JSONP)$/i</span>.test(request.method)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (_.isObject(request.cache)) &#123;</span><br><span class="line">                lifetime = request.cache.lifetime;</span><br><span class="line">                key = <span class="string">&#x27;_resource.&#x27;</span> + request.cache.key;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                lifetime = request.cache;</span><br><span class="line">                key = request.url;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 不需要缓存的请求，添加参数no_cache=true</span></span><br><span class="line">            <span class="keyword">let</span> no_cache = request.params.no_cache;</span><br><span class="line">            </span><br><span class="line">            cached = Vue.cache.get(key); </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (cached &amp;&amp; !no_cache) &#123;                </span><br><span class="line">                <span class="comment">// 重写返回数据</span></span><br><span class="line">                request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </span><br><span class="line">                    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        next(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;   </span><br><span class="line">            <span class="keyword">if</span> (!cached &amp;&amp; response.ok) &#123;</span><br><span class="line">                Vue.cache.set(key, response, lifetime);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>关键点请求的client，返回数据<code>&#123;ok: true&#125;</code>必须有，这样才能正确返回数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </span><br><span class="line">    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>具体请查看源码<a target="_blank" rel="noopener" href="https://github.com/pagekit/vue-resource/blob/master/src/http/index.js">https://github.com/pagekit/vue-resource/blob/master/src/http/index.js</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> client(<span class="keyword">new</span> Request(options)).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">		</span><br><span class="line">	<span class="comment">// 原因在这里</span></span><br><span class="line">    <span class="keyword">return</span> response.ok ? response : <span class="built_in">Promise</span>.reject(response);</span><br><span class="line"></span><br><span class="line">    &#125;, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response <span class="keyword">instanceof</span> <span class="built_in">Error</span>) &#123;</span><br><span class="line">            error(response);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(response);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/vue/">vue</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+            <div class="post-prev">
+                上一篇：
+                <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">Promise和Deferred的用法对比</a>
+            </div>
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2016/06/15/frontend/react%E5%B8%B8%E7%94%A8API%E6%80%BB%E7%BB%93/">react常用API总结</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2021 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

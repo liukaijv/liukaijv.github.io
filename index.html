@@ -5,19 +5,19 @@
     
     <title>
         
-        Hexo</title>
+        工作中的学习笔记和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="工作中的学习笔记和心得">
 <meta property="og:url" content="http://liukaijv.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Abc">
 <meta name="twitter:card" content="summary">
     
-        <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
     
     
 
@@ -31,15 +31,12 @@
 <header id="header">
     <div class="container">
         
-        <div class="logo">
-            
-                <a href="/"><img src="/images/logo.svg" class="logo_img"/></a>
-            
-            
-        
-        </div>
         <nav class="menu" id="nav">
             <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
                 
                     <li>
                         <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
@@ -47,6 +44,10 @@
                 
                     <li>
                         <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
                     </li>
                 
                     <li>
@@ -122,10 +123,6 @@
         发表于 <span>2021-12-19 21:18:17</span>
     </li>
     
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
 </ul>
 
         <div class="post-content article-entry post-markdown">
@@ -150,6 +147,152 @@
 
     <article class="post">
         <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>下载地址<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+
+<p>创建clash目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>复制文件到<code>clash</code>目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
+
+<p>进入<code>clash</code>目录下载配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动<code>class</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
+
+<p>打开<a target="_blank" rel="noopener" href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
+<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
+
+<p>解决方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
+
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
         </h2>
         <ul class="post-meta">
@@ -158,7 +301,10 @@
         <li>
             分类
             
-                <a href="/categories/android/">android</a>
+                <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                >
+            
+                <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a>
                 
             
             ·
@@ -167,10 +313,6 @@
     <li>
         发表于 <span>2020-02-13 15:14:11</span>
     </li>
-    
-        <li>
-            · By <span>Abc</span>
-        </li>
     
 </ul>
 
@@ -206,10 +348,6 @@
     <li>
         发表于 <span>2020-02-10 12:29:55</span>
     </li>
-    
-        <li>
-            · By <span>Abc</span>
-        </li>
     
 </ul>
 
@@ -248,10 +386,6 @@
         发表于 <span>2020-02-10 10:11:28</span>
     </li>
     
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
 </ul>
 
         <div class="post-content article-entry post-markdown">
@@ -273,162 +407,7 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2020/02/10/software/linux-clash-install/">clash安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2020-02-10 10:11:28</span>
-    </li>
-    
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>下载地址<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
-
-<p>创建clash目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>复制文件到<code>clash</code>目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
-
-<p>进入<code>clash</code>目录下载配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>启动<code>class</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
-
-<p>打开<a target="_blank" rel="noopener" href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
-<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2020/02/10/software/linux-nodejs-install/">nodejs安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2020-02-10 10:11:28</span>
-    </li>
-    
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2020/02/10/software/minikube-install/">minikube安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2020-02-10 10:11:28</span>
-    </li>
-    
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
-
-
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/10/29/php/show-image-files-in-laravel's-storage-directory/">显示上传到laravel的storage目录中的图片</a>
+            <a href="/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/">显示上传到laravel的storage目录中的图片</a>
         </h2>
         <ul class="post-meta">
     
@@ -445,10 +424,6 @@
     <li>
         发表于 <span>2016-10-29 12:12:55</span>
     </li>
-    
-        <li>
-            · By <span>Abc</span>
-        </li>
     
 </ul>
 
@@ -467,7 +442,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;route(&#x27;filemanager.show&#x27;,[&#x27;filename&#x27;=&gt;$image[&#x27;name&#x27;]])&#125;&#125;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
                     
                         <p class="more-link">
-                            <a href="/2016/10/29/php/show-image-files-in-laravel's-storage-directory/">查看详情&raquo;</a>
+                            <a href="/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/">查看详情&raquo;</a>
                         </p>
                     
                 
@@ -477,7 +452,7 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2016/08/04/frontend/how-javascript-run/">深入理解JS执行细节</a>
+            <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">深入理解JS执行细节</a>
         </h2>
         <ul class="post-meta">
     
@@ -498,10 +473,6 @@
         发表于 <span>2016-08-04 11:38:06</span>
     </li>
     
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
 </ul>
 
         <div class="post-content article-entry post-markdown">
@@ -518,7 +489,7 @@
 <p>这个demo是一个闭包，执行结果是4，下面我们将分全局初始化、执行函数A、执行函数B 三个阶段来分析JS引擎的工作机制:</p>
                     
                         <p class="more-link">
-                            <a href="/2016/08/04/frontend/how-javascript-run/">查看详情&raquo;</a>
+                            <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">查看详情&raquo;</a>
                         </p>
                     
                 
@@ -528,7 +499,7 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2016/07/18/frontend/Promise-and-jQuery-Deferred/">Promise和Deferred的用法对比</a>
+            <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">Promise和Deferred的用法对比</a>
         </h2>
         <ul class="post-meta">
     
@@ -549,10 +520,6 @@
         发表于 <span>2016-07-18 18:59:00</span>
     </li>
     
-        <li>
-            · By <span>Abc</span>
-        </li>
-    
 </ul>
 
         <div class="post-content article-entry post-markdown">
@@ -562,7 +529,7 @@
                     <p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
                     
                         <p class="more-link">
-                            <a href="/2016/07/18/frontend/Promise-and-jQuery-Deferred/">查看详情&raquo;</a>
+                            <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">查看详情&raquo;</a>
                         </p>
                     
                 
@@ -596,19 +563,19 @@
                     </li>
                 
                     <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+                    </li>
+                
+                    <li>
                         <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/">在shell中执行一个字符串</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2020/02/10/frontend/js%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">js防抖和节流</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2020/02/10/software/linux-clash-install/">clash安装</a>
                     </li>
                 
             </ul>
@@ -621,7 +588,7 @@
     <div class="widget">
         <h3 class="widget-title">分类</h3>
         <div class="widget-body">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/android/">android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
         </div>
     </div>
 

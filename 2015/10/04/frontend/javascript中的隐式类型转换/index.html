@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        javascript中的隐式类型转换 |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。 算术运算+号可以当算术运算符也能当连字符号，使用+情况为：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript中的隐式类型转换">
+<meta property="og:url" content="http://liukaijv.github.io/2015/10/04/frontend/javascript%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。 算术运算+号可以当算术运算符也能当连字符号，使用+情况为：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2015-10-04T03:38:06.000Z">
+<meta property="article:modified_time" content="2017-03-04T11:46:44.000Z">
+<meta property="article:author" content="Abc">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-frontend/javascript中的隐式类型转换" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">javascript中的隐式类型转换</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                >
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2015-10-04 11:38:06</span>
+    </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。</p>
+<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><p>+号可以当算术运算符也能当连字符号，使用+情况为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 只要有一个类型为string，另一个也会转为string</span><br><span class="line">console.log(1+&#x27;1&#x27;) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+1) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+true) // &#x27;11&#x27;</span><br><span class="line">// number和boolean时，boolean转为number</span><br><span class="line">console.log(1+true) // &#x27;2&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>减法，乘，除，大于，小于运算时两边都会转成number，其中一个不能转为number即为NaN时，结果为NaN。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(2-&#x27;1&#x27;) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-&#x27;1&#x27;) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-true) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-true) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2-&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2*&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2*true) // 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="if中"><a href="#if中" class="headerlink" title="if中"></a>if中</h2><p>大多数的值都会转换成true，只有少数的是false，他们分别是：false, 0, -0, “”, NaN, null, undefined。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// x为false, 0, -0, &quot;&quot;, NaN, null, undefined时才输出</span><br><span class="line">var x = 1;</span><br><span class="line">if(x)&#123;</span><br><span class="line">	console.log(&#x27;hello&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="两个-时"><a href="#两个-时" class="headerlink" title="两个==时"></a>两个==时</h2><p>两者中有布尔值(Boolean)，会把Boolean先转换为对应的Number，即0和1；双方中有一方为Number，一方为 String时，会把String转换为数字；双方中有一方为Boolean，一方为 String时，则会先将双方转换为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(1==true)//true</span><br><span class="line">console.log(1==&#x27;1&#x27;)//true</span><br><span class="line">console.log(1==&#x27;a&#x27;)//false</span><br><span class="line">console.log(true==&#x27;a&#x27;)//false</span><br><span class="line">console.log(true==&#x27;1&#x27;)//true</span><br></pre></td></tr></table></figure>
+
+<h2 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a>&amp;&amp;和||</h2><p>会先转成boolean，&amp;&amp;遇到false返回当前，无刚返回下一个；||遇到真就返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(11&amp;&amp;&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;0&#x27;&amp;&amp;&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;&#x27;&amp;&amp;&#x27;11&#x27;)// &#x27;&#x27;</span><br><span class="line">console.log(&#x27;&#x27;||&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;22&#x27;||&#x27;11&#x27;)// &#x27;22&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="引用类型参与时"><a href="#引用类型参与时" class="headerlink" title="引用类型参与时"></a>引用类型参与时</h2><p>引用类型和基本类型的比较就相对复杂一些，先要把引用类型转成基本类型。引用类型转布尔全是true，引用类型转数字或者字符串就要用valueOf()或者toString()。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(1+[]) //1</span><br><span class="line">console.log(0==[]) // true</span><br><span class="line">console.log(0+[]) // 0</span><br><span class="line">console.log(&#x27;0&#x27;+[]) // &#x27;0&#x27;</span><br><span class="line">// 与对象默认valueOf和toString都是object Object</span><br><span class="line">// var a = &#123;&#125;;console.log(a.toString()==a.valueOf());//true</span><br><span class="line">console.log(&#x27;0&#x27;+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">console.log(0+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">// 实际上是先优先valueOf</span><br><span class="line">console.log(1+&#123;toString:function()&#123;return &#x27;1&#x27;&#125;,valueOf:function()&#123;return 1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+</article>
+
+
+
+
+
+    <nav class="gutter">
+        
+            <div class="post-prev">
+                上一篇：
+                <a href="/2015/10/29/frontend/javascript%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/">javascript函数作为变量传递</a>
+            </div>
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2015/08/04/frontend/javascript%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">javascript中创建对象的几种方式</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2021 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

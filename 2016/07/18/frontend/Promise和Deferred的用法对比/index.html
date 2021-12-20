@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        Promise和Deferred的用法对比 |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise和Deferred的用法对比">
+<meta property="og:url" content="http://liukaijv.github.io/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-07-18T10:59:00.000Z">
+<meta property="article:modified_time" content="2017-03-04T03:54:34.000Z">
+<meta property="article:author" content="Abc">
+<meta property="article:tag" content="jquery">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-frontend/Promise和Deferred的用法对比" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">Promise和Deferred的用法对比</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                >
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-07-18 18:59:00</span>
+    </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
+<span id="more"></span>
+
+<h2 id="原生Promise"><a href="#原生Promise" class="headerlink" title="原生Promise"></a>原生Promise</h2><p>废话就不多说了，直接上api：</p>
+<ul>
+<li>Promise.resolve()</li>
+<li>Promise.reject()</li>
+<li>Promise.all()</li>
+<li>Promise.then()</li>
+<li>Promise.catch()</li>
+<li>Promise.race() // jQuery.Deferred没找到对应的</li>
+</ul>
+<h2 id="jQuery-Deferred"><a href="#jQuery-Deferred" class="headerlink" title="jQuery.Deferred"></a>jQuery.Deferred</h2><p>对应的api有：</p>
+<ul>
+<li>deferred.resolve() =&gt; Promise.resolve()</li>
+<li>deferred.reject() =&gt; Promise.reject()</li>
+<li>jQuery.when() =&gt; Promise.all()</li>
+<li>deferred.then() =&gt; Promise.then()</li>
+<li>deferred.fail() =&gt; Promise.catch()</li>
+</ul>
+<h2 id="对比deferred-resolve和Promise-resolve的例子"><a href="#对比deferred-resolve和Promise-resolve的例子" class="headerlink" title="对比deferred.resolve和Promise.resolve的例子"></a>对比deferred.resolve和Promise.resolve的例子</h2><p>两者resolve和then的用法都一样</p>
+<p>原生Promise</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wait = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> task = <span class="function">() =&gt;</span> &#123;   </span><br><span class="line">      resolve(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">setTimeout</span>(task, <span class="number">5000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wait().then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>jQuery版</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wait = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> $.Deferred(<span class="function">(<span class="params">deferred</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> task = <span class="function">() =&gt;</span> &#123;   </span><br><span class="line">      deferred.resolve(<span class="string">&#x27;done&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">setTimeout</span>(task, <span class="number">5000</span>);</span><br><span class="line">  &#125;).promise();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wait().then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="对比deferred-fail和Promise-catch的例子"><a href="#对比deferred-fail和Promise-catch的例子" class="headerlink" title="对比deferred.fail和Promise.catch的例子"></a>对比deferred.fail和Promise.catch的例子</h2><p>两个用法差不多</p>
+<p>原生Promise</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wait = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    reject(<span class="string">&#x27;error&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wait().then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125;).catch (<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以这样</span></span><br><span class="line">wait().then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125;, <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>jQuery版</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wait = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> $.Deferred(<span class="function">(<span class="params">deferred</span>) =&gt;</span> &#123;</span><br><span class="line">    deferred.reject(<span class="string">&#x27;error&#x27;</span>);</span><br><span class="line">  &#125;).promise();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">wait().then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125;).fail(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以这样</span></span><br><span class="line">wait().then(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// success</span></span><br><span class="line">&#125;, <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(error)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="对比Promise-all和jQuery-when的例子"><a href="#对比Promise-all和jQuery-when的例子" class="headerlink" title="对比Promise.all和jQuery.when的例子"></a>对比Promise.all和jQuery.when的例子</h2><p>这两个区别是传入参数和返回值都不同，jQuery.when参数为单个deferred函数jQuery.when(deferred1,  deferred2, deferred3)；Promise.all参数为promise数组，Promise.all([promise1, promise2, promise3])。<br>Promise返回结果为数组，$.when返回结果和参数对应。</p>
+<p>原生Promise</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> promise1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">&quot;promise1&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> promise2 = <span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="string">&quot;promise2&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all([promise1, promise2]).then(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(result); <span class="comment">// [&#x27;promise1&#x27;, &#x27;promise2&#x27;]</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>jQuery版</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deferred1 = $.Deferred(<span class="function">(<span class="params">deferred</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        deferred.resolve(<span class="string">&quot;deferred1&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">2000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> deferred2 = $.Deferred( <span class="function">(<span class="params">deferred</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">        deferred.resolve(<span class="string">&quot;deferred2&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.when.(deferred1, deferred2).then(<span class="function">(<span class="params">result1, result2</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(result1, result2); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="实际开发中特殊情况填坑"><a href="#实际开发中特殊情况填坑" class="headerlink" title="实际开发中特殊情况填坑"></a>实际开发中特殊情况填坑</h2><p>根据在实际开发的经验，参数为[promise1, promise2, promise3]这种方式的更方便，某些情况$.when实现起来很悲剧。思考下面的多文件上传时$.Deferred怎么实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file input上传的多个文件</span></span><br><span class="line"><span class="keyword">var</span> files = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> handleUpload = <span class="function">(<span class="params">file</span>) =&gt;</span> &#123;	</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">// ajax上传文件到服务器</span></span><br><span class="line">		<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	        resolve(file+<span class="string">&quot; file uploaded&quot;</span>);</span><br><span class="line">	    &#125;, <span class="number">1000</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 组装成数组</span></span><br><span class="line"><span class="keyword">var</span> promiseArr = <span class="built_in">Array</span>.prototype.slice.call(files, <span class="number">0</span>).map(<span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> handleUpload(file);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.all(promiseArr).then(<span class="function">(<span class="params">allFiles</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 要用到上传成功后的所有文件</span></span><br><span class="line">  <span class="built_in">console</span>.log(allFiles); <span class="comment">// [&quot;1 file uploaded&quot;, &quot;2 file uploaded&quot;, &quot;3 file uploaded&quot;]</span></span><br><span class="line">&#125;).catch (<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>用$.Deferred也不麻烦，$.Deferred版本</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写的都是假数据</span></span><br><span class="line"><span class="comment">// file input上传的多个文件</span></span><br><span class="line"><span class="keyword">var</span> files = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">var</span> handleUpload = <span class="function">(<span class="params">file</span>) =&gt;</span> &#123;	</span><br><span class="line">	<span class="keyword">return</span> $.Deferred(<span class="function">(<span class="params">deferred</span>) =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">// ajax上传到服务器</span></span><br><span class="line">		<span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">	        deferred.resolve(file+<span class="string">&quot; file uploaded&quot;</span>);</span><br><span class="line">	    &#125;, <span class="number">1000</span>);</span><br><span class="line">	&#125;).promise();</span><br><span class="line">  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组装成数组</span></span><br><span class="line"><span class="keyword">var</span> promiseArr = <span class="built_in">Array</span>.prototype.slice.call(files, <span class="number">0</span>).map(<span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> handleUpload(file);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$.when.apply($, promiseArr).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="comment">// 这里不能写箭头函数了，写了arguments is not defined</span></span><br><span class="line">  <span class="comment">// 要用到上传成功后的所有文件</span></span><br><span class="line">  <span class="keyword">var</span> allFiles = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(allFiles); <span class="comment">// [&quot;1 file uploaded&quot;, &quot;2 file uploaded&quot;, &quot;3 file uploaded&quot;]</span></span><br><span class="line">&#125;).fail (<span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="http://api.jquery.com/category/deferred-object/">jQuery Deferred 文档</a><br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html">阮老师的 jQuery的deferred对象详解</a></p>
+</blockquote>
+
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/jquery/">jquery</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+            <div class="post-prev">
+                上一篇：
+                <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">深入理解JS执行细节</a>
+            </div>
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2016/06/29/frontend/vue%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E7%BC%93%E5%AD%98/">vue中使用基于客户端的缓存</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2021 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
