@@ -1,41 +1,362 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>javascript中创建对象的几种方式</title>
-    <url>/2015/08/04/frontend/javascript%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。</p>
-<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><p>缺点是不能实现私有属性和私有方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">  Obj.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">  Obj.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+    <title>Apache的访问权限配置</title>
+    <url>/2015/03/03/develop/Apache%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
+<pre><code>################################################ 
+2.2上的配置 
+Order deny,allow 
+Deny from all 
+ 
+2.4上的配置 
+Require all denied 
+ 
+################################################ 
+2.2上的配置 
+Order allow,deny 
+Allow from all 
+ 
+2.4上的配置 
+Require all granted 
+ 
+################################################# 
+</code></pre>
+<span id="more"></span>
+
+<p>下面给出了几个例子在2.4版本上的配置</p>
+<p>1、仅允许IP为192.168.1.1的主机访问</p>
+<pre><code>require all  granted 
+require ip 192.168.1.1 
+</code></pre>
+<p>2、仅允许192.168.0.0/24网络的主机访问</p>
+<pre><code>require all  granted  
+require ip 192.168.1.0/24 
+</code></pre>
+<p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
+<pre><code>require all  granted 
+require not ip 192.168.1.2 
+</code></pre>
+<p>4、允许所有访问,</p>
+<pre><code>require all  granted
+ 
+</code></pre>
+<p>5、拒绝所有访问,</p>
+<pre><code>require all  denied 
+</code></pre>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>apache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>github多帐号添加ssh公钥</title>
+    <url>/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/</url>
+    <content><![CDATA[<p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
+<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
+
+<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
-<h2 id="构造函数法"><a href="#构造函数法" class="headerlink" title="构造函数法"></a>构造函数法</h2><p>与工厂方式相比，使用构造函数方式创建对象，无需再函数内部重建创建对象，而使用this指代，并而函数无需明确return。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr jack&#x27;</span>;</span><br><span class="line">	<span class="built_in">this</span>.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+<p>3、输入密码，不用设置，一路回车到完成，生成的文件为：<code>/Users/you/.ssh/id_rsa1</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again: </span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:HlteuP6zblxHGjEFh9hLohazijWnxO/aJx0zimpy0lY your_email@example.com</span><br><span class="line">The key<span class="string">&#x27;s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 2048]----+</span></span><br><span class="line"><span class="string">|              ++.|</span></span><br><span class="line"><span class="string">|           o oo+.|</span></span><br><span class="line"><span class="string">|        .   = ooo|</span></span><br><span class="line"><span class="string">|         = *  ...|</span></span><br><span class="line"><span class="string">|        S X .  + |</span></span><br><span class="line"><span class="string">|       o E + +o .|</span></span><br><span class="line"><span class="string">|      . + =.o.+. |</span></span><br><span class="line"><span class="string">|     o = o =+o   |</span></span><br><span class="line"><span class="string">|      *.. o=Bo   |</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="原型方式"><a href="#原型方式" class="headerlink" title="原型方式"></a>原型方式</h2><p>把属性和方法的定义放到prototype上</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+<h2 id="生成的ssh公钥添加到github"><a href="#生成的ssh公钥添加到github" class="headerlink" title="生成的ssh公钥添加到github"></a>生成的ssh公钥添加到github</h2><p>复制出生成的ssh公钥</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pbcopy &lt; /Users/you/.ssh/id_rsa1.pub</span><br></pre></td></tr></table></figure>
 
-<h2 id="构造函数-原型混合方式"><a href="#构造函数-原型混合方式" class="headerlink" title="构造函数+原型混合方式"></a>构造函数+原型混合方式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+<p>github网站setting的SSH and GPG keys新建一个key粘进去</p>
+<h2 id="ssh-config文件里添加一个host"><a href="#ssh-config文件里添加一个host" class="headerlink" title="ssh config文件里添加一个host"></a>ssh config文件里添加一个host</h2><p>ssh目录没config文件，新建一个</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github1</span><br><span class="line">  HostName github.com</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa1</span><br></pre></td></tr></table></figure>
 
-<h2 id="Object-create-法"><a href="#Object-create-法" class="headerlink" title="Object.create()法"></a>Object.create()法</h2><p>Es6的一个新的方法Object.create()，直接返回一个对象。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;attr name&#x27;</span>,</span><br><span class="line">  <span class="attr">eat</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="built_in">Object</span>.create(Person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+<h2 id="修改仓库地址"><a href="#修改仓库地址" class="headerlink" title="修改仓库地址"></a>修改仓库地址</h2><p>第二个账号的git地址中<code>git@github.com</code>都改为<code>github1</code>，如：<code>git@github.com:you/your-repo.git</code>变为<code>github1:you/your-repo.git</code></p>
+<p>添加仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin github1:you/your-repo.git</span><br></pre></td></tr></table></figure>
 
-<p>老式浏览器模拟Object.create()方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">    F.prototype = o;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改仓库地址</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin github1:you/your-repo.git</span><br></pre></td></tr></table></figure>
 
-<p>缺点是不能实现私有属性和私有方法，实例对象之间也不能共享数据。</p>
-<h2 id="极简主义法"><a href="#极简主义法" class="headerlink" title="极简主义法"></a>极简主义法</h2><p>荷兰程序员Gabor de Mooij提出了一种比Object.create()更好的新方法，他称这种方法为”极简主义法”（minimalist approach）。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">  <span class="attr">createNew</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _person = &#123;&#125;;</span><br><span class="line">    _person.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">    _person.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _person;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person.createNew();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
 
-<p>这种方法实现继承、私有属性和私有方法、数据共享也方便。</p>
+
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo自定义404页面</title>
+    <url>/2015/12/26/develop/hexo%E8%87%AA%E5%AE%9A%E4%B9%89404%E9%A1%B5%E9%9D%A2/</url>
+    <content><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
+<span id="more"></span>
+
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
+<ul>
+<li>优点：基于主题的，简单，直接了当</li>
+<li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
+</ul>
+<p>如404页面为腾讯公益404页面。代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="attr">homePageUrl</span>=<span class="string">&quot;http://yourdomain.com&quot;</span> <span class="attr">homePageName</span>=<span class="string">&quot;回到主页&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在项目source目录为生成一个404/index.md的页面，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试一下，运行<code>hexo s</code>，打开<a href="http://localhost:4000/404/">http://localhost:4000/404/</a>看能否浏览，修改一下404.md：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>修改这后404页面的链接变成了<a href="http://localhost:4000/404.html">http://localhost:4000/404.html</a>，这样链接是正确了，但是页面用的是page的布局，怎么才能自定义？</p>
 <blockquote>
-<p>参考和引用 <a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html">Javascript定义类（class）的三种方法</a></p>
+<p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid #ddd&quot;</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: 404</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
+<blockquote>
+<p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;%if(page.layout==&#x27;404&#x27;)&#123;%&gt;</span><br><span class="line">	&lt;%- partial(&#x27;_partial/404&#x27;) %&gt;</span><br><span class="line">&lt;%&#125;else&#123;%&gt;</span><br><span class="line">&lt;%- body %&gt;</span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
+]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo的md文件中使用html、css、javascript</title>
+    <url>/2015/03/28/develop/hexo%E7%9A%84md%E6%96%87%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8html/</url>
+    <content><![CDATA[<p>有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。</p>
+<span id="more"></span>
+
+<h2 id="开始折腾"><a href="#开始折腾" class="headerlink" title="开始折腾"></a>开始折腾</h2><h3 id="1、直接插入"><a href="#1、直接插入" class="headerlink" title="1、直接插入"></a>1、直接插入</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.styled-div</span>&#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;styled-div&quot;</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="built_in">console</span>.log(<span class="string">&#x27;我是md是的javascript&#x27;</span>);</span></span><br><span class="line"><span class="javascript">	&#125;)();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<style>
+.styled-div{
+    width: 100px;
+    height: 100px;
+    background: yellow;
+}
+</style>
+<div class="styled-div">我是div</div>
+
+<p>html和javascript成功了，但是style没有成功……。</p>
+<h3 id="2、把css放到行内"><a href="#2、把css放到行内" class="headerlink" title="2、把css放到行内"></a>2、把css放到行内</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width: 100px;height: 100px;background: yellow;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<div style="width: 100px;height: 100px;background: yellow;">我是div</div>
+
+
+<p>样式放在行内是可以的。怎么让放在style里的样式也有效呢？</p>
+<h3 id="3、使用raw"><a href="#3、使用raw" class="headerlink" title="3、使用raw:"></a>3、使用raw:</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.styled-div1</span>&#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;styled-div-other&quot;</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+
+<style>
+.styled-div-other{
+	width: 100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+<div class="styled-div-other">我是div</div>
+
+
+<p>style里的样式有效了</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><blockquote>
+<p>html，js，css 都应该写在raw标签里。</p>
+</blockquote>
+<p>方法一、二中，好像是直接在md里写html和javascript都行，但当这篇文章写到第三种方法的时候，js报错了，并且页面布局也有点乱。用web开发都工具看了下，<code>&lt;div class=&quot;styled-div&quot;&gt;我是div&lt;/div&gt;</code>和<code>&lt;script&gt;&lt;/script&gt;</code>中都生成了很多’<br>‘标签。</p>
+<p>所以要在md中杂点其它东西。放在raw标签里才是正确的：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.styled-div-right</span>&#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;styled-div-right&quot;</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="built_in">console</span>.log(<span class="string">&#x27;我才是正确的md里的javascript&#x27;</span>);</span></span><br><span class="line"><span class="javascript">	&#125;)();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<style>
+.styled-div-right{
+	width: 100px;
+	height: 100px;
+	background: yellow;
+}
+</style>
+<div class="styled-div-right">我是正确的</div>
+<script>
+	(function(){
+		console.log('我才是正确的md里的javascript');
+	})();
+</script>
+
+
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在markdown里写html的东西有点不合理，取决于各自吧。介绍下另外两种方式：</p>
+<ul>
+<li>在source文件下创建单独html页面</li>
+<li>内嵌第三方的演示平台代码，jsfiddle、codepen都是很不错的选择。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ssh长时间保持不断开</title>
+    <url>/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/</url>
+    <content><![CDATA[<p>远程ssh连接服务器，默认长时间不用会自动断开，设置不自动断开方式有三种</p>
+<h2 id="客户端连接加参数"><a href="#客户端连接加参数" class="headerlink" title="客户端连接加参数"></a>客户端连接加参数</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 相当于每隔120秒向服务器发送心跳</span></span><br><span class="line">ssh -o ServerAliveInterval=120 user@ip</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端设置配置"><a href="#客户端设置配置" class="headerlink" title="客户端设置配置"></a>客户端设置配置</h2><p>如果ssh服务器信息放<code>~/.ssh/config</code>中的，设置<code>ServerAliveInterval</code>值</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Host alias </span><br><span class="line">    HostName ip</span><br><span class="line">    User root</span><br><span class="line">    ServerAliveInterval 120</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>修改<code>sshd_config</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi vim /etc/ssh/sshd_config</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 发送心跳间隔</span></span></span><br><span class="line">ClientAliveInterval 120</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 最大发送次数</span></span></span><br><span class="line">ClientAliveCountMax 720</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>在shell中执行一个字符串</title>
+    <url>/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
+    <content><![CDATA[<p>写shell脚本时经常会拼接一个字串,然后当成命令执行，用到的linux命令是<code>eval $&#123;str&#125;</code>或者<code>echo $&#123;str&#125; | sh</code>，例子如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">start=1</span><br><span class="line">amount=<span class="variable">$1</span></span><br><span class="line">raceId=<span class="variable">$2</span></span><br><span class="line">api_host=127.0.0.1:8080</span><br><span class="line">str=<span class="string">&quot;curl --location --request POST &#x27;http://<span class="variable">$&#123;api_host&#125;</span>/api/AddBuy&#x27;</span></span><br><span class="line"><span class="string">--header \&quot;&#x27;Content-Type&#x27;:&#x27;application/json&#x27;\&quot;</span></span><br><span class="line"><span class="string">--data-raw &#x27;&#123;</span></span><br><span class="line"><span class="string">    \&quot;PidStart\&quot;:<span class="variable">$start</span>,</span></span><br><span class="line"><span class="string">    \&quot;Amount\&quot;:<span class="variable">$&#123;amount&#125;</span>,</span></span><br><span class="line"><span class="string">    \&quot;RaceId\&quot;:<span class="variable">$&#123;raceId&#125;</span></span></span><br><span class="line"><span class="string">&#125;&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str&#125;</span> | sh</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">eval</span> <span class="variable">$&#123;str&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模拟器运行instantRunSplitApkResourcesDebug报错</title>
+    <url>/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
+<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
+<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
+]]></content>
+      <categories>
+        <category>移动开发</category>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>app</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>把github作为静态资源cdn</title>
+    <url>/2015/05/27/develop/%E6%8A%8Agithub%E4%BD%9C%E4%B8%BA%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90cdn/</url>
+    <content><![CDATA[<p>博客是用hexo搭建的，没有上传图片的功能，于是想把图片都放github上。需要图片的时候<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>这样就可以插入了。</p>
+<p>在github上创建仓库，名字自己取，以我自己的为例，仓库为static_cdn，克隆到本地：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 克隆</span></span><br><span class="line">$ git <span class="built_in">clone</span> git@github.com:liukaijv/static_cdn.git</span><br><span class="line"><span class="comment"># 打开目录</span></span><br><span class="line">$ <span class="built_in">cd</span> static_cdn</span><br><span class="line"><span class="comment"># 新建images文件夹</span></span><br><span class="line">$ mikdir images</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>添加图片avatar_large.jpg到images文件夹，然后push到github。登录github网站，添加的图片链接为<code>https://github.com/liukaijv/static_cdn/blob/master/images/avatar_large.jpg</code>。把链接中的<strong>blob</strong>改成<strong>raw</strong>就可以显示图片了。如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">![](https://github.com/liukaijv/static_cdn/raw/master/images/avatar_large.jpg)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/liukaijv/static_cdn/raw/master/images/avatar_large.jpg" alt="我是放在github上的图片" title="我是放在github上的图片"></p>
+<hr>
+<p>github 静态资源链接是这样子的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://github.com/yourname/your-repository/raw/master/the-folder/xxx.xxx</span><br><span class="line"></span><br><span class="line"># 说明一下</span><br><span class="line">yourname         --- 你的帐号</span><br><span class="line">your-respository --- 你的 project 名</span><br><span class="line">images-folder    --- 你存放资源的文件夹，如果是直接放在 project 的项目根目录的話，就可以省略這個</span><br><span class="line">xxx.xxx          --- 你的资源名</span><br></pre></td></tr></table></figure>
+
+<p>不光可以是图片，其它的也是，如<a href="https://github.com/liukaijv/static_cdn/raw/master/LICENSE">LICENSE文件</a>、<a href="https://github.com/liukaijv/static_cdn/raw/master/images/avatar_large.jpg">图片</a>等等。</p>
+<blockquote>
+<p>github是服务器在国外，访问慢，可以选择放七牛。<br>教程在<a href="http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/">http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/</a></p>
 </blockquote>
 ]]></content>
       <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
+        <category>编程笔记</category>
       </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown语法</title>
+    <url>/2015/11/26/develop/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<blockquote>
+<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h3><p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行。</p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 这是 H1</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 这是 H2</span></span><br><span class="line"></span><br><span class="line"><span class="section">###### 这是 H6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="区块引用-Blockquotes"><a href="#区块引用-Blockquotes" class="headerlink" title="区块引用 Blockquotes"></a>区块引用 Blockquotes</h3><p>Markdown 标记区块引用是使用类似 email 中用 &gt; 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 &gt; ：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line"><span class="quote">&gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span></span><br><span class="line"><span class="quote">&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span></span><br><span class="line"><span class="quote">&gt; </span></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line"><span class="quote">&gt; id sem consectetuer libero luctus adipiscing.</span></span><br></pre></td></tr></table></figure>
+
+<p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 &gt; ：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line">consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span><br><span class="line">Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line">id sem consectetuer libero luctus adipiscing.</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Markdown 支持有序列表和无序列表。</p>
+<p>无序列表使用星号、加号或是减号作为列表标记：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*   Red</span><br><span class="line">*   Green</span><br><span class="line">*   Blue</span><br></pre></td></tr></table></figure>
+
+<p>有序列表则使用数字接着一个英文句点：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.  Bird</span><br><span class="line">2.  McHale</span><br><span class="line">3.  Parish</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <pre> 和 <code> 标签来把代码区块包起来。</p>
+<p>要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这是一个普通段落：</span><br><span class="line"></span><br><span class="line">    这是一个代码区块。</span><br></pre></td></tr></table></figure>
+
+<p>Markdown 会转换成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;这是一个普通段落：&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;&lt;code&gt;这是一个代码区块。</span><br><span class="line">&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>别一种方式用三个反引号包起：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line">var foo = 1;	</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">同时可以指定语言：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span>;	</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 分隔线</span><br><span class="line"></span><br><span class="line">你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 链接</span><br><span class="line"></span><br><span class="line">Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。</span><br><span class="line"></span><br><span class="line">不管是哪一种，链接文字都是用 [方括号] 来标记。</span><br><span class="line"></span><br><span class="line">要建立一个行内式的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This is <a href="http://example.com/" title="Title">an example</a> inline link.</p>
+<p><a href="http://example.net/">This link</a> has no title attribute.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This is <a href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 强调</span><br><span class="line"></span><br><span class="line">Markdown 使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 &lt;em&gt; 标签包围，用两个 * 或 _ 包起来的话，则会被转成 &lt;strong&gt;，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><em>single asterisks</em></p>
+<p><em>single underscores</em></p>
+<p><strong>double asterisks</strong></p>
+<p><strong>double underscores</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 代码</span><br><span class="line"></span><br><span class="line">如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Use the <code>printf()</code> function.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 图片</span><br><span class="line"></span><br><span class="line">很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</span><br><span class="line"></span><br><span class="line">Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。</span><br><span class="line"></span><br><span class="line">行内式的图片语法看起来像是：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/path/to/img.jpg" alt="Alt text"></p>
+<p><img src="/path/to/img.jpg" alt="Alt text" title="Optional title"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的图片语法则长得像这样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="http://example.com/" alt="Alt text" title="Optional Title Here"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>
+</code></pre>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
   </entry>
   <entry>
     <title>Promise和Deferred的用法对比</title>
@@ -98,59 +419,41 @@
       </tags>
   </entry>
   <entry>
-    <title>js验证只能输入数字</title>
-    <url>/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<p>js验证只能输入数字函数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 替换非数字值</span></span><br><span class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换第一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换最后一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换连续.+</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="comment">// .号前只能有一个0</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">&#x27;0.&#x27;</span>);</span><br><span class="line">  <span class="comment">// 保留一个.，替换其它的.</span></span><br><span class="line">  value = value.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;$#$&#x27;</span>).replace(<span class="regexp">/\./g</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;$#$&#x27;</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>js防抖和节流</title>
-    <url>/2020/02/10/frontend/js%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/</url>
-    <content><![CDATA[<p>防抖和节流在前端性能优化中很常用，防抖和节流都是对一段时间内事件触发函数执行频率的控制；使用场景就是当频繁事件时怎样去处理函数执行。</p>
-<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>在限定时间内，如果事件再次触发，丢弃当前已响应的函数执行，以当前事件响应函数重新计时</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>javascript中创建对象的几种方式</title>
+    <url>/2015/08/04/frontend/javascript%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。</p>
+<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><p>缺点是不能实现私有属性和私有方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">  Obj.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">  Obj.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 
-<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.debounce = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, immediate</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params">context, args</span>) </span>&#123;</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">     <span class="keyword">if</span> (args) result = func.apply(context, args);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> debounced = restArguments(<span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">       <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">       timeout = <span class="built_in">setTimeout</span>(later, wait);</span><br><span class="line">       <span class="keyword">if</span> (callNow) result = func.apply(<span class="built_in">this</span>, args);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       timeout = _.delay(later, wait, <span class="built_in">this</span>, args);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> result;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   debounced.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> debounced;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数法"><a href="#构造函数法" class="headerlink" title="构造函数法"></a>构造函数法</h2><p>与工厂方式相比，使用构造函数方式创建对象，无需再函数内部重建创建对象，而使用this指代，并而函数无需明确return。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr jack&#x27;</span>;</span><br><span class="line">	<span class="built_in">this</span>.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
 
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>在限定时间内，如果事件再次触发，忽略事件响应，当到达时间后函数执行后再开始事件响应</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="原型方式"><a href="#原型方式" class="headerlink" title="原型方式"></a>原型方式</h2><p>把属性和方法的定义放到prototype上</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.throttle = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout, context, args, result;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (!options) options = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      previous = options.leading === <span class="literal">false</span> ? <span class="number">0</span> : _.now();</span><br><span class="line">      timeout = <span class="literal">null</span>;</span><br><span class="line">      result = func.apply(context, args);</span><br><span class="line">      <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> throttled = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> now = _.now();</span><br><span class="line">      <span class="keyword">if</span> (!previous &amp;&amp; options.leading === <span class="literal">false</span>) previous = now;</span><br><span class="line">      <span class="keyword">var</span> remaining = wait - (now - previous);</span><br><span class="line">      context = <span class="built_in">this</span>;</span><br><span class="line">      args = <span class="built_in">arguments</span>;</span><br><span class="line">      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span> || remaining &gt; wait) &#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout) &#123;</span><br><span class="line">          <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">          timeout = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        previous = now;</span><br><span class="line">        result = func.apply(context, args);</span><br><span class="line">        <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout &amp;&amp; options.trailing !== <span class="literal">false</span>) &#123;</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(later, remaining);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    throttled.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">      previous = <span class="number">0</span>;</span><br><span class="line">      timeout = context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> throttled;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数-原型混合方式"><a href="#构造函数-原型混合方式" class="headerlink" title="构造函数+原型混合方式"></a>构造函数+原型混合方式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
 
+<h2 id="Object-create-法"><a href="#Object-create-法" class="headerlink" title="Object.create()法"></a>Object.create()法</h2><p>Es6的一个新的方法Object.create()，直接返回一个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;attr name&#x27;</span>,</span><br><span class="line">  <span class="attr">eat</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="built_in">Object</span>.create(Person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<p>老式浏览器模拟Object.create()方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">    F.prototype = o;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点是不能实现私有属性和私有方法，实例对象之间也不能共享数据。</p>
+<h2 id="极简主义法"><a href="#极简主义法" class="headerlink" title="极简主义法"></a>极简主义法</h2><p>荷兰程序员Gabor de Mooij提出了一种比Object.create()更好的新方法，他称这种方法为”极简主义法”（minimalist approach）。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">  <span class="attr">createNew</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _person = &#123;&#125;;</span><br><span class="line">    _person.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">    _person.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _person;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person.createNew();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<p>这种方法实现继承、私有属性和私有方法、数据共享也方便。</p>
+<blockquote>
+<p>参考和引用 <a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html">Javascript定义类（class）的三种方法</a></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
-      <tags>
-        <tag>js</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>lodash集合的sortBy排序</title>
-    <url>/2015/12/29/frontend/lodash%E9%9B%86%E5%90%88%E7%9A%84sortBy%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>lodash sortBy的用法</p>
-<p>数组对象：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tags = [ </span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;php&#x27;</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;html&#x27;</span>, <span class="attr">post_count</span>: <span class="number">3</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;lua&#x27;</span>, <span class="attr">post_count</span>: <span class="number">5</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;css&#x27;</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;python&#x27;</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;javascript&#x27;</span>, <span class="attr">post_count</span>: <span class="number">1</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;express&#x27;</span>, <span class="attr">post_count</span>: <span class="number">4</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;css3&#x27;</span>, <span class="attr">post_count</span>: <span class="number">6</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;mongoose&#x27;</span>, <span class="attr">post_count</span>: <span class="number">0</span> &#125; </span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
-
-<p>以post_count升序排序：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">tags = _.sortBy(tags, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> item.post_count;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>以post_count降序排序，排序项加个负号：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">tags = _.sortBy(tags, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> -item.post_count;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>lodash</tag>
-      </tags>
   </entry>
   <entry>
     <title>javascript函数作为变量传递</title>
@@ -222,6 +525,36 @@
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
+  </entry>
+  <entry>
+    <title>js验证只能输入数字</title>
+    <url>/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<p>js验证只能输入数字函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 替换非数字值</span></span><br><span class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换第一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换最后一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换连续.+</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="comment">// .号前只能有一个0</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">&#x27;0.&#x27;</span>);</span><br><span class="line">  <span class="comment">// 保留一个.，替换其它的.</span></span><br><span class="line">  value = value.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;$#$&#x27;</span>).replace(<span class="regexp">/\./g</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;$#$&#x27;</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>lodash集合的sortBy排序</title>
+    <url>/2015/12/29/frontend/lodash%E9%9B%86%E5%90%88%E7%9A%84sortBy%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>lodash sortBy的用法</p>
+<p>数组对象：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tags = [ </span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;php&#x27;</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;html&#x27;</span>, <span class="attr">post_count</span>: <span class="number">3</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;lua&#x27;</span>, <span class="attr">post_count</span>: <span class="number">5</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;css&#x27;</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;python&#x27;</span>, <span class="attr">post_count</span>: <span class="number">2</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;javascript&#x27;</span>, <span class="attr">post_count</span>: <span class="number">1</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;express&#x27;</span>, <span class="attr">post_count</span>: <span class="number">4</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;css3&#x27;</span>, <span class="attr">post_count</span>: <span class="number">6</span> &#125;,</span><br><span class="line">		&#123; <span class="attr">name</span>: <span class="string">&#x27;mongoose&#x27;</span>, <span class="attr">post_count</span>: <span class="number">0</span> &#125; </span><br><span class="line">	]</span><br></pre></td></tr></table></figure>
+
+<p>以post_count升序排序：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">tags = _.sortBy(tags, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> item.post_count;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以post_count降序排序，排序项加个负号：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">tags = _.sortBy(tags, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> -item.post_count;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>lodash</tag>
+      </tags>
   </entry>
   <entry>
     <title>react常用API总结</title>
@@ -372,6 +705,19 @@ $input.on('change', function(){
       </categories>
   </entry>
   <entry>
+    <title>如何关闭微信内置浏览器</title>
+    <url>/2015/12/28/frontend/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8/</url>
+    <content><![CDATA[<p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</span><br><span class="line">        wx.closeWindow();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">        WeixinJSBridge.call(<span class="string">&#x27;closeWindow&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>tricks</tag>
+        <tag>wechat</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>循环中正确绑定事件的N种方法</title>
     <url>/2016/02/27/frontend/%E5%BE%AA%E7%8E%AF%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<p>面试中常考的题，把想到的方法都整理一下，代码如下：</p>
@@ -398,6 +744,95 @@ $input.on('change', function(){
       <categories>
         <category>前端开发</category>
       </categories>
+  </entry>
+  <entry>
+    <title>让jquery插件支持AMD和CMD规范</title>
+    <url>/2015/03/28/frontend/%E8%AE%A9jquery%E6%8F%92%E4%BB%B6%E6%94%AF%E6%8C%81AMD%E5%92%8CCMD%E8%A7%84%E8%8C%83/</url>
+    <content><![CDATA[<p>jquery插件支持AMD和CMD规范的改造：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">;<span class="function"><span class="keyword">function</span>(<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line"><span class="meta">	 &quot;use strict&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; (define.amd || define.cmd)) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// register as anon module</span></span><br><span class="line">		define([<span class="string">&#x27;jquery&#x27;</span>], factory);</span><br><span class="line"></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// invoke directly</span></span><br><span class="line">		factory( (<span class="keyword">typeof</span>(jQuery) != <span class="string">&#x27;undefined&#x27;</span>) ? jQuery : <span class="built_in">window</span>.Zepto );</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;(<span class="built_in">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line"><span class="meta">	&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// your code</span></span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>jquery</tag>
+        <tag>tricks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mongoose使用中查不出定义的virtual字段</title>
+    <url>/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/</url>
+    <content><![CDATA[<p>定义了指定为virtual属性的post_count字段统计文章数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
+<blockquote>
+<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
+</blockquote>
+<p>需要对Schama做下面的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>mongoose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux中clash安装</title>
+    <url>/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>下载地址<a href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+
+<p>创建clash目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>复制文件到<code>clash</code>目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
+
+<p>进入<code>clash</code>目录下载配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动<code>class</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
+
+<p>打开<a href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
+<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>js防抖和节流</title>
+    <url>/2020/02/10/frontend/js%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/</url>
+    <content><![CDATA[<p>防抖和节流在前端性能优化中很常用，防抖和节流都是对一段时间内事件触发函数执行频率的控制；使用场景就是当频繁事件时怎样去处理函数执行。</p>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>在限定时间内，如果事件再次触发，丢弃当前已响应的函数执行，以当前事件响应函数重新计时</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.debounce = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, immediate</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params">context, args</span>) </span>&#123;</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">     <span class="keyword">if</span> (args) result = func.apply(context, args);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> debounced = restArguments(<span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">       <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">       timeout = <span class="built_in">setTimeout</span>(later, wait);</span><br><span class="line">       <span class="keyword">if</span> (callNow) result = func.apply(<span class="built_in">this</span>, args);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       timeout = _.delay(later, wait, <span class="built_in">this</span>, args);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> result;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   debounced.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> debounced;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>在限定时间内，如果事件再次触发，忽略事件响应，当到达时间后函数执行后再开始事件响应</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.throttle = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout, context, args, result;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (!options) options = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      previous = options.leading === <span class="literal">false</span> ? <span class="number">0</span> : _.now();</span><br><span class="line">      timeout = <span class="literal">null</span>;</span><br><span class="line">      result = func.apply(context, args);</span><br><span class="line">      <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> throttled = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> now = _.now();</span><br><span class="line">      <span class="keyword">if</span> (!previous &amp;&amp; options.leading === <span class="literal">false</span>) previous = now;</span><br><span class="line">      <span class="keyword">var</span> remaining = wait - (now - previous);</span><br><span class="line">      context = <span class="built_in">this</span>;</span><br><span class="line">      args = <span class="built_in">arguments</span>;</span><br><span class="line">      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span> || remaining &gt; wait) &#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout) &#123;</span><br><span class="line">          <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">          timeout = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        previous = now;</span><br><span class="line">        result = func.apply(context, args);</span><br><span class="line">        <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout &amp;&amp; options.trailing !== <span class="literal">false</span>) &#123;</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(later, remaining);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    throttled.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">      previous = <span class="number">0</span>;</span><br><span class="line">      timeout = context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> throttled;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
   </entry>
   <entry>
     <title>深入理解JS执行细节</title>
@@ -443,81 +878,23 @@ $input.on('change', function(){
       </categories>
   </entry>
   <entry>
-    <title>让jquery插件支持AMD和CMD规范</title>
-    <url>/2015/03/28/frontend/%E8%AE%A9jquery%E6%8F%92%E4%BB%B6%E6%94%AF%E6%8C%81AMD%E5%92%8CCMD%E8%A7%84%E8%8C%83/</url>
-    <content><![CDATA[<p>jquery插件支持AMD和CMD规范的改造：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">;<span class="function"><span class="keyword">function</span>(<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line"><span class="meta">	 &quot;use strict&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; (define.amd || define.cmd)) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// register as anon module</span></span><br><span class="line">		define([<span class="string">&#x27;jquery&#x27;</span>], factory);</span><br><span class="line"></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// invoke directly</span></span><br><span class="line">		factory( (<span class="keyword">typeof</span>(jQuery) != <span class="string">&#x27;undefined&#x27;</span>) ? jQuery : <span class="built_in">window</span>.Zepto );</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;(<span class="built_in">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line"><span class="meta">	&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// your code</span></span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>jquery</tag>
-        <tag>tricks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何关闭微信内置浏览器</title>
-    <url>/2015/12/28/frontend/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8/</url>
-    <content><![CDATA[<p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</span><br><span class="line">        wx.closeWindow();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">        WeixinJSBridge.call(<span class="string">&#x27;closeWindow&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-      </categories>
-      <tags>
-        <tag>tricks</tag>
-        <tag>wechat</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>laravel处理跨域请求</title>
-    <url>/2016/05/29/php/laravel%E5%A4%84%E7%90%86%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</url>
-    <content><![CDATA[<p>写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。</p>
-<blockquote>
-<p>推荐使用<a href="https://github.com/dingo/api">dingo/api</a>扩展包</p>
-</blockquote>
-<h2 id="1、用laravel中间件，基于CORS"><a href="#1、用laravel中间件，基于CORS" class="headerlink" title="1、用laravel中间件，基于CORS"></a>1、用laravel中间件，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">CORS</a></h2><p>创建中间件CrossDomainMiddleware.php，代码如下：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrossDomainMiddleware</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"><span class="variable">$request</span>, <span class="built_in">Closure</span> <span class="variable">$next</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;         </span><br><span class="line">        <span class="variable">$response</span> =  <span class="variable">$next</span>(<span class="variable">$request</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Origin, Content-Type, Cookie, Accept&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;GET, POST, PATCH, PUT, OPTIONS&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$response</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>minikube安装</title>
+    <url>/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<span id="more"></span>
+<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
 
-<p>在Kernel.php中注册中间件：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s global HTTP middleware stack.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware are run during every request to your application.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middleware</span> = [</span><br><span class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware groups.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middlewareGroups</span> = [</span><br><span class="line">        <span class="string">&#x27;web&#x27;</span> =&gt; [</span><br><span class="line">            \App\Http\Middleware\EncryptCookies::class,</span><br><span class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</span><br><span class="line">            \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">&#x27;api&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;throttle:60,1&#x27;</span>,</span><br><span class="line">            \App\Http\Middleware\CrossDomainMiddleware::class,        </span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware may be assigned to groups or used individually.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$routeMiddleware</span> = [</span><br><span class="line">        <span class="string">&#x27;auth&#x27;</span> =&gt; \App\Http\Middleware\Authenticate::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic&#x27;</span> =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic.once&#x27;</span> =&gt; \App\Http\Middleware\AuthenticateOnceWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;guest&#x27;</span> =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</span><br><span class="line">        <span class="string">&#x27;throttle&#x27;</span> =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,     </span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing"><a href="#2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="2、在nginx.conf中配置，基于w3c-Cross-Origin Resource Sharing"></a>2、在nginx.conf中配置，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">w3c-Cross-Origin Resource Sharing</a></h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">http</span> &#123;</span><br><span class="line">  <span class="string">......</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Origin</span> <span class="string">*;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Headers</span> <span class="string">X-Requested-With;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Methods</span> <span class="string">GET</span>,<span class="string">POST</span>,<span class="string">OPTIONS;</span></span><br><span class="line">  <span class="string">......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
 
-<h2 id="3、nginx的反向代理"><a href="#3、nginx的反向代理" class="headerlink" title="3、nginx的反向代理"></a>3、nginx的反向代理</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">upstream</span> <span class="string">serve</span> &#123;</span><br><span class="line">    <span class="string">server</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:3000;</span>    </span><br><span class="line">    <span class="string">keepalive</span> <span class="number">64</span><span class="string">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="string">listen</span> <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span> <span class="string">$remote_addr;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-For</span> <span class="string">$proxy_add_x_forwarded_for;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Host</span>  <span class="string">$http_host;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Nginx-Proxy</span> <span class="literal">true</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Connection</span> <span class="string">&quot;&quot;</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_pass</span>      <span class="string">http://serve;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>php</category>
-      </categories>
-      <tags>
-        <tag>laravel</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux中clash安装</title>
-    <url>/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>下载地址<a href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+<p>解决方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
 
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
 
-<p>创建clash目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>复制文件到<code>clash</code>目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
-
-<p>进入<code>clash</code>目录下载配置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>启动<code>class</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
-
-<p>打开<a href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
-<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
 ]]></content>
       <categories>
         <category>软件</category>
@@ -553,18 +930,91 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>模拟器运行instantRunSplitApkResourcesDebug报错</title>
-    <url>/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
-<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
-<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
+    <title>laravel处理跨域请求</title>
+    <url>/2016/05/29/php/laravel%E5%A4%84%E7%90%86%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</url>
+    <content><![CDATA[<p>写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。</p>
+<blockquote>
+<p>推荐使用<a href="https://github.com/dingo/api">dingo/api</a>扩展包</p>
+</blockquote>
+<h2 id="1、用laravel中间件，基于CORS"><a href="#1、用laravel中间件，基于CORS" class="headerlink" title="1、用laravel中间件，基于CORS"></a>1、用laravel中间件，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">CORS</a></h2><p>创建中间件CrossDomainMiddleware.php，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrossDomainMiddleware</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"><span class="variable">$request</span>, <span class="built_in">Closure</span> <span class="variable">$next</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;         </span><br><span class="line">        <span class="variable">$response</span> =  <span class="variable">$next</span>(<span class="variable">$request</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Origin, Content-Type, Cookie, Accept&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;GET, POST, PATCH, PUT, OPTIONS&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$response</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>在Kernel.php中注册中间件：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s global HTTP middleware stack.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware are run during every request to your application.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middleware</span> = [</span><br><span class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware groups.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middlewareGroups</span> = [</span><br><span class="line">        <span class="string">&#x27;web&#x27;</span> =&gt; [</span><br><span class="line">            \App\Http\Middleware\EncryptCookies::class,</span><br><span class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</span><br><span class="line">            \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">&#x27;api&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;throttle:60,1&#x27;</span>,</span><br><span class="line">            \App\Http\Middleware\CrossDomainMiddleware::class,        </span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware may be assigned to groups or used individually.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$routeMiddleware</span> = [</span><br><span class="line">        <span class="string">&#x27;auth&#x27;</span> =&gt; \App\Http\Middleware\Authenticate::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic&#x27;</span> =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic.once&#x27;</span> =&gt; \App\Http\Middleware\AuthenticateOnceWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;guest&#x27;</span> =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</span><br><span class="line">        <span class="string">&#x27;throttle&#x27;</span> =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,     </span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing"><a href="#2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="2、在nginx.conf中配置，基于w3c-Cross-Origin Resource Sharing"></a>2、在nginx.conf中配置，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">w3c-Cross-Origin Resource Sharing</a></h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">http</span> &#123;</span><br><span class="line">  <span class="string">......</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Origin</span> <span class="string">*;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Headers</span> <span class="string">X-Requested-With;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Methods</span> <span class="string">GET</span>,<span class="string">POST</span>,<span class="string">OPTIONS;</span></span><br><span class="line">  <span class="string">......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、nginx的反向代理"><a href="#3、nginx的反向代理" class="headerlink" title="3、nginx的反向代理"></a>3、nginx的反向代理</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">upstream</span> <span class="string">serve</span> &#123;</span><br><span class="line">    <span class="string">server</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:3000;</span>    </span><br><span class="line">    <span class="string">keepalive</span> <span class="number">64</span><span class="string">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="string">listen</span> <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span> <span class="string">$remote_addr;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-For</span> <span class="string">$proxy_add_x_forwarded_for;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Host</span>  <span class="string">$http_host;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Nginx-Proxy</span> <span class="literal">true</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Connection</span> <span class="string">&quot;&quot;</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_pass</span>      <span class="string">http://serve;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>移动开发</category>
-        <category>android</category>
+        <category>php</category>
       </categories>
       <tags>
-        <tag>app</tag>
+        <tag>laravel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>显示上传到laravel的storage目录中的图片</title>
+    <url>/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/</url>
+    <content><![CDATA[<p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
+<h2 id="访问storage下任意图片"><a href="#访问storage下任意图片" class="headerlink" title="访问storage下任意图片"></a>访问storage下任意图片</h2><p>如果图片不是放在<code>storage</code>公共磁盘中，可以定义一个用于访问图片的路由，如下：</p>
+<p>routes/web.php定义路由：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// file manager</span></span><br><span class="line">Route::group([<span class="string">&#x27;prefix&#x27;</span> =&gt; <span class="string">&#x27;filemanager&#x27;</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    Route::get(<span class="string">&#x27;show&#x27;</span>, <span class="string">&#x27;FileManageController@get&#x27;</span>)-&gt;name(<span class="string">&#x27;filemanager.show&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>FileManageController.php中定义action：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> Request $request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">Request <span class="variable">$request</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">    <span class="variable">$filename</span> = <span class="variable">$request</span>-&gt;get(<span class="string">&#x27;filename&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="variable">$file</span> = Storage::get(<span class="variable">$filename</span>);</span><br><span class="line">    <span class="keyword">return</span> response(<span class="variable">$file</span>, <span class="number">200</span>)-&gt;header(<span class="string">&#x27;Content-Type&#x27;</span>, Storage::mimeType(<span class="variable">$filename</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>view里的图片：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;route(&#x27;filemanager.show&#x27;,[&#x27;filename&#x27;=&gt;$image[&#x27;name&#x27;]])&#125;&#125;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="公共磁盘图片访问"><a href="#公共磁盘图片访问" class="headerlink" title="公共磁盘图片访问"></a>公共磁盘图片访问</h2><p>public 磁盘用于存储可以被公开访问的文件，默认情况下， public 磁盘使用 local 驱动并将文件存储在<code>storage/app/public</code> ，要让这些文件可以通过web访问到，需要创建一个软链 <code>public/storage</code> 指向 <code>storage/app/public</code> 。</p>
+<p>创建这个软链，可以使用Artisan命令 storage:link ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">php artisan storage:link</span><br></pre></td></tr></table></figure>
+
+<p>图片被存储并且软链已经被创建的情况下，就可以使用辅助函数<code>asset</code>创建一个指向该图片的URL：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;asset(&#x27;storage/picture.png&#x27;)&#125;&#125;&quot;</span>&gt;</span>;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>laravel</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>php函数array_chunk的妙用</title>
+    <url>/2014/12/27/php/php%E5%87%BD%E6%95%B0array_chunk%E7%9A%84%E5%A6%99%E7%94%A8/</url>
+    <content><![CDATA[<p>如果你想输出这么一个列表你会怎么做呢？</p>
+<p>数据：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最终结果：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Volvo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>BMW<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Toyota<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Honda<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Mercedes<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Opel<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>以前我一直这样做：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$cars</span> <span class="keyword">as</span> <span class="variable">$index</span>=&gt;<span class="variable">$car</span>)&#123;	</span><br><span class="line">	<span class="variable">$the_br</span> = (<span class="variable">$index</span> + <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">&#x27;&lt;br&gt;&#x27;</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span> . <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span> . <span class="variable">$the_br</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>一直在纠纷里面那个判断，使用array_chunk()函数就不在费脑细胞了。array_chunk()版本：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(array_chunk(<span class="variable">$cars</span>, <span class="number">2</span>) <span class="keyword">as</span> <span class="variable">$split_car</span>)&#123;</span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$split_car</span> <span class="keyword">as</span> <span class="variable">$car</span>)&#123;</span><br><span class="line">		<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span>. <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="array-chunk函数介绍"><a href="#array-chunk函数介绍" class="headerlink" title="array_chunk函数介绍"></a>array_chunk函数介绍</h2><p>array_chunk() 函数把数组分割为新的数组块。语法：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">array_chunk(<span class="keyword">array</span>, size, preserve_key);</span><br></pre></td></tr></table></figure>
+
+<p>其中每个数组的单元数目由 size 参数决定。最后一个数组的单元数目可能会少几个。</p>
+<p>可选参数 preserve_key 是一个布尔值，它指定新数组的元素是否有和原数组相同的键（用于关联数组），还是从 0 开始的新数字键（用于索引数组）。默认是分配新的键。</p>
+<p>例子：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line">print_r(array_chunk(<span class="variable">$cars</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">   [0] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Volvo</span></span><br><span class="line"><span class="comment">           [1] =&gt; BMW</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [1] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Toyota</span></span><br><span class="line"><span class="comment">           [1] =&gt; Honda</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [2] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Mercedes</span></span><br><span class="line"><span class="comment">           [1] =&gt; Opel</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">)*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>tricks</tag>
       </tags>
   </entry>
   <entry>
@@ -605,461 +1055,19 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>minikube安装</title>
-    <url>/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Apache的访问权限配置</title>
-    <url>/2015/03/03/develop/Apache%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
-<pre><code>################################################ 
-2.2上的配置 
-Order deny,allow 
-Deny from all 
- 
-2.4上的配置 
-Require all denied 
- 
-################################################ 
-2.2上的配置 
-Order allow,deny 
-Allow from all 
- 
-2.4上的配置 
-Require all granted 
- 
-################################################# 
-</code></pre>
-<span id="more"></span>
-
-<p>下面给出了几个例子在2.4版本上的配置</p>
-<p>1、仅允许IP为192.168.1.1的主机访问</p>
-<pre><code>require all  granted 
-require ip 192.168.1.1 
-</code></pre>
-<p>2、仅允许192.168.0.0/24网络的主机访问</p>
-<pre><code>require all  granted  
-require ip 192.168.1.0/24 
-</code></pre>
-<p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
-<pre><code>require all  granted 
-require not ip 192.168.1.2 
-</code></pre>
-<p>4、允许所有访问,</p>
-<pre><code>require all  granted
- 
-</code></pre>
-<p>5、拒绝所有访问,</p>
-<pre><code>require all  denied 
-</code></pre>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>php函数array_chunk的妙用</title>
-    <url>/2014/12/27/php/php%E5%87%BD%E6%95%B0array_chunk%E7%9A%84%E5%A6%99%E7%94%A8/</url>
-    <content><![CDATA[<p>如果你想输出这么一个列表你会怎么做呢？</p>
-<p>数据：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>最终结果：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Volvo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>BMW<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Toyota<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Honda<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Mercedes<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Opel<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>以前我一直这样做：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$cars</span> <span class="keyword">as</span> <span class="variable">$index</span>=&gt;<span class="variable">$car</span>)&#123;	</span><br><span class="line">	<span class="variable">$the_br</span> = (<span class="variable">$index</span> + <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">&#x27;&lt;br&gt;&#x27;</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span> . <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span> . <span class="variable">$the_br</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>一直在纠纷里面那个判断，使用array_chunk()函数就不在费脑细胞了。array_chunk()版本：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(array_chunk(<span class="variable">$cars</span>, <span class="number">2</span>) <span class="keyword">as</span> <span class="variable">$split_car</span>)&#123;</span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$split_car</span> <span class="keyword">as</span> <span class="variable">$car</span>)&#123;</span><br><span class="line">		<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span>. <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="array-chunk函数介绍"><a href="#array-chunk函数介绍" class="headerlink" title="array_chunk函数介绍"></a>array_chunk函数介绍</h2><p>array_chunk() 函数把数组分割为新的数组块。语法：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">array_chunk(<span class="keyword">array</span>, size, preserve_key);</span><br></pre></td></tr></table></figure>
-
-<p>其中每个数组的单元数目由 size 参数决定。最后一个数组的单元数目可能会少几个。</p>
-<p>可选参数 preserve_key 是一个布尔值，它指定新数组的元素是否有和原数组相同的键（用于关联数组），还是从 0 开始的新数字键（用于索引数组）。默认是分配新的键。</p>
-<p>例子：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line">print_r(array_chunk(<span class="variable">$cars</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">   [0] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Volvo</span></span><br><span class="line"><span class="comment">           [1] =&gt; BMW</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [1] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Toyota</span></span><br><span class="line"><span class="comment">           [1] =&gt; Honda</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [2] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Mercedes</span></span><br><span class="line"><span class="comment">           [1] =&gt; Opel</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">)*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>php</category>
-      </categories>
-      <tags>
-        <tag>tricks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>github多帐号添加ssh公钥</title>
-    <url>/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/</url>
-    <content><![CDATA[<p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
-<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
-
-<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>3、输入密码，不用设置，一路回车到完成，生成的文件为：<code>/Users/you/.ssh/id_rsa1</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Enter passphrase (empty <span class="keyword">for</span> no passphrase):</span><br><span class="line">Enter same passphrase again: </span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:HlteuP6zblxHGjEFh9hLohazijWnxO/aJx0zimpy0lY your_email@example.com</span><br><span class="line">The key<span class="string">&#x27;s randomart image is:</span></span><br><span class="line"><span class="string">+---[RSA 2048]----+</span></span><br><span class="line"><span class="string">|              ++.|</span></span><br><span class="line"><span class="string">|           o oo+.|</span></span><br><span class="line"><span class="string">|        .   = ooo|</span></span><br><span class="line"><span class="string">|         = *  ...|</span></span><br><span class="line"><span class="string">|        S X .  + |</span></span><br><span class="line"><span class="string">|       o E + +o .|</span></span><br><span class="line"><span class="string">|      . + =.o.+. |</span></span><br><span class="line"><span class="string">|     o = o =+o   |</span></span><br><span class="line"><span class="string">|      *.. o=Bo   |</span></span><br><span class="line"><span class="string">+----[SHA256]-----+</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="生成的ssh公钥添加到github"><a href="#生成的ssh公钥添加到github" class="headerlink" title="生成的ssh公钥添加到github"></a>生成的ssh公钥添加到github</h2><p>复制出生成的ssh公钥</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pbcopy &lt; /Users/you/.ssh/id_rsa1.pub</span><br></pre></td></tr></table></figure>
-
-<p>github网站setting的SSH and GPG keys新建一个key粘进去</p>
-<h2 id="ssh-config文件里添加一个host"><a href="#ssh-config文件里添加一个host" class="headerlink" title="ssh config文件里添加一个host"></a>ssh config文件里添加一个host</h2><p>ssh目录没config文件，新建一个</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Host github1</span><br><span class="line">  HostName github.com</span><br><span class="line">  User git</span><br><span class="line">  IdentityFile ~/.ssh/id_rsa1</span><br></pre></td></tr></table></figure>
-
-<h2 id="修改仓库地址"><a href="#修改仓库地址" class="headerlink" title="修改仓库地址"></a>修改仓库地址</h2><p>第二个账号的git地址中<code>git@github.com</code>都改为<code>github1</code>，如：<code>git@github.com:you/your-repo.git</code>变为<code>github1:you/your-repo.git</code></p>
-<p>添加仓库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin github1:you/your-repo.git</span><br></pre></td></tr></table></figure>
-
-<p>修改仓库地址</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote set-url origin github1:you/your-repo.git</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mongoose使用中查不出定义的virtual字段</title>
-    <url>/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/</url>
-    <content><![CDATA[<p>定义了指定为virtual属性的post_count字段统计文章数</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
+    <title>src和href的区别</title>
+    <url>/2014/11/05/frontend/html/src%E5%92%8Chref%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
+<p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
+<p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
 <blockquote>
-<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
-</blockquote>
-<p>需要对Schama做下面的配置：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>mongoose</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo自定义404页面</title>
-    <url>/2015/12/26/develop/hexo%E8%87%AA%E5%AE%9A%E4%B9%89404%E9%A1%B5%E9%9D%A2/</url>
-    <content><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
-<span id="more"></span>
-
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
-<ul>
-<li>优点：基于主题的，简单，直接了当</li>
-<li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
-</ul>
-<p>如404页面为腾讯公益404页面。代码如下：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="attr">homePageUrl</span>=<span class="string">&quot;http://yourdomain.com&quot;</span> <span class="attr">homePageName</span>=<span class="string">&quot;回到主页&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>在项目source目录为生成一个404/index.md的页面，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>测试一下，运行<code>hexo s</code>，打开<a href="http://localhost:4000/404/">http://localhost:4000/404/</a>看能否浏览，修改一下404.md：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>修改这后404页面的链接变成了<a href="http://localhost:4000/404.html">http://localhost:4000/404.html</a>，这样链接是正确了，但是页面用的是page的布局，怎么才能自定义？</p>
-<blockquote>
-<p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid #ddd&quot;</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: 404</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
-<blockquote>
-<p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;%if(page.layout==&#x27;404&#x27;)&#123;%&gt;</span><br><span class="line">	&lt;%- partial(&#x27;_partial/404&#x27;) %&gt;</span><br><span class="line">&lt;%&#125;else&#123;%&gt;</span><br><span class="line">&lt;%- body %&gt;</span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
-]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在shell中执行一个字符串</title>
-    <url>/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
-    <content><![CDATA[<p>写shell脚本时经常会拼接一个字串,然后当成命令执行，用到的linux命令是<code>eval $&#123;str&#125;</code>或者<code>echo $&#123;str&#125; | sh</code>，例子如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">start=1</span><br><span class="line">amount=<span class="variable">$1</span></span><br><span class="line">raceId=<span class="variable">$2</span></span><br><span class="line">api_host=127.0.0.1:8080</span><br><span class="line">str=<span class="string">&quot;curl --location --request POST &#x27;http://<span class="variable">$&#123;api_host&#125;</span>/api/AddBuy&#x27;</span></span><br><span class="line"><span class="string">--header \&quot;&#x27;Content-Type&#x27;:&#x27;application/json&#x27;\&quot;</span></span><br><span class="line"><span class="string">--data-raw &#x27;&#123;</span></span><br><span class="line"><span class="string">    \&quot;PidStart\&quot;:<span class="variable">$start</span>,</span></span><br><span class="line"><span class="string">    \&quot;Amount\&quot;:<span class="variable">$&#123;amount&#125;</span>,</span></span><br><span class="line"><span class="string">    \&quot;RaceId\&quot;:<span class="variable">$&#123;raceId&#125;</span></span></span><br><span class="line"><span class="string">&#125;&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str&#125;</span> | sh</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">eval</span> <span class="variable">$&#123;str&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>markdown语法</title>
-    <url>/2015/11/26/develop/markdown%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<blockquote>
-<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h3><p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行。</p>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 这是 H1</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 这是 H2</span></span><br><span class="line"></span><br><span class="line"><span class="section">###### 这是 H6</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="区块引用-Blockquotes"><a href="#区块引用-Blockquotes" class="headerlink" title="区块引用 Blockquotes"></a>区块引用 Blockquotes</h3><p>Markdown 标记区块引用是使用类似 email 中用 &gt; 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 &gt; ：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line"><span class="quote">&gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span></span><br><span class="line"><span class="quote">&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span></span><br><span class="line"><span class="quote">&gt; </span></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line"><span class="quote">&gt; id sem consectetuer libero luctus adipiscing.</span></span><br></pre></td></tr></table></figure>
-
-<p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 &gt; ：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line">consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span><br><span class="line">Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line">id sem consectetuer libero luctus adipiscing.</span><br></pre></td></tr></table></figure>
-
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Markdown 支持有序列表和无序列表。</p>
-<p>无序列表使用星号、加号或是减号作为列表标记：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*   Red</span><br><span class="line">*   Green</span><br><span class="line">*   Blue</span><br></pre></td></tr></table></figure>
-
-<p>有序列表则使用数字接着一个英文句点：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.  Bird</span><br><span class="line">2.  McHale</span><br><span class="line">3.  Parish</span><br></pre></td></tr></table></figure>
-
-<h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <pre> 和 <code> 标签来把代码区块包起来。</p>
-<p>要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这是一个普通段落：</span><br><span class="line"></span><br><span class="line">    这是一个代码区块。</span><br></pre></td></tr></table></figure>
-
-<p>Markdown 会转换成：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;这是一个普通段落：&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;&lt;code&gt;这是一个代码区块。</span><br><span class="line">&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
-
-<p>别一种方式用三个反引号包起：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line">var foo = 1;	</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">同时可以指定语言：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span>;	</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 分隔线</span><br><span class="line"></span><br><span class="line">你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 链接</span><br><span class="line"></span><br><span class="line">Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。</span><br><span class="line"></span><br><span class="line">不管是哪一种，链接文字都是用 [方括号] 来标记。</span><br><span class="line"></span><br><span class="line">要建立一个行内式的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This is <a href="http://example.com/" title="Title">an example</a> inline link.</p>
-<p><a href="http://example.net/">This link</a> has no title attribute.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This is <a href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 强调</span><br><span class="line"></span><br><span class="line">Markdown 使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 &lt;em&gt; 标签包围，用两个 * 或 _ 包起来的话，则会被转成 &lt;strong&gt;，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><em>single asterisks</em></p>
-<p><em>single underscores</em></p>
-<p><strong>double asterisks</strong></p>
-<p><strong>double underscores</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 代码</span><br><span class="line"></span><br><span class="line">如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Use the <code>printf()</code> function.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 图片</span><br><span class="line"></span><br><span class="line">很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</span><br><span class="line"></span><br><span class="line">Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。</span><br><span class="line"></span><br><span class="line">行内式的图片语法看起来像是：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="/path/to/img.jpg" alt="Alt text"></p>
-<p><img src="/path/to/img.jpg" alt="Alt text" title="Optional title"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的图片语法则长得像这样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="http://example.com/" alt="Alt text" title="Optional Title Here"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<pre><code>
-</code></pre>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>把github作为静态资源cdn</title>
-    <url>/2015/05/27/develop/%E6%8A%8Agithub%E4%BD%9C%E4%B8%BA%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90cdn/</url>
-    <content><![CDATA[<p>博客是用hexo搭建的，没有上传图片的功能，于是想把图片都放github上。需要图片的时候<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>这样就可以插入了。</p>
-<p>在github上创建仓库，名字自己取，以我自己的为例，仓库为static_cdn，克隆到本地：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 克隆</span></span><br><span class="line">$ git <span class="built_in">clone</span> git@github.com:liukaijv/static_cdn.git</span><br><span class="line"><span class="comment"># 打开目录</span></span><br><span class="line">$ <span class="built_in">cd</span> static_cdn</span><br><span class="line"><span class="comment"># 新建images文件夹</span></span><br><span class="line">$ mikdir images</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>添加图片avatar_large.jpg到images文件夹，然后push到github。登录github网站，添加的图片链接为<code>https://github.com/liukaijv/static_cdn/blob/master/images/avatar_large.jpg</code>。把链接中的<strong>blob</strong>改成<strong>raw</strong>就可以显示图片了。如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">![](https://github.com/liukaijv/static_cdn/raw/master/images/avatar_large.jpg)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://github.com/liukaijv/static_cdn/raw/master/images/avatar_large.jpg" alt="我是放在github上的图片" title="我是放在github上的图片"></p>
-<hr>
-<p>github 静态资源链接是这样子的：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">http://github.com/yourname/your-repository/raw/master/the-folder/xxx.xxx</span><br><span class="line"></span><br><span class="line"># 说明一下</span><br><span class="line">yourname         --- 你的帐号</span><br><span class="line">your-respository --- 你的 project 名</span><br><span class="line">images-folder    --- 你存放资源的文件夹，如果是直接放在 project 的项目根目录的話，就可以省略這個</span><br><span class="line">xxx.xxx          --- 你的资源名</span><br></pre></td></tr></table></figure>
-
-<p>不光可以是图片，其它的也是，如<a href="https://github.com/liukaijv/static_cdn/raw/master/LICENSE">LICENSE文件</a>、<a href="https://github.com/liukaijv/static_cdn/raw/master/images/avatar_large.jpg">图片</a>等等。</p>
-<blockquote>
-<p>github是服务器在国外，访问慢，可以选择放七牛。<br>教程在<a href="http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/">http://blog.shiqichan.com/use-qiniu-store-image-for-hexo/</a></p>
+<p>href是与资源建立关系，src是用资源替换到当前位置</p>
 </blockquote>
 ]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>显示上传到laravel的storage目录中的图片</title>
-    <url>/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/</url>
-    <content><![CDATA[<p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
-<h2 id="访问storage下任意图片"><a href="#访问storage下任意图片" class="headerlink" title="访问storage下任意图片"></a>访问storage下任意图片</h2><p>如果图片不是放在<code>storage</code>公共磁盘中，可以定义一个用于访问图片的路由，如下：</p>
-<p>routes/web.php定义路由：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">// file manager</span></span><br><span class="line">Route::group([<span class="string">&#x27;prefix&#x27;</span> =&gt; <span class="string">&#x27;filemanager&#x27;</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    Route::get(<span class="string">&#x27;show&#x27;</span>, <span class="string">&#x27;FileManageController@get&#x27;</span>)-&gt;name(<span class="string">&#x27;filemanager.show&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>FileManageController.php中定义action：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> Request $request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">Request <span class="variable">$request</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">    <span class="variable">$filename</span> = <span class="variable">$request</span>-&gt;get(<span class="string">&#x27;filename&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="variable">$file</span> = Storage::get(<span class="variable">$filename</span>);</span><br><span class="line">    <span class="keyword">return</span> response(<span class="variable">$file</span>, <span class="number">200</span>)-&gt;header(<span class="string">&#x27;Content-Type&#x27;</span>, Storage::mimeType(<span class="variable">$filename</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>view里的图片：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;route(&#x27;filemanager.show&#x27;,[&#x27;filename&#x27;=&gt;$image[&#x27;name&#x27;]])&#125;&#125;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="公共磁盘图片访问"><a href="#公共磁盘图片访问" class="headerlink" title="公共磁盘图片访问"></a>公共磁盘图片访问</h2><p>public 磁盘用于存储可以被公开访问的文件，默认情况下， public 磁盘使用 local 驱动并将文件存储在<code>storage/app/public</code> ，要让这些文件可以通过web访问到，需要创建一个软链 <code>public/storage</code> 指向 <code>storage/app/public</code> 。</p>
-<p>创建这个软链，可以使用Artisan命令 storage:link ：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">php artisan storage:link</span><br></pre></td></tr></table></figure>
-
-<p>图片被存储并且软链已经被创建的情况下，就可以使用辅助函数<code>asset</code>创建一个指向该图片的URL：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;asset(&#x27;storage/picture.png&#x27;)&#125;&#125;&quot;</span>&gt;</span>;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>php</category>
-      </categories>
-      <tags>
-        <tag>laravel</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo的md文件中使用html、css、javascript</title>
-    <url>/2015/03/28/develop/hexo%E7%9A%84md%E6%96%87%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8html/</url>
-    <content><![CDATA[<p>有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。</p>
-<span id="more"></span>
-
-<h2 id="开始折腾"><a href="#开始折腾" class="headerlink" title="开始折腾"></a>开始折腾</h2><h3 id="1、直接插入"><a href="#1、直接插入" class="headerlink" title="1、直接插入"></a>1、直接插入</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.styled-div</span>&#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;styled-div&quot;</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="built_in">console</span>.log(<span class="string">&#x27;我是md是的javascript&#x27;</span>);</span></span><br><span class="line"><span class="javascript">	&#125;)();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<style>
-.styled-div{
-    width: 100px;
-    height: 100px;
-    background: yellow;
-}
-</style>
-<div class="styled-div">我是div</div>
-
-<p>html和javascript成功了，但是style没有成功……。</p>
-<h3 id="2、把css放到行内"><a href="#2、把css放到行内" class="headerlink" title="2、把css放到行内"></a>2、把css放到行内</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;width: 100px;height: 100px;background: yellow;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<div style="width: 100px;height: 100px;background: yellow;">我是div</div>
-
-
-<p>样式放在行内是可以的。怎么让放在style里的样式也有效呢？</p>
-<h3 id="3、使用raw"><a href="#3、使用raw" class="headerlink" title="3、使用raw:"></a>3、使用raw:</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.styled-div1</span>&#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;styled-div-other&quot;</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
-
-
-<style>
-.styled-div-other{
-	width: 100px;
-	height: 100px;
-	background: yellow;
-}
-</style>
-<div class="styled-div-other">我是div</div>
-
-
-<p>style里的样式有效了</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><blockquote>
-<p>html，js，css 都应该写在raw标签里。</p>
-</blockquote>
-<p>方法一、二中，好像是直接在md里写html和javascript都行，但当这篇文章写到第三种方法的时候，js报错了，并且页面布局也有点乱。用web开发都工具看了下，<code>&lt;div class=&quot;styled-div&quot;&gt;我是div&lt;/div&gt;</code>和<code>&lt;script&gt;&lt;/script&gt;</code>中都生成了很多’<br>‘标签。</p>
-<p>所以要在md中杂点其它东西。放在raw标签里才是正确的：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"># 正文</span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.styled-div-right</span>&#123;</span></span><br><span class="line"><span class="css">	<span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">height</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="css">	<span class="attribute">background</span>: yellow;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;styled-div-right&quot;</span>&gt;</span>我是div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">	(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="built_in">console</span>.log(<span class="string">&#x27;我才是正确的md里的javascript&#x27;</span>);</span></span><br><span class="line"><span class="javascript">	&#125;)();</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
-
-<style>
-.styled-div-right{
-	width: 100px;
-	height: 100px;
-	background: yellow;
-}
-</style>
-<div class="styled-div-right">我是正确的</div>
-<script>
-	(function(){
-		console.log('我才是正确的md里的javascript');
-	})();
-</script>
-
-
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在markdown里写html的东西有点不合理，取决于各自吧。介绍下另外两种方式：</p>
-<ul>
-<li>在source文件下创建单独html页面</li>
-<li>内嵌第三方的演示平台代码，jsfiddle、codepen都是很不错的选择。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>a标签伪类顺序</title>
-    <url>/2014/12/29/frontend/css/a%E6%A0%87%E7%AD%BE%E4%BC%AA%E7%B1%BB%E9%A1%BA%E5%BA%8F/</url>
-    <content><![CDATA[<p>a标签的link、visited、hover、active通常的顺序为：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端开发</category>
-        <category>css</category>
+        <category>html</category>
       </categories>
-  </entry>
-  <entry>
-    <title>同时使用flex、white-space和overflow的bug</title>
-    <url>/2016/01/28/frontend/css/%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8flex%E5%92%8Cwhite-space%E5%92%8Coverflow%E7%9A%84bug/</url>
-    <content><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br></pre></td></tr></table></figure>
-
-<p>解决办法：再加上min-width: 0属性。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"><span class="attribute">min-width</span>:<span class="number">0</span>;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>flex</tag>
-      </tags>
   </entry>
   <entry>
     <title>触发display为none元素的动画效果</title>
@@ -1193,6 +1201,22 @@ $('#modal3').on('transitionend', function (e) {
       </tags>
   </entry>
   <entry>
+    <title>同时使用flex、white-space和overflow的bug</title>
+    <url>/2016/01/28/frontend/css/%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8flex%E5%92%8Cwhite-space%E5%92%8Coverflow%E7%9A%84bug/</url>
+    <content><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br></pre></td></tr></table></figure>
+
+<p>解决办法：再加上min-width: 0属性。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"><span class="attribute">min-width</span>:<span class="number">0</span>;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>flex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>javascript获取浏览器视口大小</title>
     <url>/2015/01/05/frontend/html/javascript%E8%8E%B7%E5%8F%96%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%86%E5%8F%A3%E5%A4%A7%E5%B0%8F/</url>
     <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">&#x27;BackCompat&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
@@ -1205,18 +1229,13 @@ $('#modal3').on('transitionend', function (e) {
       </tags>
   </entry>
   <entry>
-    <title>src和href的区别</title>
-    <url>/2014/11/05/frontend/html/src%E5%92%8Chref%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
-<p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
-<p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
-<blockquote>
-<p>href是与资源建立关系，src是用资源替换到当前位置</p>
-</blockquote>
-]]></content>
+    <title>a标签伪类顺序</title>
+    <url>/2014/12/29/frontend/css/a%E6%A0%87%E7%AD%BE%E4%BC%AA%E7%B1%BB%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[<p>a标签的link、visited、hover、active通常的顺序为：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端开发</category>
-        <category>html</category>
+        <category>css</category>
       </categories>
   </entry>
 </search>

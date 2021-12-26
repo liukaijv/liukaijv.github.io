@@ -105,7 +105,7 @@
             
     <article class="post">
         <h2 class="post-title">
-            <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+            <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
         </h2>
         <ul class="post-meta">
     
@@ -120,7 +120,7 @@
         </li>
     
     <li>
-        发表于 <span>2021-12-19 21:18:17</span>
+        发表于 <span>2021-12-26 15:54:09</span>
     </li>
     
 </ul>
@@ -129,17 +129,14 @@
             <div class="post-thumbnail"></div>
             <div class="post-content">
                 
-                    <p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
-<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
+                    <p>远程ssh连接服务器，默认长时间不用会自动断开，设置不自动断开方式有三种</p>
+<h2 id="客户端连接加参数"><a href="#客户端连接加参数" class="headerlink" title="客户端连接加参数"></a>客户端连接加参数</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 相当于每隔120秒向服务器发送心跳</span></span><br><span class="line">ssh -o ServerAliveInterval=120 user@ip</span><br></pre></td></tr></table></figure>
 
-<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
-                    
-                        <p class="more-link">
-                            <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">查看详情&raquo;</a>
-                        </p>
-                    
+<h2 id="客户端设置配置"><a href="#客户端设置配置" class="headerlink" title="客户端设置配置"></a>客户端设置配置</h2><p>如果ssh服务器信息放<code>~/.ssh/config</code>中的，设置<code>ServerAliveInterval</code>值</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host alias </span><br><span class="line">    HostName ip</span><br><span class="line">    User root</span><br><span class="line">    ServerAliveInterval 120</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>修改<code>sshd_config</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vi vim /etc/ssh/sshd_config</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 发送心跳间隔</span></span></span><br><span class="line">ClientAliveInterval 120</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 最大发送次数</span></span></span><br><span class="line">ClientAliveCountMax 720</span><br><span class="line"></span><br></pre></td></tr></table></figure>
                 
             </div>
         </div>
@@ -199,53 +196,6 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2021-02-10 10:11:28</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
             <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
         </h2>
         <ul class="post-meta">
@@ -284,6 +234,53 @@
 <p>解决方法</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
 
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
 
 
                 
@@ -407,6 +404,48 @@
 
     <article class="post">
         <h2 class="post-title">
+            <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2018-03-03 17:46:10</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
+<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
+
+<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
+                    
+                        <p class="more-link">
+                            <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">查看详情&raquo;</a>
+                        </p>
+                    
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/">显示上传到laravel的storage目录中的图片</a>
         </h2>
         <ul class="post-meta">
@@ -497,46 +536,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">Promise和Deferred的用法对比</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2016-07-18 18:59:00</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
-                    
-                        <p class="more-link">
-                            <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -559,7 +558,7 @@
             <ul>
                 
                     <li>
-                        <a href="/2021/12/19/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+                        <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
                     </li>
                 
                     <li>
@@ -567,11 +566,11 @@
                     </li>
                 
                     <li>
-                        <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
                     </li>
                 
                     <li>
-                        <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
                     </li>
                 
                     <li>
@@ -598,7 +597,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
         </div>
     </div>
 
