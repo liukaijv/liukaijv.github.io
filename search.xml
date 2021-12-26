@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>模拟器运行instantRunSplitApkResourcesDebug报错</title>
+    <url>/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
+<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
+<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
+]]></content>
+      <categories>
+        <category>移动开发</category>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>app</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Apache的访问权限配置</title>
     <url>/2015/03/03/develop/Apache%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/</url>
     <content><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
@@ -92,52 +107,6 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>hexo自定义404页面</title>
-    <url>/2015/12/26/develop/hexo%E8%87%AA%E5%AE%9A%E4%B9%89404%E9%A1%B5%E9%9D%A2/</url>
-    <content><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
-<span id="more"></span>
-
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
-<ul>
-<li>优点：基于主题的，简单，直接了当</li>
-<li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
-</ul>
-<p>如404页面为腾讯公益404页面。代码如下：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="attr">homePageUrl</span>=<span class="string">&quot;http://yourdomain.com&quot;</span> <span class="attr">homePageName</span>=<span class="string">&quot;回到主页&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>在项目source目录为生成一个404/index.md的页面，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>测试一下，运行<code>hexo s</code>，打开<a href="http://localhost:4000/404/">http://localhost:4000/404/</a>看能否浏览，修改一下404.md：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>修改这后404页面的链接变成了<a href="http://localhost:4000/404.html">http://localhost:4000/404.html</a>，这样链接是正确了，但是页面用的是page的布局，怎么才能自定义？</p>
-<blockquote>
-<p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid #ddd&quot;</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: 404</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
-<blockquote>
-<p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;%if(page.layout==&#x27;404&#x27;)&#123;%&gt;</span><br><span class="line">	&lt;%- partial(&#x27;_partial/404&#x27;) %&gt;</span><br><span class="line">&lt;%&#125;else&#123;%&gt;</span><br><span class="line">&lt;%- body %&gt;</span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
-]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo的md文件中使用html、css、javascript</title>
     <url>/2015/03/28/develop/hexo%E7%9A%84md%E6%96%87%E4%BB%B6%E4%B8%AD%E4%BD%BF%E7%94%A8html/</url>
     <content><![CDATA[<p>有时候想写点前端小demo，因为代码量实在是太少了，几行css、几行javascript；不想放在codepen作为引用，也不想单独做一个页面放到主题的source文件夹下，于是就有了在md文件里直接写的想法。</p>
@@ -211,6 +180,52 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
+    <title>hexo自定义404页面</title>
+    <url>/2015/12/26/develop/hexo%E8%87%AA%E5%AE%9A%E4%B9%89404%E9%A1%B5%E9%9D%A2/</url>
+    <content><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
+<span id="more"></span>
+
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
+<ul>
+<li>优点：基于主题的，简单，直接了当</li>
+<li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
+</ul>
+<p>如404页面为腾讯公益404页面。代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="attr">homePageUrl</span>=<span class="string">&quot;http://yourdomain.com&quot;</span> <span class="attr">homePageName</span>=<span class="string">&quot;回到主页&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在项目source目录为生成一个404/index.md的页面，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试一下，运行<code>hexo s</code>，打开<a href="http://localhost:4000/404/">http://localhost:4000/404/</a>看能否浏览，修改一下404.md：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>修改这后404页面的链接变成了<a href="http://localhost:4000/404.html">http://localhost:4000/404.html</a>，这样链接是正确了，但是页面用的是page的布局，怎么才能自定义？</p>
+<blockquote>
+<p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid #ddd&quot;</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: 404</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
+<blockquote>
+<p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;%if(page.layout==&#x27;404&#x27;)&#123;%&gt;</span><br><span class="line">	&lt;%- partial(&#x27;_partial/404&#x27;) %&gt;</span><br><span class="line">&lt;%&#125;else&#123;%&gt;</span><br><span class="line">&lt;%- body %&gt;</span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
+]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>ssh长时间保持不断开</title>
     <url>/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/</url>
     <content><![CDATA[<p>远程ssh连接服务器，默认长时间不用会自动断开，设置不自动断开方式有三种</p>
@@ -244,21 +259,6 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>模拟器运行instantRunSplitApkResourcesDebug报错</title>
-    <url>/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
-<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
-<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
-]]></content>
-      <categories>
-        <category>移动开发</category>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>app</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>把github作为静态资源cdn</title>
     <url>/2015/05/27/develop/%E6%8A%8Agithub%E4%BD%9C%E4%B8%BA%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90cdn/</url>
     <content><![CDATA[<p>博客是用hexo搭建的，没有上传图片的功能，于是想把图片都放github上。需要图片的时候<code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code>这样就可以插入了。</p>
@@ -288,74 +288,51 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>markdown语法</title>
-    <url>/2015/11/26/develop/markdown%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<blockquote>
-<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
-</blockquote>
-<span id="more"></span>
+    <title>linux用户管理</title>
+    <url>/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>创建一个用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd username</span><br></pre></td></tr></table></figure>
 
-<h3 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h3><p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行。</p>
-<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 这是 H1</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 这是 H2</span></span><br><span class="line"></span><br><span class="line"><span class="section">###### 这是 H6</span></span><br></pre></td></tr></table></figure>
+<p>创建用户并创建用户目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -m username</span><br></pre></td></tr></table></figure>
+<p>创建用户不创建用户目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -M username</span><br></pre></td></tr></table></figure>
 
-<h3 id="区块引用-Blockquotes"><a href="#区块引用-Blockquotes" class="headerlink" title="区块引用 Blockquotes"></a>区块引用 Blockquotes</h3><p>Markdown 标记区块引用是使用类似 email 中用 &gt; 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 &gt; ：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line"><span class="quote">&gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span></span><br><span class="line"><span class="quote">&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span></span><br><span class="line"><span class="quote">&gt; </span></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line"><span class="quote">&gt; id sem consectetuer libero luctus adipiscing.</span></span><br></pre></td></tr></table></figure>
+<p>创建用户不用于登录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -s /sbin/nologin</span><br></pre></td></tr></table></figure>
 
-<p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 &gt; ：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line">consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span><br><span class="line">Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line">id sem consectetuer libero luctus adipiscing.</span><br></pre></td></tr></table></figure>
+<p>创建用户不用于登录和不创建目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -s /sbin/nologin -M username</span><br></pre></td></tr></table></figure>
 
-<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Markdown 支持有序列表和无序列表。</p>
-<p>无序列表使用星号、加号或是减号作为列表标记：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*   Red</span><br><span class="line">*   Green</span><br><span class="line">*   Blue</span><br></pre></td></tr></table></figure>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">userdel username</span><br></pre></td></tr></table></figure>
 
-<p>有序列表则使用数字接着一个英文句点：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.  Bird</span><br><span class="line">2.  McHale</span><br><span class="line">3.  Parish</span><br></pre></td></tr></table></figure>
+<p>把用户目录也删掉</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">userdel -r username</span><br></pre></td></tr></table></figure>
 
-<h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <pre> 和 <code> 标签来把代码区块包起来。</p>
-<p>要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这是一个普通段落：</span><br><span class="line"></span><br><span class="line">    这是一个代码区块。</span><br></pre></td></tr></table></figure>
+<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">passwd username</span><br></pre></td></tr></table></figure>
 
-<p>Markdown 会转换成：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;这是一个普通段落：&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;&lt;code&gt;这是一个代码区块。</span><br><span class="line">&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><p>创建组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">groupadd groupname</span><br></pre></td></tr></table></figure>
 
-<p>别一种方式用三个反引号包起：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line">var foo = 1;	</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">同时可以指定语言：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span>;	</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 分隔线</span><br><span class="line"></span><br><span class="line">你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<hr>
-<hr>
-<hr>
-<hr>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 链接</span><br><span class="line"></span><br><span class="line">Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。</span><br><span class="line"></span><br><span class="line">不管是哪一种，链接文字都是用 [方括号] 来标记。</span><br><span class="line"></span><br><span class="line">要建立一个行内式的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This is <a href="http://example.com/" title="Title">an example</a> inline link.</p>
-<p><a href="http://example.net/">This link</a> has no title attribute.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>This is <a href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 强调</span><br><span class="line"></span><br><span class="line">Markdown 使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 &lt;em&gt; 标签包围，用两个 * 或 _ 包起来的话，则会被转成 &lt;strong&gt;，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><em>single asterisks</em></p>
-<p><em>single underscores</em></p>
-<p><strong>double asterisks</strong></p>
-<p><strong>double underscores</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 代码</span><br><span class="line"></span><br><span class="line">如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>Use the <code>printf()</code> function.</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 图片</span><br><span class="line"></span><br><span class="line">很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</span><br><span class="line"></span><br><span class="line">Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。</span><br><span class="line"></span><br><span class="line">行内式的图片语法看起来像是：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="/path/to/img.jpg" alt="Alt text"></p>
-<p><img src="/path/to/img.jpg" alt="Alt text" title="Optional title"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的图片语法则长得像这样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="http://example.com/" alt="Alt text" title="Optional Title Here"></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<pre><code>
-</code></pre>
-]]></content>
+<p>删除组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">groupadd groupname</span><br></pre></td></tr></table></figure>
+
+<p>用户加入组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usermod -G groupname username</span><br></pre></td></tr></table></figure>
+
+<p>用户加入组（并从原来组中移出）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usermod -g groupname username</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关查看"><a href="#相关查看" class="headerlink" title="相关查看"></a>相关查看</h2><p>所有用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>所有用户组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/group</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>编程笔记</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>markdown</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -417,6 +394,35 @@ require not ip 192.168.1.2
       <tags>
         <tag>jquery</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>javascript中的隐式类型转换</title>
+    <url>/2015/10/04/frontend/javascript%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p>在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。</p>
+<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><p>+号可以当算术运算符也能当连字符号，使用+情况为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 只要有一个类型为string，另一个也会转为string</span><br><span class="line">console.log(1+&#x27;1&#x27;) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+1) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+true) // &#x27;11&#x27;</span><br><span class="line">// number和boolean时，boolean转为number</span><br><span class="line">console.log(1+true) // &#x27;2&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>减法，乘，除，大于，小于运算时两边都会转成number，其中一个不能转为number即为NaN时，结果为NaN。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(2-&#x27;1&#x27;) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-&#x27;1&#x27;) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-true) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-true) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2-&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2*&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2*true) // 2</span><br></pre></td></tr></table></figure>
+
+<h2 id="if中"><a href="#if中" class="headerlink" title="if中"></a>if中</h2><p>大多数的值都会转换成true，只有少数的是false，他们分别是：false, 0, -0, “”, NaN, null, undefined。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// x为false, 0, -0, &quot;&quot;, NaN, null, undefined时才输出</span><br><span class="line">var x = 1;</span><br><span class="line">if(x)&#123;</span><br><span class="line">	console.log(&#x27;hello&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="两个-时"><a href="#两个-时" class="headerlink" title="两个==时"></a>两个==时</h2><p>两者中有布尔值(Boolean)，会把Boolean先转换为对应的Number，即0和1；双方中有一方为Number，一方为 String时，会把String转换为数字；双方中有一方为Boolean，一方为 String时，则会先将双方转换为数字。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(1==true)//true</span><br><span class="line">console.log(1==&#x27;1&#x27;)//true</span><br><span class="line">console.log(1==&#x27;a&#x27;)//false</span><br><span class="line">console.log(true==&#x27;a&#x27;)//false</span><br><span class="line">console.log(true==&#x27;1&#x27;)//true</span><br></pre></td></tr></table></figure>
+
+<h2 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a>&amp;&amp;和||</h2><p>会先转成boolean，&amp;&amp;遇到false返回当前，无刚返回下一个；||遇到真就返回</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(11&amp;&amp;&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;0&#x27;&amp;&amp;&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;&#x27;&amp;&amp;&#x27;11&#x27;)// &#x27;&#x27;</span><br><span class="line">console.log(&#x27;&#x27;||&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;22&#x27;||&#x27;11&#x27;)// &#x27;22&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="引用类型参与时"><a href="#引用类型参与时" class="headerlink" title="引用类型参与时"></a>引用类型参与时</h2><p>引用类型和基本类型的比较就相对复杂一些，先要把引用类型转成基本类型。引用类型转布尔全是true，引用类型转数字或者字符串就要用valueOf()或者toString()。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(1+[]) //1</span><br><span class="line">console.log(0==[]) // true</span><br><span class="line">console.log(0+[]) // 0</span><br><span class="line">console.log(&#x27;0&#x27;+[]) // &#x27;0&#x27;</span><br><span class="line">// 与对象默认valueOf和toString都是object Object</span><br><span class="line">// var a = &#123;&#125;;console.log(a.toString()==a.valueOf());//true</span><br><span class="line">console.log(&#x27;0&#x27;+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">console.log(0+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">// 实际上是先优先valueOf</span><br><span class="line">console.log(1+&#123;toString:function()&#123;return &#x27;1&#x27;&#125;,valueOf:function()&#123;return 1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
   </entry>
   <entry>
     <title>javascript中创建对象的几种方式</title>
@@ -527,14 +533,100 @@ require not ip 192.168.1.2
       </categories>
   </entry>
   <entry>
-    <title>js验证只能输入数字</title>
-    <url>/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<p>js验证只能输入数字函数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 替换非数字值</span></span><br><span class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换第一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换最后一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换连续.+</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="comment">// .号前只能有一个0</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">&#x27;0.&#x27;</span>);</span><br><span class="line">  <span class="comment">// 保留一个.，替换其它的.</span></span><br><span class="line">  value = value.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;$#$&#x27;</span>).replace(<span class="regexp">/\./g</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;$#$&#x27;</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>js防抖和节流</title>
+    <url>/2020/02/10/frontend/js%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/</url>
+    <content><![CDATA[<p>防抖和节流在前端性能优化中很常用，防抖和节流都是对一段时间内事件触发函数执行频率的控制；使用场景就是当频繁事件时怎样去处理函数执行。</p>
+<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>在限定时间内，如果事件再次触发，丢弃当前已响应的函数执行，以当前事件响应函数重新计时</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.debounce = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, immediate</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params">context, args</span>) </span>&#123;</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">     <span class="keyword">if</span> (args) result = func.apply(context, args);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> debounced = restArguments(<span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">       <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">       timeout = <span class="built_in">setTimeout</span>(later, wait);</span><br><span class="line">       <span class="keyword">if</span> (callNow) result = func.apply(<span class="built_in">this</span>, args);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       timeout = _.delay(later, wait, <span class="built_in">this</span>, args);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> result;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   debounced.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> debounced;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>在限定时间内，如果事件再次触发，忽略事件响应，当到达时间后函数执行后再开始事件响应</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.throttle = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout, context, args, result;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (!options) options = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      previous = options.leading === <span class="literal">false</span> ? <span class="number">0</span> : _.now();</span><br><span class="line">      timeout = <span class="literal">null</span>;</span><br><span class="line">      result = func.apply(context, args);</span><br><span class="line">      <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> throttled = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> now = _.now();</span><br><span class="line">      <span class="keyword">if</span> (!previous &amp;&amp; options.leading === <span class="literal">false</span>) previous = now;</span><br><span class="line">      <span class="keyword">var</span> remaining = wait - (now - previous);</span><br><span class="line">      context = <span class="built_in">this</span>;</span><br><span class="line">      args = <span class="built_in">arguments</span>;</span><br><span class="line">      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span> || remaining &gt; wait) &#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout) &#123;</span><br><span class="line">          <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">          timeout = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        previous = now;</span><br><span class="line">        result = func.apply(context, args);</span><br><span class="line">        <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout &amp;&amp; options.trailing !== <span class="literal">false</span>) &#123;</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(later, remaining);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    throttled.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">      previous = <span class="number">0</span>;</span><br><span class="line">      timeout = context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> throttled;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
+      <tags>
+        <tag>js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markdown语法</title>
+    <url>/2015/11/26/develop/markdown%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<blockquote>
+<p>摘自<a href="http://wowubuntu.com/markdown/">http://wowubuntu.com/markdown/</a>语法说明 (简体中文版)</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="段落和换行"><a href="#段落和换行" class="headerlink" title="段落和换行"></a>段落和换行</h3><p>一个 Markdown 段落是由一个或多个连续的文本行组成，它的前后要有一个以上的空行。</p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>在行首插入 1 到 6 个 # ，对应到标题 1 到 6 阶，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="section"># 这是 H1</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 这是 H2</span></span><br><span class="line"></span><br><span class="line"><span class="section">###### 这是 H6</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="区块引用-Blockquotes"><a href="#区块引用-Blockquotes" class="headerlink" title="区块引用 Blockquotes"></a>区块引用 Blockquotes</h3><p>Markdown 标记区块引用是使用类似 email 中用 &gt; 的引用方式。如果你还熟悉在 email 信件中的引言部分，你就知道怎么在 Markdown 文件中建立一个区块引用，那会看起来像是你自己先断好行，然后在每行的最前面加上 &gt; ：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line"><span class="quote">&gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span></span><br><span class="line"><span class="quote">&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span></span><br><span class="line"><span class="quote">&gt; </span></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line"><span class="quote">&gt; id sem consectetuer libero luctus adipiscing.</span></span><br></pre></td></tr></table></figure>
+
+<p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 &gt; ：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="quote">&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,</span></span><br><span class="line">consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.</span><br><span class="line">Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.</span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse</span></span><br><span class="line">id sem consectetuer libero luctus adipiscing.</span><br></pre></td></tr></table></figure>
+
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>Markdown 支持有序列表和无序列表。</p>
+<p>无序列表使用星号、加号或是减号作为列表标记：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">*   Red</span><br><span class="line">*   Green</span><br><span class="line">*   Blue</span><br></pre></td></tr></table></figure>
+
+<p>有序列表则使用数字接着一个英文句点：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.  Bird</span><br><span class="line">2.  McHale</span><br><span class="line">3.  Parish</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码区块"><a href="#代码区块" class="headerlink" title="代码区块"></a>代码区块</h3><p>和程序相关的写作或是标签语言原始码通常会有已经排版好的代码区块，通常这些区块我们并不希望它以一般段落文件的方式去排版，而是照原来的样子显示，Markdown 会用 <pre> 和 <code> 标签来把代码区块包起来。</p>
+<p>要在 Markdown 中建立代码区块很简单，只要简单地缩进 4 个空格或是 1 个制表符就可以，例如，下面的输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">这是一个普通段落：</span><br><span class="line"></span><br><span class="line">    这是一个代码区块。</span><br></pre></td></tr></table></figure>
+
+<p>Markdown 会转换成：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;p&gt;这是一个普通段落：&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;pre&gt;&lt;code&gt;这是一个代码区块。</span><br><span class="line">&lt;/code&gt;&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+<p>别一种方式用三个反引号包起：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">```</span><br><span class="line">var foo = 1;	</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">同时可以指定语言：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="number">1</span>;	</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 分隔线</span><br><span class="line"></span><br><span class="line">你可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。下面每种写法都可以建立分隔线：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<hr>
+<hr>
+<hr>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 链接</span><br><span class="line"></span><br><span class="line">Markdown 支持两种形式的链接语法： 行内式和参考式两种形式。</span><br><span class="line"></span><br><span class="line">不管是哪一种，链接文字都是用 [方括号] 来标记。</span><br><span class="line"></span><br><span class="line">要建立一个行内式的链接，只要在方块括号后面紧接着圆括号并插入网址链接即可，如果你还想要加上链接的 title 文字，只要在网址后面，用双引号把 title 文字包起来即可，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This is <a href="http://example.com/" title="Title">an example</a> inline link.</p>
+<p><a href="http://example.net/">This link</a> has no title attribute.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的链接是在链接文字的括号后面再接上另一个方括号，而在第二个方括号里面要填入用以辨识链接的标记：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>This is <a href="http://example.com/" title="Optional Title Here">an example</a> reference-style link.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">接着，在文件的任意处，你可以把这个标记的链接内容定义出来：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 强调</span><br><span class="line"></span><br><span class="line">Markdown 使用星号（*）和底线（_）作为标记强调字词的符号，被 * 或 _ 包围的字词会被转成用 &lt;em&gt; 标签包围，用两个 * 或 _ 包起来的话，则会被转成 &lt;strong&gt;，例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><em>single asterisks</em></p>
+<p><em>single underscores</em></p>
+<p><strong>double asterisks</strong></p>
+<p><strong>double underscores</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 代码</span><br><span class="line"></span><br><span class="line">如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>Use the <code>printf()</code> function.</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">### 图片</span><br><span class="line"></span><br><span class="line">很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</span><br><span class="line"></span><br><span class="line">Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。</span><br><span class="line"></span><br><span class="line">行内式的图片语法看起来像是：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/path/to/img.jpg" alt="Alt text"></p>
+<p><img src="/path/to/img.jpg" alt="Alt text" title="Optional title"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考式的图片语法则长得像这样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="http://example.com/" alt="Alt text" title="Optional Title Here"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">「id」是图片参考的名称，图片参考的定义方式则和连结参考一样：</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>
+</code></pre>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
+      </tags>
   </entry>
   <entry>
     <title>lodash集合的sortBy排序</title>
@@ -557,37 +649,14 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>react常用API总结</title>
-    <url>/2016/06/15/frontend/react%E5%B8%B8%E7%94%A8API%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。</p>
-<span id="more"></span>
-
-<h2 id="React相关"><a href="#React相关" class="headerlink" title="React相关"></a>React相关</h2><p>创建组件</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 普通</span></span><br><span class="line">React.createClass (&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> () </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无state的组件可以这样创建</span></span><br><span class="line"><span class="keyword">var</span> HelloMsg =&gt; <span class="function"><span class="keyword">function</span>(<span class="params">props</span>) </span>&#123; <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>ReactElement</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 返回ReactElement</span></span><br><span class="line">React.createElement(HTMLTag|ReactClass, &#123;props&#125;?, [children...]?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回ReactElement</span></span><br><span class="line">React.cloneElement(ReactElement, &#123;props&#125;?, [children...]?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回Boolean</span></span><br><span class="line">React.isValidElement(ReactElement)</span><br></pre></td></tr></table></figure>
-
-<h2 id="ReactDOM相关"><a href="#ReactDOM相关" class="headerlink" title="ReactDOM相关"></a>ReactDOM相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// render</span></span><br><span class="line">ReactDOM.render (ReactElement, DOMElement, callback?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回DOMElement</span></span><br><span class="line">ReactDOM.findDOMNode(ReactComponent)</span><br><span class="line"></span><br><span class="line"><span class="comment">// DOM 中移除已经挂载的 React 组件</span></span><br><span class="line">ReactDOM.unmountComponentAtNode(DOMElement)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="服务器渲染ReactDOMServer"><a href="#服务器渲染ReactDOMServer" class="headerlink" title="服务器渲染ReactDOMServer"></a>服务器渲染ReactDOMServer</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">ReactDOMServer.renderToString (ReactElement)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不会在dom上创建react 属性， 如data-react-id</span></span><br><span class="line">ReactDOMServer.renderToStaticMarkup (ReactElement)</span><br></pre></td></tr></table></figure>
-
-<h2 id="组件Component-API"><a href="#组件Component-API" class="headerlink" title="组件Component API"></a>组件Component API</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 改变状态</span></span><br><span class="line">setState ( FunctiOn *|&#123; nextState &#125;  ,  callBacK?  )</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接调用reaner()而跳过shouldComponentUpdate()</span></span><br><span class="line">forceUpdate ( callBacK?  )</span><br><span class="line"></span><br><span class="line"><span class="comment">// 渲染</span></span><br><span class="line">render ()&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化值</span></span><br><span class="line"><span class="title">constructor</span> (<span class="params"> props </span>) &#123; <span class="built_in">super</span>(props); <span class="built_in">this</span>.state = &#123;...&#125; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="组件Component事件"><a href="#组件Component事件" class="headerlink" title="组件Component事件"></a>组件Component事件</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">componentWillMount ()</span><br><span class="line"></span><br><span class="line">componentDidMount ()</span><br><span class="line"></span><br><span class="line">componentWillReceiveProps ( &#123;nextProps &#125;  )</span><br><span class="line"></span><br><span class="line">shouldComponentUpdate ( &#123;nextProps &#125;  ,  &#123;nextState &#125;  )</span><br><span class="line"></span><br><span class="line">componentWillUpdate ( &#123;nextProps &#125;  ,  &#123;nextState &#125;  </span><br><span class="line"></span><br><span class="line">componentDidUpdate ( &#123;previousProps &#125;  ,  &#123;previousState &#125;  )</span><br><span class="line"></span><br><span class="line">componentWillUnmount ()</span><br></pre></td></tr></table></figure>
-
-<h2 id="Tag相关"><a href="#Tag相关" class="headerlink" title="Tag相关"></a>Tag相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">key &lt; ExampleComponent  key = <span class="string">&quot;uniqueValue&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">ref &lt; ExampleComponent  ref =&#123; S tRing |c allBacK &#125; /&gt;</span><br><span class="line"></span><br><span class="line">dangerouslySetInnerHTML &lt; span  dangerouslySetInnerHTML =&#123; <span class="attr">__Html</span>: <span class="built_in">String</span> &#125; /&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="Props相关"><a href="#Props相关" class="headerlink" title="Props相关"></a>Props相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.props.children &lt; Component &gt;&#123; <span class="built_in">this</span>.props.children &#125;&lt;/ Component &gt;</span><br><span class="line"></span><br><span class="line">... &lt; ExampleComponent  &#123; ... <span class="built_in">this</span>.props&#125; /&gt;</span><br><span class="line"></span><br><span class="line">ReactComponentClass.defaultProps  = DefaultPropertiesObject</span><br><span class="line"></span><br><span class="line">ReactComponentClass.propTypes  = PropertiesSpecificationObject</span><br></pre></td></tr></table></figure>
-
-<h2 id="propTypes相关"><a href="#propTypes相关" class="headerlink" title="propTypes相关"></a>propTypes相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">React.PropTypes.array</span><br><span class="line"></span><br><span class="line">React.PropTypes.bool</span><br><span class="line"></span><br><span class="line">React.PropTypes.func</span><br><span class="line"></span><br><span class="line">React.PropTypes.number</span><br><span class="line"></span><br><span class="line">React.PropTypes.object</span><br><span class="line"></span><br><span class="line">React.PropTypes.string</span><br><span class="line"></span><br><span class="line">React.PropTypes.node (anything that can be rendered])</span><br><span class="line"></span><br><span class="line">React.PropTypes.element (ReactElement)</span><br><span class="line"></span><br><span class="line">React.PropTypes.instanceOf(Message) (must be <span class="keyword">of</span> javascript type)</span><br><span class="line"></span><br><span class="line">React.PropTypes.oneOf([<span class="string">&#x27;News&#x27;</span>, <span class="string">&#x27;Photos&#x27;</span>]) (specify enumerated values)</span><br><span class="line"></span><br><span class="line">React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]) (limit property types)</span><br><span class="line"></span><br><span class="line">React.PropTypes.arrayOf(React.PropTypes.number) (limit to a typed array)</span><br><span class="line"></span><br><span class="line">React.PropTypes.objectOf(React.PropTypes.number) (limit to a typed object)</span><br><span class="line"></span><br><span class="line">React.PropTypes.shape(&#123;<span class="attr">color</span>: React.PropTypes.string, <span class="attr">fontSize</span>: React.PropTypes.number&#125;) (limit to object <span class="keyword">with</span> specific keys/types)</span><br><span class="line"></span><br><span class="line">React.PropTypes.func.isRequired (produce an error <span class="keyword">if</span> the property isn<span class="string">&#x27;t passed to the child)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">React.PropTypes.any.isRequired (can be any object but must be required)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">(props, propName, componentName) =&gt; Boolean (create a custom property with the following function signature)</span></span><br></pre></td></tr></table></figure>]]></content>
+    <title>js验证只能输入数字</title>
+    <url>/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<p>js验证只能输入数字函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 替换非数字值</span></span><br><span class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换第一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换最后一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换连续.+</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="comment">// .号前只能有一个0</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">&#x27;0.&#x27;</span>);</span><br><span class="line">  <span class="comment">// 保留一个.，替换其它的.</span></span><br><span class="line">  value = value.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;$#$&#x27;</span>).replace(<span class="regexp">/\./g</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;$#$&#x27;</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
-      <tags>
-        <tag>react</tag>
-      </tags>
   </entry>
   <entry>
     <title>vue中使用基于客户端的缓存</title>
@@ -623,6 +692,19 @@ require not ip 192.168.1.2
       </categories>
       <tags>
         <tag>vue</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何关闭微信内置浏览器</title>
+    <url>/2015/12/28/frontend/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8/</url>
+    <content><![CDATA[<p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</span><br><span class="line">        wx.closeWindow();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">        WeixinJSBridge.call(<span class="string">&#x27;closeWindow&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+      </categories>
+      <tags>
+        <tag>tricks</tag>
+        <tag>wechat</tag>
       </tags>
   </entry>
   <entry>
@@ -676,45 +758,36 @@ $input.on('change', function(){
       </categories>
   </entry>
   <entry>
-    <title>javascript中的隐式类型转换</title>
-    <url>/2015/10/04/frontend/javascript%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p>在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。</p>
-<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><p>+号可以当算术运算符也能当连字符号，使用+情况为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 只要有一个类型为string，另一个也会转为string</span><br><span class="line">console.log(1+&#x27;1&#x27;) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+1) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+true) // &#x27;11&#x27;</span><br><span class="line">// number和boolean时，boolean转为number</span><br><span class="line">console.log(1+true) // &#x27;2&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+    <title>react常用API总结</title>
+    <url>/2016/06/15/frontend/react%E5%B8%B8%E7%94%A8API%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。</p>
 <span id="more"></span>
 
-<p>减法，乘，除，大于，小于运算时两边都会转成number，其中一个不能转为number即为NaN时，结果为NaN。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(2-&#x27;1&#x27;) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-&#x27;1&#x27;) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-true) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-true) // 1</span><br><span class="line">console.log(&#x27;2&#x27;-&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2-&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2*&#x27;a&#x27;) // NaN</span><br><span class="line">console.log(2*true) // 2</span><br></pre></td></tr></table></figure>
+<h2 id="React相关"><a href="#React相关" class="headerlink" title="React相关"></a>React相关</h2><p>创建组件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 普通</span></span><br><span class="line">React.createClass (&#123;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> () </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 无state的组件可以这样创建</span></span><br><span class="line"><span class="keyword">var</span> HelloMsg =&gt; <span class="function"><span class="keyword">function</span>(<span class="params">props</span>) </span>&#123; <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Hello &#123;props.name&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="if中"><a href="#if中" class="headerlink" title="if中"></a>if中</h2><p>大多数的值都会转换成true，只有少数的是false，他们分别是：false, 0, -0, “”, NaN, null, undefined。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// x为false, 0, -0, &quot;&quot;, NaN, null, undefined时才输出</span><br><span class="line">var x = 1;</span><br><span class="line">if(x)&#123;</span><br><span class="line">	console.log(&#x27;hello&#x27;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ReactElement</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 返回ReactElement</span></span><br><span class="line">React.createElement(HTMLTag|ReactClass, &#123;props&#125;?, [children...]?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回ReactElement</span></span><br><span class="line">React.cloneElement(ReactElement, &#123;props&#125;?, [children...]?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回Boolean</span></span><br><span class="line">React.isValidElement(ReactElement)</span><br></pre></td></tr></table></figure>
 
-<h2 id="两个-时"><a href="#两个-时" class="headerlink" title="两个==时"></a>两个==时</h2><p>两者中有布尔值(Boolean)，会把Boolean先转换为对应的Number，即0和1；双方中有一方为Number，一方为 String时，会把String转换为数字；双方中有一方为Boolean，一方为 String时，则会先将双方转换为数字。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(1==true)//true</span><br><span class="line">console.log(1==&#x27;1&#x27;)//true</span><br><span class="line">console.log(1==&#x27;a&#x27;)//false</span><br><span class="line">console.log(true==&#x27;a&#x27;)//false</span><br><span class="line">console.log(true==&#x27;1&#x27;)//true</span><br></pre></td></tr></table></figure>
+<h2 id="ReactDOM相关"><a href="#ReactDOM相关" class="headerlink" title="ReactDOM相关"></a>ReactDOM相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// render</span></span><br><span class="line">ReactDOM.render (ReactElement, DOMElement, callback?)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回DOMElement</span></span><br><span class="line">ReactDOM.findDOMNode(ReactComponent)</span><br><span class="line"></span><br><span class="line"><span class="comment">// DOM 中移除已经挂载的 React 组件</span></span><br><span class="line">ReactDOM.unmountComponentAtNode(DOMElement)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="amp-amp-和"><a href="#amp-amp-和" class="headerlink" title="&amp;&amp;和||"></a>&amp;&amp;和||</h2><p>会先转成boolean，&amp;&amp;遇到false返回当前，无刚返回下一个；||遇到真就返回</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(11&amp;&amp;&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;0&#x27;&amp;&amp;&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;&#x27;&amp;&amp;&#x27;11&#x27;)// &#x27;&#x27;</span><br><span class="line">console.log(&#x27;&#x27;||&#x27;11&#x27;)// &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;22&#x27;||&#x27;11&#x27;)// &#x27;22&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="服务器渲染ReactDOMServer"><a href="#服务器渲染ReactDOMServer" class="headerlink" title="服务器渲染ReactDOMServer"></a>服务器渲染ReactDOMServer</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">ReactDOMServer.renderToString (ReactElement)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不会在dom上创建react 属性， 如data-react-id</span></span><br><span class="line">ReactDOMServer.renderToStaticMarkup (ReactElement)</span><br></pre></td></tr></table></figure>
 
-<h2 id="引用类型参与时"><a href="#引用类型参与时" class="headerlink" title="引用类型参与时"></a>引用类型参与时</h2><p>引用类型和基本类型的比较就相对复杂一些，先要把引用类型转成基本类型。引用类型转布尔全是true，引用类型转数字或者字符串就要用valueOf()或者toString()。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(1+[]) //1</span><br><span class="line">console.log(0==[]) // true</span><br><span class="line">console.log(0+[]) // 0</span><br><span class="line">console.log(&#x27;0&#x27;+[]) // &#x27;0&#x27;</span><br><span class="line">// 与对象默认valueOf和toString都是object Object</span><br><span class="line">// var a = &#123;&#125;;console.log(a.toString()==a.valueOf());//true</span><br><span class="line">console.log(&#x27;0&#x27;+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">console.log(0+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">// 实际上是先优先valueOf</span><br><span class="line">console.log(1+&#123;toString:function()&#123;return &#x27;1&#x27;&#125;,valueOf:function()&#123;return 1&#125;&#125;)</span><br></pre></td></tr></table></figure>
-]]></content>
+<h2 id="组件Component-API"><a href="#组件Component-API" class="headerlink" title="组件Component API"></a>组件Component API</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 改变状态</span></span><br><span class="line">setState ( FunctiOn *|&#123; nextState &#125;  ,  callBacK?  )</span><br><span class="line"></span><br><span class="line"><span class="comment">// 直接调用reaner()而跳过shouldComponentUpdate()</span></span><br><span class="line">forceUpdate ( callBacK?  )</span><br><span class="line"></span><br><span class="line"><span class="comment">// 渲染</span></span><br><span class="line">render ()&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化值</span></span><br><span class="line"><span class="title">constructor</span> (<span class="params"> props </span>) &#123; <span class="built_in">super</span>(props); <span class="built_in">this</span>.state = &#123;...&#125; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="组件Component事件"><a href="#组件Component事件" class="headerlink" title="组件Component事件"></a>组件Component事件</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">componentWillMount ()</span><br><span class="line"></span><br><span class="line">componentDidMount ()</span><br><span class="line"></span><br><span class="line">componentWillReceiveProps ( &#123;nextProps &#125;  )</span><br><span class="line"></span><br><span class="line">shouldComponentUpdate ( &#123;nextProps &#125;  ,  &#123;nextState &#125;  )</span><br><span class="line"></span><br><span class="line">componentWillUpdate ( &#123;nextProps &#125;  ,  &#123;nextState &#125;  </span><br><span class="line"></span><br><span class="line">componentDidUpdate ( &#123;previousProps &#125;  ,  &#123;previousState &#125;  )</span><br><span class="line"></span><br><span class="line">componentWillUnmount ()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Tag相关"><a href="#Tag相关" class="headerlink" title="Tag相关"></a>Tag相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">key &lt; ExampleComponent  key = <span class="string">&quot;uniqueValue&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">ref &lt; ExampleComponent  ref =&#123; S tRing |c allBacK &#125; /&gt;</span><br><span class="line"></span><br><span class="line">dangerouslySetInnerHTML &lt; span  dangerouslySetInnerHTML =&#123; <span class="attr">__Html</span>: <span class="built_in">String</span> &#125; /&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Props相关"><a href="#Props相关" class="headerlink" title="Props相关"></a>Props相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">this</span>.props.children &lt; Component &gt;&#123; <span class="built_in">this</span>.props.children &#125;&lt;/ Component &gt;</span><br><span class="line"></span><br><span class="line">... &lt; ExampleComponent  &#123; ... <span class="built_in">this</span>.props&#125; /&gt;</span><br><span class="line"></span><br><span class="line">ReactComponentClass.defaultProps  = DefaultPropertiesObject</span><br><span class="line"></span><br><span class="line">ReactComponentClass.propTypes  = PropertiesSpecificationObject</span><br></pre></td></tr></table></figure>
+
+<h2 id="propTypes相关"><a href="#propTypes相关" class="headerlink" title="propTypes相关"></a>propTypes相关</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">React.PropTypes.array</span><br><span class="line"></span><br><span class="line">React.PropTypes.bool</span><br><span class="line"></span><br><span class="line">React.PropTypes.func</span><br><span class="line"></span><br><span class="line">React.PropTypes.number</span><br><span class="line"></span><br><span class="line">React.PropTypes.object</span><br><span class="line"></span><br><span class="line">React.PropTypes.string</span><br><span class="line"></span><br><span class="line">React.PropTypes.node (anything that can be rendered])</span><br><span class="line"></span><br><span class="line">React.PropTypes.element (ReactElement)</span><br><span class="line"></span><br><span class="line">React.PropTypes.instanceOf(Message) (must be <span class="keyword">of</span> javascript type)</span><br><span class="line"></span><br><span class="line">React.PropTypes.oneOf([<span class="string">&#x27;News&#x27;</span>, <span class="string">&#x27;Photos&#x27;</span>]) (specify enumerated values)</span><br><span class="line"></span><br><span class="line">React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]) (limit property types)</span><br><span class="line"></span><br><span class="line">React.PropTypes.arrayOf(React.PropTypes.number) (limit to a typed array)</span><br><span class="line"></span><br><span class="line">React.PropTypes.objectOf(React.PropTypes.number) (limit to a typed object)</span><br><span class="line"></span><br><span class="line">React.PropTypes.shape(&#123;<span class="attr">color</span>: React.PropTypes.string, <span class="attr">fontSize</span>: React.PropTypes.number&#125;) (limit to object <span class="keyword">with</span> specific keys/types)</span><br><span class="line"></span><br><span class="line">React.PropTypes.func.isRequired (produce an error <span class="keyword">if</span> the property isn<span class="string">&#x27;t passed to the child)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">React.PropTypes.any.isRequired (can be any object but must be required)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">(props, propName, componentName) =&gt; Boolean (create a custom property with the following function signature)</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
-  </entry>
-  <entry>
-    <title>如何关闭微信内置浏览器</title>
-    <url>/2015/12/28/frontend/%E5%A6%82%E4%BD%95%E5%85%B3%E9%97%AD%E5%BE%AE%E4%BF%A1%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8/</url>
-    <content><![CDATA[<p>做微信开发中发现window.close失效，不能关闭浏览器，解决如下：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">closeWindow</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">    <span class="keyword">if</span> (wx != <span class="literal">undefined</span>) &#123;</span><br><span class="line">        wx.closeWindow();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span>(WeixinJSBridge) != <span class="string">&quot;undefined&quot;</span>) &#123;</span><br><span class="line">        WeixinJSBridge.call(<span class="string">&#x27;closeWindow&#x27;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">window</span>.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-      </categories>
       <tags>
-        <tag>tricks</tag>
-        <tag>wechat</tag>
+        <tag>react</tag>
       </tags>
   </entry>
   <entry>
@@ -757,81 +830,6 @@ $input.on('change', function(){
       <tags>
         <tag>jquery</tag>
         <tag>tricks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>mongoose使用中查不出定义的virtual字段</title>
-    <url>/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/</url>
-    <content><![CDATA[<p>定义了指定为virtual属性的post_count字段统计文章数</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
-<blockquote>
-<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
-</blockquote>
-<p>需要对Schama做下面的配置：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>mongoose</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux中clash安装</title>
-    <url>/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>下载地址<a href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
-
-<p>创建clash目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>复制文件到<code>clash</code>目录</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
-
-<p>进入<code>clash</code>目录下载配置</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>启动<code>class</code></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
-
-<p>打开<a href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
-<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>js防抖和节流</title>
-    <url>/2020/02/10/frontend/js%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/</url>
-    <content><![CDATA[<p>防抖和节流在前端性能优化中很常用，防抖和节流都是对一段时间内事件触发函数执行频率的控制；使用场景就是当频繁事件时怎样去处理函数执行。</p>
-<h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><p>在限定时间内，如果事件再次触发，丢弃当前已响应的函数执行，以当前事件响应函数重新计时</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.debounce = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, immediate</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> timeout, result;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params">context, args</span>) </span>&#123;</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">     <span class="keyword">if</span> (args) result = func.apply(context, args);</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> debounced = restArguments(<span class="function"><span class="keyword">function</span>(<span class="params">args</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (timeout) <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     <span class="keyword">if</span> (immediate) &#123;</span><br><span class="line">       <span class="keyword">var</span> callNow = !timeout;</span><br><span class="line">       timeout = <span class="built_in">setTimeout</span>(later, wait);</span><br><span class="line">       <span class="keyword">if</span> (callNow) result = func.apply(<span class="built_in">this</span>, args);</span><br><span class="line">     &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       timeout = _.delay(later, wait, <span class="built_in">this</span>, args);</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">return</span> result;</span><br><span class="line">   &#125;);</span><br><span class="line"></span><br><span class="line">   debounced.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">     timeout = <span class="literal">null</span>;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span> debounced;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>在限定时间内，如果事件再次触发，忽略事件响应，当到达时间后函数执行后再开始事件响应</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, wait</span>) </span>&#123;</span><br><span class="line">    wait = wait || <span class="number">200</span>;</span><br><span class="line">    <span class="keyword">var</span> timer = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="built_in">arguments</span>;</span><br><span class="line">        <span class="keyword">var</span> that = <span class="built_in">this</span>;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            fn.apply(that, args);</span><br><span class="line">            timer = <span class="literal">null</span>;</span><br><span class="line">        &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><figcaption><span>_.debounce</span><a href="https://github.com/jashkenas/underscore/blob/master/underscore.js">Underscore.js</a></figcaption><table><tr><td class="code"><pre><span class="line">_.throttle = <span class="function"><span class="keyword">function</span>(<span class="params">func, wait, options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout, context, args, result;</span><br><span class="line">    <span class="keyword">var</span> previous = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (!options) options = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> later = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      previous = options.leading === <span class="literal">false</span> ? <span class="number">0</span> : _.now();</span><br><span class="line">      timeout = <span class="literal">null</span>;</span><br><span class="line">      result = func.apply(context, args);</span><br><span class="line">      <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> throttled = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> now = _.now();</span><br><span class="line">      <span class="keyword">if</span> (!previous &amp;&amp; options.leading === <span class="literal">false</span>) previous = now;</span><br><span class="line">      <span class="keyword">var</span> remaining = wait - (now - previous);</span><br><span class="line">      context = <span class="built_in">this</span>;</span><br><span class="line">      args = <span class="built_in">arguments</span>;</span><br><span class="line">      <span class="keyword">if</span> (remaining &lt;= <span class="number">0</span> || remaining &gt; wait) &#123;</span><br><span class="line">        <span class="keyword">if</span> (timeout) &#123;</span><br><span class="line">          <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">          timeout = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        previous = now;</span><br><span class="line">        result = func.apply(context, args);</span><br><span class="line">        <span class="keyword">if</span> (!timeout) context = args = <span class="literal">null</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!timeout &amp;&amp; options.trailing !== <span class="literal">false</span>) &#123;</span><br><span class="line">        timeout = <span class="built_in">setTimeout</span>(later, remaining);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    throttled.cancel = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">      previous = <span class="number">0</span>;</span><br><span class="line">      timeout = context = args = <span class="literal">null</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> throttled;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>js</tag>
       </tags>
   </entry>
   <entry>
@@ -878,55 +876,37 @@ $input.on('change', function(){
       </categories>
   </entry>
   <entry>
-    <title>minikube安装</title>
-    <url>/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>php函数array_chunk的妙用</title>
+    <url>/2014/12/27/php/php%E5%87%BD%E6%95%B0array_chunk%E7%9A%84%E5%A6%99%E7%94%A8/</url>
+    <content><![CDATA[<p>如果你想输出这么一个列表你会怎么做呢？</p>
+<p>数据：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
+<p>最终结果：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Volvo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>BMW<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Toyota<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Honda<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Mercedes<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Opel<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
 
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
+<p>以前我一直这样做：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$cars</span> <span class="keyword">as</span> <span class="variable">$index</span>=&gt;<span class="variable">$car</span>)&#123;	</span><br><span class="line">	<span class="variable">$the_br</span> = (<span class="variable">$index</span> + <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">&#x27;&lt;br&gt;&#x27;</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span> . <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span> . <span class="variable">$the_br</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
+<p>一直在纠纷里面那个判断，使用array_chunk()函数就不在费脑细胞了。array_chunk()版本：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(array_chunk(<span class="variable">$cars</span>, <span class="number">2</span>) <span class="keyword">as</span> <span class="variable">$split_car</span>)&#123;</span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$split_car</span> <span class="keyword">as</span> <span class="variable">$car</span>)&#123;</span><br><span class="line">		<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span>. <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="array-chunk函数介绍"><a href="#array-chunk函数介绍" class="headerlink" title="array_chunk函数介绍"></a>array_chunk函数介绍</h2><p>array_chunk() 函数把数组分割为新的数组块。语法：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">array_chunk(<span class="keyword">array</span>, size, preserve_key);</span><br></pre></td></tr></table></figure>
 
+<p>其中每个数组的单元数目由 size 参数决定。最后一个数组的单元数目可能会少几个。</p>
+<p>可选参数 preserve_key 是一个布尔值，它指定新数组的元素是否有和原数组相同的键（用于关联数组），还是从 0 开始的新数字键（用于索引数组）。默认是分配新的键。</p>
+<p>例子：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line">print_r(array_chunk(<span class="variable">$cars</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">   [0] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Volvo</span></span><br><span class="line"><span class="comment">           [1] =&gt; BMW</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [1] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Toyota</span></span><br><span class="line"><span class="comment">           [1] =&gt; Honda</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [2] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Mercedes</span></span><br><span class="line"><span class="comment">           [1] =&gt; Opel</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">)*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
-        <category>软件</category>
+        <category>php</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>nodejs安装</title>
-    <url>/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>ubuntu</tag>
+        <tag>tricks</tag>
       </tags>
   </entry>
   <entry>
@@ -984,37 +964,105 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>php函数array_chunk的妙用</title>
-    <url>/2014/12/27/php/php%E5%87%BD%E6%95%B0array_chunk%E7%9A%84%E5%A6%99%E7%94%A8/</url>
-    <content><![CDATA[<p>如果你想输出这么一个列表你会怎么做呢？</p>
-<p>数据：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br></pre></td></tr></table></figure>
+    <title>mongoose使用中查不出定义的virtual字段</title>
+    <url>/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/</url>
+    <content><![CDATA[<p>定义了指定为virtual属性的post_count字段统计文章数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>最终结果：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Volvo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>BMW<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Toyota<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Honda<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Mercedes<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>Opel<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">...</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<p>以前我一直这样做：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(<span class="variable">$cars</span> <span class="keyword">as</span> <span class="variable">$index</span>=&gt;<span class="variable">$car</span>)&#123;	</span><br><span class="line">	<span class="variable">$the_br</span> = (<span class="variable">$index</span> + <span class="number">1</span>) % <span class="number">2</span> == <span class="number">0</span> ? <span class="string">&#x27;&lt;br&gt;&#x27;</span> : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span> . <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span> . <span class="variable">$the_br</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>一直在纠纷里面那个判断，使用array_chunk()函数就不在费脑细胞了。array_chunk()版本：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line"><span class="variable">$html</span> = <span class="string">&#x27;&lt;section class=&quot;list&quot;&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">foreach</span>(array_chunk(<span class="variable">$cars</span>, <span class="number">2</span>) <span class="keyword">as</span> <span class="variable">$split_car</span>)&#123;</span><br><span class="line">	<span class="keyword">foreach</span>(<span class="variable">$split_car</span> <span class="keyword">as</span> <span class="variable">$car</span>)&#123;</span><br><span class="line">		<span class="variable">$html</span> .= <span class="string">&#x27;&lt;div&gt;&#x27;</span>. <span class="variable">$car</span> . <span class="string">&#x27;&lt;/div&gt;&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="variable">$html</span> .= <span class="string">&#x27;&lt;br&gt;&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">$html</span> .= <span class="string">&#x27;&lt;/section&gt;&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$html</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="array-chunk函数介绍"><a href="#array-chunk函数介绍" class="headerlink" title="array_chunk函数介绍"></a>array_chunk函数介绍</h2><p>array_chunk() 函数把数组分割为新的数组块。语法：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">array_chunk(<span class="keyword">array</span>, size, preserve_key);</span><br></pre></td></tr></table></figure>
-
-<p>其中每个数组的单元数目由 size 参数决定。最后一个数组的单元数目可能会少几个。</p>
-<p>可选参数 preserve_key 是一个布尔值，它指定新数组的元素是否有和原数组相同的键（用于关联数组），还是从 0 开始的新数字键（用于索引数组）。默认是分配新的键。</p>
-<p>例子：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>,<span class="string">&quot;Honda&quot;</span>,<span class="string">&quot;Mercedes&quot;</span>,<span class="string">&quot;Opel&quot;</span>);</span><br><span class="line">print_r(array_chunk(<span class="variable">$cars</span>,<span class="number">2</span>));</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">(</span></span><br><span class="line"><span class="comment">   [0] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Volvo</span></span><br><span class="line"><span class="comment">           [1] =&gt; BMW</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [1] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Toyota</span></span><br><span class="line"><span class="comment">           [1] =&gt; Honda</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">   [2] =&gt; Array</span></span><br><span class="line"><span class="comment">       (</span></span><br><span class="line"><span class="comment">           [0] =&gt; Mercedes</span></span><br><span class="line"><span class="comment">           [1] =&gt; Opel</span></span><br><span class="line"><span class="comment">       )</span></span><br><span class="line"><span class="comment">)*/</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-]]></content>
+<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
+<blockquote>
+<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
+</blockquote>
+<p>需要对Schama做下面的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>php</category>
+        <category>nodejs</category>
       </categories>
       <tags>
-        <tag>tricks</tag>
+        <tag>mongoose</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>minikube安装</title>
+    <url>/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
+
+<p>解决方法</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nodejs安装</title>
+    <url>/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux中clash安装</title>
+    <url>/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>下载地址<a href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+
+<p>创建clash目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>复制文件到<code>clash</code>目录</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
+
+<p>进入<code>clash</code>目录下载配置</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>启动<code>class</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
+
+<p>打开<a href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
+<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -1055,19 +1103,42 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>src和href的区别</title>
-    <url>/2014/11/05/frontend/html/src%E5%92%8Chref%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
-<p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
-<p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
-<blockquote>
-<p>href是与资源建立关系，src是用资源替换到当前位置</p>
-</blockquote>
-]]></content>
+    <title>javascript获取浏览器视口大小</title>
+    <url>/2015/01/05/frontend/html/javascript%E8%8E%B7%E5%8F%96%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%86%E5%8F%A3%E5%A4%A7%E5%B0%8F/</url>
+    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">&#x27;BackCompat&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端开发</category>
-        <category>html</category>
+        <category>javascript</category>
       </categories>
+      <tags>
+        <tag>tricks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>a标签伪类顺序</title>
+    <url>/2014/12/29/frontend/css/a%E6%A0%87%E7%AD%BE%E4%BC%AA%E7%B1%BB%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[<p>a标签的link、visited、hover、active通常的顺序为：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>css</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>同时使用flex、white-space和overflow的bug</title>
+    <url>/2016/01/28/frontend/css/%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8flex%E5%92%8Cwhite-space%E5%92%8Coverflow%E7%9A%84bug/</url>
+    <content><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br></pre></td></tr></table></figure>
+
+<p>解决办法：再加上min-width: 0属性。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"><span class="attribute">min-width</span>:<span class="number">0</span>;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>css</category>
+      </categories>
+      <tags>
+        <tag>flex</tag>
+      </tags>
   </entry>
   <entry>
     <title>触发display为none元素的动画效果</title>
@@ -1201,41 +1272,18 @@ $('#modal3').on('transitionend', function (e) {
       </tags>
   </entry>
   <entry>
-    <title>同时使用flex、white-space和overflow的bug</title>
-    <url>/2016/01/28/frontend/css/%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8flex%E5%92%8Cwhite-space%E5%92%8Coverflow%E7%9A%84bug/</url>
-    <content><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br></pre></td></tr></table></figure>
-
-<p>解决办法：再加上min-width: 0属性。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"><span class="attribute">min-width</span>:<span class="number">0</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    <title>src和href的区别</title>
+    <url>/2014/11/05/frontend/html/src%E5%92%8Chref%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>href(Hypertext Reference)指定网络资源的位置，从而在当前元素或者当前文档和由当前属性定义的需要的锚点或资源之间定义一个链接或者关系。</p>
+<p>src(Source)属性仅仅嵌入当前资源到当前文档元素定义的位置。</p>
+<p>两者最大的区别在于<code>src</code>在浏览器下载，编译，执行这个文件之前页面的加载和处理会被暂停；而<code>href</code>页面解析不会暂停。</p>
+<blockquote>
+<p>href是与资源建立关系，src是用资源替换到当前位置</p>
+</blockquote>
+]]></content>
       <categories>
         <category>前端开发</category>
-        <category>css</category>
-      </categories>
-      <tags>
-        <tag>flex</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javascript获取浏览器视口大小</title>
-    <url>/2015/01/05/frontend/html/javascript%E8%8E%B7%E5%8F%96%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%86%E5%8F%A3%E5%A4%A7%E5%B0%8F/</url>
-    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">&#x27;BackCompat&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>tricks</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>a标签伪类顺序</title>
-    <url>/2014/12/29/frontend/css/a%E6%A0%87%E7%AD%BE%E4%BC%AA%E7%B1%BB%E9%A1%BA%E5%BA%8F/</url>
-    <content><![CDATA[<p>a标签的link、visited、hover、active通常的顺序为：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>css</category>
+        <category>html</category>
       </categories>
   </entry>
 </search>

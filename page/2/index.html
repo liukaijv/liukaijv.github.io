@@ -105,6 +105,53 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">深入理解JS执行细节</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                >
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-08-04 11:38:06</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>以前看Tom大叔的深入理解JS系列介绍的很在错，但这篇文章短而好懂，mark一份。</p>
+<blockquote>
+<p>转自<a target="_blank" rel="noopener" href="http://www.cnblogs.com/onepixel/p/5090799.html">http://www.cnblogs.com/onepixel/p/5090799.html</a></p>
+</blockquote>
+<p>javascript从定义到执行，JS引擎在实现层做了很多初始化工作，因此在学习JS引擎工作机制之前，我们需要引入几个相关的概念：执行环境栈、全局对象、执行环境、变量对象、活动对象、作用域和作用域链等，这些概念正是JS引擎工作的核心组件。这篇文章的目的不是孤立的为你讲解每一个概念，而是通过一个简单的demo来展开分析，全局讲解JS引擎从定义到执行的每一个细节，以及这些概念在其中所扮演的角色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;  <span class="comment">//定义一个全局变量 x</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> x = <span class="number">2</span>;  <span class="comment">//定义一个局部变量 x</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">z</span>)</span>&#123; <span class="comment">//定义一个内部函数 B</span></span><br><span class="line">       <span class="built_in">console</span>.log(x+y+z);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> B; <span class="comment">//返回函数B的引用</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> C = A(<span class="number">1</span>); <span class="comment">//执行A,返回B</span></span><br><span class="line">C(<span class="number">1</span>); <span class="comment">//执行函数B</span></span><br></pre></td></tr></table></figure>
+
+<p>这个demo是一个闭包，执行结果是4，下面我们将分全局初始化、执行函数A、执行函数B 三个阶段来分析JS引擎的工作机制:</p>
+                    
+                        <p class="more-link">
+                            <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">查看详情&raquo;</a>
+                        </p>
+                    
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">Promise和Deferred的用法对比</a>
         </h2>
         <ul class="post-meta">
@@ -483,47 +530,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/01/09/frontend/%E4%BD%BF%E7%94%A8ajax%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E4%B8%83%E7%89%9B/">使用$.ajax上传文件到七牛</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2016-01-09 09:27:03</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>用jquery的ajax方法上传文件到七牛和常规的ajax有点区别，直接上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $input = $(<span class="string">&#x27;#upload-qiniu&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> token = <span class="string">&#x27;sMTdcnRxls_IaTJ1uSOR1Rb7zFkcdJq3LK0MPjR1:4k547QcZwzo2fK7zPJeu28UgXNM=:eyJzY29wZSI6Im9haGEiLCJkZWFkbGluZSI6MTQ0MTk2NzY1Mn0=&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;http://up.qiniu.com/&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> prefix = <span class="string">&#x27;http://7vii28.com1.z0.glb.clouddn.com/&#x27;</span>;</span><br><span class="line"></span><br><span class="line">$input.on(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> me = $(<span class="built_in">this</span>);</span><br><span class="line">	<span class="keyword">var</span> file = <span class="built_in">this</span>.files[<span class="number">0</span>];     </span><br><span class="line">	<span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(),</span><br><span class="line">	    filename = file.name;</span><br><span class="line">	formData.append(<span class="string">&#x27;token&#x27;</span>, token);</span><br><span class="line">	formData.append(<span class="string">&quot;file&quot;</span>, file);</span><br><span class="line">	$.ajax(&#123;  </span><br><span class="line">		<span class="attr">url</span> : url,  </span><br><span class="line">		<span class="attr">type</span> : <span class="string">&#x27;POST&#x27;</span>,  </span><br><span class="line">		<span class="attr">data</span> : formData, </span><br><span class="line">		<span class="attr">processData</span> : <span class="literal">false</span>, <span class="comment">// 对数据不作处理</span></span><br><span class="line">		<span class="attr">contentType</span> : <span class="literal">false</span> <span class="comment">// 使用原始类型</span></span><br><span class="line">	&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123; </span><br><span class="line">		<span class="built_in">console</span>.log(json);</span><br><span class="line">	&#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;                </span><br><span class="line">		<span class="built_in">console</span>.log(json.responseJSON.error);</span><br><span class="line">	&#125;);              </span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-                    
-                        <p class="more-link">
-                            <a href="/2016/01/09/frontend/%E4%BD%BF%E7%94%A8ajax%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E4%B8%83%E7%89%9B/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -546,11 +552,11 @@
             <ul>
                 
                     <li>
-                        <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
+                        <a href="/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">linux用户管理</a>
                     </li>
                 
                     <li>
-                        <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+                        <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
                     </li>
                 
                     <li>
@@ -562,7 +568,7 @@
                     </li>
                 
                     <li>
-                        <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+                        <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
                     </li>
                 
             </ul>
@@ -575,7 +581,7 @@
     <div class="widget">
         <h3 class="widget-title">分类</h3>
         <div class="widget-body">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
         </div>
     </div>
 
@@ -585,7 +591,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 16.67px;">hexo</a> <a href="/tags/jquery/" style="font-size: 13.33px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 13.33px;">laravel</a> <a href="/tags/linux/" style="font-size: 16.67px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 16.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
         </div>
     </div>
 
