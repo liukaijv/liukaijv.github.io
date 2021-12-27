@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     
     <title>
-        标签: mongoose |
+        标签: ssl |
         
         工作中的学习笔记和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,7 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta property="og:type" content="website">
 <meta property="og:title" content="工作中的学习笔记和心得">
-<meta property="og:url" content="http://liukaijv.github.io/tags/mongoose/index.html">
+<meta property="og:url" content="http://liukaijv.github.io/tags/ssl/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Abc">
@@ -106,7 +106,7 @@
             
     <article class="post">
         <h2 class="post-title">
-            <a href="/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/">mongoose使用中查不出定义的virtual字段</a>
+            <a href="/2021/12/27/develop/%E9%85%8D%E7%BD%AE%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/">配置免费ssl证书</a>
         </h2>
         <ul class="post-meta">
     
@@ -114,14 +114,14 @@
         <li>
             分类
             
-                <a href="/categories/nodejs/">nodejs</a>
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2016-04-29 14:06:19</span>
+        发表于 <span>2021-12-27 17:56:45</span>
     </li>
     
 </ul>
@@ -130,15 +130,43 @@
             <div class="post-thumbnail"></div>
             <div class="post-content">
                 
-                    <p>定义了指定为virtual属性的post_count字段统计文章数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+                    <h2 id="安装acme-sh"><a href="#安装acme-sh" class="headerlink" title="安装acme.sh"></a>安装<code>acme.sh</code></h2><p>官方安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  https://get.acme.sh | sh -s email=my@example.com</span><br></pre></td></tr></table></figure>
 
-<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
-<blockquote>
-<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
-</blockquote>
-<p>需要对Schama做下面的配置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>安装之后会在目录下生成个<code>.acme.sh</code>目录</p>
+<p>资源在github，经常下载失败，手动克隆仓库安装</p>
+<p>把<code>https://github.com/acmesh-official/acme.sh</code>同步到gitee上，再克隆下来，执行下面命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git https://gitee.com/xxx/acme.sh.git</span><br><span class="line">cd acme.sh</span><br><span class="line">./acme.sh --install -m  my@example.com</span><br><span class="line">alias acme.sh=~/.acme.sh/acme.sh</span><br></pre></td></tr></table></figure>
+
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.sh  --issue -d www.example.com  --webroot  /home/wwwroot/example.com/</span><br></pre></td></tr></table></figure>
+
+<p>如果80端口只配置了一个站点，可以这样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> apache</span></span><br><span class="line">acme.sh  --issue -d www.example.com  --apache</span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx</span></span><br><span class="line">acme.sh  --issue -d www.example.com  --nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>官方例子nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --install-cert -d www.example.com \</span><br><span class="line">--cert-file      /path/to/certfile/in/apache/cert.pem  \</span><br><span class="line">--key-file       /path/to/keyfile/in/apache/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/certfile/apache/fullchain.pem \</span><br><span class="line">--reloadcmd     &quot;service apache2 force-reload&quot;</span><br></pre></td></tr></table></figure>
+
+<p>官方例子apache</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --install-cert -d www.example.com \</span><br><span class="line">--key-file       /path/to/keyfile/in/nginx/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/nginx/cert.pem \</span><br><span class="line">--reloadcmd     &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><p>拷贝到指定的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp  ~/.acme.sh/www.example.com/fullchain.cer /etc/nginx/ssl/www.example.com.cer</span><br><span class="line">cp ~/.acme.sh/www.example.com/www.example.com.key /etc/nginx/ssl/www.example.com.key</span><br></pre></td></tr></table></figure>
+
+<p>修改nginx配置<code>/etc/nginx/conf.d/www.example.com.conf</code></p>
+<ul>
+<li>启用https</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listen 443 ssl;</span><br><span class="line">listen [::]:443 ssl;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>证书</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_certificate /etc/nginx/ssl/www.example.com.cer;</span><br><span class="line">ssl_certificate_key /etc/nginx/ssl/www.example.com.key;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>http跳转https</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen 80;</span><br><span class="line">     server_name www.example.com;</span><br><span class="line">     return 301 https://$server_name$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                 
             </div>
         </div>

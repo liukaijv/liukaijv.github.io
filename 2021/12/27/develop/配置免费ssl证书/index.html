@@ -4,23 +4,24 @@
     <meta charset="utf-8">
     
     <title>
-        linux中clash安装 |
+        配置免费ssl证书 |
         
         工作中的学习笔记和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="下载地址github clash 1wget https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases&#x2F;download&#x2F;v1.8.0&#x2F;clash-linux-amd64-v1.8.0.gz  解压 1gunzip clash-linux-amd64-v1.8.0.gz  创建clash目录 12mkdir ~&#x2F;clash  复制文件到clash目录 1mv clas">
+    <meta name="description" content="安装acme.sh官方安装 1curl  https:&#x2F;&#x2F;get.acme.sh | sh -s email&#x3D;my@example.com  安装之后会在目录下生成个.acme.sh目录 资源在github，经常下载失败，手动克隆仓库安装 把https:&#x2F;&#x2F;github.com&#x2F;acmesh-official&#x2F;acme.sh同步到gitee上，再克隆下来，执行下面命令 1234git https:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="linux中clash安装">
-<meta property="og:url" content="http://liukaijv.github.io/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="配置免费ssl证书">
+<meta property="og:url" content="http://liukaijv.github.io/2021/12/27/develop/%E9%85%8D%E7%BD%AE%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
-<meta property="og:description" content="下载地址github clash 1wget https:&#x2F;&#x2F;github.com&#x2F;Dreamacro&#x2F;clash&#x2F;releases&#x2F;download&#x2F;v1.8.0&#x2F;clash-linux-amd64-v1.8.0.gz  解压 1gunzip clash-linux-amd64-v1.8.0.gz  创建clash目录 12mkdir ~&#x2F;clash  复制文件到clash目录 1mv clas">
+<meta property="og:description" content="安装acme.sh官方安装 1curl  https:&#x2F;&#x2F;get.acme.sh | sh -s email&#x3D;my@example.com  安装之后会在目录下生成个.acme.sh目录 资源在github，经常下载失败，手动克隆仓库安装 把https:&#x2F;&#x2F;github.com&#x2F;acmesh-official&#x2F;acme.sh同步到gitee上，再克隆下来，执行下面命令 1234git https:">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-10T02:11:28.000Z">
-<meta property="article:modified_time" content="2021-12-19T14:46:32.082Z">
+<meta property="article:published_time" content="2021-12-27T09:56:45.000Z">
+<meta property="article:modified_time" content="2021-12-27T10:47:00.956Z">
 <meta property="article:author" content="Abc">
-<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="ssl">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
@@ -108,10 +109,10 @@
 <section class="container content">
     <main>
         
-            <article id="post-software/linux中clash安装" class="article-entry post post-type-post" itemscope
+            <article id="post-develop/配置免费ssl证书" class="article-entry post post-type-post" itemscope
          itemprop="blogPost">
 
-    <h2 class="post-title">linux中clash安装</h2>
+    <h2 class="post-title">配置免费ssl证书</h2>
 
     <ul class="post-meta">
     
@@ -119,41 +120,57 @@
         <li>
             分类
             
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2021-02-10 10:11:28</span>
+        发表于 <span>2021-12-27 17:56:45</span>
     </li>
     
 </ul>
 
 
     <div class="post-content article-entry post-markdown">
-        <p>下载地址<a target="_blank" rel="noopener" href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/Dreamacro/clash/releases/download/v1.8.0/clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+        <h2 id="安装acme-sh"><a href="#安装acme-sh" class="headerlink" title="安装acme.sh"></a>安装<code>acme.sh</code></h2><p>官方安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl  https://get.acme.sh | sh -s email=my@example.com</span><br></pre></td></tr></table></figure>
 
-<p>解压</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gunzip clash-linux-amd64-v1.8.0.gz</span><br></pre></td></tr></table></figure>
+<p>安装之后会在目录下生成个<code>.acme.sh</code>目录</p>
+<p>资源在github，经常下载失败，手动克隆仓库安装</p>
+<p>把<code>https://github.com/acmesh-official/acme.sh</code>同步到gitee上，再克隆下来，执行下面命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git https://gitee.com/xxx/acme.sh.git</span><br><span class="line">cd acme.sh</span><br><span class="line">./acme.sh --install -m  my@example.com</span><br><span class="line">alias acme.sh=~/.acme.sh/acme.sh</span><br></pre></td></tr></table></figure>
 
-<p>创建clash目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/clash</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.sh  --issue -d www.example.com  --webroot  /home/wwwroot/example.com/</span><br></pre></td></tr></table></figure>
 
-<p>复制文件到<code>clash</code>目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv clash-linux-amd64-v1.8.0 ~/clash/clash</span><br></pre></td></tr></table></figure>
+<p>如果80端口只配置了一个站点，可以这样</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> apache</span></span><br><span class="line">acme.sh  --issue -d www.example.com  --apache</span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx</span></span><br><span class="line">acme.sh  --issue -d www.example.com  --nginx</span><br></pre></td></tr></table></figure>
 
-<p>进入<code>clash</code>目录下载配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/clash</span><br><span class="line">wget -O config.yaml https://xxx/config.yml</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="安装证书"><a href="#安装证书" class="headerlink" title="安装证书"></a>安装证书</h2><p>官方例子nginx</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --install-cert -d www.example.com \</span><br><span class="line">--cert-file      /path/to/certfile/in/apache/cert.pem  \</span><br><span class="line">--key-file       /path/to/keyfile/in/apache/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/certfile/apache/fullchain.pem \</span><br><span class="line">--reloadcmd     &quot;service apache2 force-reload&quot;</span><br></pre></td></tr></table></figure>
 
-<p>启动<code>class</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./clash -d .</span><br><span class="line"># clash不能执行，加可执行权限</span><br><span class="line">sudo chmod +x clash</span><br></pre></td></tr></table></figure>
+<p>官方例子apache</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh --install-cert -d www.example.com \</span><br><span class="line">--key-file       /path/to/keyfile/in/nginx/key.pem  \</span><br><span class="line">--fullchain-file /path/to/fullchain/nginx/cert.pem \</span><br><span class="line">--reloadcmd     &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
 
-<p>打开<a target="_blank" rel="noopener" href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
-<p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><p>拷贝到指定的目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp  ~/.acme.sh/www.example.com/fullchain.cer /etc/nginx/ssl/www.example.com.cer</span><br><span class="line">cp ~/.acme.sh/www.example.com/www.example.com.key /etc/nginx/ssl/www.example.com.key</span><br></pre></td></tr></table></figure>
 
+<p>修改nginx配置<code>/etc/nginx/conf.d/www.example.com.conf</code></p>
+<ul>
+<li>启用https</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listen 443 ssl;</span><br><span class="line">listen [::]:443 ssl;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>证书</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssl_certificate /etc/nginx/ssl/www.example.com.cer;</span><br><span class="line">ssl_certificate_key /etc/nginx/ssl/www.example.com.key;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>http跳转https</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen 80;</span><br><span class="line">     server_name www.example.com;</span><br><span class="line">     return 301 https://$server_name$request_uri;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
 </article>
@@ -162,7 +179,9 @@
     <div class="post-tag">
         <i class="lb-icon-tag" title="标签"></i>
         
-            <a class="tag-item" href="/tags/ubuntu/">ubuntu</a>
+            <a class="tag-item" href="/tags/nginx/">nginx</a>
+        
+            <a class="tag-item" href="/tags/ssl/">ssl</a>
         
     </div>
 
@@ -171,15 +190,10 @@
 
     <nav class="gutter">
         
-            <div class="post-prev">
-                上一篇：
-                <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
-            </div>
-        
         
             <div class="post-next">
                 下一篇：
-                <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+                <a href="/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">linux用户管理</a>
             </div>
         
     </nav>
