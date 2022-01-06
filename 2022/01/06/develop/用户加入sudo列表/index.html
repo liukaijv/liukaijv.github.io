@@ -4,18 +4,23 @@
     <meta charset="utf-8">
     
     <title>
-        归档: 2015/2 |
+        用户加入sudo列表 |
         
         工作中的学习笔记和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="工作中的学习笔记和心得">
-<meta property="og:url" content="http://liukaijv.github.io/archives/2015/02/index.html">
+    <meta name="description" content="新创建的用户，使用sudo切换到root时提示错误 1xxx is not in the sudoers file.  This incident will be reported.  解决方法： 12345678910# 切换到&#96;root&#96;下su # 授权chmod u+w &#x2F;etc&#x2F;sudoers# 编辑sudoers文件vi &#x2F;etc&#x2F;sudoers# 添加username">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户加入sudo列表">
+<meta property="og:url" content="http://liukaijv.github.io/2022/01/06/develop/%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5sudo%E5%88%97%E8%A1%A8/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="新创建的用户，使用sudo切换到root时提示错误 1xxx is not in the sudoers file.  This incident will be reported.  解决方法： 12345678910# 切换到&#96;root&#96;下su # 授权chmod u+w &#x2F;etc&#x2F;sudoers# 编辑sudoers文件vi &#x2F;etc&#x2F;sudoers# 添加username">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-01-06T11:59:21.000Z">
+<meta property="article:modified_time" content="2022-01-06T12:12:29.855Z">
 <meta property="article:author" content="Abc">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
@@ -103,27 +108,89 @@
 <section class="container content">
     <main>
         
-            
+            <article id="post-develop/用户加入sudo列表" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
 
-<section class="archive-item">
-    <h3>
-        <a href="/archives/2015" class="archive-year">2015</a>
-    </h3>
+    <h2 class="post-title">用户加入sudo列表</h2>
+
+    <ul class="post-meta">
     
-        <div class="archive-month">
-            <a href="/archives/2015/02">2015/02</a>
-        </div>
-        <ul>
-            
-                <li>
-                    <a href="/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/">js验证只能输入数字</a>
-                </li>
-            
-        </ul>
     
-</section>
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-01-06 19:59:21</span>
+    </li>
+    
+</ul>
 
 
+    <div class="post-content article-entry post-markdown">
+        <p>新创建的用户，使用<code>sudo</code>切换到<code>root</code>时提示错误</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx is not in the sudoers file.  This incident will be reported.</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到`root`下</span></span><br><span class="line">su </span><br><span class="line"><span class="meta">#</span><span class="bash"> 授权</span></span><br><span class="line">chmod u+w /etc/sudoers</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑sudoers文件</span></span><br><span class="line">vi /etc/sudoers</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加</span></span><br><span class="line">username            ALL=(ALL)                ALL</span><br><span class="line"><span class="meta">#</span><span class="bash"> 保存</span></span><br><span class="line">chmod u-w /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/linux/">linux</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/01/04/software/centos%E5%AE%89%E8%A3%85docker/">centos安装docker</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
 
 
 
