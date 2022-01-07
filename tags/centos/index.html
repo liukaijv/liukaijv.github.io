@@ -106,6 +106,58 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-01-07 16:52:51</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+<p>找到想要的版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示</span></span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-client(x86-64) &gt;= 5.7.9 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line">        mysql-community-common(x86-64) = 5.7.34-1.el7 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提示依赖<code>mysql-community-client</code>和<code>mysql-community-common</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示和mariadb-libs冲突</span></span><br><span class="line">file /usr/share/mysql/czech/errmsg.sys from install of mysql-community-common-5.7.34-1.el7.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.el7.x86_64</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看出来删除掉</span></span><br><span class="line">rpm -qa|grep mariadb-libs</span><br><span class="line">rpm -e mariadb-libs-5.5.68-1.el7.x86_64 --nodeps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再重新安装mysql-community-common</span></span><br><span class="line"></span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-libs(x86-64) &gt;= 5.7.9 is needed by mysql-community-client-5.7.34-1.el7.x86_64</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p>提示依赖<code>mysql-community-libs</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>一共需要下面4个文件</p>
+<ul>
+<li>mysql-community-client-5.7.34-1.el7.x86_64.rpm</li>
+<li>mysql-community-common-5.7.34-1.el7.x86_64.rpm</li>
+<li>mysql-community-libs-5.7.34-1.el7.x86_64.rpm</li>
+<li>mysql-community-server-5.7.34-1.el7.x86_64.rpm</li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld.service</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">systemctl status mysqld.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化密码"><a href="#初始化密码" class="headerlink" title="初始化密码"></a>初始化密码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/mysqladmin -u root password &#x27;123456&#x27;</span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/01/04/software/centos%E5%AE%89%E8%A3%85docker/">centos安装docker</a>
         </h2>
         <ul class="post-meta">
@@ -171,6 +223,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/01/06/develop/%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5sudo%E5%88%97%E8%A1%A8/">用户加入sudo列表</a>
                     </li>
                 
@@ -184,10 +240,6 @@
                 
                     <li>
                         <a href="/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">linux用户管理</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
                     </li>
                 
             </ul>
@@ -210,7 +262,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 12.5px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
         </div>
     </div>
 
