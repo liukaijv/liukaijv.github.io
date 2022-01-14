@@ -204,6 +204,9 @@
 <p>用户加入组（并从原来组中移出）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -g groupname username</span><br></pre></td></tr></table></figure>
 
+<p>用户移出用户组</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gpasswd -d username groupname</span><br></pre></td></tr></table></figure>
+
 <h2 id="相关查看"><a href="#相关查看" class="headerlink" title="相关查看"></a>相关查看</h2><p>所有用户</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
 
