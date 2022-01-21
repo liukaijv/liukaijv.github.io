@@ -105,6 +105,44 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                >
+            
+                <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2020-02-13 15:14:11</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
+<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
+<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/">在shell中执行一个字符串</a>
         </h2>
         <ul class="post-meta">
@@ -485,46 +523,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/">mongoose使用中查不出定义的virtual字段</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/nodejs/">nodejs</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2016-04-29 14:06:19</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>定义了指定为virtual属性的post_count字段统计文章数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
-<blockquote>
-<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
-</blockquote>
-<p>需要对Schama做下面的配置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -547,6 +545,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/01/21/develop/grafana%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/">grafana重置密码</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
                     </li>
                 
@@ -560,10 +562,6 @@
                 
                     <li>
                         <a href="/2021/12/27/develop/%E9%85%8D%E7%BD%AE%E5%85%8D%E8%B4%B9ssl%E8%AF%81%E4%B9%A6/">配置免费ssl证书</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/">linux用户管理</a>
                     </li>
                 
             </ul>
@@ -586,7 +584,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 12.5px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 12.5px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grafana/" style="font-size: 10px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a>
         </div>
     </div>
 
