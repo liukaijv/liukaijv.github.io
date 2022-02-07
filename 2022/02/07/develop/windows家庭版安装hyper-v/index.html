@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        windows家庭版安装hyper-v |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="新建bat文件hyper-v.bat，内容为 123456789pushd &quot;%~dp0&quot;dir &#x2F;b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txtfor &#x2F;f %%i in (&amp;#x27;findstr &#x2F;i . hyper-v.txt 2^&gt;nul&amp;#x27;) do dism &#x2F;onlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="windows家庭版安装hyper-v">
+<meta property="og:url" content="http://liukaijv.github.io/2022/02/07/develop/windows%E5%AE%B6%E5%BA%AD%E7%89%88%E5%AE%89%E8%A3%85hyper-v/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="新建bat文件hyper-v.bat，内容为 123456789pushd &quot;%~dp0&quot;dir &#x2F;b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txtfor &#x2F;f %%i in (&amp;#x27;findstr &#x2F;i . hyper-v.txt 2^&gt;nul&amp;#x27;) do dism &#x2F;onlin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-07T07:10:15.000Z">
+<meta property="article:modified_time" content="2022-02-07T07:15:32.415Z">
+<meta property="article:author" content="Abc">
+<meta property="article:tag" content="windows">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-develop/windows家庭版安装hyper-v" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">windows家庭版安装hyper-v</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-02-07 15:10:15</span>
+    </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>新建bat文件<code>hyper-v.bat</code>，内容为</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pushd &quot;%~dp0&quot;</span><br><span class="line"></span><br><span class="line">dir /b %SystemRoot%\servicing\Packages\*Hyper-V*.mum &gt;hyper-v.txt</span><br><span class="line"></span><br><span class="line">for /f %%i in (&#x27;findstr /i . hyper-v.txt 2^&gt;nul&#x27;) do dism /online /norestart /add-package:&quot;%SystemRoot%\servicing\Packages\%%i&quot;</span><br><span class="line"></span><br><span class="line">del hyper-v.txt</span><br><span class="line"></span><br><span class="line">Dism /online /enable-feature /featurename:Microsoft-Hyper-V-All /LimitAccess /ALL</span><br></pre></td></tr></table></figure>
+
+<p>以管理员身份执行<code>hyper-v.bat</code>，然后等待安装，需要确认的都选择<code>y</code></p>
+
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/windows/">windows</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/01/24/software/centos7%E5%AE%89%E8%A3%85grafana/">centos7安装grafana</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2022/02/07/develop/windows%E5%AE%B6%E5%BA%AD%E7%89%88%E5%AE%89%E8%A3%85hyper-v/">windows家庭版安装hyper-v</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/01/24/software/centos7%E5%AE%89%E8%A3%85grafana/">centos7安装grafana</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/01/21/develop/grafana%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/">grafana重置密码</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/01/06/develop/%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5sudo%E5%88%97%E8%A1%A8/">用户加入sudo列表</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 15px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2022 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
