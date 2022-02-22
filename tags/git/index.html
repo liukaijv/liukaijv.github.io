@@ -106,6 +106,43 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/">git遇到pull出现403问题</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-02-22 10:25:48</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>git拉代码失败，不提示输入账号密码，出现<code>The requested URL returned error: 403</code></p>
+<p>解决方法，清除密码缓存</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --local --unset credential.helper</span><br><span class="line">git config --global --unset credential.helper</span><br><span class="line">git config --system --unset credential.helper</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以重新输入账号密码拉代码了</p>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
         </h2>
         <ul class="post-meta">
@@ -162,6 +199,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/">git遇到pull出现403问题</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/02/08/develop/windows%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/">windows子系统目录位置</a>
                     </li>
                 
@@ -175,10 +216,6 @@
                 
                     <li>
                         <a href="/2022/01/21/develop/grafana%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/">grafana重置密码</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
                     </li>
                 
             </ul>
@@ -201,7 +238,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 15px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 15px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
         </div>
     </div>
 
