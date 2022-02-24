@@ -105,6 +105,93 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2018-03-03 17:46:10</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
+<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
+
+<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
+                    
+                        <p class="more-link">
+                            <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">查看详情&raquo;</a>
+                        </p>
+                    
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
+            <a href="/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/">显示上传到laravel的storage目录中的图片</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/php/">php</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-10-29 12:12:55</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>Laravel提供了强大文件系统，开发文件管理非常方便。默认情况下web只能访问<code>public</code>公共磁盘目录。</p>
+<h2 id="访问storage下任意图片"><a href="#访问storage下任意图片" class="headerlink" title="访问storage下任意图片"></a>访问storage下任意图片</h2><p>如果图片不是放在<code>storage</code>公共磁盘中，可以定义一个用于访问图片的路由，如下：</p>
+<p>routes/web.php定义路由：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file manager</span></span><br><span class="line">Route::group([<span class="string">&#x27;prefix&#x27;</span> =&gt; <span class="string">&#x27;filemanager&#x27;</span>], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </span><br><span class="line">    Route::get(<span class="string">&#x27;show&#x27;</span>, <span class="string">&#x27;FileManageController@get&#x27;</span>)-&gt;name(<span class="string">&#x27;filemanager.show&#x27;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>FileManageController.php中定义action：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> Request $request</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get</span>(<span class="params">Request <span class="variable">$request</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">    <span class="variable">$filename</span> = <span class="variable">$request</span>-&gt;get(<span class="string">&#x27;filename&#x27;</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">    <span class="variable">$file</span> = Storage::get(<span class="variable">$filename</span>);</span><br><span class="line">    <span class="keyword">return</span> response(<span class="variable">$file</span>, <span class="number">200</span>)-&gt;header(<span class="string">&#x27;Content-Type&#x27;</span>, Storage::mimeType(<span class="variable">$filename</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>view里的图片：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;route(&#x27;filemanager.show&#x27;,[&#x27;filename&#x27;=&gt;$image[&#x27;name&#x27;]])&#125;&#125;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+                    
+                        <p class="more-link">
+                            <a href="/2016/10/29/php/%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E5%88%B0laravel%E7%9A%84storage%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E5%9B%BE%E7%89%87/">查看详情&raquo;</a>
+                        </p>
+                    
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">深入理解JS执行细节</a>
         </h2>
         <ul class="post-meta">
@@ -448,88 +535,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/02/23/frontend/css/%E8%A7%A6%E5%8F%91display%E4%B8%BAnone%E5%85%83%E7%B4%A0%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/">触发display为none元素的动画效果</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2016-02-23 16:45:28</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>写模态框时，当模态框show的时候动画没有，原来是元素有display:none时添加样式里css3的变幻效果无法生效，解决的方法总结，测试代码如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.modal</span>&#123;</span><br><span class="line">  <span class="attribute">z-index</span>: <span class="number">100</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">200px</span>;</span><br><span class="line">  <span class="attribute">background</span>: yellow;</span><br><span class="line">  <span class="attribute">transition</span>: all <span class="number">1s</span>;</span><br><span class="line">  <span class="attribute">display</span>:none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.modal</span><span class="selector-class">.active</span>&#123;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">100px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;javascript:&quot;</span> <span class="attr">id</span>=<span class="string">&quot;trigger&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;#model1&quot;</span>&gt;</span>运行动画<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;model1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;modal&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-                    
-                        <p class="more-link">
-                            <a href="/2016/02/23/frontend/css/%E8%A7%A6%E5%8F%91display%E4%B8%BAnone%E5%85%83%E7%B4%A0%E7%9A%84%E5%8A%A8%E7%94%BB%E6%95%88%E6%9E%9C/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/01/28/frontend/css/%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8flex%E5%92%8Cwhite-space%E5%92%8Coverflow%E7%9A%84bug/">同时使用flex、white-space和overflow的bug</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2016-01-28 17:14:07</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br></pre></td></tr></table></figure>
-
-<p>解决办法：再加上min-width: 0属性。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flex</span>: <span class="number">1</span>;</span><br><span class="line"><span class="attribute">overflow</span>: hidden;</span><br><span class="line"><span class="attribute">white-space</span>: nowrap;</span><br><span class="line"><span class="attribute">text-overflow</span>: ellipsis;</span><br><span class="line"><span class="attribute">min-width</span>:<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -552,6 +557,14 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/">linux安装golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/23/software/centos%E5%AE%89%E8%A3%85jenkins/">centos安装jenkins遇到的问题</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/02/23/develop/golang%E8%AE%BE%E7%BD%AEgoroot%E6%8A%A5%E9%94%99/">golang设置GOROOT报错</a>
                     </li>
                 
@@ -561,14 +574,6 @@
                 
                     <li>
                         <a href="/2022/02/08/develop/windows%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/">windows子系统目录位置</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/02/07/develop/windows%E5%AE%B6%E5%BA%AD%E7%89%88%E5%AE%89%E8%A3%85hyper-v/">windows家庭版安装hyper-v</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/01/24/software/centos7%E5%AE%89%E8%A3%85grafana/">centos7安装grafana</a>
                     </li>
                 
             </ul>
@@ -591,7 +596,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 15px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 17.5px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 20px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 17.5px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 17.5px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
         </div>
     </div>
 
