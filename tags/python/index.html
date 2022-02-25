@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        标签: python |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="工作中的学习笔记和心得">
+<meta property="og:url" content="http://liukaijv.github.io/tags/python/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Abc">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            
+    <article class="post">
+        <h2 class="post-title">
+            <a href="/2022/02/25/software/centos7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85python3/">centos7编译安装python3</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-02-25 10:44:58</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>安装编译依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zlib zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make</span><br></pre></td></tr></table></figure>
+
+<p>找到要安装的对应版本<a target="_blank" rel="noopener" href="https://www.python.org/downloads/source/">https://www.python.org/downloads/source/</a></p>
+<p>下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf Python-3.9.10.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入解压后的目录</span></span><br><span class="line">cd Python-3.9.10</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置安装目录/usr/<span class="built_in">local</span>/python3</span></span><br><span class="line">./configure prefix=/usr/local/python3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>成功之后会生成<code>/usr/local/python3</code>目录</p>
+<p>替换自带的python</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 原python位置</span></span><br><span class="line">which python</span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份</span></span><br><span class="line">mv /bin/python /bin/python_bak</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新链接</span></span><br><span class="line">ln -s /usr/local/python3/bin/python3 /usr/bin/python</span><br></pre></td></tr></table></figure>
+
+<p>替换自带的pip</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 原pip位置</span></span><br><span class="line">which pip</span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份</span></span><br><span class="line">mv /bin/pip /bin/pip_bak</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新链接</span></span><br><span class="line">ln -s /usr/local/python3/bin/pip3 /usr/bin/pip</span><br></pre></td></tr></table></figure>
+
+
+
+                
+            </div>
+        </div>
+    </article>
+
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2022/02/25/software/centos7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85python3/">centos7编译安装python3</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/">linux安装golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/23/software/centos%E5%AE%89%E8%A3%85jenkins/">centos安装jenkins遇到的问题</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/23/develop/golang%E8%AE%BE%E7%BD%AEgoroot%E6%8A%A5%E9%94%99/">golang设置GOROOT报错</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/">git遇到pull出现403问题</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/%E9%97%AE%E9%A2%98/">问题</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 17.5px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2022 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

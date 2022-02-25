@@ -106,6 +106,59 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/02/25/software/centos7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85python3/">centos7编译安装python3</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-02-25 10:44:58</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>安装编译依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install zlib zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make</span><br></pre></td></tr></table></figure>
+
+<p>找到要安装的对应版本<a target="_blank" rel="noopener" href="https://www.python.org/downloads/source/">https://www.python.org/downloads/source/</a></p>
+<p>下载</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.9.10/Python-3.9.10.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf Python-3.9.10.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入解压后的目录</span></span><br><span class="line">cd Python-3.9.10</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置安装目录/usr/<span class="built_in">local</span>/python3</span></span><br><span class="line">./configure prefix=/usr/local/python3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>成功之后会生成<code>/usr/local/python3</code>目录</p>
+<p>替换自带的python</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 原python位置</span></span><br><span class="line">which python</span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份</span></span><br><span class="line">mv /bin/python /bin/python_bak</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新链接</span></span><br><span class="line">ln -s /usr/local/python3/bin/python3 /usr/bin/python</span><br></pre></td></tr></table></figure>
+
+<p>替换自带的pip</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 原pip位置</span></span><br><span class="line">which pip</span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份</span></span><br><span class="line">mv /bin/pip /bin/pip_bak</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重新链接</span></span><br><span class="line">ln -s /usr/local/python3/bin/pip3 /usr/bin/pip</span><br></pre></td></tr></table></figure>
+
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/">linux安装golang</a>
         </h2>
         <ul class="post-meta">
@@ -374,6 +427,53 @@
 
     <article class="post">
         <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
+
+<p>解决方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
+
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
         </h2>
         <ul class="post-meta">
@@ -418,53 +518,6 @@
 
 <p>打开<a target="_blank" rel="noopener" href="http://clash.razord.top/">clash dashboard</a>，设置：Host: 127.0.0.1，端口: 9090</p>
 <p>打开网络设置代理，HTTP和HTTPS代理为 127.0.0.1:7890，Socks代理为 127.0.0.1:7891。</p>
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2021-02-10 10:11:28</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
-
-
 
                 
             </div>
@@ -534,6 +587,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/02/25/software/centos7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85python3/">centos7编译安装python3</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/">linux安装golang</a>
                     </li>
                 
@@ -547,10 +604,6 @@
                 
                     <li>
                         <a href="/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/">git遇到pull出现403问题</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/02/08/develop/windows%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/">windows子系统目录位置</a>
                     </li>
                 
             </ul>
@@ -573,7 +626,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 17.5px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 17.5px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/git/" style="font-size: 12.5px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12.5px;">grafana</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12.5px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 17.5px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12.5px;">windows</a>
         </div>
     </div>
 
