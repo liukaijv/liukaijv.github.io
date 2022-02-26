@@ -105,6 +105,42 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/01/21/develop/grafana%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/">grafana重置密码</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-01-21 19:47:46</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>找到<code>grafana.db</code>数据库，用sqlite工具执行下无sql语句</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update <span class="keyword">user</span> <span class="keyword">set</span> password <span class="operator">=</span> <span class="string">&#x27;59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6&#x27;</span>, salt <span class="operator">=</span> <span class="string">&#x27;F3FAxVm33R&#x27;</span> <span class="keyword">where</span> login <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>重置后登录用户和密码为：admin/admin</p>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
         </h2>
         <ul class="post-meta">
@@ -484,53 +520,6 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2021-02-10 10:11:28</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
             <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
         </h2>
         <ul class="post-meta">
@@ -578,7 +567,7 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/">模拟器运行instantRunSplitApkResourcesDebug报错</a>
+            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
         </h2>
         <ul class="post-meta">
     
@@ -586,17 +575,14 @@
         <li>
             分类
             
-                <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
-                >
-            
-                <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a>
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2020-02-13 15:14:11</span>
+        发表于 <span>2021-02-10 10:11:28</span>
     </li>
     
 </ul>
@@ -605,9 +591,21 @@
             <div class="post-thumbnail"></div>
             <div class="post-content">
                 
-                    <p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
-<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
-<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
+                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
+
 
                 
             </div>
@@ -636,6 +634,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/02/25/develop/centos7%E5%8D%87%E7%BA%A7gcc/">centos7升级gcc.md</a>
                     </li>
                 
@@ -649,10 +651,6 @@
                 
                     <li>
                         <a href="/2022/02/23/software/centos%E5%AE%89%E8%A3%85jenkins/">centos安装jenkins遇到的问题</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/02/23/develop/golang%E8%AE%BE%E7%BD%AEgoroot%E6%8A%A5%E9%94%99/">golang设置GOROOT报错</a>
                     </li>
                 
             </ul>
@@ -675,7 +673,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
         </div>
     </div>
 

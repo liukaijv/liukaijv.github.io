@@ -4,18 +4,25 @@
     <meta charset="utf-8">
     
     <title>
-        标签: git |
+        linux编译安装gcc |
         
         工作中的学习笔记和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="工作中的学习笔记和心得">
-<meta property="og:url" content="http://liukaijv.github.io/tags/git/index.html">
+    <meta name="description" content="下载指定版本http:&#x2F;&#x2F;ftp.gnu.org&#x2F;gnu&#x2F;gcc&#x2F; 1wget http:&#x2F;&#x2F;ftp.gnu.org&#x2F;gnu&#x2F;gcc&#x2F;gcc-8.1.0&#x2F;gcc-8.1.0.tar.xz  解压 12tar -xvf gcc-8.1.0.tar.xzcd gcc-8.1.0  编译 123456789# 安装依赖.&#x2F;contrib&#x2F;download_prerequisites# 编译目录mkdir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux编译安装gcc">
+<meta property="og:url" content="http://liukaijv.github.io/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/index.html">
 <meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="下载指定版本http:&#x2F;&#x2F;ftp.gnu.org&#x2F;gnu&#x2F;gcc&#x2F; 1wget http:&#x2F;&#x2F;ftp.gnu.org&#x2F;gnu&#x2F;gcc&#x2F;gcc-8.1.0&#x2F;gcc-8.1.0.tar.xz  解压 12tar -xvf gcc-8.1.0.tar.xzcd gcc-8.1.0  编译 123456789# 安装依赖.&#x2F;contrib&#x2F;download_prerequisites# 编译目录mkdir">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-26T02:25:16.000Z">
+<meta property="article:modified_time" content="2022-02-26T02:33:09.683Z">
 <meta property="article:author" content="Abc">
+<meta property="article:tag" content="centos">
+<meta property="article:tag" content="gcc">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
@@ -103,86 +110,98 @@
 <section class="container content">
     <main>
         
-            
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/">git遇到pull出现403问题</a>
-        </h2>
-        <ul class="post-meta">
+            <article id="post-software/linux编译安装gcc" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">linux编译安装gcc</h2>
+
+    <ul class="post-meta">
     
     
         <li>
             分类
             
-                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2022-02-22 10:25:48</span>
+        发表于 <span>2022-02-26 10:25:16</span>
     </li>
     
 </ul>
 
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>git拉代码失败，不提示输入账号密码，出现<code>The requested URL returned error: 403</code></p>
-<p>解决方法，清除密码缓存</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git config --local --unset credential.helper</span><br><span class="line">git config --global --unset credential.helper</span><br><span class="line">git config --system --unset credential.helper</span><br></pre></td></tr></table></figure>
 
-<p>之后就可以重新输入账号密码拉代码了</p>
+    <div class="post-content article-entry post-markdown">
+        <p>下载指定版本<a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gcc/">http://ftp.gnu.org/gnu/gcc/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.xz</span><br></pre></td></tr></table></figure>
 
-                
+<p>解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf gcc-8.1.0.tar.xz</span><br><span class="line">cd gcc-8.1.0</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装依赖</span></span><br><span class="line">./contrib/download_prerequisites</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译目录</span></span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置,安装到/usr/<span class="built_in">local</span>/gcc目录</span></span><br><span class="line">../configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib</span><br><span class="line"><span class="meta">#</span><span class="bash"> make</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>2cup+8g大概用了4个小时</p>
+<p>加软链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/gcc /usr/bin/gcc_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/gcc /usr/bin/gcc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/g++ /usr/bin/g++_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/g++ /usr/bin/g++</span><br></pre></td></tr></table></figure>
+
+<p>验证是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/centos/">centos</a>
+        
+            <a class="tag-item" href="/tags/gcc/">gcc</a>
+        
+            <a class="tag-item" href="/tags/linux/">linux</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/02/25/develop/centos7%E5%8D%87%E7%BA%A7gcc/">centos7升级gcc.md</a>
             </div>
-        </div>
-    </article>
+        
+    </nav>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2018-03-03 17:46:10</span>
-    </li>
-    
-</ul>
 
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>github有两个账号，但是同一个ssh公钥只能添加给一个账号，需要再生成一个密匙后添加。步骤如下：</p>
-<h2 id="再添加一个ssh密匙"><a href="#再添加一个ssh密匙" class="headerlink" title="再添加一个ssh密匙"></a>再添加一个ssh密匙</h2><p>1、指定邮箱</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br><span class="line">Generating public/private rsa key pair.</span><br></pre></td></tr></table></figure>
 
-<p>2、提示输入生成位置和文件名，取个不同的名称。如: /Users/you/.ssh/id_rsa1</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enter file <span class="keyword">in</span> swhich to save the key (/Users/you/.ssh/id_rsa):</span><br></pre></td></tr></table></figure>
-                    
-                        <p class="more-link">
-                            <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
 
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
 
 
 

@@ -106,6 +106,52 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-02-26 10:25:16</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>下载指定版本<a target="_blank" rel="noopener" href="http://ftp.gnu.org/gnu/gcc/">http://ftp.gnu.org/gnu/gcc/</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf gcc-8.1.0.tar.xz</span><br><span class="line">cd gcc-8.1.0</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装依赖</span></span><br><span class="line">./contrib/download_prerequisites</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译目录</span></span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置,安装到/usr/<span class="built_in">local</span>/gcc目录</span></span><br><span class="line">../configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib</span><br><span class="line"><span class="meta">#</span><span class="bash"> make</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>2cup+8g大概用了4个小时</p>
+<p>加软链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/gcc /usr/bin/gcc_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/gcc /usr/bin/gcc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/g++ /usr/bin/g++_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/g++ /usr/bin/g++</span><br></pre></td></tr></table></figure>
+
+<p>验证是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/">linux安装golang</a>
         </h2>
         <ul class="post-meta">
@@ -399,6 +445,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/02/25/develop/centos7%E5%8D%87%E7%BA%A7gcc/">centos7升级gcc.md</a>
                     </li>
                 
@@ -412,10 +462,6 @@
                 
                     <li>
                         <a href="/2022/02/23/software/centos%E5%AE%89%E8%A3%85jenkins/">centos安装jenkins遇到的问题</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/02/23/develop/golang%E8%AE%BE%E7%BD%AEgoroot%E6%8A%A5%E9%94%99/">golang设置GOROOT报错</a>
                     </li>
                 
             </ul>
@@ -438,7 +484,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
         </div>
     </div>
 

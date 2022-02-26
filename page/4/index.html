@@ -105,6 +105,46 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/">mongoose使用中查不出定义的virtual字段</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/nodejs/">nodejs</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-04-29 14:06:19</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>定义了指定为virtual属性的post_count字段统计文章数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
+<blockquote>
+<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
+</blockquote>
+<p>需要对Schama做下面的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2016/03/03/software/%E5%9C%A8centos7%E4%B8%8A%E5%AE%89%E8%A3%85php/">在centos7上安装php</a>
         </h2>
         <ul class="post-meta">
@@ -464,46 +504,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2015/10/29/frontend/javascript%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/">javascript函数作为变量传递</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2015-10-29 14:19:13</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>js中当函数不加括号时可以把函数当成值传递。</p>
-<p>无参数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无参函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = foo;</span><br></pre></td></tr></table></figure>
-
-<p>有参时需要用一个匿名函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar =  <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	foo(arg1, arg2);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -526,6 +526,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/02/25/develop/centos7%E5%8D%87%E7%BA%A7gcc/">centos7升级gcc.md</a>
                     </li>
                 
@@ -539,10 +543,6 @@
                 
                     <li>
                         <a href="/2022/02/23/software/centos%E5%AE%89%E8%A3%85jenkins/">centos安装jenkins遇到的问题</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/02/23/develop/golang%E8%AE%BE%E7%BD%AEgoroot%E6%8A%A5%E9%94%99/">golang设置GOROOT报错</a>
                     </li>
                 
             </ul>
@@ -565,7 +565,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 10px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
         </div>
     </div>
 
