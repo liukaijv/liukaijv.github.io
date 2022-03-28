@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        certbot配置证书 |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="之前配置证书一直用https:&#x2F;&#x2F;github.com&#x2F;acmesh-official&#x2F;acme.sh，网络原因生成时好时坏；换成Certbot后简单多了 contos7下安装Certbot certbot官网：https:&#x2F;&#x2F;certbot.eff.org&#x2F;instructions 先安装snapd官网https:&#x2F;&#x2F;snapcraft.io&#x2F;docs&#x2F;installing-snap-on-ce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="certbot配置证书">
+<meta property="og:url" content="http://liukaijv.github.io/2022/03/28/develop/certbot%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="之前配置证书一直用https:&#x2F;&#x2F;github.com&#x2F;acmesh-official&#x2F;acme.sh，网络原因生成时好时坏；换成Certbot后简单多了 contos7下安装Certbot certbot官网：https:&#x2F;&#x2F;certbot.eff.org&#x2F;instructions 先安装snapd官网https:&#x2F;&#x2F;snapcraft.io&#x2F;docs&#x2F;installing-snap-on-ce">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-28T03:20:08.000Z">
+<meta property="article:modified_time" content="2022-03-28T03:33:31.352Z">
+<meta property="article:author" content="Abc">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="ssl">
+<meta property="article:tag" content="centos7">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-develop/certbot配置证书" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">certbot配置证书</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-03-28 11:20:08</span>
+    </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>之前配置证书一直用<code>https://github.com/acmesh-official/acme.sh</code>，网络原因生成时好时坏；换成<code>Certbot</code>后简单多了</p>
+<p><code>contos7</code>下安装<code>Certbot</code></p>
+<p><code>certbot</code>官网：<a target="_blank" rel="noopener" href="https://certbot.eff.org/instructions">https://certbot.eff.org/instructions</a></p>
+<h2 id="先安装snapd"><a href="#先安装snapd" class="headerlink" title="先安装snapd"></a>先安装snapd</h2><p>官网<a target="_blank" rel="noopener" href="https://snapcraft.io/docs/installing-snap-on-centos">https://snapcraft.io/docs/installing-snap-on-centos</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install epel-release</span><br><span class="line">sudo yum install snapd</span><br><span class="line">sudo systemctl enable --now snapd.socket</span><br><span class="line">sudo ln -s /var/lib/snapd/snap /snap</span><br></pre></td></tr></table></figure>
+
+<p>更新snapd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo snap install core;</span><br><span class="line">sudo snap refresh core</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装Certbot"><a href="#安装Certbot" class="headerlink" title="安装Certbot"></a>安装Certbot</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo snap install --classic certbot</span><br><span class="line">sudo ln -s /snap/bin/certbot /usr/bin/certbot</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx证书"><a href="#nginx证书" class="headerlink" title="nginx证书"></a>nginx证书</h2><p>会自动找到<code>conf</code>所有域名并设置好证书</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo certbot --nginx</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/nginx/">nginx</a>
+        
+            <a class="tag-item" href="/tags/ssl/">ssl</a>
+        
+            <a class="tag-item" href="/tags/centos7/">centos7</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/03/15/linux/shell%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8map/">shell中的使用map</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2022/03/28/develop/certbot%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6/">certbot配置证书</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/03/15/linux/shell%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8map/">shell中的使用map</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/25/develop/centos7%E5%8D%87%E7%BA%A7gcc/">centos7升级gcc.md</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/02/25/software/centos7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85python3/">centos7编译安装python3</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/%E9%97%AE%E9%A2%98/">问题</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 12px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2022 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
