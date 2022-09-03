@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>
+        maven项目添加第三方jar库 |
+        
+        工作中的学习笔记和心得</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="第三方的sdk没在maven公共仓库里，需要下载jar集成到maven项目里 把jar文件拷贝到项目里在根目录或resources创建lib目录，把jar文件拷贝进去 修改pom.xml文件，添加依赖12345678&lt;dependency&gt;    &lt;groupId&gt;com.example&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;opensd">
+<meta property="og:type" content="article">
+<meta property="og:title" content="maven项目添加第三方jar库">
+<meta property="og:url" content="http://liukaijv.github.io/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/index.html">
+<meta property="og:site_name" content="工作中的学习笔记和心得">
+<meta property="og:description" content="第三方的sdk没在maven公共仓库里，需要下载jar集成到maven项目里 把jar文件拷贝到项目里在根目录或resources创建lib目录，把jar文件拷贝进去 修改pom.xml文件，添加依赖12345678&lt;dependency&gt;    &lt;groupId&gt;com.example&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;opensd">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-03T11:43:59.000Z">
+<meta property="article:modified_time" content="2022-09-03T12:48:20.141Z">
+<meta property="article:author" content="Abc">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="maven">
+<meta property="article:tag" content="springboot">
+<meta name="twitter:card" content="summary">
+    
+        <link rel="alternate" href="/atom.xml" title="工作中的学习笔记和心得" type="application/atom+xml">
+    
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+<header id="header">
+    <div class="container">
+        
+        <nav class="menu" id="nav">
+            <ul>
+                
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91">前端开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/java/">JAVA</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/go/">Golang</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/php/">PHP</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件安装</a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">归档</a>
+                    </li>
+                
+            </ul>
+        </nav>
+        
+            <form class="search-form" id="search-form">
+    <div class="search-control">
+        <input placeholder="关键字" type="search" id="search-input" autocomplete="false" maxlength="10">
+        <button title="搜索" id="search-btn" type="button"><i class="lb-icon-search"></i></button>
+    </div>
+    <div class="search-result" id="search-result">
+        <!--<span class="search-result-close">x</span>-->
+        <ul id="search-result-list">
+            <li>无数据</li>
+        </ul>
+    </div>
+</form>
+
+
+<script src="/js/search.js"></script>
+
+
+        
+        <div class="toggle-menu">
+            <a class="menu-icon" id="toggle-nav">
+                <i class="lb-icon-list"></i>
+            </a>
+        </div>
+    </div>
+</header>
+
+<section class="container content">
+    <main>
+        
+            <article id="post-java/maven项目添加第三方jar库" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">maven项目添加第三方jar库</h2>
+
+    <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/java/">java</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-09-03 19:43:59</span>
+    </li>
+    
+</ul>
+
+
+    <div class="post-content article-entry post-markdown">
+        <p>第三方的sdk没在maven公共仓库里，需要下载jar集成到maven项目里</p>
+<h2 id="把jar文件拷贝到项目里"><a href="#把jar文件拷贝到项目里" class="headerlink" title="把jar文件拷贝到项目里"></a>把jar文件拷贝到项目里</h2><p>在根目录或<code>resources</code>创建<code>lib</code>目录，把<code>jar</code>文件拷贝进去</p>
+<h2 id="修改pom-xml文件，添加依赖"><a href="#修改pom-xml文件，添加依赖" class="headerlink" title="修改pom.xml文件，添加依赖"></a>修改<code>pom.xml</code>文件，添加依赖</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>opensdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;pom.basedir&#125;/src/main/resources/lib/opensdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改spring-boot-maven-plugin"><a href="#修改spring-boot-maven-plugin" class="headerlink" title="修改spring-boot-maven-plugin"></a>修改<code>spring-boot-maven-plugin</code></h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includeSystemScope</span>&gt;</span>true<span class="tag">&lt;/<span class="name">includeSystemScope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="刷新maven或者重新打开项目"><a href="#刷新maven或者重新打开项目" class="headerlink" title="刷新maven或者重新打开项目"></a>刷新maven或者重新打开项目</h2>
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/java/">java</a>
+        
+            <a class="tag-item" href="/tags/maven/">maven</a>
+        
+            <a class="tag-item" href="/tags/springboot/">springboot</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/07/04/develop/mysql%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/">mysql创建只读用户</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
+
+
+
+
+        
+    </main>
+    
+        <aside id="sidebar">
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget-body">
+            <ul>
+                
+                    <li>
+                        <a href="/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/">maven项目添加第三方jar库</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/07/04/develop/mysql%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/">mysql创建只读用户</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/06/17/java/windows%E4%B8%8Bhadoop%E9%85%8D%E7%BD%AE/">windows下hadoop配置</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/03/28/develop/certbot%E9%85%8D%E7%BD%AE%E8%AF%81%E4%B9%A6/">certbot配置证书</a>
+                    </li>
+                
+                    <li>
+                        <a href="/2022/03/15/linux/shell%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8map/">shell中的使用map</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget-body">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/java/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodejs/">nodejs</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/php/">php</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/html/">html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/">移动开发</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8%E5%BC%80%E5%8F%91/android/">android</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/%E9%97%AE%E9%A2%98/">问题</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a></li></ul>
+        </div>
+    </div>
+
+
+    
+        
+    <div class="widget">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget-body tagcloud">
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 12px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 18px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 12px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 12px;">windows</a>
+        </div>
+    </div>
+
+
+    
+</aside>
+
+    
+</section>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; 2022 Abc all rights reserved.
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+            
+                <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
+            
+    </div>
+</footer>
+
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>
