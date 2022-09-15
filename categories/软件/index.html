@@ -488,53 +488,6 @@
 
     <article class="post">
         <h2 class="post-title">
-            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2021-02-10 10:11:28</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-
-
-                
-            </div>
-        </div>
-    </article>
-
-    <article class="post">
-        <h2 class="post-title">
             <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
         </h2>
         <ul class="post-meta">
@@ -632,6 +585,53 @@
         </div>
     </article>
 
+    <article class="post">
+        <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/">nodejs安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a target="_blank" rel="noopener" href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
+
+
+                
+            </div>
+        </div>
+    </article>
+
 
 
 
@@ -648,6 +648,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/09/15/develop/%E5%AF%B9git%E4%BB%93%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%B8%85%E7%90%86/">对git仓库进行清理</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/">python类中方法返回自身值类型的写法</a>
                     </li>
                 
@@ -661,10 +665,6 @@
                 
                     <li>
                         <a href="/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/">maven项目添加第三方jar库</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/07/04/develop/mysql%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/">mysql创建只读用户</a>
                     </li>
                 
             </ul>
@@ -687,7 +687,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 11.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a>
         </div>
     </div>
 
@@ -762,6 +762,7 @@
             ta.select()
             ta.focus()
             var flag = document.execCommand('copy')
+            ta.blur()
             if (flag) {
                 $copyBtn.innerText = "复制成功"
             } else {

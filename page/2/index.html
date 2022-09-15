@@ -116,6 +116,53 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/02/25/develop/centos7%E5%8D%87%E7%BA%A7gcc/">centos7升级gcc.md</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-02-25 12:22:46</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>centos7默认安装的gcc版本是4.8.5，升级为最新版本</p>
+<p>安装<code>centos-release-scl</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install centos-release-scl</span><br></pre></td></tr></table></figure>
+
+<p>查看可安装的<code>devtoolset</code>版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum search devtoolset</span><br></pre></td></tr></table></figure>
+
+<p>安装对应的版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install devtoolset-8-gcc</span><br><span class="line">sudo yum install devtoolset-8-gcc-c++</span><br></pre></td></tr></table></figure>
+
+<p>安装<code>devtoolset</code>之后的目录是<code>/opt/rh/devtoolset-8</code></p>
+<p>激活</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo source /opt/rh/devtoolset-8/enable</span><br></pre></td></tr></table></figure>
+
+<p>替换centos是老版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 替换gcc</span></span><br><span class="line">sudo mv /usr/bin/gcc /usr/bin/gcc_bak</span><br><span class="line">sudo ln -s /opt/rh/devtoolset-8/root/bin/gcc /usr/bin/gcc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换g++</span></span><br><span class="line">sudo mv /usr/bin/g++ /usr/bin/g++_bak</span><br><span class="line">sudo ln -s /opt/rh/devtoolset-8/root/bin/g++ /usr/bin/g++</span><br></pre></td></tr></table></figure>
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/02/25/software/centos7%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85python3/">centos7编译安装python3</a>
         </h2>
         <ul class="post-meta">
@@ -524,62 +571,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/">centos7安装mysql</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2022-01-07 16:52:51</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址<a target="_blank" rel="noopener" href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-<p>找到想要的版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install libaio</span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示</span></span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-client(x86-64) &gt;= 5.7.9 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line">        mysql-community-common(x86-64) = 5.7.34-1.el7 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>提示依赖<code>mysql-community-client</code>和<code>mysql-community-common</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示和mariadb-libs冲突</span></span><br><span class="line">file /usr/share/mysql/czech/errmsg.sys from install of mysql-community-common-5.7.34-1.el7.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.el7.x86_64</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看出来删除掉</span></span><br><span class="line">rpm -qa|grep mariadb-libs</span><br><span class="line">rpm -e mariadb-libs-5.5.68-1.el7.x86_64 --nodeps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再重新安装mysql-community-common</span></span><br><span class="line"></span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-libs(x86-64) &gt;= 5.7.9 is needed by mysql-community-client-5.7.34-1.el7.x86_64</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
-
-<p>提示依赖<code>mysql-community-libs</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-
-<p>一共需要下面4个文件</p>
-<ul>
-<li>mysql-community-client-5.7.34-1.el7.x86_64.rpm</li>
-<li>mysql-community-common-5.7.34-1.el7.x86_64.rpm</li>
-<li>mysql-community-libs-5.7.34-1.el7.x86_64.rpm</li>
-<li>mysql-community-server-5.7.34-1.el7.x86_64.rpm</li>
-</ul>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><p>如果没有设置密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/mysqladmin -u root password &#x27;xxx&#x27;</span><br></pre></td></tr></table></figure>
-
-<p>如果设置了密码</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 找到密码</span></span><br><span class="line">sudo grep &#x27;temporary password&#x27; /var/log/mysqld.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录</span></span><br><span class="line">mysql -uroot -p</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改密码</span></span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;MyNewPass4!&#x27;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 出错</span></span><br><span class="line">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 降低密码强度</span></span><br><span class="line">set global validate_password_policy=0;</span><br><span class="line">set global validate_password_length=1;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mysql8，没这两个变量</span></span><br><span class="line">SHOW VARIABLES LIKE &#x27;validate_password%&#x27;;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改为</span></span><br><span class="line">set global validate_password.policy=0;</span><br><span class="line">set global validate_password.length=1;</span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
-
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -602,6 +593,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/09/15/develop/%E5%AF%B9git%E4%BB%93%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%B8%85%E7%90%86/">对git仓库进行清理</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/">python类中方法返回自身值类型的写法</a>
                     </li>
                 
@@ -615,10 +610,6 @@
                 
                     <li>
                         <a href="/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/">maven项目添加第三方jar库</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/07/04/develop/mysql%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/">mysql创建只读用户</a>
                     </li>
                 
             </ul>
@@ -641,7 +632,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 11.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a>
         </div>
     </div>
 
@@ -716,6 +707,7 @@
             ta.select()
             ta.focus()
             var flag = document.execCommand('copy')
+            ta.blur()
             if (flag) {
                 $copyBtn.innerText = "复制成功"
             } else {

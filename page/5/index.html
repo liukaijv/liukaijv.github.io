@@ -116,6 +116,50 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2016/03/03/software/%E5%9C%A8centos7%E4%B8%8A%E5%AE%89%E8%A3%85php/">在centos7上安装php</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-03-03 17:39:23</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>###默认安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install php</span><br></pre></td></tr></table></figure>
+
+<p>默认的版本太低了，手动安装有一些麻烦，想采用Yum安装的可以使用下面的方案：</p>
+<h5 id="检查当前安装的PHP包"><a href="#检查当前安装的PHP包" class="headerlink" title="检查当前安装的PHP包"></a>检查当前安装的PHP包</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list installed | grep php</span><br></pre></td></tr></table></figure>
+
+<p>如果有安装的PHP包，先删除他们</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove php.x86_64 php-cli.x86_64 php-common.x86_64 php-gd.x86_64 php-ldap.x86_64 php-mbstring.x86_64 php-mcrypt.x86_64 php-mysql.x86_64 php-pdo.x86_64</span><br></pre></td></tr></table></figure>
+                    
+                        <p class="more-link">
+                            <a href="/2016/03/03/software/%E5%9C%A8centos7%E4%B8%8A%E5%AE%89%E8%A3%85php/">查看详情&raquo;</a>
+                        </p>
+                    
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2016/02/27/frontend/%E5%BE%AA%E7%8E%AF%E4%B8%AD%E6%AD%A3%E7%A1%AE%E7%BB%91%E5%AE%9A%E4%BA%8B%E4%BB%B6%E7%9A%84N%E7%A7%8D%E6%96%B9%E6%B3%95/">循环中正确绑定事件的N种方法</a>
         </h2>
         <ul class="post-meta">
@@ -471,48 +515,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2015/10/04/frontend/javascript%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">javascript中的隐式类型转换</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2015-10-04 11:38:06</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。</p>
-<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2><p>+号可以当算术运算符也能当连字符号，使用+情况为：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 只要有一个类型为string，另一个也会转为string</span><br><span class="line">console.log(1+&#x27;1&#x27;) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+1) // &#x27;11&#x27;</span><br><span class="line">console.log(&#x27;1&#x27;+true) // &#x27;11&#x27;</span><br><span class="line">// number和boolean时，boolean转为number</span><br><span class="line">console.log(1+true) // &#x27;2&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-                    
-                        <p class="more-link">
-                            <a href="/2015/10/04/frontend/javascript%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -535,6 +537,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/09/15/develop/%E5%AF%B9git%E4%BB%93%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%B8%85%E7%90%86/">对git仓库进行清理</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/">python类中方法返回自身值类型的写法</a>
                     </li>
                 
@@ -548,10 +554,6 @@
                 
                     <li>
                         <a href="/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/">maven项目添加第三方jar库</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/07/04/develop/mysql%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/">mysql创建只读用户</a>
                     </li>
                 
             </ul>
@@ -574,7 +576,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 11.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 13.33px;">windows</a>
         </div>
     </div>
 
@@ -649,6 +651,7 @@
             ta.select()
             ta.focus()
             var flag = document.execCommand('copy')
+            ta.blur()
             if (flag) {
                 $copyBtn.innerText = "复制成功"
             } else {

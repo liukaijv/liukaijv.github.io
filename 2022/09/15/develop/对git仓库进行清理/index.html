@@ -4,18 +4,23 @@
     <meta charset="utf-8">
     
     <title>
-        标签: jquery |
+        对git仓库进行清理 |
         
         工作中的记录和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="工作中的记录和心得">
-<meta property="og:url" content="http://liukaijv.github.io/tags/jquery/index.html">
+    <meta name="description" content="git仓库使用很长一段时间后，因为提交次数多了.git目录会越来越大；导致构建检出tag时耗时特别长。 整理了清理git仓库方法 使用bfg工具清理下载地址：https:&#x2F;&#x2F;github.com&#x2F;rtyley&#x2F;bfg-repo-cleaner 使用步骤： 下载bfg，是一个jar文件，需求安装java环境才能执行 清理命令 12# 清理&gt;10M的文件java -jar bfg-path&#x2F;bf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对git仓库进行清理">
+<meta property="og:url" content="http://liukaijv.github.io/2022/09/15/develop/%E5%AF%B9git%E4%BB%93%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%B8%85%E7%90%86/index.html">
 <meta property="og:site_name" content="工作中的记录和心得">
+<meta property="og:description" content="git仓库使用很长一段时间后，因为提交次数多了.git目录会越来越大；导致构建检出tag时耗时特别长。 整理了清理git仓库方法 使用bfg工具清理下载地址：https:&#x2F;&#x2F;github.com&#x2F;rtyley&#x2F;bfg-repo-cleaner 使用步骤： 下载bfg，是一个jar文件，需求安装java环境才能执行 清理命令 12# 清理&gt;10M的文件java -jar bfg-path&#x2F;bf">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-15T12:44:14.000Z">
+<meta property="article:modified_time" content="2022-09-15T13:03:29.001Z">
 <meta property="article:author" content="Abc">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="工作中的记录和心得" type="application/atom+xml">
@@ -114,83 +119,95 @@
 <section class="container content">
     <main>
         
-            
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">Promise和Deferred的用法对比</a>
-        </h2>
-        <ul class="post-meta">
+            <article id="post-develop/对git仓库进行清理" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">对git仓库进行清理</h2>
+
+    <ul class="post-meta">
     
     
         <li>
             分类
             
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2016-07-18 18:59:00</span>
+        发表于 <span>2022-09-15 20:44:14</span>
     </li>
     
 </ul>
 
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
-                    
-                        <p class="more-link">
-                            <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">查看详情&raquo;</a>
-                        </p>
-                    
-                
+
+    <div class="post-content article-entry post-markdown">
+        <p>git仓库使用很长一段时间后，因为提交次数多了<code>.git</code>目录会越来越大；导致构建检出<code>tag</code>时耗时特别长。</p>
+<p>整理了清理git仓库方法</p>
+<h2 id="使用bfg工具清理"><a href="#使用bfg工具清理" class="headerlink" title="使用bfg工具清理"></a>使用bfg工具清理</h2><p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/rtyley/bfg-repo-cleaner">https://github.com/rtyley/bfg-repo-cleaner</a></p>
+<p>使用步骤：</p>
+<p>下载bfg，是一个jar文件，需求安装<code>java</code>环境才能执行</p>
+<p>清理命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 清理&gt;10M的文件</span></span><br><span class="line">java -jar bfg-path/bfg.jar --strip-blobs-bigger-than 10M --no-blob-protection your-git-repo-path</span><br></pre></td></tr></table></figure>
+
+<p>进入仓库目录，执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd your-git-repo-path</span><br><span class="line">git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</span><br></pre></td></tr></table></figure>
+
+<p>漫长的等待过后，推送到远程</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --force</span><br></pre></td></tr></table></figure>
+
+<p>自已的项目可以像这样搞，如果是多人使用的仓库，最好是清理后迁移成一个新仓库，然后所有人重新clone</p>
+
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/git/">git</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/">python类中方法返回自身值类型的写法</a>
             </div>
-        </div>
-    </article>
+        
+    </nav>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2015/03/28/frontend/%E8%AE%A9jquery%E6%8F%92%E4%BB%B6%E6%94%AF%E6%8C%81AMD%E5%92%8CCMD%E8%A7%84%E8%8C%83/">让jquery插件支持AMD和CMD规范</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2015-03-28 11:37:47</span>
-    </li>
-    
-</ul>
 
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>jquery插件支持AMD和CMD规范的改造：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">;<span class="function"><span class="keyword">function</span>(<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line"><span class="meta">	 &quot;use strict&quot;</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; (define.amd || define.cmd)) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// register as anon module</span></span><br><span class="line">		define([<span class="string">&#x27;jquery&#x27;</span>], factory);</span><br><span class="line"></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// invoke directly</span></span><br><span class="line">		factory( (<span class="keyword">typeof</span>(jQuery) != <span class="string">&#x27;undefined&#x27;</span>) ? jQuery : <span class="built_in">window</span>.Zepto );</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;(<span class="built_in">this</span>, <span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</span><br><span class="line"><span class="meta">	&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// your code</span></span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-                
-            </div>
-        </div>
-    </article>
 
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
 
 
 
