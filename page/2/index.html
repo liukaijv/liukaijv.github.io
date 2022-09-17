@@ -116,6 +116,47 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/03/15/linux/shell%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8map/">shell中的使用map</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/linux/">linux</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-03-15 10:55:35</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>shell中map必须申明才能使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">declare -A userIds</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方式一，item项目中间不需要逗号</span></span><br><span class="line">userIds=([&#x27;bar&#x27;]=&quot;1&quot; [&#x27;foo&#x27;]=&quot;2&quot;)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 方式二</span></span><br><span class="line">userIds[&#x27;bar&#x27;]=&quot;1&quot;</span><br><span class="line">userIds[&#x27;foo&#x27;]=&quot;2&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输出value</span></span><br><span class="line">echo &quot;$&#123;userIds[*]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">echo &quot;$&#123;userIds[@]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出key</span></span><br><span class="line">echo &quot;$&#123;!userIds[*]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">echo &quot;$&#123;!userIds[@]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> bar foo</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输出key</span></span><br><span class="line">for key in &quot;$&#123;!userIds[@]&#125;&quot;; do</span><br><span class="line">    echo $key</span><br><span class="line">    echo $&#123;userIds[$key]&#125;</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出value</span></span><br><span class="line">for value in &quot;$&#123;userIds[@]&#125;&quot;; do</span><br><span class="line">    echo $value</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><code>@</code>换成<code>*</code>效果一样</p>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
         </h2>
         <ul class="post-meta">
@@ -532,55 +573,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2022/01/24/software/centos7%E5%AE%89%E8%A3%85grafana/">centos7安装grafana</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2022-01-24 15:20:01</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>设置源</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.repos.d/grafana.repo</span><br></pre></td></tr></table></figure>
-
-<p>源文件内容</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[grafana]</span></span><br><span class="line"><span class="attr">name</span> = grafana</span><br><span class="line"><span class="attr">baseurl</span> = https://packages.grafana.com/oss/rpm</span><br><span class="line"><span class="attr">repo_gpgcheck</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">enabled</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">gpgcheck</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span> = https://packages.grafana.com/gpg.key</span><br><span class="line"><span class="attr">sslverify</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">sslcacert</span> = /etc/pki/tls/certs/ca-bundle.crt</span><br></pre></td></tr></table></figure>
-
-<p>安装</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install grafana</span><br></pre></td></tr></table></figure>
-
-<p>启动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start grafana-server</span><br></pre></td></tr></table></figure>
-
-<p>设为开机启动</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable grafana-server</span><br></pre></td></tr></table></figure>
-
-<p>访问</p>
-<p>访问<a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000</a></p>
-
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -603,6 +595,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git错误invalid path解决方法</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/09/17/develop/git%E6%96%87%E4%BB%B6%E5%90%8D%E8%BF%87%E9%95%BF%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git文件名过长错误解决方法</a>
                     </li>
                 
@@ -616,10 +612,6 @@
                 
                     <li>
                         <a href="/2022/09/14/python/pip%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%E5%87%BA%E7%8E%B0neither-setup-py-nor-pyproject-toml-found/">pip安装模块出现neither-setup.py-nor-pyproject.toml-found</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/09/12/python/windows%E4%B8%8B%E7%BC%BA%E5%A4%B1fcntl%E6%8A%A5%E9%94%99/">windows下缺失fcntl报错</a>
                     </li>
                 
             </ul>
@@ -642,7 +634,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 16.67px;">windows</a>
         </div>
     </div>
 

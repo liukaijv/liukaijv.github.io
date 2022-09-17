@@ -4,23 +4,24 @@
     <meta charset="utf-8">
     
     <title>
-        minikube安装 |
+        git错误invalid path解决方法 |
         
         工作中的记录和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="本地安装kubernetes开发环境minikube。 下载安装minikube官网选择系统对应的安装包 123curl -LO https:&#x2F;&#x2F;storage.googleapis.com&#x2F;minikube&#x2F;releases&#x2F;latest&#x2F;minikube-linux-amd64sudo install minikube-linux-amd64 &#x2F;usr&#x2F;local&#x2F;bin&#x2F;minikube">
+    <meta name="description" content="在windows上git clone代码时报错：error: invalid path ‘xxxx’ 解决方法： 1git config core.protectNTFS false  参数说明： 12core.protectNTFSIf set to true, do not allow checkout of paths that would cause problems with the N">
 <meta property="og:type" content="article">
-<meta property="og:title" content="minikube安装">
-<meta property="og:url" content="http://liukaijv.github.io/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="git错误invalid path解决方法">
+<meta property="og:url" content="http://liukaijv.github.io/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="工作中的记录和心得">
-<meta property="og:description" content="本地安装kubernetes开发环境minikube。 下载安装minikube官网选择系统对应的安装包 123curl -LO https:&#x2F;&#x2F;storage.googleapis.com&#x2F;minikube&#x2F;releases&#x2F;latest&#x2F;minikube-linux-amd64sudo install minikube-linux-amd64 &#x2F;usr&#x2F;local&#x2F;bin&#x2F;minikube">
+<meta property="og:description" content="在windows上git clone代码时报错：error: invalid path ‘xxxx’ 解决方法： 1git config core.protectNTFS false  参数说明： 12core.protectNTFSIf set to true, do not allow checkout of paths that would cause problems with the N">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-10T02:11:28.000Z">
-<meta property="article:modified_time" content="2021-12-19T14:46:28.572Z">
+<meta property="article:published_time" content="2022-09-17T07:50:22.000Z">
+<meta property="article:modified_time" content="2022-09-17T07:55:36.467Z">
 <meta property="article:author" content="Abc">
-<meta property="article:tag" content="ubuntu">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="windows">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="工作中的记录和心得" type="application/atom+xml">
@@ -119,10 +120,10 @@
 <section class="container content">
     <main>
         
-            <article id="post-software/linux中minikube安装" class="article-entry post post-type-post" itemscope
+            <article id="post-develop/git错误invalid-path解决方法" class="article-entry post post-type-post" itemscope
          itemprop="blogPost">
 
-    <h2 class="post-title">minikube安装</h2>
+    <h2 class="post-title">git错误invalid path解决方法</h2>
 
     <ul class="post-meta">
     
@@ -130,36 +131,26 @@
         <li>
             分类
             
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2021-02-10 10:11:28</span>
+        发表于 <span>2022-09-17 15:50:22</span>
     </li>
     
 </ul>
 
 
     <div class="post-content article-entry post-markdown">
-        <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+        <p>在windows上git clone代码时报错：error: invalid path ‘xxxx’</p>
+<p>解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config core.protectNTFS false</span><br></pre></td></tr></table></figure>
 
-<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
-
-
-
+<p>参数说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">core.protectNTFS</span><br><span class="line">If set to true, do not allow checkout of paths that would cause problems with the NTFS filesystem, e.g. conflict with 8.3 &quot;short&quot; names. Defaults to true on Windows, and false elsewhere.</span><br></pre></td></tr></table></figure>
     </div>
 
 </article>
@@ -168,7 +159,9 @@
     <div class="post-tag">
         <i class="lb-icon-tag" title="标签"></i>
         
-            <a class="tag-item" href="/tags/ubuntu/">ubuntu</a>
+            <a class="tag-item" href="/tags/git/">git</a>
+        
+            <a class="tag-item" href="/tags/windows/">windows</a>
         
     </div>
 
@@ -177,15 +170,10 @@
 
     <nav class="gutter">
         
-            <div class="post-prev">
-                上一篇：
-                <a href="/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/">ssh长时间保持不断开</a>
-            </div>
-        
         
             <div class="post-next">
                 下一篇：
-                <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
+                <a href="/2022/09/17/develop/git%E6%96%87%E4%BB%B6%E5%90%8D%E8%BF%87%E9%95%BF%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git文件名过长错误解决方法</a>
             </div>
         
     </nav>
