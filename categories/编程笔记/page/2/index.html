@@ -117,6 +117,40 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/">在shell中执行一个字符串</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2020-02-10 12:29:55</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>写shell脚本时经常会拼接一个字串,然后当成命令执行，用到的linux命令是<code>eval $&#123;str&#125;</code>或者<code>echo $&#123;str&#125; | sh</code>，例子如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">start=1</span><br><span class="line">amount=<span class="variable">$1</span></span><br><span class="line">raceId=<span class="variable">$2</span></span><br><span class="line">api_host=127.0.0.1:8080</span><br><span class="line">str=<span class="string">&quot;curl --location --request POST &#x27;http://<span class="variable">$&#123;api_host&#125;</span>/api/AddBuy&#x27;</span></span><br><span class="line"><span class="string">--header \&quot;&#x27;Content-Type&#x27;:&#x27;application/json&#x27;\&quot;</span></span><br><span class="line"><span class="string">--data-raw &#x27;&#123;</span></span><br><span class="line"><span class="string">    \&quot;PidStart\&quot;:<span class="variable">$start</span>,</span></span><br><span class="line"><span class="string">    \&quot;Amount\&quot;:<span class="variable">$&#123;amount&#125;</span>,</span></span><br><span class="line"><span class="string">    \&quot;RaceId\&quot;:<span class="variable">$&#123;raceId&#125;</span></span></span><br><span class="line"><span class="string">&#125;&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str&#125;</span> | sh</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">eval</span> <span class="variable">$&#123;str&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2018/03/03/develop/github%E5%A4%9A%E5%B8%90%E5%8F%B7%E6%B7%BB%E5%8A%A0SSH%E5%85%AC%E9%92%A5/">github多帐号添加ssh公钥</a>
         </h2>
         <ul class="post-meta">
@@ -393,6 +427,10 @@ Require all granted
             <ul>
                 
                     <li>
+                        <a href="/2022/09/20/develop/git%E7%BB%9F%E8%AE%A1%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95%E4%B8%AD%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84%E6%96%87%E4%BB%B6/">git统计提交记录中修改过的文件</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git错误invalid path解决方法</a>
                     </li>
                 
@@ -406,10 +444,6 @@ Require all granted
                 
                     <li>
                         <a href="/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/">python类中方法返回自身值类型的写法</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/09/14/python/pip%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%E5%87%BA%E7%8E%B0neither-setup-py-nor-pyproject-toml-found/">pip安装模块出现neither-setup.py-nor-pyproject.toml-found</a>
                     </li>
                 
             </ul>
@@ -432,7 +466,7 @@ Require all granted
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.33px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16.67px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 16.67px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.43px;">gcc</a> <a href="/tags/git/" style="font-size: 17.14px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.43px;">grafana</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 12.86px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.43px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.43px;">laravel</a> <a href="/tags/linux/" style="font-size: 18.57px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.43px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.43px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/python/" style="font-size: 14.29px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/shell/" style="font-size: 11.43px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.43px;">ssl</a> <a href="/tags/tricks/" style="font-size: 15.71px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.43px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 15.71px;">windows</a>
         </div>
     </div>
 

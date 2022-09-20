@@ -4,18 +4,23 @@
     <meta charset="utf-8">
     
     <title>
-        标签: react |
+        git统计提交记录中修改过的文件 |
         
         工作中的记录和心得</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="工作中的记录和心得">
-<meta property="og:url" content="http://liukaijv.github.io/tags/react/index.html">
+    <meta name="description" content="使用git的log命令 123# start_commit_id 起始提交ID# end_commit_id 结束提交IDgit log --author&#x3D;abc --name-only --pretty&#x3D; start_commit_id..end_commit_id   只显示文件pretty必须为空  12# 显示commit_id和文件git log --author&#x3D;abc --name-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git统计提交记录中修改过的文件">
+<meta property="og:url" content="http://liukaijv.github.io/2022/09/20/develop/git%E7%BB%9F%E8%AE%A1%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95%E4%B8%AD%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="工作中的记录和心得">
+<meta property="og:description" content="使用git的log命令 123# start_commit_id 起始提交ID# end_commit_id 结束提交IDgit log --author&#x3D;abc --name-only --pretty&#x3D; start_commit_id..end_commit_id   只显示文件pretty必须为空  12# 显示commit_id和文件git log --author&#x3D;abc --name-">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-20T06:31:05.000Z">
+<meta property="article:modified_time" content="2022-09-20T06:52:33.589Z">
 <meta property="article:author" content="Abc">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
     
         <link rel="alternate" href="/atom.xml" title="工作中的记录和心得" type="application/atom+xml">
@@ -114,47 +119,86 @@
 <section class="container content">
     <main>
         
-            
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/06/15/frontend/react%E5%B8%B8%E7%94%A8API%E6%80%BB%E7%BB%93/">react常用API总结</a>
-        </h2>
-        <ul class="post-meta">
+            <article id="post-develop/git统计提交记录中修改过的文件" class="article-entry post post-type-post" itemscope
+         itemprop="blogPost">
+
+    <h2 class="post-title">git统计提交记录中修改过的文件</h2>
+
+    <ul class="post-meta">
     
     
         <li>
             分类
             
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                <a href="/categories/%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0/">编程笔记</a>
                 
             
             ·
         </li>
     
     <li>
-        发表于 <span>2016-06-15 10:35:51</span>
+        发表于 <span>2022-09-20 14:31:05</span>
     </li>
     
 </ul>
 
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。</p>
-                    
-                        <p class="more-link">
-                            <a href="/2016/06/15/frontend/react%E5%B8%B8%E7%94%A8API%E6%80%BB%E7%BB%93/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
 
+    <div class="post-content article-entry post-markdown">
+        <p>使用git的log命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> start_commit_id 起始提交ID</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> end_commit_id 结束提交ID</span></span><br><span class="line">git log --author=abc --name-only --pretty= start_commit_id..end_commit_id</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>只显示文件<code>pretty</code>必须为空</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示commit_id和文件</span></span><br><span class="line">git log --author=abc --name-only --pretty=oneline start_commit_id..end_commit_id</span><br></pre></td></tr></table></figure>
+    </div>
+
+</article>
+
+
+    <div class="post-tag">
+        <i class="lb-icon-tag" title="标签"></i>
+        
+            <a class="tag-item" href="/tags/git/">git</a>
+        
+    </div>
+
+
+
+
+    <nav class="gutter">
+        
+        
+            <div class="post-next">
+                下一篇：
+                <a href="/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git错误invalid path解决方法</a>
+            </div>
+        
+    </nav>
+
+
+
+
+    <div id="comments" class="post-comments"></div>
+
+<script src="/js/md5.min.js"></script>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '9e8f30fb04a96980e808',
+        clientSecret: '5d41003daf07883809a1fd581192dbf0af33fae2',
+        repo: 'liukaijv.github.io',
+        owner: 'liukaijv',
+        admin: ['liukaijv'],
+        id: md5(decodeURI(window.location.pathname)),
+        distractionFreeMode: 'false',
+        language: 'zh-CN',
+        perPage: parseInt('10', 10)
+    })
+    gitalk.render('comments');
+</script>
 
 
 
