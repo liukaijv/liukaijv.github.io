@@ -118,6 +118,53 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">深入理解JS执行细节</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
+                >
+            
+                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2016-08-04 11:38:06</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>以前看Tom大叔的深入理解JS系列介绍的很在错，但这篇文章短而好懂，mark一份。</p>
+<blockquote>
+<p>转自<a target="_blank" rel="noopener" href="http://www.cnblogs.com/onepixel/p/5090799.html">http://www.cnblogs.com/onepixel/p/5090799.html</a></p>
+</blockquote>
+<p>javascript从定义到执行，JS引擎在实现层做了很多初始化工作，因此在学习JS引擎工作机制之前，我们需要引入几个相关的概念：执行环境栈、全局对象、执行环境、变量对象、活动对象、作用域和作用域链等，这些概念正是JS引擎工作的核心组件。这篇文章的目的不是孤立的为你讲解每一个概念，而是通过一个简单的demo来展开分析，全局讲解JS引擎从定义到执行的每一个细节，以及这些概念在其中所扮演的角色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span>;  <span class="comment">//定义一个全局变量 x</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">y</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">var</span> x = <span class="number">2</span>;  <span class="comment">//定义一个局部变量 x</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">z</span>)</span>&#123; <span class="comment">//定义一个内部函数 B</span></span><br><span class="line">       <span class="built_in">console</span>.log(x+y+z);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> B; <span class="comment">//返回函数B的引用</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> C = A(<span class="number">1</span>); <span class="comment">//执行A,返回B</span></span><br><span class="line">C(<span class="number">1</span>); <span class="comment">//执行函数B</span></span><br></pre></td></tr></table></figure>
+
+<p>这个demo是一个闭包，执行结果是4，下面我们将分全局初始化、执行函数A、执行函数B 三个阶段来分析JS引擎的工作机制:</p>
+                    
+                        <p class="more-link">
+                            <a href="/2016/08/04/frontend/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3JS%E6%89%A7%E8%A1%8C%E7%BB%86%E8%8A%82/">查看详情&raquo;</a>
+                        </p>
+                    
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/">Promise和Deferred的用法对比</a>
         </h2>
         <ul class="post-meta">
@@ -496,47 +543,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2016/01/09/frontend/%E4%BD%BF%E7%94%A8ajax%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E4%B8%83%E7%89%9B/">使用$.ajax上传文件到七牛</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>
-                >
-            
-                <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/javascript/">javascript</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2016-01-09 09:27:03</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>用jquery的ajax方法上传文件到七牛和常规的ajax有点区别，直接上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $input = $(<span class="string">&#x27;#upload-qiniu&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> token = <span class="string">&#x27;sMTdcnRxls_IaTJ1uSOR1Rb7zFkcdJq3LK0MPjR1:4k547QcZwzo2fK7zPJeu28UgXNM=:eyJzY29wZSI6Im9haGEiLCJkZWFkbGluZSI6MTQ0MTk2NzY1Mn0=&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">&#x27;http://up.qiniu.com/&#x27;</span>;</span><br><span class="line"><span class="keyword">var</span> prefix = <span class="string">&#x27;http://7vii28.com1.z0.glb.clouddn.com/&#x27;</span>;</span><br><span class="line"></span><br><span class="line">$input.on(<span class="string">&#x27;change&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> me = $(<span class="built_in">this</span>);</span><br><span class="line">	<span class="keyword">var</span> file = <span class="built_in">this</span>.files[<span class="number">0</span>];     </span><br><span class="line">	<span class="keyword">var</span> formData = <span class="keyword">new</span> FormData(),</span><br><span class="line">	    filename = file.name;</span><br><span class="line">	formData.append(<span class="string">&#x27;token&#x27;</span>, token);</span><br><span class="line">	formData.append(<span class="string">&quot;file&quot;</span>, file);</span><br><span class="line">	$.ajax(&#123;  </span><br><span class="line">		<span class="attr">url</span> : url,  </span><br><span class="line">		<span class="attr">type</span> : <span class="string">&#x27;POST&#x27;</span>,  </span><br><span class="line">		<span class="attr">data</span> : formData, </span><br><span class="line">		<span class="attr">processData</span> : <span class="literal">false</span>, <span class="comment">// 对数据不作处理</span></span><br><span class="line">		<span class="attr">contentType</span> : <span class="literal">false</span> <span class="comment">// 使用原始类型</span></span><br><span class="line">	&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123; </span><br><span class="line">		<span class="built_in">console</span>.log(json);</span><br><span class="line">	&#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;                </span><br><span class="line">		<span class="built_in">console</span>.log(json.responseJSON.error);</span><br><span class="line">	&#125;);              </span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-                    
-                        <p class="more-link">
-                            <a href="/2016/01/09/frontend/%E4%BD%BF%E7%94%A8ajax%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E5%88%B0%E4%B8%83%E7%89%9B/">查看详情&raquo;</a>
-                        </p>
-                    
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -559,6 +565,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/10/13/linux/%E6%B8%85%E7%90%86%E8%BF%87%E6%9C%9F%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">清理过期日志文件</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/09/27/develop/%E5%A6%82%E4%BD%95%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E6%97%B6%E9%97%B4%E8%8C%83%E5%9B%B4%E5%86%85%E7%9A%84%E6%97%A5%E5%BF%97/">如何查询指定时间范围内的日志</a>
                     </li>
                 
@@ -572,10 +582,6 @@
                 
                     <li>
                         <a href="/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git错误invalid path解决方法</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/09/17/develop/git%E6%96%87%E4%BB%B6%E5%90%8D%E8%BF%87%E9%95%BF%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git文件名过长错误解决方法</a>
                     </li>
                 
             </ul>
@@ -598,7 +604,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 18px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/log/" style="font-size: 10px;">log</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/python/" style="font-size: 16px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 12px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 16px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/centos/" style="font-size: 18.33px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/log/" style="font-size: 11.67px;">log</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 15px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a>
         </div>
     </div>
 

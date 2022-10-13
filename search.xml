@@ -1,73 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Apache的访问权限配置</title>
-    <url>/2015/03/03/develop/Apache%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
-<pre><code>################################################ 
-2.2上的配置 
-Order deny,allow 
-Deny from all 
- 
-2.4上的配置 
-Require all denied 
- 
-################################################ 
-2.2上的配置 
-Order allow,deny 
-Allow from all 
- 
-2.4上的配置 
-Require all granted 
- 
-################################################# 
-</code></pre>
-<span id="more"></span>
-
-<p>下面给出了几个例子在2.4版本上的配置</p>
-<p>1、仅允许IP为192.168.1.1的主机访问</p>
-<pre><code>require all  granted 
-require ip 192.168.1.1 
-</code></pre>
-<p>2、仅允许192.168.0.0/24网络的主机访问</p>
-<pre><code>require all  granted  
-require ip 192.168.1.0/24 
-</code></pre>
-<p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
-<pre><code>require all  granted 
-require not ip 192.168.1.2 
-</code></pre>
-<p>4、允许所有访问,</p>
-<pre><code>require all  granted
- 
-</code></pre>
-<p>5、拒绝所有访问,</p>
-<pre><code>require all  denied 
-</code></pre>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>apache</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>模拟器运行instantRunSplitApkResourcesDebug报错</title>
-    <url>/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/</url>
-    <content><![CDATA[<p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
-<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
-<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
-]]></content>
-      <categories>
-        <category>移动开发</category>
-        <category>android</category>
-      </categories>
-      <tags>
-        <tag>app</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>git统计提交记录中修改过的文件</title>
     <url>/2022/09/20/develop/git%E7%BB%9F%E8%AE%A1%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95%E4%B8%AD%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<p>使用git的log命令</p>
@@ -124,19 +57,19 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>git文件名过长错误解决方法</title>
-    <url>/2022/09/17/develop/git%E6%96%87%E4%BB%B6%E5%90%8D%E8%BF%87%E9%95%BF%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>git使用过程中，出现<code>error: unable to create file xxx: Filename too long Updated 0 paths from the index</code></p>
-<p>原因是windows的git版本中如果是文件名太长了，git会报错</p>
-<p>解决方法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 选其一</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 全局设置</span></span><br><span class="line">git config --global core.longpaths true</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前项目设置</span></span><br><span class="line">git config core.longpaths true</span><br></pre></td></tr></table></figure>
+    <title>git遇到pull出现403问题</title>
+    <url>/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>git拉代码失败，不提示输入账号密码，出现<code>The requested URL returned error: 403</code></p>
+<p>解决方法，清除密码缓存</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local --unset credential.helper</span><br><span class="line">git config --global --unset credential.helper</span><br><span class="line">git config --system --unset credential.helper</span><br></pre></td></tr></table></figure>
+
+<p>之后就可以重新输入账号密码拉代码了</p>
 ]]></content>
       <categories>
         <category>编程笔记</category>
       </categories>
       <tags>
         <tag>git</tag>
-        <tag>windows</tag>
       </tags>
   </entry>
   <entry>
@@ -167,19 +100,103 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>git遇到pull出现403问题</title>
-    <url>/2022/02/22/develop/git%E9%81%87%E5%88%B0pull%E5%87%BA%E7%8E%B0403%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>git拉代码失败，不提示输入账号密码，出现<code>The requested URL returned error: 403</code></p>
-<p>解决方法，清除密码缓存</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config --local --unset credential.helper</span><br><span class="line">git config --global --unset credential.helper</span><br><span class="line">git config --system --unset credential.helper</span><br></pre></td></tr></table></figure>
+    <title>git错误invalid path解决方法</title>
+    <url>/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>在windows上git clone代码时报错：error: invalid path ‘xxxx’</p>
+<p>解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config core.protectNTFS false</span><br></pre></td></tr></table></figure>
 
-<p>之后就可以重新输入账号密码拉代码了</p>
+<p>参数说明：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">core.protectNTFS</span><br><span class="line">If set to true, do not allow checkout of paths that would cause problems with the NTFS filesystem, e.g. conflict with 8.3 &quot;short&quot; names. Defaults to true on Windows, and false elsewhere.</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Apache的访问权限配置</title>
+    <url>/2015/03/03/develop/Apache%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>在apache2.4版本之前做客户端访问控制,是用Allow Deny Order指令做访问控制的,而在2.4的版本上是用的用法跟之前的版本大不相同,如下</p>
+<pre><code>################################################ 
+2.2上的配置 
+Order deny,allow 
+Deny from all 
+ 
+2.4上的配置 
+Require all denied 
+ 
+################################################ 
+2.2上的配置 
+Order allow,deny 
+Allow from all 
+ 
+2.4上的配置 
+Require all granted 
+ 
+################################################# 
+</code></pre>
+<span id="more"></span>
+
+<p>下面给出了几个例子在2.4版本上的配置</p>
+<p>1、仅允许IP为192.168.1.1的主机访问</p>
+<pre><code>require all  granted 
+require ip 192.168.1.1 
+</code></pre>
+<p>2、仅允许192.168.0.0/24网络的主机访问</p>
+<pre><code>require all  granted  
+require ip 192.168.1.0/24 
+</code></pre>
+<p>3、禁止192.168.1.2的主机访问,其他的都允许访问,</p>
+<pre><code>require all  granted 
+require not ip 192.168.1.2 
+</code></pre>
+<p>4、允许所有访问,</p>
+<pre><code>require all  granted
+ 
+</code></pre>
+<p>5、拒绝所有访问,</p>
+<pre><code>require all  denied 
+</code></pre>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>apache</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>git文件名过长错误解决方法</title>
+    <url>/2022/09/17/develop/git%E6%96%87%E4%BB%B6%E5%90%8D%E8%BF%87%E9%95%BF%E9%94%99%E8%AF%AF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>git使用过程中，出现<code>error: unable to create file xxx: Filename too long Updated 0 paths from the index</code></p>
+<p>原因是windows的git版本中如果是文件名太长了，git会报错</p>
+<p>解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 选其一</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 全局设置</span></span><br><span class="line">git config --global core.longpaths true</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前项目设置</span></span><br><span class="line">git config core.longpaths true</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>编程笔记</category>
       </categories>
       <tags>
         <tag>git</tag>
+        <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>grafana重置密码</title>
+    <url>/2022/01/21/develop/grafana%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/</url>
+    <content><![CDATA[<p>找到<code>grafana.db</code>数据库，用sqlite工具执行下无sql语句</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update <span class="keyword">user</span> <span class="keyword">set</span> password <span class="operator">=</span> <span class="string">&#x27;59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6&#x27;</span>, salt <span class="operator">=</span> <span class="string">&#x27;F3FAxVm33R&#x27;</span> <span class="keyword">where</span> login <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>重置后登录用户和密码为：admin/admin</p>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>grafana</tag>
       </tags>
   </entry>
   <entry>
@@ -306,20 +323,84 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>git错误invalid path解决方法</title>
-    <url>/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>在windows上git clone代码时报错：error: invalid path ‘xxxx’</p>
-<p>解决方法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git config core.protectNTFS false</span><br></pre></td></tr></table></figure>
+    <title>hexo自定义404页面</title>
+    <url>/2015/12/26/develop/hexo%E8%87%AA%E5%AE%9A%E4%B9%89404%E9%A1%B5%E9%9D%A2/</url>
+    <content><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
+<span id="more"></span>
 
-<p>参数说明：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">core.protectNTFS</span><br><span class="line">If set to true, do not allow checkout of paths that would cause problems with the NTFS filesystem, e.g. conflict with 8.3 &quot;short&quot; names. Defaults to true on Windows, and false elsewhere.</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
+<ul>
+<li>优点：基于主题的，简单，直接了当</li>
+<li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
+</ul>
+<p>如404页面为腾讯公益404页面。代码如下：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="attr">homePageUrl</span>=<span class="string">&quot;http://yourdomain.com&quot;</span> <span class="attr">homePageName</span>=<span class="string">&quot;回到主页&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在项目source目录为生成一个404/index.md的页面，内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>测试一下，运行<code>hexo s</code>，打开<a href="http://localhost:4000/404/">http://localhost:4000/404/</a>看能否浏览，修改一下404.md：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>修改这后404页面的链接变成了<a href="http://localhost:4000/404.html">http://localhost:4000/404.html</a>，这样链接是正确了，但是页面用的是page的布局，怎么才能自定义？</p>
+<blockquote>
+<p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid #ddd&quot;</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: 404</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
+<blockquote>
+<p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;%if(page.layout==&#x27;404&#x27;)&#123;%&gt;</span><br><span class="line">	&lt;%- partial(&#x27;_partial/404&#x27;) %&gt;</span><br><span class="line">&lt;%&#125;else&#123;%&gt;</span><br><span class="line">&lt;%- body %&gt;</span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
+]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>windows子系统目录位置</title>
+    <url>/2022/02/08/develop/windows%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>打开我的电脑，在地址栏输入<code>\\wsl$</code>，确定之后就看到所有的子系统了</p>
+<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>安装的地址路径为</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">C:\Users\用户\AppData\Local\Packages\对应的子系统\LocalState</span><br><span class="line"><span class="meta">#</span><span class="bash"> 例如</span></span><br><span class="line">C:\Users\用户\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
       <categories>
         <category>编程笔记</category>
       </categories>
       <tags>
-        <tag>git</tag>
         <tag>windows</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ssh长时间保持不断开</title>
+    <url>/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/</url>
+    <content><![CDATA[<p>远程ssh连接服务器，默认长时间不用会自动断开，设置不自动断开方式有三种</p>
+<h2 id="客户端连接加参数"><a href="#客户端连接加参数" class="headerlink" title="客户端连接加参数"></a>客户端连接加参数</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 相当于每隔120秒向服务器发送心跳</span></span><br><span class="line">ssh -o ServerAliveInterval=120 user@ip</span><br></pre></td></tr></table></figure>
+
+<h2 id="客户端设置配置"><a href="#客户端设置配置" class="headerlink" title="客户端设置配置"></a>客户端设置配置</h2><p>如果ssh服务器信息放<code>~/.ssh/config</code>中的，设置<code>ServerAliveInterval</code>值</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Host alias </span><br><span class="line">    HostName ip</span><br><span class="line">    User root</span><br><span class="line">    ServerAliveInterval 120</span><br></pre></td></tr></table></figure>
+
+<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>修改<code>sshd_config</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi vim /etc/ssh/sshd_config</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 发送心跳间隔</span></span></span><br><span class="line">ClientAliveInterval 120</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 最大发送次数</span></span></span><br><span class="line">ClientAliveCountMax 720</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>ssh</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -394,6 +475,20 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
+    <title>在shell中执行一个字符串</title>
+    <url>/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
+    <content><![CDATA[<p>写shell脚本时经常会拼接一个字串,然后当成命令执行，用到的linux命令是<code>eval $&#123;str&#125;</code>或者<code>echo $&#123;str&#125; | sh</code>，例子如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">start=1</span><br><span class="line">amount=<span class="variable">$1</span></span><br><span class="line">raceId=<span class="variable">$2</span></span><br><span class="line">api_host=127.0.0.1:8080</span><br><span class="line">str=<span class="string">&quot;curl --location --request POST &#x27;http://<span class="variable">$&#123;api_host&#125;</span>/api/AddBuy&#x27;</span></span><br><span class="line"><span class="string">--header \&quot;&#x27;Content-Type&#x27;:&#x27;application/json&#x27;\&quot;</span></span><br><span class="line"><span class="string">--data-raw &#x27;&#123;</span></span><br><span class="line"><span class="string">    \&quot;PidStart\&quot;:<span class="variable">$start</span>,</span></span><br><span class="line"><span class="string">    \&quot;Amount\&quot;:<span class="variable">$&#123;amount&#125;</span>,</span></span><br><span class="line"><span class="string">    \&quot;RaceId\&quot;:<span class="variable">$&#123;raceId&#125;</span></span></span><br><span class="line"><span class="string">&#125;&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str&#125;</span> | sh</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">eval</span> <span class="variable">$&#123;str&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程笔记</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>shell</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>mysql创建只读用户</title>
     <url>/2022/07/04/develop/mysql%E5%88%9B%E5%BB%BA%E5%8F%AA%E8%AF%BB%E7%94%A8%E6%88%B7/</url>
     <content><![CDATA[<p>创建只读用户</p>
@@ -413,36 +508,6 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>windows子系统目录位置</title>
-    <url>/2022/02/08/develop/windows%E5%AD%90%E7%B3%BB%E7%BB%9F%E7%9B%AE%E5%BD%95%E4%BD%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h2 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h2><p>打开我的电脑，在地址栏输入<code>\\wsl$</code>，确定之后就看到所有的子系统了</p>
-<h2 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h2><p>安装的地址路径为</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">C:\Users\用户\AppData\Local\Packages\对应的子系统\LocalState</span><br><span class="line"><span class="meta">#</span><span class="bash"> 例如</span></span><br><span class="line">C:\Users\用户\AppData\Local\Packages\CanonicalGroupLimited.UbuntuonWindows_79rhkp1fndgsc\LocalState</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>windows</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>在shell中执行一个字符串</title>
-    <url>/2020/02/10/develop/%E5%9C%A8shell%E4%B8%AD%E6%89%A7%E8%A1%8C%E4%B8%80%E4%B8%AA%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
-    <content><![CDATA[<p>写shell脚本时经常会拼接一个字串,然后当成命令执行，用到的linux命令是<code>eval $&#123;str&#125;</code>或者<code>echo $&#123;str&#125; | sh</code>，例子如下：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line">start=1</span><br><span class="line">amount=<span class="variable">$1</span></span><br><span class="line">raceId=<span class="variable">$2</span></span><br><span class="line">api_host=127.0.0.1:8080</span><br><span class="line">str=<span class="string">&quot;curl --location --request POST &#x27;http://<span class="variable">$&#123;api_host&#125;</span>/api/AddBuy&#x27;</span></span><br><span class="line"><span class="string">--header \&quot;&#x27;Content-Type&#x27;:&#x27;application/json&#x27;\&quot;</span></span><br><span class="line"><span class="string">--data-raw &#x27;&#123;</span></span><br><span class="line"><span class="string">    \&quot;PidStart\&quot;:<span class="variable">$start</span>,</span></span><br><span class="line"><span class="string">    \&quot;Amount\&quot;:<span class="variable">$&#123;amount&#125;</span>,</span></span><br><span class="line"><span class="string">    \&quot;RaceId\&quot;:<span class="variable">$&#123;raceId&#125;</span></span></span><br><span class="line"><span class="string">&#125;&#x27;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;str&#125;</span> | sh</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"><span class="built_in">eval</span> <span class="variable">$&#123;str&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>windows家庭版安装hyper-v</title>
     <url>/2022/02/07/develop/windows%E5%AE%B6%E5%BA%AD%E7%89%88%E5%AE%89%E8%A3%85hyper-v/</url>
     <content><![CDATA[<p>新建bat文件<code>hyper-v.bat</code>，内容为</p>
@@ -458,83 +523,64 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>grafana重置密码</title>
-    <url>/2022/01/21/develop/grafana%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81/</url>
-    <content><![CDATA[<p>找到<code>grafana.db</code>数据库，用sqlite工具执行下无sql语句</p>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">update <span class="keyword">user</span> <span class="keyword">set</span> password <span class="operator">=</span> <span class="string">&#x27;59acf18b94d7eb0694c61e60ce44c110c7a683ac6a8f09580d626f90f4a242000746579358d77dd9e570e83fa24faa88a8a6&#x27;</span>, salt <span class="operator">=</span> <span class="string">&#x27;F3FAxVm33R&#x27;</span> <span class="keyword">where</span> login <span class="operator">=</span> <span class="string">&#x27;admin&#x27;</span>;</span><br></pre></td></tr></table></figure>
+    <title>对git仓库进行清理</title>
+    <url>/2022/09/15/develop/%E5%AF%B9git%E4%BB%93%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%B8%85%E7%90%86/</url>
+    <content><![CDATA[<p>git仓库使用很长一段时间后，因为提交次数多了<code>.git</code>目录会越来越大；导致构建检出<code>tag</code>时耗时特别长。</p>
+<p>整理了清理git仓库方法</p>
+<h2 id="使用bfg工具清理"><a href="#使用bfg工具清理" class="headerlink" title="使用bfg工具清理"></a>使用bfg工具清理</h2><p>下载地址：<a href="https://github.com/rtyley/bfg-repo-cleaner">https://github.com/rtyley/bfg-repo-cleaner</a></p>
+<p>使用步骤：</p>
+<p>下载bfg，是一个jar文件，需求安装<code>java</code>环境才能执行</p>
+<p>清理命令</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 清理&gt;10M的文件</span></span><br><span class="line">java -jar bfg-path/bfg.jar --strip-blobs-bigger-than 10M --no-blob-protection your-git-repo-path</span><br></pre></td></tr></table></figure>
 
-<p>重置后登录用户和密码为：admin/admin</p>
+<p>进入仓库目录，执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd your-git-repo-path</span><br><span class="line">git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</span><br></pre></td></tr></table></figure>
+
+<p>漫长的等待过后，推送到远程</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push --force</span><br></pre></td></tr></table></figure>
+
+<p>自已的项目可以像这样搞，如果是多人使用的仓库，最好是清理后迁移成一个新仓库，然后所有人重新clone</p>
 ]]></content>
       <categories>
         <category>编程笔记</category>
       </categories>
       <tags>
-        <tag>grafana</tag>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
-    <title>hexo自定义404页面</title>
-    <url>/2015/12/26/develop/hexo%E8%87%AA%E5%AE%9A%E4%B9%89404%E9%A1%B5%E9%9D%A2/</url>
-    <content><![CDATA[<p>要自定义hexo的404页面，只要根目录下只要个404.html页面就行了。创建404页面的方法同样适用于创建hexo所有自定义页面。</p>
-<span id="more"></span>
+    <title>用户加入sudo列表</title>
+    <url>/2022/01/06/develop/%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5sudo%E5%88%97%E8%A1%A8/</url>
+    <content><![CDATA[<p>新创建的用户，使用<code>sudo</code>切换到<code>root</code>时提示错误</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xxx is not in the sudoers file.  This incident will be reported.</span><br></pre></td></tr></table></figure>
 
-<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>来自于知乎贴<a href="https://www.zhihu.com/question/21650209">https://www.zhihu.com/question/21650209</a>，直接在主题的source文件夹下面创建404.html页面。</p>
-<ul>
-<li>优点：基于主题的，简单，直接了当</li>
-<li>缺点：页面内容只能是独立的，无法共享主题资源和数据，也是不好使用主题css、js以及loyout这些，只适合外链页</li>
-</ul>
-<p>如404页面为腾讯公益404页面。代码如下：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;utf-8&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1, maximum-scale=1&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;renderer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;webkit&quot;</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge,chrome=1&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span> </span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;http://www.qq.com/404/search_children.js&quot;</span> <span class="attr">homePageUrl</span>=<span class="string">&quot;http://yourdomain.com&quot;</span> <span class="attr">homePageName</span>=<span class="string">&quot;回到主页&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>解决方法：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到`root`下</span></span><br><span class="line">su </span><br><span class="line"><span class="meta">#</span><span class="bash"> 授权</span></span><br><span class="line">chmod u+w /etc/sudoers</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑sudoers文件</span></span><br><span class="line">vi /etc/sudoers</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加</span></span><br><span class="line">username            ALL=(ALL)                ALL</span><br><span class="line"><span class="meta">#</span><span class="bash"> 保存</span></span><br><span class="line">chmod u-w /etc/sudoers</span><br></pre></td></tr></table></figure>
 
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>进入命令行，创建类型为page页面</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new page 404</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>在项目source目录为生成一个404/index.md的页面，内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>测试一下，运行<code>hexo s</code>，打开<a href="http://localhost:4000/404/">http://localhost:4000/404/</a>看能否浏览，修改一下404.md：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>修改这后404页面的链接变成了<a href="http://localhost:4000/404.html">http://localhost:4000/404.html</a>，这样链接是正确了，但是页面用的是page的布局，怎么才能自定义？</p>
-<blockquote>
-<p>可以在404.md中添加html代码,css样式，折腾出你想要的样式</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">&#123;% raw %&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;border: 1px solid #ddd&quot;</span>&gt;</span>not found<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这样只能说，太僵硬……要自定义，用的是hexo的layout。每个page或者post都有个layout字段，404.md默认layout为page，修改404.md的layout字段为404：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">layout: 404</span><br><span class="line">title: 404</span><br><span class="line">date: 2015-12-26 09:16:44</span><br><span class="line">comments: false #禁止评论</span><br><span class="line">permalink: 404.html #设为固定链接</span><br><span class="line">---</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>主题中每个页面都有个page.layout的变量，这个的值是我们在markdown文件中定义的layout字段，利用这个变量想怎么改都行了，方法很多，只介绍一种：</p>
-<blockquote>
-<p>_partial文件夹中新建个404.ejs文件，内容就是你自定义的；找到layout/layout.ejs文件，找到&lt;%- body %&gt;，修改成这样：</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">&lt;%if(page.layout==&#x27;404&#x27;)&#123;%&gt;</span><br><span class="line">	&lt;%- partial(&#x27;_partial/404&#x27;) %&gt;</span><br><span class="line">&lt;%&#125;else&#123;%&gt;</span><br><span class="line">&lt;%- body %&gt;</span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>根据自己喜好，原理是判断page.layout变量的值，输出相应的内容。请看我的博客<a href="http://liukaijv.github.io/404.html">404页面</a>。</p>
 ]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ssh长时间保持不断开</title>
-    <url>/2021/12/26/develop/ssh%E9%95%BF%E6%97%B6%E9%97%B4%E4%BF%9D%E6%8C%81%E4%B8%8D%E6%96%AD%E5%BC%80/</url>
-    <content><![CDATA[<p>远程ssh连接服务器，默认长时间不用会自动断开，设置不自动断开方式有三种</p>
-<h2 id="客户端连接加参数"><a href="#客户端连接加参数" class="headerlink" title="客户端连接加参数"></a>客户端连接加参数</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 相当于每隔120秒向服务器发送心跳</span></span><br><span class="line">ssh -o ServerAliveInterval=120 user@ip</span><br></pre></td></tr></table></figure>
-
-<h2 id="客户端设置配置"><a href="#客户端设置配置" class="headerlink" title="客户端设置配置"></a>客户端设置配置</h2><p>如果ssh服务器信息放<code>~/.ssh/config</code>中的，设置<code>ServerAliveInterval</code>值</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">Host alias </span><br><span class="line">    HostName ip</span><br><span class="line">    User root</span><br><span class="line">    ServerAliveInterval 120</span><br></pre></td></tr></table></figure>
-
-<h2 id="服务器配置"><a href="#服务器配置" class="headerlink" title="服务器配置"></a>服务器配置</h2><p>修改<code>sshd_config</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vi vim /etc/ssh/sshd_config</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 发送心跳间隔</span></span></span><br><span class="line">ClientAliveInterval 120</span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># 最大发送次数</span></span></span><br><span class="line">ClientAliveCountMax 720</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>编程笔记</category>
       </categories>
       <tags>
         <tag>linux</tag>
-        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>模拟器运行instantRunSplitApkResourcesDebug报错</title>
+    <url>/2020/02/13/android/%E6%A8%A1%E6%8B%9F%E5%99%A8%E8%BF%90%E8%A1%8CinstantRunSplitApkResourcesDebug%E6%8A%A5%E9%94%99/</url>
+    <content><![CDATA[<p>android应用模拟器运行里提示<code>/app/build/intermediates/instant_run_split_apk_resources/debug/instantRunSplitApkResourcesDebug/out/slice_1/resources_ap</code>报错，解决方法：</p>
+<p>依次打开<br>Preferences | Build, Execution, Deployment | Instant Run</p>
+<p>不勾选<br>Enable Instant Run to hot swap code/resource changes on deploy(default enabled)</p>
+]]></content>
+      <categories>
+        <category>移动开发</category>
+        <category>android</category>
+      </categories>
+      <tags>
+        <tag>app</tag>
       </tags>
   </entry>
   <entry>
@@ -652,163 +698,6 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>用户加入sudo列表</title>
-    <url>/2022/01/06/develop/%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5sudo%E5%88%97%E8%A1%A8/</url>
-    <content><![CDATA[<p>新创建的用户，使用<code>sudo</code>切换到<code>root</code>时提示错误</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">xxx is not in the sudoers file.  This incident will be reported.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到`root`下</span></span><br><span class="line">su </span><br><span class="line"><span class="meta">#</span><span class="bash"> 授权</span></span><br><span class="line">chmod u+w /etc/sudoers</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑sudoers文件</span></span><br><span class="line">vi /etc/sudoers</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加</span></span><br><span class="line">username            ALL=(ALL)                ALL</span><br><span class="line"><span class="meta">#</span><span class="bash"> 保存</span></span><br><span class="line">chmod u-w /etc/sudoers</span><br></pre></td></tr></table></figure>
-
-
-
-
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>对git仓库进行清理</title>
-    <url>/2022/09/15/develop/%E5%AF%B9git%E4%BB%93%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%B8%85%E7%90%86/</url>
-    <content><![CDATA[<p>git仓库使用很长一段时间后，因为提交次数多了<code>.git</code>目录会越来越大；导致构建检出<code>tag</code>时耗时特别长。</p>
-<p>整理了清理git仓库方法</p>
-<h2 id="使用bfg工具清理"><a href="#使用bfg工具清理" class="headerlink" title="使用bfg工具清理"></a>使用bfg工具清理</h2><p>下载地址：<a href="https://github.com/rtyley/bfg-repo-cleaner">https://github.com/rtyley/bfg-repo-cleaner</a></p>
-<p>使用步骤：</p>
-<p>下载bfg，是一个jar文件，需求安装<code>java</code>环境才能执行</p>
-<p>清理命令</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 清理&gt;10M的文件</span></span><br><span class="line">java -jar bfg-path/bfg.jar --strip-blobs-bigger-than 10M --no-blob-protection your-git-repo-path</span><br></pre></td></tr></table></figure>
-
-<p>进入仓库目录，执行</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd your-git-repo-path</span><br><span class="line">git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</span><br></pre></td></tr></table></figure>
-
-<p>漫长的等待过后，推送到远程</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git push --force</span><br></pre></td></tr></table></figure>
-
-<p>自已的项目可以像这样搞，如果是多人使用的仓库，最好是清理后迁移成一个新仓库，然后所有人重新clone</p>
-]]></content>
-      <categories>
-        <category>编程笔记</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux用户管理</title>
-    <url>/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>创建一个用户</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd username</span><br></pre></td></tr></table></figure>
-
-<p>创建用户并创建用户目录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -m username</span><br></pre></td></tr></table></figure>
-<p>创建用户不创建用户目录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -M username</span><br></pre></td></tr></table></figure>
-
-<p>创建用户不用于登录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -s /sbin/nologin</span><br></pre></td></tr></table></figure>
-
-<p>创建用户不用于登录和不创建目录</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -s /sbin/nologin -M username</span><br></pre></td></tr></table></figure>
-
-<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">userdel username</span><br></pre></td></tr></table></figure>
-
-<p>把用户目录也删掉</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">userdel -r username</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">passwd username</span><br></pre></td></tr></table></figure>
-
-<h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><p>创建组</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">groupadd groupname</span><br></pre></td></tr></table></figure>
-
-<p>删除组</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">groupadd groupname</span><br></pre></td></tr></table></figure>
-
-<p>用户加入组</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usermod -G groupname username</span><br></pre></td></tr></table></figure>
-
-<p>用户加入组（并从原来组中移出）</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usermod -g groupname username</span><br></pre></td></tr></table></figure>
-
-<p>用户移出用户组</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gpasswd -d username groupname</span><br></pre></td></tr></table></figure>
-
-<h2 id="相关查看"><a href="#相关查看" class="headerlink" title="相关查看"></a>相关查看</h2><p>所有用户</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
-
-<p>所有用户组</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/group</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>shell中的使用map</title>
-    <url>/2022/03/15/linux/shell%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8map/</url>
-    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>shell中map必须申明才能使用</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">declare -A userIds</span><br></pre></td></tr></table></figure>
-
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方式一，item项目中间不需要逗号</span></span><br><span class="line">userIds=([&#x27;bar&#x27;]=&quot;1&quot; [&#x27;foo&#x27;]=&quot;2&quot;)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 方式二</span></span><br><span class="line">userIds[&#x27;bar&#x27;]=&quot;1&quot;</span><br><span class="line">userIds[&#x27;foo&#x27;]=&quot;2&quot;</span><br></pre></td></tr></table></figure>
-
-<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输出value</span></span><br><span class="line">echo &quot;$&#123;userIds[*]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">echo &quot;$&#123;userIds[@]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出key</span></span><br><span class="line">echo &quot;$&#123;!userIds[*]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">echo &quot;$&#123;!userIds[@]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> bar foo</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输出key</span></span><br><span class="line">for key in &quot;$&#123;!userIds[@]&#125;&quot;; do</span><br><span class="line">    echo $key</span><br><span class="line">    echo $&#123;userIds[$key]&#125;</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出value</span></span><br><span class="line">for value in &quot;$&#123;userIds[@]&#125;&quot;; do</span><br><span class="line">    echo $value</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<p><code>@</code>换成<code>*</code>效果一样</p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>maven项目添加第三方jar库</title>
-    <url>/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/</url>
-    <content><![CDATA[<p>第三方的sdk没在maven公共仓库里，需要下载jar集成到maven项目里</p>
-<h2 id="把jar文件拷贝到项目里"><a href="#把jar文件拷贝到项目里" class="headerlink" title="把jar文件拷贝到项目里"></a>把jar文件拷贝到项目里</h2><p>在根目录或<code>resources</code>创建<code>lib</code>目录，把<code>jar</code>文件拷贝进去</p>
-<h2 id="修改pom-xml文件，添加依赖"><a href="#修改pom-xml文件，添加依赖" class="headerlink" title="修改pom.xml文件，添加依赖"></a>修改<code>pom.xml</code>文件，添加依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>opensdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;pom.basedir&#125;/src/main/resources/lib/opensdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="修改spring-boot-maven-plugin"><a href="#修改spring-boot-maven-plugin" class="headerlink" title="修改spring-boot-maven-plugin"></a>修改<code>spring-boot-maven-plugin</code></h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includeSystemScope</span>&gt;</span>true<span class="tag">&lt;/<span class="name">includeSystemScope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="刷新maven或者重新打开项目"><a href="#刷新maven或者重新打开项目" class="headerlink" title="刷新maven或者重新打开项目"></a>刷新maven或者重新打开项目</h2>]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-        <tag>maven</tag>
-        <tag>springboot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>windows下hadoop配置</title>
-    <url>/2022/06/17/java/windows%E4%B8%8Bhadoop%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<p>hadoop不支持windows，做为开发环境通过配置是可以使用部分功能的</p>
-<h2 id="下载hadoop"><a href="#下载hadoop" class="headerlink" title="下载hadoop"></a>下载hadoop</h2><p>下载指定版本<a href="https://archive.apache.org/dist/hadoop/common/">https://archive.apache.org/dist/hadoop/common/</a>，下载linux使用的<code>xxx.tar.gz</code>，解压到指定目录</p>
-<p>解压过程中会提示错误，看提示信息是文件链接的问题，不用管它。</p>
-<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>环境变量里新增一条记录：</p>
-<p>变量名：HADDOOP_HOME<br>变量值：D:\hadoop-2.8.1（解压目录）</p>
-<p>把bin目录添加到PATH</p>
-<p>也是就<code>%HADDOOP_HOME%\bin</code></p>
-<h3 id="java安装"><a href="#java安装" class="headerlink" title="java安装"></a>java安装</h3><p>如果没有java去安装java</p>
-<h2 id="安装winutils"><a href="#安装winutils" class="headerlink" title="安装winutils"></a>安装winutils</h2><p>windows下需要安装这个东西，下载地是<a href="https://github.com/cdarlint/winutils">https://github.com/cdarlint/winutils</a> ，找到对应的版本下载之后把所有文件放hadoop的bin目录下就行了</p>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>命令行运行下<code>hadoop</code>，没提示错误就说明成功了</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>hadoop</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Promise和Deferred的用法对比</title>
     <url>/2016/07/18/frontend/Promise%E5%92%8CDeferred%E7%9A%84%E7%94%A8%E6%B3%95%E5%AF%B9%E6%AF%94/</url>
     <content><![CDATA[<p>ES6原生提供了Promise对象，高版本的nodejs可以直接使用，服务器端的开发中借住babel工具也可以使用，但是如果直接用到浏览器中，兼容性还是个问题。试下了最新的firefox和chorme浏览器都支持了，为了安全还是老老实实用jquery提供的Deferred对象吧。Promise能实现的功能$.Deferred也能实现。</p>
@@ -869,42 +758,6 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>mongoose使用中查不出定义的virtual字段</title>
-    <url>/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/</url>
-    <content><![CDATA[<p>定义了指定为virtual属性的post_count字段统计文章数</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
-<blockquote>
-<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
-</blockquote>
-<p>需要对Schama做下面的配置：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>nodejs</category>
-      </categories>
-      <tags>
-        <tag>mongoose</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javascript函数作为变量传递</title>
-    <url>/2015/10/29/frontend/javascript%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/</url>
-    <content><![CDATA[<p>js中当函数不加括号时可以把函数当成值传递。</p>
-<p>无参数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 无参函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = foo;</span><br></pre></td></tr></table></figure>
-
-<p>有参时需要用一个匿名函数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar =  <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	foo(arg1, arg2);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>tricks</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>javascript中的隐式类型转换</title>
     <url>/2015/10/04/frontend/javascript%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
     <content><![CDATA[<p>在Javascript 中，只有在一些极少数情况下才会因为类型错误而抛出一个异常，大多数情况会偷偷的把类型转换了，这就是所谓的“隐式类型转换”，js中的基本类型有：string、number、boolean、object、symbol、undefined、null，其中object为引用类型。不同类型的变量比较或运算时会产生隐式类型转换。</p>
@@ -927,6 +780,60 @@ require not ip 192.168.1.2
 
 <h2 id="引用类型参与时"><a href="#引用类型参与时" class="headerlink" title="引用类型参与时"></a>引用类型参与时</h2><p>引用类型和基本类型的比较就相对复杂一些，先要把引用类型转成基本类型。引用类型转布尔全是true，引用类型转数字或者字符串就要用valueOf()或者toString()。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">console.log(1+[]) //1</span><br><span class="line">console.log(0==[]) // true</span><br><span class="line">console.log(0+[]) // 0</span><br><span class="line">console.log(&#x27;0&#x27;+[]) // &#x27;0&#x27;</span><br><span class="line">// 与对象默认valueOf和toString都是object Object</span><br><span class="line">// var a = &#123;&#125;;console.log(a.toString()==a.valueOf());//true</span><br><span class="line">console.log(&#x27;0&#x27;+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">console.log(0+&#123;&#125;) // &#x27;0[object Object]&#x27;</span><br><span class="line">// 实际上是先优先valueOf</span><br><span class="line">console.log(1+&#123;toString:function()&#123;return &#x27;1&#x27;&#125;,valueOf:function()&#123;return 1&#125;&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>javascript函数作为变量传递</title>
+    <url>/2015/10/29/frontend/javascript%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%8F%98%E9%87%8F%E4%BC%A0%E9%80%92/</url>
+    <content><![CDATA[<p>js中当函数不加括号时可以把函数当成值传递。</p>
+<p>无参数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 无参函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bar = foo;</span><br></pre></td></tr></table></figure>
+
+<p>有参时需要用一个匿名函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> bar =  <span class="function"><span class="keyword">function</span>(<span class="params">arg1, arg2</span>) </span>&#123;</span><br><span class="line">	foo(arg1, arg2);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>tricks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>javascript中创建对象的几种方式</title>
+    <url>/2015/08/04/frontend/javascript%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。</p>
+<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><p>缺点是不能实现私有属性和私有方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">  Obj.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">  Obj.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<h2 id="构造函数法"><a href="#构造函数法" class="headerlink" title="构造函数法"></a>构造函数法</h2><p>与工厂方式相比，使用构造函数方式创建对象，无需再函数内部重建创建对象，而使用this指代，并而函数无需明确return。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr jack&#x27;</span>;</span><br><span class="line">	<span class="built_in">this</span>.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<h2 id="原型方式"><a href="#原型方式" class="headerlink" title="原型方式"></a>原型方式</h2><p>把属性和方法的定义放到prototype上</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数-原型混合方式"><a href="#构造函数-原型混合方式" class="headerlink" title="构造函数+原型混合方式"></a>构造函数+原型混合方式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<h2 id="Object-create-法"><a href="#Object-create-法" class="headerlink" title="Object.create()法"></a>Object.create()法</h2><p>Es6的一个新的方法Object.create()，直接返回一个对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;attr name&#x27;</span>,</span><br><span class="line">  <span class="attr">eat</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="built_in">Object</span>.create(Person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<p>老式浏览器模拟Object.create()方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">    F.prototype = o;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>缺点是不能实现私有属性和私有方法，实例对象之间也不能共享数据。</p>
+<h2 id="极简主义法"><a href="#极简主义法" class="headerlink" title="极简主义法"></a>极简主义法</h2><p>荷兰程序员Gabor de Mooij提出了一种比Object.create()更好的新方法，他称这种方法为”极简主义法”（minimalist approach）。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">  <span class="attr">createNew</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _person = &#123;&#125;;</span><br><span class="line">    _person.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">    _person.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _person;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person.createNew();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
+
+<p>这种方法实现继承、私有属性和私有方法、数据共享也方便。</p>
+<blockquote>
+<p>参考和引用 <a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html">Javascript定义类（class）的三种方法</a></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>前端开发</category>
@@ -1033,16 +940,6 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>js验证只能输入数字</title>
-    <url>/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<p>js验证只能输入数字函数：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 替换非数字值</span></span><br><span class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换第一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换最后一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换连续.+</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="comment">// .号前只能有一个0</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">&#x27;0.&#x27;</span>);</span><br><span class="line">  <span class="comment">// 保留一个.，替换其它的.</span></span><br><span class="line">  value = value.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;$#$&#x27;</span>).replace(<span class="regexp">/\./g</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;$#$&#x27;</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-  </entry>
-  <entry>
     <title>react常用API总结</title>
     <url>/2016/06/15/frontend/react%E5%B8%B8%E7%94%A8API%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<p>其实react涉及的内容并不是很多，把react API整理了一下，版本为0.14.7。</p>
@@ -1076,77 +973,14 @@ require not ip 192.168.1.2
       </tags>
   </entry>
   <entry>
-    <title>javascript中创建对象的几种方式</title>
-    <url>/2015/08/04/frontend/javascript%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>javascript中没有类，可以用一些变通的方法模拟出来，整理的几种创建类的方法。</p>
-<h2 id="工厂方式"><a href="#工厂方式" class="headerlink" title="工厂方式"></a>工厂方式</h2><p>缺点是不能实现私有属性和私有方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> Obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">  Obj.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">  Obj.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> Obj;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
-
-<span id="more"></span>
-
-<h2 id="构造函数法"><a href="#构造函数法" class="headerlink" title="构造函数法"></a>构造函数法</h2><p>与工厂方式相比，使用构造函数方式创建对象，无需再函数内部重建创建对象，而使用this指代，并而函数无需明确return。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr jack&#x27;</span>;</span><br><span class="line">	<span class="built_in">this</span>.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
-
-<h2 id="原型方式"><a href="#原型方式" class="headerlink" title="原型方式"></a>原型方式</h2><p>把属性和方法的定义放到prototype上</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
-
-<h2 id="构造函数-原型混合方式"><a href="#构造函数-原型混合方式" class="headerlink" title="构造函数+原型混合方式"></a>构造函数+原型混合方式</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">this</span>.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
-
-<h2 id="Object-create-法"><a href="#Object-create-法" class="headerlink" title="Object.create()法"></a>Object.create()法</h2><p>Es6的一个新的方法Object.create()，直接返回一个对象。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;attr name&#x27;</span>,</span><br><span class="line">  <span class="attr">eat</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  	<span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> person = <span class="built_in">Object</span>.create(Person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
-
-<p>老式浏览器模拟Object.create()方法</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="built_in">Object</span>.create) &#123;</span><br><span class="line">  <span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span>(<span class="params">o</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">    F.prototype = o;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>缺点是不能实现私有属性和私有方法，实例对象之间也不能共享数据。</p>
-<h2 id="极简主义法"><a href="#极简主义法" class="headerlink" title="极简主义法"></a>极简主义法</h2><p>荷兰程序员Gabor de Mooij提出了一种比Object.create()更好的新方法，他称这种方法为”极简主义法”（minimalist approach）。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">  <span class="attr">createNew</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _person = &#123;&#125;;</span><br><span class="line">    _person.name = <span class="string">&#x27;attr name&#x27;</span>;</span><br><span class="line">    _person.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">&#x27;method eat&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _person;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = Person.createNew();</span><br><span class="line"><span class="built_in">console</span>.log(person.name);</span><br><span class="line"><span class="built_in">console</span>.log(person.eat());</span><br></pre></td></tr></table></figure>
-
-<p>这种方法实现继承、私有属性和私有方法、数据共享也方便。</p>
-<blockquote>
-<p>参考和引用 <a href="http://www.ruanyifeng.com/blog/2012/07/three_ways_to_define_a_javascript_class.html">Javascript定义类（class）的三种方法</a></p>
-</blockquote>
-]]></content>
+    <title>js验证只能输入数字</title>
+    <url>/2015/02/27/frontend/js%E9%AA%8C%E8%AF%81%E5%8F%AA%E8%83%BD%E8%BE%93%E5%85%A5%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<p>js验证只能输入数字函数：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseNumber</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 替换非数字值</span></span><br><span class="line">  value = value.replace(<span class="regexp">/[^\d.]/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换第一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^\./g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换最后一位为.</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">  <span class="comment">// 替换连续.+</span></span><br><span class="line">  value = value.replace(<span class="regexp">/\.&#123;2,&#125;/g</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="comment">// .号前只能有一个0</span></span><br><span class="line">  value = value.replace(<span class="regexp">/^0+\./g</span>, <span class="string">&#x27;0.&#x27;</span>);</span><br><span class="line">  <span class="comment">// 保留一个.，替换其它的.</span></span><br><span class="line">  value = value.replace(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;$#$&#x27;</span>).replace(<span class="regexp">/\./g</span>, <span class="string">&#x27;&#x27;</span>).replace(<span class="string">&#x27;$#$&#x27;</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
-  </entry>
-  <entry>
-    <title>vue中使用基于客户端的缓存</title>
-    <url>/2016/06/29/frontend/vue%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E7%BC%93%E5%AD%98/</url>
-    <content><![CDATA[<p>在写<a href="https://github.com/liukaijv/lnode-blog">基于express、vuejs博客</a>的小项目过程中，折腾了下在<strong>vuejs</strong>中怎么使用浏览器缓存请求。</p>
-<blockquote>
-<p>原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。</p>
-</blockquote>
-<p>用到的依赖包：</p>
-<ul>
-<li><a href="https://github.com/pagekit/vue-resource">vue-resource</a> #一个vuejs的http包</li>
-<li><a href="https://github.com/lodash/lodash">lodash</a> # js库</li>
-<li><a href="https://github.com/pamelafox/lscache">lscache</a> #localStorage和sessionStorage包</li>
-</ul>
-<p>详细代码在<a href="https://github.com/liukaijv/lnode-blog/tree/master/frontend">https://github.com/liukaijv/lnode-blog/tree/master/frontend</a>。</p>
-<span id="more"></span>
-
-<h2 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h2><p>vue入口文件main.js：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">&#x27;vue-resource&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Cache <span class="keyword">from</span> <span class="string">&#x27;lscache&#x27;</span>;</span><br><span class="line"></span><br><span class="line">Vue.prototype.$cache = Cache;</span><br><span class="line">Vue.cache = Cache;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httpCache <span class="keyword">from</span> <span class="string">&#x27;./lib/cache&#x27;</span>;</span><br><span class="line">httpCache(Vue);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>缓存拦截器cache.js：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>)</span>&#123;</span><br><span class="line">    Vue.http.interceptors.push(<span class="function">(<span class="params">request, next</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    	<span class="comment">// lifetime为缓存时间</span></span><br><span class="line">        <span class="keyword">let</span> cached, key, lifetime; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(request.cache !== <span class="literal">undefined</span> &amp;&amp; <span class="regexp">/^(GET|JSONP)$/i</span>.test(request.method)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (_.isObject(request.cache)) &#123;</span><br><span class="line">                lifetime = request.cache.lifetime;</span><br><span class="line">                key = <span class="string">&#x27;_resource.&#x27;</span> + request.cache.key;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                lifetime = request.cache;</span><br><span class="line">                key = request.url;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 不需要缓存的请求，添加参数no_cache=true</span></span><br><span class="line">            <span class="keyword">let</span> no_cache = request.params.no_cache;</span><br><span class="line">            </span><br><span class="line">            cached = Vue.cache.get(key); </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (cached &amp;&amp; !no_cache) &#123;                </span><br><span class="line">                <span class="comment">// 重写返回数据</span></span><br><span class="line">                request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </span><br><span class="line">                    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        next(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;   </span><br><span class="line">            <span class="keyword">if</span> (!cached &amp;&amp; response.ok) &#123;</span><br><span class="line">                Vue.cache.set(key, response, lifetime);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>关键点请求的client，返回数据<code>&#123;ok: true&#125;</code>必须有，这样才能正确返回数据。</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </span><br><span class="line">    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>具体请查看源码<a href="https://github.com/pagekit/vue-resource/blob/master/src/http/index.js">https://github.com/pagekit/vue-resource/blob/master/src/http/index.js</a>：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> client(<span class="keyword">new</span> Request(options)).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">		</span><br><span class="line">	<span class="comment">// 原因在这里</span></span><br><span class="line">    <span class="keyword">return</span> response.ok ? response : <span class="built_in">Promise</span>.reject(response);</span><br><span class="line"></span><br><span class="line">    &#125;, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response <span class="keyword">instanceof</span> <span class="built_in">Error</span>) &#123;</span><br><span class="line">            error(response);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(response);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>vue</tag>
-      </tags>
   </entry>
   <entry>
     <title>使用$.ajax上传文件到七牛</title>
@@ -1197,6 +1031,42 @@ $input.on('change', function(){
         <category>前端开发</category>
         <category>javascript</category>
       </categories>
+  </entry>
+  <entry>
+    <title>vue中使用基于客户端的缓存</title>
+    <url>/2016/06/29/frontend/vue%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9F%BA%E4%BA%8E%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E7%BC%93%E5%AD%98/</url>
+    <content><![CDATA[<p>在写<a href="https://github.com/liukaijv/lnode-blog">基于express、vuejs博客</a>的小项目过程中，折腾了下在<strong>vuejs</strong>中怎么使用浏览器缓存请求。</p>
+<blockquote>
+<p>原理是利用vue-resource拦截器interceptor，判断当前请求是否存在localStorage里，有则返回缓存的内容；没有则请求服务器，并在localStorage写入缓存。</p>
+</blockquote>
+<p>用到的依赖包：</p>
+<ul>
+<li><a href="https://github.com/pagekit/vue-resource">vue-resource</a> #一个vuejs的http包</li>
+<li><a href="https://github.com/lodash/lodash">lodash</a> # js库</li>
+<li><a href="https://github.com/pamelafox/lscache">lscache</a> #localStorage和sessionStorage包</li>
+</ul>
+<p>详细代码在<a href="https://github.com/liukaijv/lnode-blog/tree/master/frontend">https://github.com/liukaijv/lnode-blog/tree/master/frontend</a>。</p>
+<span id="more"></span>
+
+<h2 id="相关代码"><a href="#相关代码" class="headerlink" title="相关代码"></a>相关代码</h2><p>vue入口文件main.js：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> VueResource <span class="keyword">from</span> <span class="string">&#x27;vue-resource&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Cache <span class="keyword">from</span> <span class="string">&#x27;lscache&#x27;</span>;</span><br><span class="line"></span><br><span class="line">Vue.prototype.$cache = Cache;</span><br><span class="line">Vue.cache = Cache;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> httpCache <span class="keyword">from</span> <span class="string">&#x27;./lib/cache&#x27;</span>;</span><br><span class="line">httpCache(Vue);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>缓存拦截器cache.js：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params">Vue</span>)</span>&#123;</span><br><span class="line">    Vue.http.interceptors.push(<span class="function">(<span class="params">request, next</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    	<span class="comment">// lifetime为缓存时间</span></span><br><span class="line">        <span class="keyword">let</span> cached, key, lifetime; </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(request.cache !== <span class="literal">undefined</span> &amp;&amp; <span class="regexp">/^(GET|JSONP)$/i</span>.test(request.method)) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (_.isObject(request.cache)) &#123;</span><br><span class="line">                lifetime = request.cache.lifetime;</span><br><span class="line">                key = <span class="string">&#x27;_resource.&#x27;</span> + request.cache.key;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                lifetime = request.cache;</span><br><span class="line">                key = request.url;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 不需要缓存的请求，添加参数no_cache=true</span></span><br><span class="line">            <span class="keyword">let</span> no_cache = request.params.no_cache;</span><br><span class="line">            </span><br><span class="line">            cached = Vue.cache.get(key); </span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (cached &amp;&amp; !no_cache) &#123;                </span><br><span class="line">                <span class="comment">// 重写返回数据</span></span><br><span class="line">                request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </span><br><span class="line">                    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        next(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;   </span><br><span class="line">            <span class="keyword">if</span> (!cached &amp;&amp; response.ok) &#123;</span><br><span class="line">                Vue.cache.set(key, response, lifetime);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>关键点请求的client，返回数据<code>&#123;ok: true&#125;</code>必须有，这样才能正确返回数据。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">request.client = <span class="function"><span class="keyword">function</span> (<span class="params">request</span>) </span>&#123;                    </span><br><span class="line">    <span class="keyword">return</span> request.respondWith(cached.body, &#123;<span class="attr">ok</span>: <span class="literal">true</span>, <span class="attr">status</span>:<span class="number">200</span>&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>具体请查看源码<a href="https://github.com/pagekit/vue-resource/blob/master/src/http/index.js">https://github.com/pagekit/vue-resource/blob/master/src/http/index.js</a>：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">return</span> client(<span class="keyword">new</span> Request(options)).then(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">		</span><br><span class="line">	<span class="comment">// 原因在这里</span></span><br><span class="line">    <span class="keyword">return</span> response.ok ? response : <span class="built_in">Promise</span>.reject(response);</span><br><span class="line"></span><br><span class="line">    &#125;, <span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response <span class="keyword">instanceof</span> <span class="built_in">Error</span>) &#123;</span><br><span class="line">            error(response);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(response);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+      </tags>
   </entry>
   <entry>
     <title>循环中正确绑定事件的N种方法</title>
@@ -1297,14 +1167,19 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>pip安装模块出现neither-setup.py-nor-pyproject.toml-found</title>
-    <url>/2022/09/14/python/pip%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%E5%87%BA%E7%8E%B0neither-setup-py-nor-pyproject-toml-found/</url>
-    <content><![CDATA[<p>使用pip安装模块时出现<code>neither &#39;setup.py&#39; nor &#39;pyproject.toml&#39; found.</code>导致模块无法安装</p>
-<p>因为根据打包方案，项目中需要一个setup.py或pyproject.toml用于生成包的配置文件，然而模块里没有按照这个规定来</p>
-<p>网上搜了一遍，没找到解决方案</p>
-<p>只能选择手动安装</p>
-<p>去<a href="https://pypi.org/">https://pypi.org/</a>，找到相应的包，下载下来解压到python的<code>Lib</code>目录</p>
-]]></content>
+    <title>python类中方法返回自身值类型的写法</title>
+    <url>/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/</url>
+    <content><![CDATA[<p>在python3中使用类型遇到的问题，代码如下：</p>
+<p>想在<code>factory</code>创建自已，以为类型是这样的<code>-&gt; People</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span>(<span class="params">cls, name: <span class="built_in">str</span></span>) -&gt; People:</span></span><br><span class="line">        <span class="keyword">return</span> cls(name)</span><br></pre></td></tr></table></figure>
+
+<p>这样的错的</p>
+<p>正确的写法是这样的：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypeVar, <span class="type">Type</span></span><br><span class="line"></span><br><span class="line">T = TypeVar(<span class="string">&#x27;T&#x27;</span>, bound=<span class="string">&#x27;People&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span>(<span class="params">cls: <span class="type">Type</span>[T], name: <span class="built_in">str</span></span>) -&gt; T:</span></span><br><span class="line">        <span class="keyword">return</span> cls(name)</span><br></pre></td></tr></table></figure>
+
+<p>要写成泛型才对，问题地址：<a href="https://github.com/python/peps/pull/89">https://github.com/python/peps/pull/89</a></p>
+<h2 id="另一种方法"><a href="#另一种方法" class="headerlink" title="另一种方法"></a>另一种方法</h2><p>类型写成字符串也是可以的</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span>(<span class="params">cls, name: <span class="built_in">str</span></span>) -&gt; &quot;People&quot;:</span></span><br><span class="line">        <span class="keyword">return</span> cls(name)</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>python</category>
       </categories>
@@ -1335,29 +1210,43 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>laravel处理跨域请求</title>
-    <url>/2016/05/29/php/laravel%E5%A4%84%E7%90%86%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</url>
-    <content><![CDATA[<p>写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。</p>
-<blockquote>
-<p>推荐使用<a href="https://github.com/dingo/api">dingo/api</a>扩展包</p>
-</blockquote>
-<h2 id="1、用laravel中间件，基于CORS"><a href="#1、用laravel中间件，基于CORS" class="headerlink" title="1、用laravel中间件，基于CORS"></a>1、用laravel中间件，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">CORS</a></h2><p>创建中间件CrossDomainMiddleware.php，代码如下：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrossDomainMiddleware</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"><span class="variable">$request</span>, <span class="built_in">Closure</span> <span class="variable">$next</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;         </span><br><span class="line">        <span class="variable">$response</span> =  <span class="variable">$next</span>(<span class="variable">$request</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Origin, Content-Type, Cookie, Accept&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;GET, POST, PATCH, PUT, OPTIONS&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$response</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>maven项目添加第三方jar库</title>
+    <url>/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/</url>
+    <content><![CDATA[<p>第三方的sdk没在maven公共仓库里，需要下载jar集成到maven项目里</p>
+<h2 id="把jar文件拷贝到项目里"><a href="#把jar文件拷贝到项目里" class="headerlink" title="把jar文件拷贝到项目里"></a>把jar文件拷贝到项目里</h2><p>在根目录或<code>resources</code>创建<code>lib</code>目录，把<code>jar</code>文件拷贝进去</p>
+<h2 id="修改pom-xml文件，添加依赖"><a href="#修改pom-xml文件，添加依赖" class="headerlink" title="修改pom.xml文件，添加依赖"></a>修改<code>pom.xml</code>文件，添加依赖</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.example<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>opensdk<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>system<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">systemPath</span>&gt;</span>$&#123;pom.basedir&#125;/src/main/resources/lib/opensdk.jar<span class="tag">&lt;/<span class="name">systemPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<span id="more"></span>
+<h2 id="修改spring-boot-maven-plugin"><a href="#修改spring-boot-maven-plugin" class="headerlink" title="修改spring-boot-maven-plugin"></a>修改<code>spring-boot-maven-plugin</code></h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">includeSystemScope</span>&gt;</span>true<span class="tag">&lt;/<span class="name">includeSystemScope</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>在Kernel.php中注册中间件：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s global HTTP middleware stack.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware are run during every request to your application.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middleware</span> = [</span><br><span class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware groups.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middlewareGroups</span> = [</span><br><span class="line">        <span class="string">&#x27;web&#x27;</span> =&gt; [</span><br><span class="line">            \App\Http\Middleware\EncryptCookies::class,</span><br><span class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</span><br><span class="line">            \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">&#x27;api&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;throttle:60,1&#x27;</span>,</span><br><span class="line">            \App\Http\Middleware\CrossDomainMiddleware::class,        </span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware may be assigned to groups or used individually.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$routeMiddleware</span> = [</span><br><span class="line">        <span class="string">&#x27;auth&#x27;</span> =&gt; \App\Http\Middleware\Authenticate::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic&#x27;</span> =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic.once&#x27;</span> =&gt; \App\Http\Middleware\AuthenticateOnceWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;guest&#x27;</span> =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</span><br><span class="line">        <span class="string">&#x27;throttle&#x27;</span> =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,     </span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing"><a href="#2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="2、在nginx.conf中配置，基于w3c-Cross-Origin Resource Sharing"></a>2、在nginx.conf中配置，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">w3c-Cross-Origin Resource Sharing</a></h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">http</span> &#123;</span><br><span class="line">  <span class="string">......</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Origin</span> <span class="string">*;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Headers</span> <span class="string">X-Requested-With;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Methods</span> <span class="string">GET</span>,<span class="string">POST</span>,<span class="string">OPTIONS;</span></span><br><span class="line">  <span class="string">......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="3、nginx的反向代理"><a href="#3、nginx的反向代理" class="headerlink" title="3、nginx的反向代理"></a>3、nginx的反向代理</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">upstream</span> <span class="string">serve</span> &#123;</span><br><span class="line">    <span class="string">server</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:3000;</span>    </span><br><span class="line">    <span class="string">keepalive</span> <span class="number">64</span><span class="string">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="string">listen</span> <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span> <span class="string">$remote_addr;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-For</span> <span class="string">$proxy_add_x_forwarded_for;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Host</span>  <span class="string">$http_host;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Nginx-Proxy</span> <span class="literal">true</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Connection</span> <span class="string">&quot;&quot;</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_pass</span>      <span class="string">http://serve;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
+<h2 id="刷新maven或者重新打开项目"><a href="#刷新maven或者重新打开项目" class="headerlink" title="刷新maven或者重新打开项目"></a>刷新maven或者重新打开项目</h2>]]></content>
       <categories>
-        <category>php</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>laravel</tag>
+        <tag>java</tag>
+        <tag>maven</tag>
+        <tag>springboot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>windows下hadoop配置</title>
+    <url>/2022/06/17/java/windows%E4%B8%8Bhadoop%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<p>hadoop不支持windows，做为开发环境通过配置是可以使用部分功能的</p>
+<h2 id="下载hadoop"><a href="#下载hadoop" class="headerlink" title="下载hadoop"></a>下载hadoop</h2><p>下载指定版本<a href="https://archive.apache.org/dist/hadoop/common/">https://archive.apache.org/dist/hadoop/common/</a>，下载linux使用的<code>xxx.tar.gz</code>，解压到指定目录</p>
+<p>解压过程中会提示错误，看提示信息是文件链接的问题，不用管它。</p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>环境变量里新增一条记录：</p>
+<p>变量名：HADDOOP_HOME<br>变量值：D:\hadoop-2.8.1（解压目录）</p>
+<p>把bin目录添加到PATH</p>
+<p>也是就<code>%HADDOOP_HOME%\bin</code></p>
+<h3 id="java安装"><a href="#java安装" class="headerlink" title="java安装"></a>java安装</h3><p>如果没有java去安装java</p>
+<h2 id="安装winutils"><a href="#安装winutils" class="headerlink" title="安装winutils"></a>安装winutils</h2><p>windows下需要安装这个东西，下载地是<a href="https://github.com/cdarlint/winutils">https://github.com/cdarlint/winutils</a> ，找到对应的版本下载之后把所有文件放hadoop的bin目录下就行了</p>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>命令行运行下<code>hadoop</code>，没提示错误就说明成功了</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>hadoop</tag>
       </tags>
   </entry>
   <entry>
@@ -1395,24 +1284,45 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>python类中方法返回自身值类型的写法</title>
-    <url>/2022/09/14/python/python%E7%B1%BB%E4%B8%AD%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%80%BC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%99%E6%B3%95/</url>
-    <content><![CDATA[<p>在python3中使用类型遇到的问题，代码如下：</p>
-<p>想在<code>factory</code>创建自已，以为类型是这样的<code>-&gt; People</code></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span>(<span class="params">cls, name: <span class="built_in">str</span></span>) -&gt; People:</span></span><br><span class="line">        <span class="keyword">return</span> cls(name)</span><br></pre></td></tr></table></figure>
-
-<p>这样的错的</p>
-<p>正确的写法是这样的：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypeVar, <span class="type">Type</span></span><br><span class="line"></span><br><span class="line">T = TypeVar(<span class="string">&#x27;T&#x27;</span>, bound=<span class="string">&#x27;People&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span>(<span class="params">cls: <span class="type">Type</span>[T], name: <span class="built_in">str</span></span>) -&gt; T:</span></span><br><span class="line">        <span class="keyword">return</span> cls(name)</span><br></pre></td></tr></table></figure>
-
-<p>要写成泛型才对，问题地址：<a href="https://github.com/python/peps/pull/89">https://github.com/python/peps/pull/89</a></p>
-<h2 id="另一种方法"><a href="#另一种方法" class="headerlink" title="另一种方法"></a>另一种方法</h2><p>类型写成字符串也是可以的</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span>:</span></span><br><span class="line">    name: <span class="built_in">str</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name: <span class="built_in">str</span></span>) -&gt; <span class="literal">None</span>:</span></span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factory</span>(<span class="params">cls, name: <span class="built_in">str</span></span>) -&gt; &quot;People&quot;:</span></span><br><span class="line">        <span class="keyword">return</span> cls(name)</span><br></pre></td></tr></table></figure>]]></content>
+    <title>pip安装模块出现neither-setup.py-nor-pyproject.toml-found</title>
+    <url>/2022/09/14/python/pip%E5%AE%89%E8%A3%85%E6%A8%A1%E5%9D%97%E5%87%BA%E7%8E%B0neither-setup-py-nor-pyproject-toml-found/</url>
+    <content><![CDATA[<p>使用pip安装模块时出现<code>neither &#39;setup.py&#39; nor &#39;pyproject.toml&#39; found.</code>导致模块无法安装</p>
+<p>因为根据打包方案，项目中需要一个setup.py或pyproject.toml用于生成包的配置文件，然而模块里没有按照这个规定来</p>
+<p>网上搜了一遍，没找到解决方案</p>
+<p>只能选择手动安装</p>
+<p>去<a href="https://pypi.org/">https://pypi.org/</a>，找到相应的包，下载下来解压到python的<code>Lib</code>目录</p>
+]]></content>
       <categories>
         <category>python</category>
       </categories>
       <tags>
         <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>laravel处理跨域请求</title>
+    <url>/2016/05/29/php/laravel%E5%A4%84%E7%90%86%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/</url>
+    <content><![CDATA[<p>写webapi总离开不跨域问题，总结下自己在做laravel开发的处理跨域请求方案。</p>
+<blockquote>
+<p>推荐使用<a href="https://github.com/dingo/api">dingo/api</a>扩展包</p>
+</blockquote>
+<h2 id="1、用laravel中间件，基于CORS"><a href="#1、用laravel中间件，基于CORS" class="headerlink" title="1、用laravel中间件，基于CORS"></a>1、用laravel中间件，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">CORS</a></h2><p>创建中间件CrossDomainMiddleware.php，代码如下：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Middleware</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Closure</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CrossDomainMiddleware</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Handle an incoming request.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Illuminate\Http\Request  $request</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span>  \Closure  $next</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"><span class="variable">$request</span>, <span class="built_in">Closure</span> <span class="variable">$next</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;         </span><br><span class="line">        <span class="variable">$response</span> =  <span class="variable">$next</span>(<span class="variable">$request</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;Origin, Content-Type, Cookie, Accept&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Methods&#x27;</span>, <span class="string">&#x27;GET, POST, PATCH, PUT, OPTIONS&#x27;</span>);</span><br><span class="line">        <span class="variable">$response</span>-&gt;header(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$response</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>在Kernel.php中注册中间件：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Foundation</span>\<span class="title">Http</span>\<span class="title">Kernel</span> <span class="title">as</span> <span class="title">HttpKernel</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kernel</span> <span class="keyword">extends</span> <span class="title">HttpKernel</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s global HTTP middleware stack.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware are run during every request to your application.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middleware</span> = [</span><br><span class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware groups.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$middlewareGroups</span> = [</span><br><span class="line">        <span class="string">&#x27;web&#x27;</span> =&gt; [</span><br><span class="line">            \App\Http\Middleware\EncryptCookies::class,</span><br><span class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</span><br><span class="line">            \Illuminate\Session\Middleware\StartSession::class,</span><br><span class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</span><br><span class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</span><br><span class="line">        ],</span><br><span class="line"></span><br><span class="line">        <span class="string">&#x27;api&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;throttle:60,1&#x27;</span>,</span><br><span class="line">            \App\Http\Middleware\CrossDomainMiddleware::class,        </span><br><span class="line">        ]</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The application&#x27;s route middleware.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * These middleware may be assigned to groups or used individually.</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@var</span> array</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="variable">$routeMiddleware</span> = [</span><br><span class="line">        <span class="string">&#x27;auth&#x27;</span> =&gt; \App\Http\Middleware\Authenticate::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic&#x27;</span> =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;auth.basic.once&#x27;</span> =&gt; \App\Http\Middleware\AuthenticateOnceWithBasicAuth::class,</span><br><span class="line">        <span class="string">&#x27;guest&#x27;</span> =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</span><br><span class="line">        <span class="string">&#x27;throttle&#x27;</span> =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,     </span><br><span class="line">    ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing"><a href="#2、在nginx-conf中配置，基于w3c-Cross-Origin-Resource-Sharing" class="headerlink" title="2、在nginx.conf中配置，基于w3c-Cross-Origin Resource Sharing"></a>2、在nginx.conf中配置，基于<a href="https://www.w3.org/TR/cors/#access-control-allow-methods-response-header">w3c-Cross-Origin Resource Sharing</a></h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">http</span> &#123;</span><br><span class="line">  <span class="string">......</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Origin</span> <span class="string">*;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Headers</span> <span class="string">X-Requested-With;</span></span><br><span class="line">  <span class="string">add_header</span> <span class="string">Access-Control-Allow-Methods</span> <span class="string">GET</span>,<span class="string">POST</span>,<span class="string">OPTIONS;</span></span><br><span class="line">  <span class="string">......</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、nginx的反向代理"><a href="#3、nginx的反向代理" class="headerlink" title="3、nginx的反向代理"></a>3、nginx的反向代理</h2><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="string">upstream</span> <span class="string">serve</span> &#123;</span><br><span class="line">    <span class="string">server</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:3000;</span>    </span><br><span class="line">    <span class="string">keepalive</span> <span class="number">64</span><span class="string">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">server</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="string">listen</span> <span class="number">80</span><span class="string">;</span></span><br><span class="line">    <span class="string">server_name</span> <span class="string">localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span> <span class="string">$remote_addr;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-For</span> <span class="string">$proxy_add_x_forwarded_for;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Host</span>  <span class="string">$http_host;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">X-Nginx-Proxy</span> <span class="literal">true</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_set_header</span> <span class="string">Connection</span> <span class="string">&quot;&quot;</span><span class="string">;</span></span><br><span class="line">        <span class="string">proxy_pass</span>      <span class="string">http://serve;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>php</category>
+      </categories>
+      <tags>
+        <tag>laravel</tag>
       </tags>
   </entry>
   <entry>
@@ -1469,39 +1379,74 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>centos7安装mysql</title>
-    <url>/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址<a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
-<p>找到想要的版本</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install libaio</span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示</span></span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-client(x86-64) &gt;= 5.7.9 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line">        mysql-community-common(x86-64) = 5.7.34-1.el7 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>linux用户管理</title>
+    <url>/2021/12/26/linux/linux%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86/</url>
+    <content><![CDATA[<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><p>创建一个用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd username</span><br></pre></td></tr></table></figure>
 
-<p>提示依赖<code>mysql-community-client</code>和<code>mysql-community-common</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示和mariadb-libs冲突</span></span><br><span class="line">file /usr/share/mysql/czech/errmsg.sys from install of mysql-community-common-5.7.34-1.el7.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.el7.x86_64</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看出来删除掉</span></span><br><span class="line">rpm -qa|grep mariadb-libs</span><br><span class="line">rpm -e mariadb-libs-5.5.68-1.el7.x86_64 --nodeps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再重新安装mysql-community-common</span></span><br><span class="line"></span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-libs(x86-64) &gt;= 5.7.9 is needed by mysql-community-client-5.7.34-1.el7.x86_64</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+<p>创建用户并创建用户目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -m username</span><br></pre></td></tr></table></figure>
+<p>创建用户不创建用户目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -M username</span><br></pre></td></tr></table></figure>
 
-<p>提示依赖<code>mysql-community-libs</code></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>创建用户不用于登录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -s /sbin/nologin</span><br></pre></td></tr></table></figure>
 
-<p>一共需要下面4个文件</p>
-<ul>
-<li>mysql-community-client-5.7.34-1.el7.x86_64.rpm</li>
-<li>mysql-community-common-5.7.34-1.el7.x86_64.rpm</li>
-<li>mysql-community-libs-5.7.34-1.el7.x86_64.rpm</li>
-<li>mysql-community-server-5.7.34-1.el7.x86_64.rpm</li>
-</ul>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start mysqld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+<p>创建用户不用于登录和不创建目录</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd -s /sbin/nologin -M username</span><br></pre></td></tr></table></figure>
 
-<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><p>如果没有设置密码</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/bin/mysqladmin -u root password &#x27;xxx&#x27;</span><br></pre></td></tr></table></figure>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">userdel username</span><br></pre></td></tr></table></figure>
 
-<p>如果设置了密码</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 找到密码</span></span><br><span class="line">sudo grep &#x27;temporary password&#x27; /var/log/mysqld.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录</span></span><br><span class="line">mysql -uroot -p</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改密码</span></span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;MyNewPass4!&#x27;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 出错</span></span><br><span class="line">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 降低密码强度</span></span><br><span class="line">set global validate_password_policy=0;</span><br><span class="line">set global validate_password_length=1;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mysql8，没这两个变量</span></span><br><span class="line">SHOW VARIABLES LIKE &#x27;validate_password%&#x27;;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改为</span></span><br><span class="line">set global validate_password.policy=0;</span><br><span class="line">set global validate_password.length=1;</span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
-]]></content>
+<p>把用户目录也删掉</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">userdel -r username</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">passwd username</span><br></pre></td></tr></table></figure>
+
+<h2 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h2><p>创建组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">groupadd groupname</span><br></pre></td></tr></table></figure>
+
+<p>删除组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">groupadd groupname</span><br></pre></td></tr></table></figure>
+
+<p>用户加入组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usermod -G groupname username</span><br></pre></td></tr></table></figure>
+
+<p>用户加入组（并从原来组中移出）</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">usermod -g groupname username</span><br></pre></td></tr></table></figure>
+
+<p>用户移出用户组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gpasswd -d username groupname</span><br></pre></td></tr></table></figure>
+
+<h2 id="相关查看"><a href="#相关查看" class="headerlink" title="相关查看"></a>相关查看</h2><p>所有用户</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>所有用户组</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cat /etc/group</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>软件</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>centos</tag>
-        <tag>mysql</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>shell中的使用map</title>
+    <url>/2022/03/15/linux/shell%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8map/</url>
+    <content><![CDATA[<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>shell中map必须申明才能使用</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">declare -A userIds</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 方式一，item项目中间不需要逗号</span></span><br><span class="line">userIds=([&#x27;bar&#x27;]=&quot;1&quot; [&#x27;foo&#x27;]=&quot;2&quot;)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 方式二</span></span><br><span class="line">userIds[&#x27;bar&#x27;]=&quot;1&quot;</span><br><span class="line">userIds[&#x27;foo&#x27;]=&quot;2&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输出value</span></span><br><span class="line">echo &quot;$&#123;userIds[*]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">echo &quot;$&#123;userIds[@]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出key</span></span><br><span class="line">echo &quot;$&#123;!userIds[*]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者</span></span><br><span class="line">echo &quot;$&#123;!userIds[@]&#125;&quot;</span><br><span class="line"><span class="meta">#</span><span class="bash"> bar foo</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输出key</span></span><br><span class="line">for key in &quot;$&#123;!userIds[@]&#125;&quot;; do</span><br><span class="line">    echo $key</span><br><span class="line">    echo $&#123;userIds[$key]&#125;</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出value</span></span><br><span class="line">for value in &quot;$&#123;userIds[@]&#125;&quot;; do</span><br><span class="line">    echo $value</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<p><code>@</code>换成<code>*</code>效果一样</p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
       </tags>
   </entry>
   <entry>
@@ -1531,6 +1476,23 @@ $input.on('change', function(){
       <tags>
         <tag>centos</tag>
         <tag>grafana</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>清理过期日志文件</title>
+    <url>/2022/10/13/linux/%E6%B8%85%E7%90%86%E8%BF%87%E6%9C%9F%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>清理过期日志文件的方法</p>
+<h1 id="用find-exec"><a href="#用find-exec" class="headerlink" title="用find+exec"></a>用find+exec</h1><p>用<code>find</code>找出指定时间的文件，配合<code>exec</code>执行删除</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -mtime 指定文件修改时间</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 如清理2天前的</span></span><br><span class="line">find log_dir -mtime +2 -type f -name &quot;*.log&quot; -exec rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h2 id="用tmpwatch"><a href="#用tmpwatch" class="headerlink" title="用tmpwatch"></a>用tmpwatch</h2><p>使用<code>tmpwatch</code>清理目录，文件最后一次被访问的时间，单位是小时；这个命令只适全整个目录下都是日志的情况</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如清理2天前的</span></span><br><span class="line">tmpwatch -mdfv  48 log_dir </span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>log</tag>
       </tags>
   </entry>
   <entry>
@@ -1571,6 +1533,73 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
+    <title>centos安装docker</title>
+    <url>/2022/01/04/software/centos%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[<p>按<a href="https://docs.docker.com/engine/install/centos/">官网</a>步骤</p>
+<h2 id="删除旧的"><a href="#删除旧的" class="headerlink" title="删除旧的"></a>删除旧的</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置源"><a href="#设置源" class="headerlink" title="设置源"></a>设置源</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils</span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>启用Nightly版</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum-config-manager --enable docker-ce-nightly</span><br></pre></td></tr></table></figure>
+
+<p>安装</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+
+<p>搜索可用版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br></pre></td></tr></table></figure>
+
+<p>指定版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>docker</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos7安装mysql</title>
+    <url>/2022/01/07/software/centos7%E5%AE%89%E8%A3%85mysql/</url>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>下载地址<a href="https://downloads.mysql.com/archives/community/">https://downloads.mysql.com/archives/community/</a></p>
+<p>找到想要的版本</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum install libaio</span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-server-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示</span></span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-client(x86-64) &gt;= 5.7.9 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line">        mysql-community-common(x86-64) = 5.7.34-1.el7 is needed by mysql-community-server-5.7.34-1.el7.x86_64</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提示依赖<code>mysql-community-client</code>和<code>mysql-community-common</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-common-5.7.34-1.el7.x86_64.rpm</span><br><span class="line"><span class="meta">#</span><span class="bash"> 提示和mariadb-libs冲突</span></span><br><span class="line">file /usr/share/mysql/czech/errmsg.sys from install of mysql-community-common-5.7.34-1.el7.x86_64 conflicts with file from package mariadb-libs-1:5.5.68-1.el7.x86_64</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看出来删除掉</span></span><br><span class="line">rpm -qa|grep mariadb-libs</span><br><span class="line">rpm -e mariadb-libs-5.5.68-1.el7.x86_64 --nodeps</span><br><span class="line"><span class="meta">#</span><span class="bash"> 再重新安装mysql-community-common</span></span><br><span class="line"></span><br><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">error: Failed dependencies:</span><br><span class="line">        mysql-community-libs(x86-64) &gt;= 5.7.9 is needed by mysql-community-client-5.7.34-1.el7.x86_64</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p>提示依赖<code>mysql-community-libs</code></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget https://downloads.mysql.com/archives/get/p/23/file/mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.34-1.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
+
+<p>一共需要下面4个文件</p>
+<ul>
+<li>mysql-community-client-5.7.34-1.el7.x86_64.rpm</li>
+<li>mysql-community-common-5.7.34-1.el7.x86_64.rpm</li>
+<li>mysql-community-libs-5.7.34-1.el7.x86_64.rpm</li>
+<li>mysql-community-server-5.7.34-1.el7.x86_64.rpm</li>
+</ul>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">systemctl start mysqld</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line">systemctl status mysqld</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h2><p>如果没有设置密码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">/usr/bin/mysqladmin -u root password &#x27;xxx&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>如果设置了密码</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 找到密码</span></span><br><span class="line">sudo grep &#x27;temporary password&#x27; /var/log/mysqld.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录</span></span><br><span class="line">mysql -uroot -p</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改密码</span></span><br><span class="line">ALTER USER &#x27;root&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;MyNewPass4!&#x27;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 出错</span></span><br><span class="line">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 降低密码强度</span></span><br><span class="line">set global validate_password_policy=0;</span><br><span class="line">set global validate_password_length=1;</span><br><span class="line"><span class="meta"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mysql8，没这两个变量</span></span><br><span class="line">SHOW VARIABLES LIKE &#x27;validate_password%&#x27;;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改为</span></span><br><span class="line">set global validate_password.policy=0;</span><br><span class="line">set global validate_password.length=1;</span><br><span class="line">systemctl restart mysqld</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux中clash安装</title>
     <url>/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/</url>
     <content><![CDATA[<p>下载地址<a href="https://github.com/Dreamacro/clash/releases">github clash</a></p>
@@ -1599,6 +1628,32 @@ $input.on('change', function(){
       </categories>
       <tags>
         <tag>ubuntu</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nodejs安装</title>
+    <url>/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/</url>
+    <content><![CDATA[<p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
+<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+
+<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
+
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1648,34 +1703,56 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>centos安装docker</title>
-    <url>/2022/01/04/software/centos%E5%AE%89%E8%A3%85docker/</url>
-    <content><![CDATA[<p>按<a href="https://docs.docker.com/engine/install/centos/">官网</a>步骤</p>
-<h2 id="删除旧的"><a href="#删除旧的" class="headerlink" title="删除旧的"></a>删除旧的</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum remove docker \</span><br><span class="line">                  docker-client \</span><br><span class="line">                  docker-client-latest \</span><br><span class="line">                  docker-common \</span><br><span class="line">                  docker-latest \</span><br><span class="line">                  docker-latest-logrotate \</span><br><span class="line">                  docker-logrotate \</span><br><span class="line">                  docker-engine</span><br></pre></td></tr></table></figure>
+    <title>linux安装golang</title>
+    <url>/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/</url>
+    <content><![CDATA[<p>下载golang指定版本<a href="https://studygolang.com/dl">https://studygolang.com/dl</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget https://studygolang.com/dl/golang/go1.17.7.linux-amd64.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压</span></span><br><span class="line">tar -xvf go1.17.7.linux-amd64.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 统一放/usr/<span class="built_in">local</span></span></span><br><span class="line">sudo mv go/ /usr/local/</span><br></pre></td></tr></table></figure>
 
-<h2 id="设置源"><a href="#设置源" class="headerlink" title="设置源"></a>设置源</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install -y yum-utils</span><br><span class="line">sudo yum-config-manager \</span><br><span class="line">    --add-repo \</span><br><span class="line">    https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+<p>设置环境变量</p>
+<p>在<code>.bashrc</code>文件中添加</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:/usr/local/go/bin</span><br></pre></td></tr></table></figure>
 
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>启用Nightly版</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum-config-manager --enable docker-ce-nightly</span><br></pre></td></tr></table></figure>
+<p>激活环境变量</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
 
-<p>安装</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+<p>测试安装结果</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go env</span><br></pre></td></tr></table></figure>
 
-<p>搜索可用版本</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br></pre></td></tr></table></figure>
 
-<p>指定版本</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo yum install docker-ce-&lt;VERSION_STRING&gt; docker-ce-cli-&lt;VERSION_STRING&gt; containerd.io</span><br></pre></td></tr></table></figure>
-
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo systemctl start docker</span><br></pre></td></tr></table></figure>
-
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">sudo docker run hello-world</span><br></pre></td></tr></table></figure>]]></content>
+]]></content>
       <categories>
         <category>软件</category>
       </categories>
       <tags>
         <tag>centos</tag>
-        <tag>docker</tag>
+        <tag>linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>linux编译安装gcc</title>
+    <url>/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/</url>
+    <content><![CDATA[<p>下载指定版本<a href="http://ftp.gnu.org/gnu/gcc/">http://ftp.gnu.org/gnu/gcc/</a></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.xz</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -xvf gcc-8.1.0.tar.xz</span><br><span class="line">cd gcc-8.1.0</span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装依赖</span></span><br><span class="line">./contrib/download_prerequisites</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译目录</span></span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置,安装到/usr/<span class="built_in">local</span>/gcc目录</span></span><br><span class="line">../configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib</span><br><span class="line"><span class="meta">#</span><span class="bash"> make</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>2cup+8g大概用了4个小时</p>
+<p>加软链接</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/gcc /usr/bin/gcc_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/gcc /usr/bin/gcc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/g++ /usr/bin/g++_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/g++ /usr/bin/g++</span><br></pre></td></tr></table></figure>
+
+<p>验证是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>软件</category>
+      </categories>
+      <tags>
+        <tag>centos</tag>
+        <tag>gcc</tag>
+        <tag>linux</tag>
       </tags>
   </entry>
   <entry>
@@ -1705,29 +1782,34 @@ $input.on('change', function(){
       </tags>
   </entry>
   <entry>
-    <title>nodejs安装</title>
-    <url>/2021/02/10/software/linux%E4%B8%ADnodejs%E5%AE%89%E8%A3%85/</url>
-    <content><![CDATA[<p>各个linux系统的包管理都可安装nodejs，但安装的版本往往不是自己想要的版本，最好是手动安装</p>
-<h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p>去<a href="http://nodejs.cn/download/">nodejs中文网</a>找到自己想要的版本</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://npmmirror.com/mirrors/node/v16.13.1/node-v16.13.1-linux-x64.tar.xz</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="解压"><a href="#解压" class="headerlink" title="解压"></a>解压</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v16.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
-
-<h2 id="移动到指定位置"><a href="#移动到指定位置" class="headerlink" title="移动到指定位置"></a>移动到指定位置</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo mv node-v16.13.1-linux-x64 /usr/local/node</span><br></pre></td></tr></table></figure>
-
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo ln -s /usr/local/node/bin/node /usr/bin/node</span><br><span class="line">sudo ln -s /usr/local/node/bin/npm /usr/bin/npm</span><br><span class="line">sudo ln -s /usr/local/node/bin/npx /usr/bin/npx</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加到path"><a href="#添加到path" class="headerlink" title="添加到path"></a>添加到path</h2><p>在.profile或者.bashrc中添加</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/node/bin</span><br></pre></td></tr></table></figure>
-
-<h2 id="添加镜像源"><a href="#添加镜像源" class="headerlink" title="添加镜像源"></a>添加镜像源</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm config set registry &quot;https://registry.npm.taobao.org&quot;</span><br></pre></td></tr></table></figure>
-
-]]></content>
+    <title>javascript获取浏览器视口大小</title>
+    <url>/2015/01/05/frontend/html/javascript%E8%8E%B7%E5%8F%96%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%86%E5%8F%A3%E5%A4%A7%E5%B0%8F/</url>
+    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">&#x27;BackCompat&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>软件</category>
+        <category>前端开发</category>
+        <category>javascript</category>
       </categories>
       <tags>
-        <tag>linux</tag>
+        <tag>tricks</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mongoose使用中查不出定义的virtual字段</title>
+    <url>/2016/04/29/nodejs/mongoose%E4%BD%BF%E7%94%A8%E4%B8%AD%E6%9F%A5%E4%B8%8D%E5%87%BA%E5%AE%9A%E4%B9%89%E7%9A%84virtual%E5%AD%97%E6%AE%B5/</url>
+    <content><![CDATA[<p>定义了指定为virtual属性的post_count字段统计文章数</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// model</span></span><br><span class="line"><span class="keyword">var</span> TagSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">	<span class="attr">name</span>:  <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">slug</span>: <span class="built_in">String</span>,</span><br><span class="line">	<span class="attr">posts</span>: [&#123; <span class="attr">type</span>:Schema.ObjectId, <span class="attr">ref</span>:<span class="string">&quot;Post&quot;</span> &#125;],</span><br><span class="line">	<span class="attr">created_at</span>: &#123;<span class="attr">type</span>: <span class="built_in">Date</span>, <span class="attr">default</span>: <span class="built_in">Date</span>.now &#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// virtual</span></span><br><span class="line">TagSchema.virtual(<span class="string">&#x27;post_count&#x27;</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">this</span>.posts ? <span class="built_in">this</span>.posts.length : <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用find查询的时候居然查不出post_count出来。查看手册后是因为document 对象的toJSON和toObject方法里面 默认将virtual 属性排除了。 原文是这样的：</p>
+<blockquote>
+<p>Note that if the resulting record is converted to an object or JSON, virtuals are not included by default. Pass virtuals : true to either toObject() or to toJSON() to have them returned.</p>
+</blockquote>
+<p>需要对Schama做下面的配置：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">TagSchema.set(<span class="string">&#x27;toJSON&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">TagSchema.set(<span class="string">&#x27;toObject&#x27;</span>, &#123; <span class="attr">virtuals</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>nodejs</category>
+      </categories>
+      <tags>
+        <tag>mongoose</tag>
       </tags>
   </entry>
   <entry>
@@ -1765,71 +1847,6 @@ $input.on('change', function(){
       </categories>
       <tags>
         <tag>php</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux编译安装gcc</title>
-    <url>/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/</url>
-    <content><![CDATA[<p>下载指定版本<a href="http://ftp.gnu.org/gnu/gcc/">http://ftp.gnu.org/gnu/gcc/</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">wget http://ftp.gnu.org/gnu/gcc/gcc-8.1.0/gcc-8.1.0.tar.xz</span><br></pre></td></tr></table></figure>
-
-<p>解压</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">tar -xvf gcc-8.1.0.tar.xz</span><br><span class="line">cd gcc-8.1.0</span><br></pre></td></tr></table></figure>
-
-<p>编译</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装依赖</span></span><br><span class="line">./contrib/download_prerequisites</span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译目录</span></span><br><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line"><span class="meta">#</span><span class="bash"> 配置,安装到/usr/<span class="built_in">local</span>/gcc目录</span></span><br><span class="line">../configure --prefix=/usr/local/gcc --enable-languages=c,c++ --disable-multilib</span><br><span class="line"><span class="meta">#</span><span class="bash"> make</span></span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-
-<p>2cup+8g大概用了4个小时</p>
-<p>加软链接</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/gcc /usr/bin/gcc_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/gcc /usr/bin/gcc</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果有老的版本先备份</span></span><br><span class="line">sudo mv /usr/bin/g++ /usr/bin/g++_bak</span><br><span class="line">sudo ln -s /usr/local/gcc/g++ /usr/bin/g++</span><br></pre></td></tr></table></figure>
-
-<p>验证是否安装成功</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">gcc --version</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>gcc</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>linux安装golang</title>
-    <url>/2022/02/24/software/linux%E5%AE%89%E8%A3%85golang/</url>
-    <content><![CDATA[<p>下载golang指定版本<a href="https://studygolang.com/dl">https://studygolang.com/dl</a></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 下载</span></span><br><span class="line">wget https://studygolang.com/dl/golang/go1.17.7.linux-amd64.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压</span></span><br><span class="line">tar -xvf go1.17.7.linux-amd64.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash"> 统一放/usr/<span class="built_in">local</span></span></span><br><span class="line">sudo mv go/ /usr/local/</span><br></pre></td></tr></table></figure>
-
-<p>设置环境变量</p>
-<p>在<code>.bashrc</code>文件中添加</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">export GOROOT=/usr/local/go</span><br><span class="line">export PATH=$PATH:/usr/local/go/bin</span><br></pre></td></tr></table></figure>
-
-<p>激活环境变量</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
-
-<p>测试安装结果</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">go env</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>软件</category>
-      </categories>
-      <tags>
-        <tag>centos</tag>
-        <tag>linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>javascript获取浏览器视口大小</title>
-    <url>/2015/01/05/frontend/html/javascript%E8%8E%B7%E5%8F%96%E6%B5%8F%E8%A7%88%E5%99%A8%E8%A7%86%E5%8F%A3%E5%A4%A7%E5%B0%8F/</url>
-    <content><![CDATA[<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getViewport</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">&#x27;BackCompat&#x27;</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.body.clientWitdh,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.body.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">width</span>: <span class="built_in">document</span>.documentElement.clientWidth,</span><br><span class="line">            <span class="attr">height</span>: <span class="built_in">document</span>.documentElement.clientHeight</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>javascript</category>
-      </categories>
-      <tags>
-        <tag>tricks</tag>
       </tags>
   </entry>
   <entry>
@@ -1979,6 +1996,16 @@ $('#modal3').on('transitionend', function (e) {
       </tags>
   </entry>
   <entry>
+    <title>a标签伪类顺序</title>
+    <url>/2014/12/29/frontend/css/a%E6%A0%87%E7%AD%BE%E4%BC%AA%E7%B1%BB%E9%A1%BA%E5%BA%8F/</url>
+    <content><![CDATA[<p>a标签的link、visited、hover、active通常的顺序为：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>前端开发</category>
+        <category>css</category>
+      </categories>
+  </entry>
+  <entry>
     <title>同时使用flex、white-space和overflow的bug</title>
     <url>/2016/01/28/frontend/css/%E5%90%8C%E6%97%B6%E4%BD%BF%E7%94%A8flex%E5%92%8Cwhite-space%E5%92%8Coverflow%E7%9A%84bug/</url>
     <content><![CDATA[<p>写这个博客文章列表标题时遇到的bug，当flex和white-space、overflow一起用的时候，发现overflow:hidden失效了。代码如下：</p>
@@ -1993,15 +2020,5 @@ $('#modal3').on('transitionend', function (e) {
       <tags>
         <tag>flex</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>a标签伪类顺序</title>
-    <url>/2014/12/29/frontend/css/a%E6%A0%87%E7%AD%BE%E4%BC%AA%E7%B1%BB%E9%A1%BA%E5%BA%8F/</url>
-    <content><![CDATA[<p>a标签的link、visited、hover、active通常的顺序为：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123;<span class="attribute">color</span>: <span class="number">#000</span>;&#125; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123;<span class="attribute">color</span>: <span class="number">#F00</span>;&#125; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>&#123;<span class="attribute">color</span>: <span class="number">#0F0</span>;&#125; <span class="comment">/* 鼠标在链接上 */</span> </span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123;<span class="attribute">color</span>: <span class="number">#00F</span>;&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>前端开发</category>
-        <category>css</category>
-      </categories>
   </entry>
 </search>
