@@ -118,6 +118,51 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2022/09/12/python/windows%E4%B8%8B%E7%BC%BA%E5%A4%B1fcntl%E6%8A%A5%E9%94%99/">windows下缺失fcntl报错</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/python/">python</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2022-09-12 15:48:26</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>windows下运行python项目，报错<code>ModuleNotFoundError: No module named &#39;fcntl&#39;</code></p>
+<p><code>fcntl</code>库是<code>linix</code>的Python发行版才有，<code>windows</code>没有带</p>
+<h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>pip安装缺失的包，这个地址去搜索<a target="_blank" rel="noopener" href="https://libraries.io/search?q=micropython">https://libraries.io/search?q=micropython</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install micropython-xxx</span><br></pre></td></tr></table></figure>
+
+<p>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/micropython/micropython">https://github.com/micropython/micropython</a></p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在python库文件目录<code>D:\Python\Python38\Lib\site-packages</code>中创建’<code>fcnty</code>文件，内容为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fcntl</span>(<span class="params">fd, op, arg=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ioctl</span>(<span class="params">fd, op, arg=<span class="number">0</span>, mutable_flag=<span class="literal">True</span></span>):</span></span><br><span class="line">    <span class="keyword">if</span> mutable_flag:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">flock</span>(<span class="params">fd, op</span>):</span></span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lockf</span>(<span class="params">fd, operation, length=<span class="number">0</span>, start=<span class="number">0</span>, whence=<span class="number">0</span></span>):</span></span><br><span class="line">    <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/09/03/java/maven%E9%A1%B9%E7%9B%AE%E6%B7%BB%E5%8A%A0%E7%AC%AC%E4%B8%89%E6%96%B9jar%E5%BA%93/">maven项目添加第三方jar库</a>
         </h2>
         <ul class="post-meta">
@@ -518,72 +563,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2022/02/23/software/centos%E5%AE%89%E8%A3%85jenkins/">centos安装jenkins遇到的问题</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2022-02-23 14:37:45</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>官方网站<a target="_blank" rel="noopener" href="https://pkg.jenkins.io/redhat-stable/">https://pkg.jenkins.io/redhat-stable/</a>，按着步骤来</p>
-<h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span><br></pre></td></tr></table></figure>
-
-<p>不成功，提示错误是</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Resolving pkg.jenkins.io (pkg.jenkins.io)... 151.101.74.133, 2a04:4e42:1a::645</span><br><span class="line">Connecting to pkg.jenkins.io (pkg.jenkins.io)|151.101.74.133|:443... connected.</span><br><span class="line">ERROR: cannot verify pkg.jenkins.io&#x27;s certificate, issued by ‘/C=US/O=Let&#x27;s Encrypt/CN=R3’:</span><br><span class="line">  Issued certificate has expired.</span><br><span class="line">To connect to pkg.jenkins.io insecurely, use `--no-check-certificate&#x27;.</span><br></pre></td></tr></table></figure>
-
-<p>加上<code>--no-check-certificate</code>再试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo wget --no-check-certificate -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo</span><br><span class="line">// jenkins.repo会添加到/etc/yum.repos.d/中</span><br><span class="line">cat /etc/yum.repos.d/jenkins.repo</span><br></pre></td></tr></table></figure>
-
-<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key</span><br></pre></td></tr></table></figure>
-
-<p>不成功，提示错误</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Peer reports incompatible or unsupported protocol version.</span><br></pre></td></tr></table></figure>
-
-<p>需要升级<code>curl</code>包，后再执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update -y nss curl libcurl </span><br></pre></td></tr></table></figure>
-
-<h2 id="安装java"><a href="#安装java" class="headerlink" title="安装java"></a>安装java</h2><p>java已安装，跳过</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release</span><br><span class="line">yum install java-1.8.0-openjdk-devel</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装jenkins"><a href="#安装jenkins" class="headerlink" title="安装jenkins"></a>安装jenkins</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install jenkins</span><br></pre></td></tr></table></figure>
-
-<p>不成功，提示</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Delta RPMs disabled because /usr/bin/applydeltarpm not installed.</span><br></pre></td></tr></table></figure>
-
-<p>查找<code>applydeltarpm</code>的包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum provides &#x27;*/applydeltarpm&#x27;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Loaded plugins: langpacks                                                                                                                                                                                                                                                                                                                                     </span><br><span class="line">updates/7/x86_64/filelists_db                                                                                                                                                                             </span><br><span class="line">webtatic/x86_64/filelists_db                                                                                                                                                                             </span><br><span class="line">deltarpm-3.6-3.el7.x86_64 : Create deltas between rpms</span><br><span class="line">Repo        : base</span><br><span class="line">Matched from:</span><br><span class="line">Filename    : /usr/bin/applydeltarpm</span><br></pre></td></tr></table></figure>
-
-<p>安装<code>deltarpm</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y deltarpm</span><br></pre></td></tr></table></figure>
-
-
-
-                
-            </div>
-        </div>
-    </article>
-
 
 
     <section class="paginate-container">
@@ -606,6 +585,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2022/10/14/develop/wsl2%E5%92%8CProxifier%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/">wsl2和Proxifier兼容问题</a>
+                    </li>
+                
+                    <li>
                         <a href="/2022/10/13/linux/%E6%B8%85%E7%90%86%E8%BF%87%E6%9C%9F%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">清理过期日志文件</a>
                     </li>
                 
@@ -619,10 +602,6 @@
                 
                     <li>
                         <a href="/2022/09/20/develop/git%E7%BB%9F%E8%AE%A1%E6%8F%90%E4%BA%A4%E8%AE%B0%E5%BD%95%E4%B8%AD%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84%E6%96%87%E4%BB%B6/">git统计提交记录中修改过的文件</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/09/17/develop/git%E9%94%99%E8%AF%AFinvalid-path%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">git错误invalid path解决方法</a>
                     </li>
                 
             </ul>
@@ -645,7 +624,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/centos/" style="font-size: 18.33px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/log/" style="font-size: 11.67px;">log</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 15px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/centos/" style="font-size: 18.33px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/log/" style="font-size: 11.67px;">log</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/springboot/" style="font-size: 10px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 15px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a>
         </div>
     </div>
 
