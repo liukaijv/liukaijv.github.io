@@ -18,7 +18,7 @@
 <meta property="og:description" content="使用过Proxifier后，发现wsl2出问题了，打开子系统时提示参考的对象类型不支持尝试的操作。，搜了下网上的解决方法是通过下载NoLsp.exe解决 问题链接：https:&#x2F;&#x2F;github.com&#x2F;microsoft&#x2F;WSL&#x2F;issues&#x2F;4177#issuecomment-597736482，提供的用不了 这个里的可以用，https:&#x2F;&#x2F;github.com&#x2F;dyingsu&#x2F;nolsp 下载">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-14T02:32:54.000Z">
-<meta property="article:modified_time" content="2022-10-14T02:41:46.116Z">
+<meta property="article:modified_time" content="2022-11-15T03:28:18.674Z">
 <meta property="article:author" content="Abc">
 <meta property="article:tag" content="wsl">
 <meta property="article:tag" content="docker">
@@ -151,6 +151,8 @@
 <p>下载之后，管理员打开<code>cmd</code>执行命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NoLsp.exe C:\windows\system32\wsl.exe</span><br></pre></td></tr></table></figure>
 
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>管理员身份在<code>CMD</code>执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure>
 
 
 
