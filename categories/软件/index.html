@@ -119,6 +119,53 @@
             
     <article class="post">
         <h2 class="post-title">
+            <a href="/2024/01/04/software/centos%E5%AE%89%E8%A3%85mongodb/">centos安装mongodb</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2024-01-04 14:35:58</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>以centos安装mongodb4.2为例</p>
+<h2 id="添加yum源"><a href="#添加yum源" class="headerlink" title="添加yum源"></a>添加yum源</h2><p>创建repo<code>/etc/yum.repos.d/mongodb-org-4.2.repo</code>，内容为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[mongodb-org-4.2]</span><br><span class="line">name=MongoDB Repository</span><br><span class="line">baseurl=https://repo.mongodb.org/yum/redhat/7Server/mongodb-org/4.2/x86_64/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=1</span><br><span class="line">gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y mongodb-org</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动mongodb"><a href="#启动mongodb" class="headerlink" title="启动mongodb"></a>启动mongodb</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start mongod</span><br></pre></td></tr></table></figure>
+
+<h2 id="开机运行mongodb"><a href="#开机运行mongodb" class="headerlink" title="开机运行mongodb"></a>开机运行mongodb</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable mongod</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongo </span><br><span class="line">use admin</span><br><span class="line">db.createUser(&#123;user: &#x27;root&#x27;, pwd: &#x27;root&#x27;, roles: [&#x27;readWriteAnyDatabase&#x27;]&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置开启认证"><a href="#修改配置开启认证" class="headerlink" title="修改配置开启认证"></a>修改配置开启认证</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/mongod.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加</span></span><br><span class="line">security:</span><br><span class="line">  authorization: enabled</span><br></pre></td></tr></table></figure>
+
+<h2 id="验证登录"><a href="#验证登录" class="headerlink" title="验证登录"></a>验证登录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mongosh -u root --authenticationDatabase admin</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输入密码</span></span><br></pre></td></tr></table></figure>
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2022/02/26/software/linux%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85gcc/">linux编译安装gcc</a>
         </h2>
         <ul class="post-meta">
@@ -490,6 +537,53 @@
 
     <article class="post">
         <h2 class="post-title">
+            <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
+        </h2>
+        <ul class="post-meta">
+    
+    
+        <li>
+            分类
+            
+                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
+                
+            
+            ·
+        </li>
+    
+    <li>
+        发表于 <span>2021-02-10 10:11:28</span>
+    </li>
+    
+</ul>
+
+        <div class="post-content article-entry post-markdown">
+            <div class="post-thumbnail"></div>
+            <div class="post-content">
+                
+                    <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
+<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
+
+<p>解决方法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
+
+
+
+                
+            </div>
+        </div>
+    </article>
+
+    <article class="post">
+        <h2 class="post-title">
             <a href="/2021/02/10/software/linux%E4%B8%ADclash%E5%AE%89%E8%A3%85/">linux中clash安装</a>
         </h2>
         <ul class="post-meta">
@@ -587,53 +681,6 @@
         </div>
     </article>
 
-    <article class="post">
-        <h2 class="post-title">
-            <a href="/2021/02/10/software/linux%E4%B8%ADminikube%E5%AE%89%E8%A3%85/">minikube安装</a>
-        </h2>
-        <ul class="post-meta">
-    
-    
-        <li>
-            分类
-            
-                <a href="/categories/%E8%BD%AF%E4%BB%B6/">软件</a>
-                
-            
-            ·
-        </li>
-    
-    <li>
-        发表于 <span>2021-02-10 10:11:28</span>
-    </li>
-    
-</ul>
-
-        <div class="post-content article-entry post-markdown">
-            <div class="post-thumbnail"></div>
-            <div class="post-content">
-                
-                    <p>本地安装<code>kubernetes</code>开发环境<code>minikube</code>。</p>
-<h2 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h2><p><a target="_blank" rel="noopener" href="https://minikube.sigs.k8s.io/docs/start/">minikube官网</a>选择系统对应的安装包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">sudo install minikube-linux-amd64 /usr/local/bin/minikube</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="测试是否安装成功"><a href="#测试是否安装成功" class="headerlink" title="测试是否安装成功"></a>测试是否安装成功</h2><p>启动<code>minikube</code>查看运行结果</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minikube start</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>安装之后，apt用的是阿里镜像，运行<code>apt-get update</code>报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">W: GPG error: https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease: The following signatures couldn&#x27;t be verified because the public key is not available: NO_PUBKEY FEEA9169307EA071 NO_PUBKEY 8B57C5C2836F4BEB</span><br><span class="line">E: The repository &#x27;https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial InRelease&#x27; is not signed.</span><br><span class="line">N: Updating from such a repository can&#x27;t be done securely, and is therefore disabled by default.</span><br></pre></td></tr></table></figure>
-
-<p>解决方法</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -</span><br></pre></td></tr></table></figure>
-
-
-
-                
-            </div>
-        </div>
-    </article>
-
 
 
 
@@ -650,6 +697,10 @@
             <ul>
                 
                     <li>
+                        <a href="/2024/01/04/software/centos%E5%AE%89%E8%A3%85mongodb/">centos安装mongodb</a>
+                    </li>
+                
+                    <li>
                         <a href="/2023/06/09/develop/jenkins%E8%BF%9C%E7%A8%8B%E8%A7%A6%E5%8F%91%E6%9E%84%E5%BB%BA/">jenkins远程触发构建</a>
                     </li>
                 
@@ -663,10 +714,6 @@
                 
                     <li>
                         <a href="/2022/12/01/java/springboot%E8%B7%A8%E5%9F%9F%E8%AE%BE%E7%BD%AE/">springboot跨域设置</a>
-                    </li>
-                
-                    <li>
-                        <a href="/2022/10/14/develop/wsl2%E5%92%8CProxifier%E5%85%BC%E5%AE%B9%E9%97%AE%E9%A2%98/">wsl2和Proxifier兼容问题</a>
                     </li>
                 
             </ul>
@@ -689,7 +736,7 @@
     <div class="widget">
         <h3 class="widget-title">标签云</h3>
         <div class="widget-body tagcloud">
-            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/centos/" style="font-size: 18.33px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 11.67px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 11.67px;">gcc</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 11.67px;">grafana</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 11.67px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 11.67px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 11.67px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/log/" style="font-size: 11.67px;">log</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 11.67px;">mysql</a> <a href="/tags/nginx/" style="font-size: 11.67px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 11.67px;">shell</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 11.67px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11.67px;">ssl</a> <a href="/tags/tricks/" style="font-size: 15px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 11.67px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 15px;">windows</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a>
+            <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/css3/" style="font-size: 10px;">css3</a> <a href="/tags/docker/" style="font-size: 12px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/flex/" style="font-size: 10px;">flex</a> <a href="/tags/gcc/" style="font-size: 12px;">gcc</a> <a href="/tags/git/" style="font-size: 18px;">git</a> <a href="/tags/go/" style="font-size: 10px;">go</a> <a href="/tags/goland/" style="font-size: 10px;">goland</a> <a href="/tags/grafana/" style="font-size: 12px;">grafana</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/hexo/" style="font-size: 14px;">hexo</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jenkins/" style="font-size: 12px;">jenkins</a> <a href="/tags/jquery/" style="font-size: 12px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/laravel/" style="font-size: 12px;">laravel</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/lodash/" style="font-size: 10px;">lodash</a> <a href="/tags/log/" style="font-size: 12px;">log</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/mongoose/" style="font-size: 10px;">mongoose</a> <a href="/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12px;">nginx</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/pip/" style="font-size: 10px;">pip</a> <a href="/tags/python/" style="font-size: 16px;">python</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shell/" style="font-size: 12px;">shell</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/springboot/" style="font-size: 12px;">springboot</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 12px;">ssl</a> <a href="/tags/tricks/" style="font-size: 16px;">tricks</a> <a href="/tags/ubuntu/" style="font-size: 12px;">ubuntu</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/wechat/" style="font-size: 10px;">wechat</a> <a href="/tags/windows/" style="font-size: 16px;">windows</a> <a href="/tags/wsl/" style="font-size: 10px;">wsl</a>
         </div>
     </div>
 
@@ -703,7 +750,7 @@
 <footer>
     <div class="container">
         <p>
-            &copy; 2023 Abc all rights reserved.
+            &copy; 2024 Abc all rights reserved.
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
             
                 <a href="/atom.xml" title="RSS Feed"><i class="lb-icon-rss"></i></a>
